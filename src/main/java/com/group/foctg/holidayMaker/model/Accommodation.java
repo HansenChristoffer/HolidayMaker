@@ -45,11 +45,14 @@ public class Accommodation {
 	@Column
 	private String description;
 	
-	//@Column
-	//private List<Booking> bookings;
-	private List<Room> rooms;
-	//private User user;
+	@Column
+	private List<Booking> bookings;
 	
+	@Column
+	private List<Room> rooms;
+	
+	@Column
+	private User user;
 
 	public Long getID() {
 		return ID;
@@ -130,6 +133,10 @@ public class Accommodation {
 	public String getDescription() {
 		return description;
 	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 	public List<Room> getRooms() {
 		return rooms;
@@ -138,9 +145,21 @@ public class Accommodation {
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
+
+	public List<Booking> getBookings() {
+		return bookings;
+	}
 	
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
