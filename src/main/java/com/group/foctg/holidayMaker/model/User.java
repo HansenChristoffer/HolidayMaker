@@ -24,11 +24,11 @@ public class User {
 	@Column
 	private List<Accommodation> accommodations;
 
-	//@Column
-	//@ManyToOne
-	//private List<Booking> bookings;
+	@Column
+	@ManyToOne
+	private List<Booking> bookings;
 	
-	
+
 	public Long getID() {
 		return ID;
 	}
@@ -47,6 +47,14 @@ public class User {
 
 	public void setAccommodations(List<Accommodation> accommodations) {
 		this.accommodations = accommodations;
+	}
+	
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 	
 
