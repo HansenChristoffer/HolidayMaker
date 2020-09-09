@@ -1,4 +1,4 @@
-package holiday.maker.holidayMaker;
+package com.group.foctg.holidayMaker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
