@@ -1,4 +1,4 @@
-package holiday.maker.holidayMaker;
+package com.group.foctg.holidayMaker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
