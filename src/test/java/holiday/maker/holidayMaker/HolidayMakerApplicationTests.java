@@ -1,10 +1,10 @@
-package holiday.maker.HoldayMaker;
+package holiday.maker.holidayMaker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HoldayMakerApplicationTests {
+class HolidayMakerApplicationTests {
 
 	@Test
 	void contextLoads() {
