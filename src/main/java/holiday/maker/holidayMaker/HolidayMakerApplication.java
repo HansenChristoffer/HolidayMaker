@@ -1,13 +1,13 @@
-package holiday.maker.HoldayMaker;
+package holiday.maker.holidayMaker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HoldayMakerApplication {
+public class HolidayMakerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HoldayMakerApplication.class, args);
+		SpringApplication.run(HolidayMakerApplication.class, args);
 	}
 
 }

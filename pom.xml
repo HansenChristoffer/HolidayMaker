@@ -8,10 +8,10 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>holiday.maker</groupId>
-	<artifactId>HoldayMaker</artifactId>
+	<groupId>com.group.foctg</groupId>
+	<artifactId>HolidayMaker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HoldayMaker</name>
+	<name>HolidayMaker</name>
 	<description>ÄMF</description>
 
 	<properties>
