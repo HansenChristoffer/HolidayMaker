@@ -1,5 +1,7 @@
 package com.group.foctg.holidayMaker.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,11 +47,10 @@ public class Accommodation {
 	
 	//@Column
 	//private List<Booking> bookings;
-	//private List<Room> rooms;
+	private List<Room> rooms;
 	//private User user;
 	
-	
-	
+
 	public Long getID() {
 		return ID;
 	}
@@ -128,6 +129,14 @@ public class Accommodation {
 	
 	public String getDescription() {
 		return description;
+	}
+	
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
 	}
 	
 	public void setDescription(String description) {

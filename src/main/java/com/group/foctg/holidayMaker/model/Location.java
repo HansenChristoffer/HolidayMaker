@@ -1,9 +1,12 @@
 package com.group.foctg.holidayMaker.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Location {
@@ -16,11 +19,11 @@ public class Location {
     @Column
     private String name;
 
-    //Uncomment when accommodation exists
-    //@Column
-    //@OneToMany
-    //private List<Accommodation> accommodations;
-    public Long getID() {
+    @Column
+    @OneToMany
+    private List<Accommodation> accommodations;
+
+	public Long getID() {
         return this.ID;
     }
 
@@ -32,11 +35,11 @@ public class Location {
         this.name = name;
     }
 
-    /*public List<Accommodation> getAccommodation() {
+    public List<Accommodation> getAccommodation() {
 		return this.accommodations;
 	}
 
 	public void setAccommodation(List<Accommodation> accommodations) {
 		this.accommodations = accommodations;
-	}*/
+	}
 }
