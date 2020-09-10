@@ -14,7 +14,7 @@ public interface CustomerRepo extends JpaRepository<Customer, Long>{
 
 	Customer findCustomerByEmail(String email);
 	
-	List<Booking> findCustomersBookingsByCustomerID(Long ID);
+	List<Booking> findBookingsByID(Long ID);
 	
-	List<Accommodation> findCustomersAccommodationsByCustomerID(Long ID);
+	List<Accommodation> findAccommodationsByID(Long ID);
 }
