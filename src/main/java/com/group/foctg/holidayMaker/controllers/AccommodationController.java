@@ -40,7 +40,7 @@ public class AccommodationController {
 
 	@GetMapping("/api/accommodation")
 	public String getOneAccommodation(@RequestParam Long accommodationid) {
-		return accommodationService.findOne(accommodationid).getID().toString();
+		return accommodationService.getOne(accommodationid).getID().toString();
 	}
 	
 	@DeleteMapping("/api/accommodation")

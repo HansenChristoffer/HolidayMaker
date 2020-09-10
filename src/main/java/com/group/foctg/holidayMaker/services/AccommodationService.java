@@ -51,17 +51,12 @@ public class AccommodationService {
 		return accommodationRepository.findAll();
 	}
 
-	public Accommodation findOne(Long ID) {
+	public Accommodation getOne(Long ID) {
 		return accommodationRepository.getOne(ID);
 	}
 
-	public List<Accommodation> findAccommodationsByUser(Customer customer) {
-		/*
-		 * 1. CustomerRepo
-		 * 2. if Customer exists in CustomerRepo
-		 *    then return every accommodation that customer has
-		 * */
-		return null;
+	public List<Accommodation> findAccommodationsByUser(Long id) {
+            return accommodationRepository.findAccommodationsByCustomerID(id);
 	}
 
 	public List<Accommodation> getFilteredAccommodations(Filter filter, List<Accommodation> accommodations) {
