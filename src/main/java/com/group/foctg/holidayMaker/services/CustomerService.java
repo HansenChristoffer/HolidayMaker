@@ -8,21 +8,21 @@ import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
-import com.group.foctg.holidayMaker.repositories.CustomerRepo;
+import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 
 @Service
 public class CustomerService {
 	
 	@Autowired
-	private CustomerRepo customerRepo;
+	private CustomerRepository customerRepository;
 	
 	public boolean saveCustomer(Customer customer) {
-            return customerRepo.saveAndFlush(customer).equals(customer);
+            return customerRepository.saveAndFlush(customer).equals(customer);
 	}
 	
 	public boolean removeCustomer(Long id) {
-		if (customerRepo.existsById(id)) {
-			customerRepo.deleteById(id);
+		if (customerRepository.existsById(id)) {
+			customerRepository.deleteById(id);
 			return true;
 		} else {
 			return false;
@@ -30,18 +30,18 @@ public class CustomerService {
 	}
 	
 	public Customer getOne(Long ID) {
-		return customerRepo.getOne(ID);
+		return customerRepository.getOne(ID);
 	}
 	
 	public Customer findCustomerByEmail(String email) {
-		return customerRepo.findCustomerByEmail(email);
+		return customerRepository.findCustomerByEmail(email);
 	}
 	
 	public List<Booking> findCustomersBookingsByCustomerID(Long ID) {
-		return customerRepo.findBookingsByID(ID);
+		return customerRepository.findBookingsByID(ID);
 	}
 	
 	public List<Accommodation> findCustomersAccommodationsByCustomerID(Long ID) {
-		return customerRepo.findAccommodationsByID(ID);
+		return customerRepository.findAccommodationsByID(ID);
 	}
 }

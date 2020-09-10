@@ -11,7 +11,7 @@ import com.group.foctg.holidayMaker.model.Customer;
 import org.springframework.data.jpa.repository.Query;
 
 @Repository
-public interface CustomerRepo extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
     
     @Query("SELECT c FROM Customer c WHERE c.email = ?1")
     Customer findCustomerByEmail(String email);
