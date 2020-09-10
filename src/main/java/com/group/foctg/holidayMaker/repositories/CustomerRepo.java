@@ -10,7 +10,7 @@ import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 
 @Repository
-public interface CustomerRepo extends JpaRepository<Customer, Long>{
+public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
 	Customer findCustomerByEmail(String email);
 	
