@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.group.foctg.holidayMaker.model.Booking;
+import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface BookingRepo extends JpaRepository<Booking, Long> {

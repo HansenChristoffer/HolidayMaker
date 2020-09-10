@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.Customer;
-import com.group.foctg.holidayMaker.model.Filter;
 
 @Repository
-public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
+public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
 
-	List<Accommodation> findAccommodationsByCustomerID(Long ID);
+    @Query("SELECT a FROM Accommodation a WHERE a.customer = ?1")
+    List<Accommodation> findAccommodationsByCustomerID(Long ID);
 	
 }

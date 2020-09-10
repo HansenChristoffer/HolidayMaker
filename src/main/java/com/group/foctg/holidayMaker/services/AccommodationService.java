@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.model.Filter;
-import com.group.foctg.holidayMaker.repositories.AccommodationRepo;
+import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 
 @Service
 @Transactional
 public class AccommodationService {
 
 	@Autowired
-	private AccommodationRepo accommodationRepository;
+	private AccommodationRepository accommodationRepository;
 
 	public boolean saveAccommodation(Accommodation accommodation) {
 		if (accommodationRepository.save(accommodation).equals(accommodation)) {
