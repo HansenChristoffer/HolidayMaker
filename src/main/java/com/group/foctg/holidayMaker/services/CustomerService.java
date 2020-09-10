@@ -17,16 +17,12 @@ public class CustomerService {
 	private CustomerRepo customerRepo;
 	
 	public boolean saveCustomer(Customer customer) {
-		if (customerRepo.saveAndFlush(customer).equals(customer)) {
-			return true;
-		} else {
-			return false;
-		}
+            return customerRepo.saveAndFlush(customer).equals(customer);
 	}
 	
-	public boolean removeCustomer(Customer customer) {
-		if (customerRepo.existsById(customer.getID())) {
-			customerRepo.delete(customer);
+	public boolean removeCustomer(Long id) {
+		if (customerRepo.existsById(id)) {
+			customerRepo.deleteById(id);
 			return true;
 		} else {
 			return false;
