@@ -3,38 +3,49 @@ package com.group.foctg.holidayMaker.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.repositories.CustomerRepo;
 
+@Service
 public class CustomerService {
 	
 	@Autowired
 	private CustomerRepo customerRepo;
 	
 	public boolean saveCustomer(Customer customer) {
-		return true;
+		if (customerRepo.saveAndFlush(customer).equals(customer)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean removeCustomer(Customer customer) {
-		return true;
+		if (customerRepo.existsById(customer.getID())) {
+			customerRepo.delete(customer);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
-	public Customer findOne(Long ID) {
-		return null;
+	public Customer getOne(Long ID) {
+		return customerRepo.getOne(ID);
 	}
 	
 	public Customer findCustomerByEmail(String email) {
-		return null;
+		return customerRepo.findCustomerByEmail(email);
 	}
 	
-	public List<Booking> findCustomersBookingsByCustomerID(Long ID){
-		return null;
+	public List<Booking> findCustomersBookingsByCustomerID(Long ID) {
+		return customerRepo.findBookingsByID(ID);
 	}
 	
-	public List<Accommodation> findCustomersAccommodationsByCustomerID(Long ID){
-		return null;
+	public List<Accommodation> findCustomersAccommodationsByCustomerID(Long ID) {
+		return customerRepo.findAccommodationsByID(ID);
 	}
 }
