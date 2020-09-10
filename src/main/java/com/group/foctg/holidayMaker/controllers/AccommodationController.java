@@ -35,7 +35,7 @@ public class AccommodationController {
 
 	@GetMapping("/api/accommodation/filter")
 	public List<Accommodation> filterAccommodations(@RequestBody Filter filter) {
-		return accommodationService.getFilteredAccommodations(filter, accommodationService.findAll());
+		return accommodationService.getFilteredAccommodations(filter);
 	}
 
 	@GetMapping("/api/accommodation")
