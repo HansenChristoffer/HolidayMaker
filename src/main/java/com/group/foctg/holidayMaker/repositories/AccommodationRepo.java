@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Customer;
-import com.group.foctg.holidayMaker.filter.Filter;
+import com.group.foctg.holidayMaker.model.Filter;
 
 @Repository
 public interface AccommodationRepo extends JpaRepository<Accommodation, Long> {
 
-	List<Accommodation> findAccommodationsByCustomerID(Long customer_id);
+	List<Accommodation> findAccommodationsByCustomerID(Long ID);
 	
 }
