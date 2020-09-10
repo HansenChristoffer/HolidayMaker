@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group.foctg.holidayMaker.model.Accommodation;
@@ -20,30 +21,30 @@ public class AccommodationController {
 	@Autowired
 	private AccommodationService accommodationService;
 
-	@GetMapping("/accommodations")
+	@GetMapping("/api/accommodations")
 	public List<Accommodation> allAccommodations() {
 		return accommodationService.findAll();
 	}
 	
-	@PostMapping("/accommodations")
+	@PostMapping("/api/accommodation")
 	public String saveAccommodation(@RequestBody Accommodation accommodation) {
 		if (accommodationService.saveAccommodation(accommodation)) {
 			return "Saved!";
 		} else return "Not Saved!";
 	}
 
-	@GetMapping("/filter")
+	@GetMapping("/api/accommodation/filter")
 	public List<Accommodation> filterAccommodations(@RequestBody Filter filter) {
 		return accommodationService.getFilteredAccommodations(filter, accommodationService.findAll());
 	}
 
-	@GetMapping("/accommodations/id={ID}")
-	public String getOneAccommodation(@PathVariable Long ID) {
-		return accommodationService.findOne(ID).getID().toString();
+	@GetMapping("/api/accommodation")
+	public String getOneAccommodation(@RequestParam Long accommodationid) {
+		return accommodationService.findOne(accommodationid).getID().toString();
 	}
 	
-	@DeleteMapping("/accommodations/del={ID}")
-	public void deleteAccommodation(@PathVariable Long ID) {
-		accommodationService.removeAccommodationByID(ID);
+	@DeleteMapping("/api/accommodation")
+	public void deleteAccommodation(@RequestParam Long accommodationid) {
+		accommodationService.removeAccommodationByID(accommodationid);
 	}
 }
