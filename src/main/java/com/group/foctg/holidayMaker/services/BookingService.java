@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
-import com.group.foctg.holidayMaker.repositories.BookingRepo;
+import com.group.foctg.holidayMaker.repositories.BookingRepository;
 
 public class BookingService {
 	
 	@Autowired
-	private BookingRepo repository;
+	private BookingRepository repository;
 	
 	
 	public boolean saveBooking(Booking booking) {
