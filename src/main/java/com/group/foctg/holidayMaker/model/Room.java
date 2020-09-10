@@ -26,11 +26,13 @@ public class Room implements Serializable {
 
     //@Column
     //private Boolean isVacant;
+    
     @Column
     private Float price;
 
     //@Column
     //private List<List<Date>> datesAvailable;
+    
     public Long getID() {
         return ID;
     }
