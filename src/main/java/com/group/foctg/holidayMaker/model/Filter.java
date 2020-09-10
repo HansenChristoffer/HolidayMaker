@@ -2,9 +2,7 @@ package com.group.foctg.holidayMaker.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
 
-@Entity
 public class Filter {
 
 	private String location;
