@@ -1,6 +1,7 @@
 package com.group.foctg.holidayMaker.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -64,11 +65,18 @@ public class AccommodationService {
 		return null;
 	}
 
-	public List<Accommodation> getFilteredAccommodations(Filter filter, List<Accommodation> accommodations) {
+	public List<Accommodation> getFilteredAccommodations(Filter filter) {
 
-		// do this last
-
-		return null;
+		
+		List<Accommodation> filtered = findAll().stream()
+			    .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
+			    .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
+			    .filter(a -> a.getLocation() != null)
+			    .filter(a -> a.getPool() == true || filter.isPool() == false)
+			    .collect(Collectors.toList());
+		
+		
+		return filtered;
 	}
 
 }
