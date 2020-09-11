@@ -95,7 +95,7 @@ public class Customer implements Serializable {
      *
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
-     * the Customer objects field accommodations
+     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field accommodations
      */
     public List<Accommodation> getAccommodations() {
         return accommodations;
@@ -117,7 +117,7 @@ public class Customer implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
-     * the Customer objects field bookings
+     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field bookings
      */
     public List<Booking> getBookings() {
         return bookings;
