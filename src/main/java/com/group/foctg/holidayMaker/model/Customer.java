@@ -27,10 +27,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
- * The Customer entity class. Holds the various fields that are required for the
- * functionality of the program. These fields are also turned into columns in
- * the SQLite3 database. There is also two OneToMany relationships with other
- * entity classes.
+ * The {@link com.group.foctg.holidayMaker.model.Customer} entity class. Holds
+ * the various fields that are required for the functionality of the program.
+ * These fields are also turned into columns in the SQLite3 database. There is
+ * also two OneToMany relationships with other entity classes.
+ *
+ * Uses the SEQUENCE type for auto gen id values because of the restrictions
+ * that SQLite3 holds.
  *
  * @author Olle Johansson
  * @author Christoffer Hansen
