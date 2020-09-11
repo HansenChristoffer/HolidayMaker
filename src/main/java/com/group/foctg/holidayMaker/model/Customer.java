@@ -55,10 +55,11 @@ public class Customer implements Serializable {
     private List<Booking> bookings;
 
     /**
-     * Method that returns the <code>ID</code> of the <code>Customer</code>
-     * object
+     * Method that returns the <code>ID</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Customer} object
      *
-     * @return Long value <code>Customer</code> objects field <code>ID</code>
+     * @return Long value {@link com.group.foctg.holidayMaker.model.Customer}
+     * objects field <code>ID</code>
      */
     public Long getID() {
         return ID;
@@ -66,9 +67,10 @@ public class Customer implements Serializable {
 
     /**
      * Method that returns the field <code>email</code> of the
-     * <code>Customer</code> object
+     * {@link com.group.foctg.holidayMaker.model.Customer} object
      *
-     * @return String of <code>Customer</code> objects field <code>email</code>
+     * @return String of {@link com.group.foctg.holidayMaker.model.Customer}
+     * objects field <code>email</code>
      */
     public String getEmail() {
         return email;
@@ -86,10 +88,11 @@ public class Customer implements Serializable {
 
     /**
      * Method that returns the field <code>accommodation</code> of the
-     * <code>Customer</code> object.
+     * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
-     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of the Customer objects field
-     * accommodations
+     * @return
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
+     * the Customer objects field accommodations
      */
     public List<Accommodation> getAccommodations() {
         return accommodations;
@@ -108,9 +111,10 @@ public class Customer implements Serializable {
 
     /**
      * Method that returns the field <code>bookings</code> of the
-     * <code>Customer</code> object.
+     * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
-     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of the Customer objects field bookings
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
+     * the Customer objects field bookings
      */
     public List<Booking> getBookings() {
         return bookings;
