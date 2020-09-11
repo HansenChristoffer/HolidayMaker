@@ -30,7 +30,7 @@ import com.group.foctg.holidayMaker.repositories.CustomerRepository;
  * column and entity. Autowires the repository.
  *
  * @author Frida Ek
- * @author Christoffer Hansen &lt;christoffer.hansen.hc@gmail.com&gt;
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  *
  * @see com.group.foctg.holidayMaker.repositories.CustomerRepository
  */

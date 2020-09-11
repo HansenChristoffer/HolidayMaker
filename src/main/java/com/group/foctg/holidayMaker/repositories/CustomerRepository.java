@@ -35,7 +35,7 @@ import org.springframework.data.jpa.repository.Query;
  * {@link com.group.foctg.holidayMaker.services.CustomerService}.
  *
  * @author Frida Ek
- * @author Christoffer Hansen &lt;christoffer.hansen.hc@gmail.com&gt;
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
 @Repository
