@@ -10,6 +10,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EntityScan(basePackages = {"com.group.foctg.holidayMaker.model"})
 public class HolidayMakerApplication extends SpringBootServletInitializer {
 
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(HolidayMakerApplication.class);
@@ -18,5 +19,6 @@ public class HolidayMakerApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(HolidayMakerApplication.class, args);
     }
+
 
 }
