@@ -58,7 +58,7 @@ public class Customer implements Serializable {
      * Method that returns the <code>ID</code> of the <code>Customer</code>
      * object
      *
-     * @return int of <code>Customer</code> objects field <code>ID</code>
+     * @return Long value <code>Customer</code> objects field <code>ID</code>
      */
     public Long getID() {
         return ID;
