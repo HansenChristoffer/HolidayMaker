@@ -101,8 +101,8 @@ public class CustomerService {
     }
 
     /**
-     * Goes through the database, checks and returns all <code>Booking</code>
-     * objects in the
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Booking} objects in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; if a
      * customer with given <code>id</code> exists.
      *
