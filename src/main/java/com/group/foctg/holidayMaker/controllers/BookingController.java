@@ -30,12 +30,12 @@ public class BookingController {
 		return bookingService.removeBooking(bookingId);
 	}
 	
-	@PutMapping("/api/booking?bookingid=")
+	@PutMapping("/api/booking")
 	public boolean updateBooking(@RequestBody Booking booking) {
 		return bookingService.updateBooking(booking);
 	}
 	
-	@GetMapping("/api/booking?customerid=")
+	@GetMapping("/api/booking")
 	public List<Booking> findBookingsByCustomerId(@RequestParam Long customerId) {
 		return bookingService.findBookingsByCustomerId(customerId);
 	}
