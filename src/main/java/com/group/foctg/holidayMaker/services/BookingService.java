@@ -31,7 +31,7 @@ public class BookingService {
 		return bookingRepository.saveAndFlush(booking).equals(booking);
 	}
 	
-	public List<Booking> findBookingsByUser(Long ID) {
+	public List<Booking> findBookingsByCustomerId(Long ID) {
 		return bookingRepository.findBookingsByCustomerID(ID);
 	}
 }
