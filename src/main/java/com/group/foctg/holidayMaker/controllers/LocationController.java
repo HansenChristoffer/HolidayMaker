@@ -33,7 +33,7 @@ public class LocationController {
 		} else return false;
 	}
 
-	@GetMapping("/api/accommodation")
+	@GetMapping("/api/location")
 	public String getOneLocation(@RequestParam Long locationid) {
 		return locationService.getOne(locationid).getID().toString();
 	}
