@@ -11,22 +11,27 @@ import com.group.foctg.holidayMaker.repositories.BookingRepository;
 public class BookingService {
 	
 	@Autowired
-	private BookingRepository repository;
+	private BookingRepository bookingRepository;
 	
 	
 	public boolean saveBooking(Booking booking) {
-		return false;
+		return bookingRepository.saveAndFlush(booking).equals(booking);
 	}
 	
-	public boolean removeBooking(Booking booking) {
-		return false;
+	public boolean removeBooking(Long ID) {
+		if (bookingRepository.existsById(ID)) {
+			bookingRepository.deleteById(ID);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean updateBooking(Booking booking) {
-		return false;
+		return bookingRepository.saveAndFlush(booking).equals(booking);
 	}
 	
-	public List<Booking> findBookingsByUser(Customer customer){
-		return null;
+	public List<Booking> findBookingsByUser(Long ID) {
+		return bookingRepository.findBookingsByCustomerID(ID);
 	}
 }
