@@ -36,7 +36,7 @@ import javax.persistence.SequenceGenerator;
  * that SQLite3 holds.
  *
  * @author Olle Johansson
- * @author Christoffer Hansen
+ * @author Christoffer Hansen &lt;christoffer.hansen.hc@gmail.com&gt;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

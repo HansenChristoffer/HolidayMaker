@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * The default URL value is set to, "/api".
  *
- * @author Christoffer Hansen <christoffer.hansen.hc@gmail.com>
+ * @author Christoffer Hansen &lt;christoffer.hansen.hc@gmail.com&gt;
  * @see com.group.foctg.holidayMaker.services.CustomerService
  */
 @RestController
