@@ -27,15 +27,15 @@ public class AccommodationController {
 	}
 	
 	@PostMapping("/api/accommodation")
-	public String saveAccommodation(@RequestBody Accommodation accommodation) {
+	public boolean saveAccommodation(@RequestBody Accommodation accommodation) {
 		if (accommodationService.saveAccommodation(accommodation)) {
-			return "Saved!";
-		} else return "Not Saved!";
+			return true;
+		} else return false;
 	}
 
 	@GetMapping("/api/accommodation/filter")
 	public List<Accommodation> filterAccommodations(@RequestBody Filter filter) {
-		return accommodationService.getFilteredAccommodations(filter, accommodationService.findAll());
+		return accommodationService.getFilteredAccommodations(filter);
 	}
 
 	@GetMapping("/api/accommodation")

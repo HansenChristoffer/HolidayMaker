@@ -78,7 +78,7 @@ public class Filter {
 		this.pack = pack;
 	}
 
-	public boolean isPool() {
+	public boolean hasPool() {
 		return pool;
 	}
 
@@ -86,7 +86,7 @@ public class Filter {
 		this.pool = pool;
 	}
 
-	public boolean isChildrenClub() {
+	public boolean hasChildrenClub() {
 		return childrenClub;
 	}
 
@@ -94,7 +94,7 @@ public class Filter {
 		this.childrenClub = childrenClub;
 	}
 
-	public boolean isRestaurant() {
+	public boolean hasRestaurant() {
 		return restaurant;
 	}
 
@@ -102,7 +102,7 @@ public class Filter {
 		this.restaurant = restaurant;
 	}
 
-	public boolean isNightEntertainment() {
+	public boolean hasNightEntertainment() {
 		return nightEntertainment;
 	}
 
