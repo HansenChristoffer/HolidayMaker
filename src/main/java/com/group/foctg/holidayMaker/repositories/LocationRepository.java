@@ -13,5 +13,5 @@ import com.group.foctg.holidayMaker.model.Location;
 public interface LocationRepository extends JpaRepository<Location, Long> {
     
     @Query("SELECT a FROM Accommodation a WHERE a.location.ID = ?1")
-    Customer findAccommodationsByLocationID(Long ID);
+    Accommodation findAccommodationsByLocationID(Long ID);
 }
