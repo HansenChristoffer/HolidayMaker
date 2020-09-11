@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * RestController for the <code>Customer</code> entity and column. This class
- * holds all the endpoints for <code>Customer</code>.
+ * RestController for the {@link com.group.foctg.holidayMaker.model.Customer} entity and column. This class
+ * holds all the endpoints for {@link com.group.foctg.holidayMaker.model.Customer}.
  *
  * Autowiring {@link com.group.foctg.holidayMaker.services.CustomerService}.
  *
@@ -51,7 +51,7 @@ public class CustomerController {
      * {@link com.group.foctg.holidayMaker.services.CustomerService#saveCustomer(com.group.foctg.holidayMaker.model.Customer)}
      * method from the Service.
      *
-     * @param customer <code>Customer</code> object to pass to the Service class
+     * @param customer {@link com.group.foctg.holidayMaker.model.Customer} object to pass to the Service class
      * @return a boolean value from the autowired Service
      */
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
