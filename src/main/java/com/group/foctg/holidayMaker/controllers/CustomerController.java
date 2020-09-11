@@ -28,8 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * RestController for the {@link com.group.foctg.holidayMaker.model.Customer} entity and column. This class
- * holds all the endpoints for {@link com.group.foctg.holidayMaker.model.Customer}.
+ * RestController for the {@link com.group.foctg.holidayMaker.model.Customer}
+ * entity and column. This class holds all the endpoints for
+ * {@link com.group.foctg.holidayMaker.model.Customer}.
  *
  * Autowiring {@link com.group.foctg.holidayMaker.services.CustomerService}.
  *
@@ -51,7 +52,8 @@ public class CustomerController {
      * {@link com.group.foctg.holidayMaker.services.CustomerService#saveCustomer(com.group.foctg.holidayMaker.model.Customer)}
      * method from the Service.
      *
-     * @param customer {@link com.group.foctg.holidayMaker.model.Customer} object to pass to the Service class
+     * @param customer {@link com.group.foctg.holidayMaker.model.Customer}
+     * object to pass to the Service class
      * @return a boolean value from the autowired Service
      */
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
@@ -80,7 +82,8 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @return a {@link com.group.foctg.holidayMaker.model.Customer} object from
+     * the Service
      */
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public Customer findCustomerById(@RequestParam Long id) {
@@ -94,7 +97,8 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param email String value to pass to the Service class
-     * @return a boolean value from the Service
+     * @return a {@link com.group.foctg.holidayMaker.model.Customer} value from
+     * the Service
      */
     @RequestMapping(value = "/customer/by", method = RequestMethod.GET)
     public Customer findCustomerByEmail(@RequestParam String email) {
@@ -108,7 +112,7 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @return a List object from the Service
      */
     @RequestMapping(value = "/customer/bookings", method = RequestMethod.GET)
     public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {
@@ -122,7 +126,7 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @return a List object from the Service
      */
     @RequestMapping(value = "/customer/accommodations", method = RequestMethod.GET)
     public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {

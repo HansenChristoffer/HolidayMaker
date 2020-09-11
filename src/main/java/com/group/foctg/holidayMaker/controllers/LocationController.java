@@ -78,12 +78,14 @@ public class LocationController {
     }
 
     /**
-     * GET endpoint method that listens on <code>"/location"</code> URL and will call the 
+     * GET endpoint method that listens on <code>"/location"</code> URL and will
+     * call the 
      * {@link com.group.foctg.holidayMaker.services.LocationService#getOne(java.lang.Long) }
      * method from the Service.
-     * 
+     *
      * @param id Long value to pass to the Service class
-     * @return a Location object from the autowired Service
+     * @return a {@link com.group.foctg.holidayMaker.model.Location} object from
+     * the autowired Service
      */
     @GetMapping("/location")
     public Location getOne(@RequestParam Long id) {
@@ -105,8 +107,8 @@ public class LocationController {
     }
 
     /**
-     * GET endpoint method that listens on <code>"/location/accommodations"</code> URL
-     * and will call the
+     * GET endpoint method that listens on
+     * <code>"/location/accommodations"</code> URL and will call the
      * {@link com.group.foctg.holidayMaker.services.LocationService#findAccommodationsByLocation(java.lang.Long) }
      * method from the autowired Service.
      *
