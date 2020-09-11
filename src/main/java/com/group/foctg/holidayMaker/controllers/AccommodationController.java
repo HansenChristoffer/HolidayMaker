@@ -27,10 +27,10 @@ public class AccommodationController {
 	}
 	
 	@PostMapping("/api/accommodation")
-	public String saveAccommodation(@RequestBody Accommodation accommodation) {
+	public boolean saveAccommodation(@RequestBody Accommodation accommodation) {
 		if (accommodationService.saveAccommodation(accommodation)) {
-			return "Saved!";
-		} else return "Not Saved!";
+			return true;
+		} else return false;
 	}
 
 	@GetMapping("/api/accommodation/filter")
