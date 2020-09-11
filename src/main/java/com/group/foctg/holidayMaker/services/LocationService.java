@@ -75,7 +75,7 @@ public class LocationService {
         return locationRepository.findAll();
     }
 
-        /**
+    /**
      * Goes through the database, checks and returns a
      * {@link com.group.foctg.holidayMaker.model.Location} object if a location
      * with given <code>id</code> exists.
