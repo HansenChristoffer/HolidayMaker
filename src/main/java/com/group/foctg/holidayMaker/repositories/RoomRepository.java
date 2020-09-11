@@ -10,7 +10,7 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 
 @Repository
-public interface RoomRepo extends JpaRepository<Room, Long> {
+public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	public Accommodation findAccommdotionByID(Long ID);
 	
