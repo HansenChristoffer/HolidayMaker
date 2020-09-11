@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2030 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.group.foctg.holidayMaker.model;
 
 import java.io.Serializable;
@@ -10,6 +25,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+/**
+ * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
+ * the various fields that are required for the functionality of the program.
+ * These fields are also turned into columns in the SQLite3 database. There is
+ * also one OneToMany relationships with other entity classes.
+ *
+ * Uses the SEQUENCE type for auto gen id values because of the restrictions
+ * that SQLite3 holds.
+ *
+ * @author Olle Johansson
+ */
 @Entity
 public class Location implements Serializable {
 
@@ -17,7 +43,7 @@ public class Location implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     @Column
-    private Long ID;
+    private Long id;
 
     @Column
     private String name;
@@ -26,22 +52,58 @@ public class Location implements Serializable {
     @OneToMany
     private List<Accommodation> accommodations;
 
-    public Long getID() {
-        return this.ID;
+    /**
+     * Method that returns the <code>id</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Location} object
+     *
+     * @return Long value {@link com.group.foctg.holidayMaker.model.Location}
+     * objects field <code>id</code>
+     */
+    public Long getId() {
+        return this.id;
     }
 
+    /**
+     * Method that returns the field <code>name</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Location} object
+     *
+     * @return String of {@link com.group.foctg.holidayMaker.model.Location}
+     * objects field <code>name</code>
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Method that will set the value of the field <code>name</code> by the
+     * value sent as parameter.
+     *
+     * @param name String value to be added to field <code>name</code>
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Method that returns the field <code>accommodation</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Location} object.
+     *
+     * @return
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
+     * the {@link com.group.foctg.holidayMaker.model.Location} objects field
+     * accommodations
+     */
     public List<Accommodation> getAccommodation() {
         return this.accommodations;
     }
 
+    /**
+     * Method that will set the value of the field <code>accommodations</code>
+     * by the value sent as parameter.
+     *
+     * @param accommodations List that will become the new
+     * <code>accommodations</code>
+     */
     public void setAccommodation(List<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }

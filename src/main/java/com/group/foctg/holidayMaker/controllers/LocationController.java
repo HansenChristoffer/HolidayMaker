@@ -35,7 +35,7 @@ public class LocationController {
 
 	@GetMapping("/api/accommodation")
 	public String getOneLocation(@RequestParam Long locationid) {
-		return locationService.getOne(locationid).getID().toString();
+		return locationService.getOne(locationid).getId().toString();
 	}
 	
 	@DeleteMapping("/api/location")
