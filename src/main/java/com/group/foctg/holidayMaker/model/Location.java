@@ -37,6 +37,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Location implements Serializable {
 
+    public Location(String name, List<Accommodation> accommodations) {
+        this.name = name;
+        this.accommodations = accommodations;
+    }
+    
     @Id
     @GeneratedValue
     @Column

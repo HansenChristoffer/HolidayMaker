@@ -43,6 +43,22 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class Accommodation implements Serializable {
 
+    public Accommodation(String name, Boolean pool, Boolean nightEntertainment, Boolean childEvents, Boolean restaurant, Short distanceToBeach, Short distanceToCenter, Location location, String imageURL, String description, List<Booking> bookings, List<Room> rooms, Customer customer) {
+        this.name = name;
+        this.pool = pool;
+        this.nightEntertainment = nightEntertainment;
+        this.childEvents = childEvents;
+        this.restaurant = restaurant;
+        this.distanceToBeach = distanceToBeach;
+        this.distanceToCenter = distanceToCenter;
+        this.location = location;
+        this.imageURL = imageURL;
+        this.description = description;
+        this.bookings = bookings;
+        this.rooms = rooms;
+        this.customer = customer;
+    }
+    
     @Id
     @GeneratedValue
     @Column

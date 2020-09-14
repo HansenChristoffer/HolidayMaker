@@ -40,6 +40,12 @@ import javax.persistence.OneToMany;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer implements Serializable {
 
+    public Customer(String email, List<Accommodation> accommodations, List<Booking> bookings) {
+        this.email = email;
+        this.accommodations = accommodations;
+        this.bookings = bookings;
+    }
+    
     @Id
     @GeneratedValue
     @Column

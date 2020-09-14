@@ -40,6 +40,19 @@ import javax.persistence.Temporal;
 @Entity
 public class Booking implements Serializable {
 
+    public Booking(Customer customer, List<Room> rooms, Date dateFrom, Date dateTo, Short numberOfAdults, Short numberOfKids, Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, Short extraBeds) {
+        this.customer = customer;
+        this.rooms = rooms;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.numberOfAdults = numberOfAdults;
+        this.numberOfKids = numberOfKids;
+        this.allInclusive = allInclusive;
+        this.fullBoard = fullBoard;
+        this.halfBoard = halfBoard;
+        this.extraBeds = extraBeds;
+    }
+    
     @Id
     @GeneratedValue
     @Column

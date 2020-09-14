@@ -36,6 +36,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Room implements Serializable {
 
+    public Room(Short numberOfBeds, Accommodation accommodation, Float price) {
+        this.numberOfBeds = numberOfBeds;
+        this.accommodation = accommodation;
+        this.price = price;
+    }
+    
     @Id
     @GeneratedValue
     @Column
