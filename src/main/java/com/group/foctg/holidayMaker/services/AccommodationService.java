@@ -66,15 +66,12 @@ public class AccommodationService {
 		List<Accommodation> filtered = findAll().stream()
 			    .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
 			    .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
-			    //.filter(a -> a.getLocation().getName() == filter.getLocation() && a.getLocation() != null && filter.getLocation() != null)
 			    .filter(a -> a.getPool() == true || filter.hasPool() == false)
 			    .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
 			    .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
 			    .filter(a -> a.getNightEntertainment() == true || filter.hasNightEntertainment() == false)
-			    //filter rooms
-			    //filter beds
-			    //filter price
-			    //filter package
+			    .filter(a -> a.getLocation().getName().equals(filter.getLocation()))
+			    .filter(a -> a.getRooms().size() >= filter.getRooms())
 			    .collect(Collectors.toList());
 		
 		

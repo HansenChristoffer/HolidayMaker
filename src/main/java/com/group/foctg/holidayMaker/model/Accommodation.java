@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 public class Accommodation implements Serializable {
 
@@ -42,6 +45,7 @@ public class Accommodation implements Serializable {
     private Short distanceToCenter;
 
     @ManyToOne
+    @Cascade(value = { CascadeType.ALL })
     private Location location;
 
     @Column
@@ -51,9 +55,11 @@ public class Accommodation implements Serializable {
     private String description;
 
     @OneToMany
+    @Cascade(value = { CascadeType.ALL })
     private List<Booking> bookings;
 
     @OneToMany
+    @Cascade(value = { CascadeType.ALL })
     private List<Room> rooms;
 
     @ManyToOne

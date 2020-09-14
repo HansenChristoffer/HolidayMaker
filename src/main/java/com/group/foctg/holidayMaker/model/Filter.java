@@ -17,7 +17,6 @@ public class Filter {
 	private boolean nightEntertainment;
 	
 	private short rooms;
-	private short beds;
 	private short adults;
 	private short kids;
 
@@ -116,14 +115,6 @@ public class Filter {
 
 	public void setRooms(short rooms) {
 		this.rooms = rooms;
-	}
-
-	public short getBeds() {
-		return beds;
-	}
-
-	public void setBeds(short beds) {
-		this.beds = beds;
 	}
 
 	public int getMinPrice() {
