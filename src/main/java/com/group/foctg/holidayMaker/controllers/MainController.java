@@ -12,9 +12,9 @@ public class MainController {
 		return "index.html";
 	}
 	
-	@GetMapping("/dashboard")
+	@GetMapping("/login")
 	public String init2() {
-		return "index2.html";
+		return "login.html";
 	}
 
 }

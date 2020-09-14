@@ -40,6 +40,11 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    
+    public List<Customer> findAll() {
+    	return customerRepository.findAll();
+    }
+    
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Customer} object from
      * parameter in the database.
