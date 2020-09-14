@@ -16,10 +16,8 @@
 package com.group.foctg.holidayMaker.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;

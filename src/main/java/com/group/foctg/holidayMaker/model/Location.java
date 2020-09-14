@@ -15,8 +15,12 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,23 +39,29 @@ import javax.persistence.OneToMany;
  * @author Olle Johansson
  */
 @Entity
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class, 
+  property = "id")
 public class Location implements Serializable {
+
+    public Location() {
+    }
 
     public Location(String name, List<Accommodation> accommodations) {
         this.name = name;
         this.accommodations = accommodations;
     }
-    
+
     @Id
     @GeneratedValue
-    @Column
+    @Column(name = "location_id")
     private Long id;
 
     @Column
     private String name;
-
-    @Column
-    @OneToMany
+    
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Accommodation> accommodations;
 
     /**

@@ -16,17 +16,19 @@
 
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Accommodation} entity class. Holds
@@ -41,9 +43,18 @@ import org.hibernate.annotations.CascadeType;
  */
 
 @Entity
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class, 
+  property = "id")
 public class Accommodation implements Serializable {
 
-    public Accommodation(String name, Boolean pool, Boolean nightEntertainment, Boolean childEvents, Boolean restaurant, Short distanceToBeach, Short distanceToCenter, Location location, String imageURL, String description, List<Booking> bookings, List<Room> rooms, Customer customer) {
+    public Accommodation() {
+    }
+
+    public Accommodation(String name, Boolean pool, Boolean nightEntertainment, 
+            Boolean childEvents, Boolean restaurant, Short distanceToBeach, 
+            Short distanceToCenter, Location location, String imageURL, 
+            String description, List<Room> rooms, Customer customer) {
         this.name = name;
         this.pool = pool;
         this.nightEntertainment = nightEntertainment;
@@ -54,14 +65,13 @@ public class Accommodation implements Serializable {
         this.location = location;
         this.imageURL = imageURL;
         this.description = description;
-        this.bookings = bookings;
         this.rooms = rooms;
         this.customer = customer;
     }
     
     @Id
     @GeneratedValue
-    @Column
+    @Column(name = "accommodation_id")
     private Long id;
 
     @Column
@@ -85,8 +95,8 @@ public class Accommodation implements Serializable {
     @Column
     private Short distanceToCenter;
 
-    @ManyToOne
-    @Cascade(value = { CascadeType.ALL })
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Location location;
 
     @Column
@@ -95,15 +105,12 @@ public class Accommodation implements Serializable {
     @Column
     private String description;
 
-    @OneToMany
-    @Cascade(value = { CascadeType.ALL })
-    private List<Booking> bookings;
-
-    @OneToMany
-    @Cascade(value = { CascadeType.ALL })
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Room> rooms;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Customer customer;
 
     public Long getId() {
@@ -196,14 +203,6 @@ public class Accommodation implements Serializable {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
-    }
-
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
     }
 
     public Customer getCustomer() {

@@ -54,11 +54,11 @@ public class CustomerController {
      * method from the Service.
      *
      * 
-     * @return a List<Customer> from the autowired Service
+     * @return a List&lt;Customer&gt; from the autowired Service
      */
     
     @GetMapping("/customers")
-    public List<Customer> getAll() {
+    public List<Customer> allCustomers() {
     	return customerService.findAll();
     }
 
