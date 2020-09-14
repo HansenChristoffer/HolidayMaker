@@ -23,6 +23,19 @@ import org.springframework.stereotype.Repository;
 import com.group.foctg.holidayMaker.model.Booking;
 import org.springframework.data.jpa.repository.Query;
 
+/**
+ * Repository interface for the
+ * {@link com.group.foctg.holidayMaker.model.Booking} and this extends
+ * JpaRepository. This repository also has one custom function with its own HQL
+ * query associated with it.
+ *
+ * This repository is suppose to be autowired by a Service. See
+ * {@link com.group.foctg.holidayMaker.services.BookingService}.
+ *
+ * @author Frida Ek
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
+ * @see org.springframework.data.jpa.repository.JpaRepository
+ */
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     
