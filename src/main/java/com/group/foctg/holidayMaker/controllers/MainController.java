@@ -11,5 +11,10 @@ public class MainController {
 	public String init() {
 		return "index.html";
 	}
+	
+	@GetMapping("/dashboard")
+	public String init2() {
+		return "index2.html";
+	}
 
 }

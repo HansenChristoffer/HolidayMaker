@@ -25,6 +25,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 /**
  * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
  * the various fields that are required for the functionality of the program.
