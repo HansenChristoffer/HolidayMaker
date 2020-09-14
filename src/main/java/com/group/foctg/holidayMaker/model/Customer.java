@@ -50,8 +50,11 @@ public class Customer implements Serializable {
 
     @Column
     private String email;
+    
+    @Column
+    private String password;
 
-    @OneToMany
+	@OneToMany
     private List<Accommodation> accommodations;
 
     @OneToMany
@@ -132,5 +135,28 @@ public class Customer implements Serializable {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+    
+    /**
+     * Method that returns the field <code>password</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Customer} object.
+     *
+     * @return String of
+     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field password
+     */
+        
+    public String getPassword() {
+		return password;
+	}
+
+    /**
+     * Method that will set the value of the field <code>password</code> by the
+     * value sent as parameter.
+     *
+     * @param password String that will become the <code>password</code>
+     */
+    
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }
