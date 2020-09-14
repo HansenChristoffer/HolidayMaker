@@ -46,7 +46,7 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     @Column
-    private Long ID;
+    private Long id;
 
     @Column
     private String email;
@@ -58,14 +58,14 @@ public class Customer implements Serializable {
     private List<Booking> bookings;
 
     /**
-     * Method that returns the <code>ID</code> of the
+     * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Customer} object
      *
      * @return Long value {@link com.group.foctg.holidayMaker.model.Customer}
-     * objects field <code>ID</code>
+     * objects field <code>id</code>
      */
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     /**
