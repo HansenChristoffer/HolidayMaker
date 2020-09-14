@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020-2030 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.group.foctg.holidayMaker.model;
 
 import java.io.Serializable;
@@ -10,6 +26,21 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+/**
+ * The {@link com.group.foctg.holidayMaker.model.Accommodation} entity class. Holds
+ * the various fields that are required for the functionality of the program.
+ * These fields are also turned into columns in the SQLite3 database. There is
+ * also one OneToMany and one ManyToOne relationships with other entity classes.
+ *
+ * Uses the SEQUENCE type for auto gen id values because of the restrictions
+ * that SQLite3 holds.
+ *
+ * @author Olle Johansson
+ */
 
 @Entity
 public class Accommodation implements Serializable {
@@ -42,6 +73,7 @@ public class Accommodation implements Serializable {
     private Short distanceToCenter;
 
     @ManyToOne
+    @Cascade(value = { CascadeType.ALL })
     private Location location;
 
     @Column
@@ -51,9 +83,11 @@ public class Accommodation implements Serializable {
     private String description;
 
     @OneToMany
+    @Cascade(value = { CascadeType.ALL })
     private List<Booking> bookings;
 
     @OneToMany
+    @Cascade(value = { CascadeType.ALL })
     private List<Room> rooms;
 
     @ManyToOne

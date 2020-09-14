@@ -138,7 +138,7 @@ public class Filter {
 	public void setRooms(short rooms) {
 		this.rooms = rooms;
 	}
-
+  
 	public int getMinDistBeach() {
 		return minDistBeach;
 	}
