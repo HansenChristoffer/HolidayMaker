@@ -16,8 +16,10 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,21 +42,33 @@ import javax.persistence.OneToMany;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Customer implements Serializable {
 
+    public Customer() {
+    }
+
+    public Customer(String email, String password, List<Accommodation> accommodations, List<Booking> bookings) {
+        this.email = email;
+        this.password = password;
+        this.accommodations = accommodations;
+        this.bookings = bookings;
+    }
+
     @Id
     @GeneratedValue
-    @Column
+    @Column(name = "customer_id")
     private Long id;
 
     @Column
     private String email;
-    
+
     @Column
     private String password;
 
-	@OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Accommodation> accommodations;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Booking> bookings;
 
     /**
@@ -95,7 +109,8 @@ public class Customer implements Serializable {
      *
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
-     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field accommodations
+     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field
+     * accommodations
      */
     public List<Accommodation> getAccommodations() {
         return accommodations;
@@ -117,7 +132,8 @@ public class Customer implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
-     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field bookings
+     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field
+     * bookings
      */
     public List<Booking> getBookings() {
         return bookings;
@@ -132,18 +148,17 @@ public class Customer implements Serializable {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
-    
+
     /**
      * Method that returns the field <code>password</code> of the
      * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
-     * @return String of
-     * the {@link com.group.foctg.holidayMaker.model.Customer} objects field password
+     * @return String of the {@link com.group.foctg.holidayMaker.model.Customer}
+     * objects field password
      */
-        
     public String getPassword() {
-		return password;
-	}
+        return password;
+    }
 
     /**
      * Method that will set the value of the field <code>password</code> by the
@@ -151,9 +166,8 @@ public class Customer implements Serializable {
      *
      * @param password String that will become the <code>password</code>
      */
-    
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

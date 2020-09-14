@@ -15,15 +15,18 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -40,15 +43,33 @@ import javax.persistence.Temporal;
 @Entity
 public class Booking implements Serializable {
 
+    public Booking() {
+    }
+
+    public Booking(Customer customer, List<Room> rooms, Date dateFrom, Date dateTo, Short numberOfAdults, Short numberOfKids, Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, Short extraBeds) {
+        this.customer = customer;
+        this.rooms = rooms;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.numberOfAdults = numberOfAdults;
+        this.numberOfKids = numberOfKids;
+        this.allInclusive = allInclusive;
+        this.fullBoard = fullBoard;
+        this.halfBoard = halfBoard;
+        this.extraBeds = extraBeds;
+    }
+
     @Id
     @GeneratedValue
-    @Column
+    @Column(name = "booking_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Customer customer;
 
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Room> rooms;
 
     @Column
