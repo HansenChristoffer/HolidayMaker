@@ -144,6 +144,7 @@ public class AccommodationService {
 		List<Accommodation> filtered = findAll().stream()
 			    .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
 			    .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
+			    .filter(a -> a.getLocation().getName().equals(filter.getLocation()))
 			    .filter(a -> a.getPool() == true || filter.hasPool() == false)
 			    .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
 			    .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
