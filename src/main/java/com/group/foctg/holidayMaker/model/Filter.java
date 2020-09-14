@@ -1,6 +1,31 @@
+/*
+ * Copyright 2020-2030 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.group.foctg.holidayMaker.model;
 
 import java.util.Date;
+
+/**
+ * The {@link com.group.foctg.holidayMaker.model.Filter} entity class.
+ *
+ * Used to store database values for filtering out database items in
+ * the {@link com.group.foctg.holidayMaker.services.AccommodationService} class
+ *
+ * @author Olle Johansson
+ */
 
 
 public class Filter {
@@ -19,9 +44,6 @@ public class Filter {
 	private short rooms;
 	private short adults;
 	private short kids;
-
-	private int minPrice;
-	private int maxPrice;
 
 	private int minDistBeach;
 	private int maxDistBeach;
@@ -116,23 +138,7 @@ public class Filter {
 	public void setRooms(short rooms) {
 		this.rooms = rooms;
 	}
-
-	public int getMinPrice() {
-		return minPrice;
-	}
-
-	public void setMinPrice(int minPrice) {
-		this.minPrice = minPrice;
-	}
-
-	public int getMaxPrice() {
-		return maxPrice;
-	}
-
-	public void setMaxPrice(int maxPrice) {
-		this.maxPrice = maxPrice;
-	}
-
+	
 	public int getMinDistBeach() {
 		return minDistBeach;
 	}
