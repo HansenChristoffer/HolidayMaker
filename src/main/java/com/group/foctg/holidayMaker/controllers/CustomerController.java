@@ -21,6 +21,7 @@ import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.services.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +46,21 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    
+    /**
+     * GET endpoint method that listens on <code>"/customers"</code> URL and
+     * will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#getAll(com.group.foctg.holidayMaker.model.Customer)}
+     * method from the Service.
+     *
+     * 
+     * @return a List<Customer> from the autowired Service
+     */
+    
+    @GetMapping("/customers")
+    public List<Customer> getAll() {
+    	return customerService.findAll();
+    }
 
     /**
      * POST endpoint method that listens on <code>"/customer"</code> URL and
