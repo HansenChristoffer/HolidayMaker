@@ -19,10 +19,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds
@@ -39,10 +37,9 @@ import javax.persistence.SequenceGenerator;
 public class Room implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+    @GeneratedValue
     @Column
-    private Long ID;
+    private Long id;
 
     @Column
     private Short numberOfBeds;
@@ -66,8 +63,8 @@ public class Room implements Serializable {
      * @return Long value {@link com.group.foctg.holidayMaker.model.Room}
      * objects field <code>id</code>
      */
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
     
     /**
