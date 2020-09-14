@@ -46,8 +46,7 @@ import org.hibernate.annotations.CascadeType;
 public class Accommodation implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+    @GeneratedValue
     @Column
     private Long ID;
 

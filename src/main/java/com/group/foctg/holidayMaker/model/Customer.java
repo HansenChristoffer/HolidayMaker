@@ -43,8 +43,7 @@ import javax.persistence.SequenceGenerator;
 public class Customer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+    @GeneratedValue
     @Column
     private Long id;
 

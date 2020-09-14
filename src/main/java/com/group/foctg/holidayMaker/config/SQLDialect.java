@@ -2,7 +2,7 @@ package com.group.foctg.holidayMaker.config;
 
 /**
  *
- * @author Christoffer Hansen <christoffer.hansen.hc@gmail.com>
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  * https://fullstackdeveloper.guru/2020/05/01/how-to-integrate-sqlite-database-with-spring-boot/
  */
 import java.sql.Types;
@@ -10,6 +10,7 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
+import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.type.StringType;
 
 public class SQLDialect extends Dialect {
@@ -43,6 +44,11 @@ public class SQLDialect extends Dialect {
         registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
         registerFunction("substr", new StandardSQLFunction("substr", StringType.INSTANCE));
         registerFunction("substring", new StandardSQLFunction("substr", StringType.INSTANCE));
+    }
+
+    @Override
+    public IdentityColumnSupport getIdentityColumnSupport() {
+        return new SQLiteIdentityColumnSupport();
     }
 
     public boolean supportsIdentityColumns() {
