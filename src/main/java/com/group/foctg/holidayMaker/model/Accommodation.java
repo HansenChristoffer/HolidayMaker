@@ -48,7 +48,7 @@ public class Accommodation implements Serializable {
     @Id
     @GeneratedValue
     @Column
-    private Long ID;
+    private Long id;
 
     @Column
     private String name;
@@ -92,8 +92,8 @@ public class Accommodation implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

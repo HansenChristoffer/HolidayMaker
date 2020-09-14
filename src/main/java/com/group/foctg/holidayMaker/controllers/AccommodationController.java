@@ -113,7 +113,7 @@ public class AccommodationController {
 
 	@GetMapping("/accommodation")
 	public String getOneAccommodation(@RequestParam Long accommodationid) {
-		return accommodationService.getOne(accommodationid).getID().toString();
+		return accommodationService.getOne(accommodationid).getId().toString();
 	}
 	
 	/**

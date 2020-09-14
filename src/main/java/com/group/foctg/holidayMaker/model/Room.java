@@ -41,7 +41,7 @@ public class Room implements Serializable {
     @Id
     @GeneratedValue
     @Column
-    private Long ID;
+    private Long id;
 
     @Column
     private Short numberOfBeds;
@@ -65,8 +65,8 @@ public class Room implements Serializable {
      * @return Long value {@link com.group.foctg.holidayMaker.model.Room}
      * objects field <code>id</code>
      */
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
     
     /**
