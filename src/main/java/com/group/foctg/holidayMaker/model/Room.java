@@ -16,6 +16,7 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -59,7 +60,7 @@ public class Room implements Serializable {
     private Short numberOfBeds;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Booking> bookings;
     
     @ManyToOne(cascade = CascadeType.ALL)

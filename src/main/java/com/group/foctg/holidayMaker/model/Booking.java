@@ -70,7 +70,7 @@ public class Booking implements Serializable {
     private Customer customer;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Room> rooms;
 
     @Column
