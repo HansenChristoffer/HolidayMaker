@@ -68,6 +68,10 @@ public class Room implements Serializable {
 
     @Column
     private Float price;
+    
+    //Gör docs
+    @Column
+    private Short size;
 
     /**
      * Method that returns the <code>id</code> of the

@@ -104,8 +104,12 @@ public class Accommodation implements Serializable {
 
     @Column
     private String description;
+    
+    //gör docs
+    @Column
+    private Float rating;
 
-    @OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Room> rooms;
 
@@ -212,5 +216,13 @@ public class Accommodation implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public Float getRating() {
+		return rating;
+	}
+
+	public void setRating(Float rating) {
+		this.rating = rating;
+	}
 
 }
