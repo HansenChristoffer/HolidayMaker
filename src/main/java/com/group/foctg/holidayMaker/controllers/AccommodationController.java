@@ -145,8 +145,8 @@ public class AccommodationController {
      * @return a List of accommodations
      */
 	@GetMapping("/accommodation/customer")
-	public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long customerId) {
-		return accommodationService.findAccommodationsByUser(customerId);
+	public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
+		return accommodationService.findAccommodationsByUser(id);
 	}
 	
 	/**
