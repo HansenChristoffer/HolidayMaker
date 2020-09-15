@@ -33,8 +33,8 @@ public class Filter {
 	private String location;
 	private String pack;
 	
-	private Date dateFrom;
-	private Date dateTo;
+	private String dateFrom;
+	private String dateTo;
 	
 	private boolean pool;
 	private boolean childrenClub;
@@ -59,19 +59,19 @@ public class Filter {
 		this.location = location;
 	}
 
-	public Date getDateFrom() {
+	public String getDateFrom() {
 		return dateFrom;
 	}
 
-	public void setDateFrom(Date dateFrom) {
+	public void setDateFrom(String dateFrom) {
 		this.dateFrom = dateFrom;
 	}
 
-	public Date getDateTo() {
+	public String getDateTo() {
 		return dateTo;
 	}
 
-	public void setDateTo(Date dateTo) {
+	public void setDateTo(String dateTo) {
 		this.dateTo = dateTo;
 	}
 
