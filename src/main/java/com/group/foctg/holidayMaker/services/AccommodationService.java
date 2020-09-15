@@ -64,7 +64,7 @@ public class AccommodationService {
      * @return A boolean value representing whether the removing was successful
      * or not
      */
-    public boolean removeAccommodationByID(Long id) {
+    public boolean removeAccommodationById(Long id) {
         if (accommodationRepository.existsById(id)) {
             Accommodation found = accommodationRepository.getOne(id);
             accommodationRepository.delete(found);
@@ -116,8 +116,8 @@ public class AccommodationService {
      * matches the <code>ID</code> of a
      * {@link com.group.foctg.holidayMaker.model.Customer}
      */
-    public List<Accommodation> findAccommodationsByUser(Long id) {
-        return accommodationRepository.findAccommodationsByCustomerID(id);
+    public List<Accommodation> findAccommodationsByCustomerId(Long id) {
+        return accommodationRepository.findAccommodationsByCustomerId(id);
     }
 
     /**

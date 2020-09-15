@@ -124,7 +124,7 @@ public class AccommodationController {
     /**
      * DELETE endpoint method that listens on <code>"/accommodation"</code> URL
      * and will call the
-     * {@link com.group.foctg.holidayMaker.services.AccommodationService#removeAccommodationByID(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#removeAccommodationById(java.lang.Long)}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -132,13 +132,13 @@ public class AccommodationController {
      */
     @DeleteMapping("/api/accommodation")
     public boolean removeAccommodation(@RequestParam Long id) {
-        return accommodationService.removeAccommodationByID(id);
+        return accommodationService.removeAccommodationById(id);
     }
 	
 	/**
      * GET endpoint method that listens on <code>"/accommodation/customer"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsByUser(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsByCustomerId(java.lang.Long)}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -146,7 +146,7 @@ public class AccommodationController {
      */
 	@GetMapping("/accommodation/customer")
 	public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
-		return accommodationService.findAccommodationsByUser(id);
+		return accommodationService.findAccommodationsByCustomerId(id);
 	}
 	
 	/**
