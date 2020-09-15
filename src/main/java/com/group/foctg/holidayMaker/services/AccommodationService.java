@@ -148,5 +148,44 @@ public class AccommodationService {
 
         return filtered;
     }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has
+     * <code>distanceToBeach</code> within given argument.
+     *
+     * @param distance Short value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsWithinDistanceToBeach(Short distance) {
+    	return accommodationRepository.findAccommodationsByDistanceToBeach(distance);
+    }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has
+     * <code>distanceToCenter</code> within given argument.
+     *
+     * @param distance Short value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsWithinDistanceToCenter(Short distance) {
+    	return accommodationRepository.findAccommodationsByDistanceToCenter(distance);
+    }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has the
+     * <code>rating</code> within given argument.
+     *
+     * @param rating float value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsByRating(Float rating) {
+    	return accommodationRepository.findAccommodationsByRating(rating);
+    }
 
 }
