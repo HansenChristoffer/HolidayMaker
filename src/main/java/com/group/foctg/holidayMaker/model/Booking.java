@@ -18,7 +18,6 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +26,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -46,7 +44,10 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(Customer customer, List<Room> rooms, Date dateFrom, Date dateTo, Short numberOfAdults, Short numberOfKids, Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, Short extraBeds) {
+    public Booking(Customer customer, List<Room> rooms, String dateFrom, 
+            String dateTo, Short numberOfAdults, Short numberOfKids, 
+            Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, 
+            Short extraBeds) {
         this.customer = customer;
         this.rooms = rooms;
         this.dateFrom = dateFrom;
@@ -73,12 +74,10 @@ public class Booking implements Serializable {
     private List<Room> rooms;
 
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateFrom;
+    private String dateFrom;
 
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateTo;
+    private String dateTo;
 
     @Column
     private Short numberOfAdults;
@@ -161,7 +160,7 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateFrom</code>
      */
-    public Date getDateFrom() {
+    public String getDateFrom() {
         return dateFrom;
     }
 
@@ -172,7 +171,7 @@ public class Booking implements Serializable {
      * @param dateFrom <code>Date</code> value to be added to field
      * <code>dateFrom</code>
      */
-    public void setDateFrom(Date dateFrom) {
+    public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
     }
 
@@ -183,7 +182,7 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateTo</code>
      */
-    public Date getDateTo() {
+    public String getDateTo() {
         return dateTo;
     }
 
@@ -194,7 +193,7 @@ public class Booking implements Serializable {
      * @param dateTo <code>Date</code> value to be added to field
      * <code>dateTo</code>
      */
-    public void setDateTo(Date dateTo) {
+    public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
     }
 

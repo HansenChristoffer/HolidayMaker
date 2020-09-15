@@ -66,18 +66,15 @@ public class MockDataGenerator implements CommandLineRunner {
 
         Booking mockBooking1 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom1)),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/01/2020"),
+                "01/01/2020", "10/01/2020",
                 (short) 2, (short) 0, true, false, false, (short) 0);
         Booking mockBooking2 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom2)),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/02/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/02/2020"),
+                "01/02/2020", "10/02/2020",
                 (short) 1, (short) 2, false, true, false, (short) 0);
         Booking mockBooking3 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom3)),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/03/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/03/2020"),
+                "01/03/2020", "10/03/2020",
                 (short) 1, (short) 0, false, false, true, (short) 1);
 
         mockLocation1.setAccommodation(new ArrayList<>(Arrays.asList(
