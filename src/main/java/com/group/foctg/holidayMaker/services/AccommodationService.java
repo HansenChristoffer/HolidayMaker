@@ -64,7 +64,7 @@ public class AccommodationService {
      * @return A boolean value representing whether the removing was successful
      * or not
      */
-    public boolean removeAccommodationByID(Long id) {
+    public boolean removeAccommodationById(Long id) {
         if (accommodationRepository.existsById(id)) {
             Accommodation found = accommodationRepository.getOne(id);
             accommodationRepository.delete(found);
@@ -116,8 +116,8 @@ public class AccommodationService {
      * matches the <code>ID</code> of a
      * {@link com.group.foctg.holidayMaker.model.Customer}
      */
-    public List<Accommodation> findAccommodationsByUser(Long id) {
-        return accommodationRepository.findAccommodationsByCustomerID(id);
+    public List<Accommodation> findAccommodationsByCustomerId(Long id) {
+        return accommodationRepository.findAccommodationsByCustomerId(id);
     }
 
     /**
@@ -147,6 +147,45 @@ public class AccommodationService {
                 .collect(Collectors.toList());
 
         return filtered;
+    }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has
+     * <code>distanceToBeach</code> within given argument.
+     *
+     * @param distance Short value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsWithinDistanceToBeach(Short distance) {
+    	return accommodationRepository.findAccommodationsByDistanceToBeach(distance);
+    }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has
+     * <code>distanceToCenter</code> within given argument.
+     *
+     * @param distance Short value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsWithinDistanceToCenter(Short distance) {
+    	return accommodationRepository.findAccommodationsByDistanceToCenter(distance);
+    }
+    
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has the
+     * <code>rating</code> within given argument.
+     *
+     * @param rating float value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     */
+    public List<Accommodation> findAccommodationsByRating(Float rating) {
+    	return accommodationRepository.findAccommodationsByRating(rating);
     }
 
 }

@@ -60,9 +60,9 @@ public class MockDataGenerator implements CommandLineRunner {
                 "mock_URL", "mock_Description",
                 new ArrayList<>(), mockCustomer2);
 
-        Room mockRoom1 = new Room((short) 2, new ArrayList<>(),mockAccommodation1, 258f);
-        Room mockRoom2 = new Room((short) 3, new ArrayList<>(),mockAccommodation1, 380f);
-        Room mockRoom3 = new Room((short) 1, new ArrayList<>(),mockAccommodation1, 800f);
+        Room mockRoom1 = new Room((short) 2, new ArrayList<>(),mockAccommodation1, 258f, (short) 20);
+        Room mockRoom2 = new Room((short) 3, new ArrayList<>(),mockAccommodation1, 380f, (short) 15);
+        Room mockRoom3 = new Room((short) 1, new ArrayList<>(),mockAccommodation1, 800f, (short) 25);
 
         Booking mockBooking1 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom1)),
