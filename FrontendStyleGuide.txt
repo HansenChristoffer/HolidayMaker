@@ -1,0 +1,149 @@
+HTML
+1. Allt ska vara i containers.
+   Exempel:
+	<div><p>text</p><div>
+
+2. Allt ska vara indelat med indentations. Exempel:
+	<div>
+		<p>
+			text
+		</p>
+	</div>
+
+3. Alla containers ska vara identifierbara med antingen id eller class.
+   Exempel:
+	<div id="container">
+		<p class="title">
+			text
+		</p>
+	</div>
+
+4. Alla containers ska vara kommenterade.
+   Exempel:
+	<!-- detta är en container -->
+	<div id="container">
+		<!-- detta är också en container -->
+		<p class="title">
+			text
+		</p>
+	</div>
+
+5. Alla id's och classes ska vara camel case.
+   Exempel:
+	<div id="mainContainer">
+	</div>
+
+6. Använd enbart ID när du bara har ett element som ska använda sig av de egenskaper
+   som ID:t håller och använd CLASS när du har flera element som ska ha samma egenskaper.
+   Exempel:
+	<!-- där ska bara finnas en mainContainer = ID -->
+	<div id="mainContainer">
+		<!-- där finns flera titlar som har samma egenskaper = CLASS -->
+		<p class="title">
+			text
+		</p>
+		<p class="title">
+			text
+		</p>
+	</div>
+
+CSS
+
+1. I varje CSS-fil vi kommer skapa så ska filen vara indelat i 3.
+   Element-properties är längst upp.
+   ID-properties är i mitteln.
+   Class-properties är på botten.
+   Exempel:
+	body {
+		background-color: black;
+	}
+
+	#mainContainer {
+		border: 2px solid black;
+	}
+
+	.title {
+		color: white;
+	}
+	
+2. Varje Css-chunk som body, #mainContainer och .title ska vara kommenterad
+   om koden inte är själv-förklarande.
+   Exempel:
+	/*Detta är en css-kommentar*/
+
+3. Undvik att ha delade egenskaper med ett eller flera id/classer.
+   Exempel:
+	.title1 {
+		font-size: 10px;
+	}
+
+	.title2 {
+		font-size: 20px;
+	}
+
+	.title1, .title2 {
+		color: white;
+	}
+
+
+4. Alla färger ska vara i HEX-värden. Ingen RGBA eller plain-text colors.
+   I det enda fallet som är OK att använda plain-text färger är om vi testar
+   någon egenskap.
+   Exempel:
+	#mainContainer {
+		border: 2px solid black; /*rätt definition på svart om vi testar gränser till containern*/
+	}
+	
+	.title1 {
+		color: #ffffff; /*rätt definition på vit*/
+	}
+
+	.title2 {
+		color: white; /*fel definition på vit*/
+	}
+
+	.title3 {
+		color: rgba(255, 255, 255, 1); /*fel definition på vit*/
+	}
+
+5. Använd helst enheter som rem, em, vw eller %. Undvik att använda px som du kan!
+   Exempel:
+	body {
+		width: 100%;
+	}
+
+	#mainContainer {
+		width: 50vw;
+	}
+
+	.title {
+		font-size: 10rem;
+	}
+
+JAVASCRIPT
+
+1. Kommentera alla funktioner.
+   Exempel:
+	//Single-line comment
+	/*
+	  Multi-line comment
+	*/
+
+2. Använd "datatypen" 'let' istället för 'var'.
+   'let' är blockscope vilket innebär att den är public i objektet/funktionen den är i men private för alla andra.
+   'var' är function scope, den är public för exakt alla även om den inte har blivit deklarerad ännu.
+
+3. Använd camel case
+
+4. More to come
+	
+
+
+
+
+
+
+
+
+
+
