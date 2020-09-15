@@ -43,11 +43,12 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(Short numberOfBeds, List<Booking> bookings,Accommodation accommodation, Float price) {
+    public Room(Short numberOfBeds, List<Booking> bookings,Accommodation accommodation, Float price, Short size) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
         this.price = price;
+        this.size = size;
     }
 
     @Id
@@ -68,6 +69,9 @@ public class Room implements Serializable {
 
     @Column
     private Float price;
+    
+    @Column 
+    private Short size;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -146,12 +150,50 @@ public class Room implements Serializable {
     public void setPrice(Float price) {
         this.price = price;
     }
-
+    
+    /**
+     * Method that returns the field <code>bookings</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Room} object
+     *
+     * @return
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
+     * the {@link com.group.foctg.holidayMaker.model.Room} objects field
+     * bookings
+     */
     public List<Booking> getBookings() {
         return bookings;
     }
-
+    
+    /**
+     * Method that will set the value of the field <code>bookings</code> by the
+     * value sent as parameter.
+     *
+     * @param bookings List that will become the new
+     * <code>bookings</code>
+     */
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
+    }
+    
+    /**
+     * Method that returns the field <code>size</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Room} object
+     *
+     * @return Short of {@link com.group.foctg.holidayMaker.model.Room} objects
+     * field <code>size</code>
+     */
+    public Short getSize() {
+    	return size;
+    }
+    
+    /**
+     * Method that will set the value of the field <code>size</code> by the
+     * value sent as parameter.
+     *
+     * @param size <code>Short</code> value to be added to field
+     * <code>size</code>
+     */
+    public void setSize(Short size) {
+    	this.size = size;
     }
 }
