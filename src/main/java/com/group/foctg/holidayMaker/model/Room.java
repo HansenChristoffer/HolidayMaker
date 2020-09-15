@@ -47,8 +47,8 @@ public class Room implements Serializable {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
-        this.price = price;
         this.size = size;
+        this.price = price + (numberOfBeds * 20);
     }
 
     @Id
@@ -148,7 +148,7 @@ public class Room implements Serializable {
      * <code>price</code>
      */
     public void setPrice(Float price) {
-        this.price = price;
+        this.price = price + (numberOfBeds * 20);
     }
     
     /**
