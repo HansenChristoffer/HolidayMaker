@@ -28,6 +28,7 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,9 +87,10 @@ public class AccommodationController {
      *
      * @param filter Filter object to pass to the Service class
      * @return a List of the filtered accommodations
+     * @throws ParseException 
      */
 	@GetMapping("/accommodation/filter")
-	public List<Accommodation> filterAccommodations(@RequestBody Filter filter) {
+	public List<Accommodation> filterAccommodations(@RequestBody Filter filter) throws ParseException {
 		return accommodationService.getFilteredAccommodations(filter);
 	}
 	

@@ -16,6 +16,7 @@
 package com.group.foctg.holidayMaker.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * This class holds a static method that will check if two ranges of Dates
