@@ -105,12 +105,12 @@ public class CustomerController {
      */
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public Optional<Customer> findCustomerById(@RequestParam Long id) {
-        Optional<Customer> cust = customerService.findById(id);        
-        
+        Optional<Customer> cust = customerService.findById(id);
+
         if (cust.isEmpty()) {
             throw new CustomerNotFoundException(id);
         }
-        
+
         return cust;
     }
 
@@ -121,11 +121,12 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param email String value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Customer} value from
-     * the Service
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} value from the
+     * Service
      */
     @RequestMapping(value = "/customer/by", method = RequestMethod.GET)
-    public Customer findCustomerByEmail(@RequestParam String email) {
+    public Optional<Customer> findCustomerByEmail(@RequestParam String email) {
         return customerService.findCustomerByEmail(email);
     }
 
