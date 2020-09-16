@@ -62,8 +62,7 @@ public class LocationService {
      */
     public boolean removeLocationById(Long id) {
         if (locationRepository.existsById(id)) {
-            Location found = locationRepository.getOne(id);
-            locationRepository.delete(found);
+            locationRepository.deleteById(id);
             return true;
         } else {
             return false;
