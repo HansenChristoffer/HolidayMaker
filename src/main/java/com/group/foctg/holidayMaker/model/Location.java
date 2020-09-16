@@ -44,6 +44,12 @@ public class Location implements Serializable {
     public Location() {
     }
 
+    /**
+     * Contructor to initialize a {@link com.group.foctg.holidayMaker.model.Location} object.
+     * 
+     * @param name String value to be added to field <code>name</code>
+     * @param accommodations List that will become field <code>accommodations</code>
+     */
     public Location(String name, List<Accommodation> accommodations) {
         this.name = name;
         this.accommodations = accommodations;
@@ -100,7 +106,7 @@ public class Location implements Serializable {
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
      * the {@link com.group.foctg.holidayMaker.model.Location} objects field
-     * accommodations
+     * <code>accommodations</code>
      */
     public List<Accommodation> getAccommodation() {
         return this.accommodations;

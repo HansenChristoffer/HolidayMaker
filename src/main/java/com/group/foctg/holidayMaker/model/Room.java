@@ -40,11 +40,21 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(Short numberOfBeds, List<Booking> bookings,Accommodation accommodation, Float price, Short size) {
+    /**
+     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Room} object.
+     * 
+     * @param numberOfBeds Short value to be added to field <code>numberOfBeds</code>
+     * @param bookings List that will become the field <code>bookings</code>
+     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} object 
+     * to be added to field <code>accommodation</code>
+     * @param price Float value to be added to field <code>price</code>
+     * @param roomSize Short value to be added to field <code>roomSize</code>
+     */
+    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
-        this.size = size;
+        this.roomSize = roomSize;
         this.price = price + (numberOfBeds * 20);
     }
 
@@ -68,7 +78,7 @@ public class Room implements Serializable {
     private Float price;
     
     @Column 
-    private Short size;
+    private Short roomSize;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -155,7 +165,7 @@ public class Room implements Serializable {
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
      * the {@link com.group.foctg.holidayMaker.model.Room} objects field
-     * bookings
+     * <code>bookings</code>
      */
     public List<Booking> getBookings() {
         return bookings;
@@ -173,24 +183,24 @@ public class Room implements Serializable {
     }
     
     /**
-     * Method that returns the field <code>size</code> of the
+     * Method that returns the field <code>roomSize</code> of the
      * {@link com.group.foctg.holidayMaker.model.Room} object
      *
      * @return Short of {@link com.group.foctg.holidayMaker.model.Room} objects
-     * field <code>size</code>
+     * field <code>roomSize</code>
      */
     public Short getSize() {
-    	return size;
+    	return roomSize;
     }
     
     /**
      * Method that will set the value of the field <code>size</code> by the
      * value sent as parameter.
      *
-     * @param size Short value to be added to field
-     * <code>size</code>
+     * @param roomSize Short value to be added to field
+     * <code>roomSize</code>
      */
-    public void setSize(Short size) {
-    	this.size = size;
+    public void setSize(Short roomSize) {
+    	this.roomSize = roomSize;
     }
 }
