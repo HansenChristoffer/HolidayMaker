@@ -13,6 +13,8 @@ import com.group.foctg.holidayMaker.services.RoomService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +68,12 @@ public class MockDataGenerator implements CommandLineRunner {
 
         Booking mockBooking1 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom1)),
-                "01/01/2020", "10/01/2020",
                 (short) 2, (short) 0, true, false, false, (short) 0);
         Booking mockBooking2 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom2)),
-                "01/02/2020", "10/02/2020",
                 (short) 1, (short) 2, false, true, false, (short) 0);
         Booking mockBooking3 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom3)),
-                "01/03/2020", "10/03/2020",
                 (short) 1, (short) 0, false, false, true, (short) 1);
 
         mockLocation1.setAccommodation(new ArrayList<>(Arrays.asList(
@@ -92,6 +91,13 @@ public class MockDataGenerator implements CommandLineRunner {
         mockRoom1.setBookings(new ArrayList<>(Arrays.asList(mockBooking1)));
         mockRoom2.setBookings(new ArrayList<>(Arrays.asList(mockBooking2)));
         mockRoom3.setBookings(new ArrayList<>(Arrays.asList(mockBooking3)));
+
+        List<String[]> mockDatesTaken1 = new ArrayList<String[]>();
+
+        mockDatesTaken1.add(new String[] { "01/01/2020", "10/01/2020" });
+        mockDatesTaken1.add(new String[] { "01/02/2020", "10/02/2020" });
+        
+        mockRoom1.setDatesTaken(mockDatesTaken1);
         
         customerService.saveCustomer(mockCustomer1);
         customerService.saveCustomer(mockCustomer2);
