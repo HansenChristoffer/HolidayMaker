@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import com.group.foctg.holidayMaker.exceptions.CustomerNotFoundException;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
@@ -104,7 +105,13 @@ public class CustomerController {
      */
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public Optional<Customer> findCustomerById(@RequestParam Long id) {
-        return customerService.findById(id);
+        Optional<Customer> cust = customerService.findById(id);        
+        
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(id);
+        }
+        
+        return cust;
     }
 
     /**
