@@ -44,8 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.services.AccommodationService;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -109,13 +108,14 @@ public class AccommodationController {
      * from the Service
      */
     @GetMapping("/accommodation")
-    public Accommodation findAccommodationById(@RequestParam Long id) {
-        try {
-            return accommodationService.getOne(id);
-        } catch (AccommodationNotFoundException exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Accommodation Not Found", exc);
+    public Optional<Accommodation> findAccommodationById(@RequestParam Long id) {
+        Optional<Accommodation> acc = accommodationService.findById(id);
+
+        if (acc.isEmpty()) {
+            throw new AccommodationNotFoundException(id);
         }
+        
+        return acc;
     }
 
     /**
