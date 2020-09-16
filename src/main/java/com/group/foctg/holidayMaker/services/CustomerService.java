@@ -22,6 +22,7 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
+import java.util.Optional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Customer}
@@ -38,11 +39,10 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    
     public List<Customer> findAll() {
-    	return customerRepository.findAll();
+        return customerRepository.findAll();
     }
-    
+
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Customer} object from
      * parameter in the database.
@@ -82,11 +82,12 @@ public class CustomerService {
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
-     * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>id</code>, if it exists
+     * @return Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} object with the given
+     * <code>id</code>, if it exists
      */
-    public Customer findById(Long id) {
-        return customerRepository.getOne(id);
+    public Optional<Customer> findById(Long id) {
+        return customerRepository.findById(id);
     }
 
     /**
