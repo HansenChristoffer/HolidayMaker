@@ -25,6 +25,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	/**
+	 * To find user by email to authenticate logged in user.
+	 * 
+	 * @Override loadByUsername from {@link org.springframework.security.core.userdetails.UserDetailsService}
+	 * @throws {@link org.springframework.security.core.userdetails.UsernameNotFoundException}
+	 * 
+	 * @param email String to find {@link com.group.foctg.holidayMaker.model.Customer} object.
+	 * @return {@link org.springframework.security.core.userdetails.UserDetails}
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 				
