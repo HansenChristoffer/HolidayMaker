@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +121,13 @@ public class RoomController {
      */
     @GetMapping("/room")
     public Optional<Room> findById(@RequestParam Long id) {
-        return roomService.findById(id);
+        Optional<Room> room = roomService.findById(id);
+        
+        if (room.isEmpty()) {
+            throw new RoomNotFoundException(id);
+        }
+                
+        return room;
     }
 
     /**
