@@ -114,7 +114,7 @@ public class Accommodation implements Serializable {
     private Short distanceToCenter;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference(value = "accommodation_location")
     private Location location;
 
     @URL
@@ -125,11 +125,11 @@ public class Accommodation implements Serializable {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "accommodation_rooms")
     private List<Room> rooms;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference(value = "customers_accommodations")
     private Customer customer;
 
     @Range(min = 0, max = 5)

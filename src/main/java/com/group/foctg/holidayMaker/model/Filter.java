@@ -13,205 +13,197 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.group.foctg.holidayMaker.model;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Filter} entity class.
  *
- * Used to store database values for filtering out database items in
- * the {@link com.group.foctg.holidayMaker.services.AccommodationService} class
+ * Used to store database values for filtering out database items in the
+ * {@link com.group.foctg.holidayMaker.services.AccommodationService} class
  *
  * @author Olle Johansson
  */
 public class Filter {
 
-	private String location;
-	private String pack;
-	
-	private String dateFrom;
-	private String dateTo;
-	
-	private boolean pool;
-	private boolean childrenClub;
-	private boolean restaurant;
-	private boolean nightEntertainment;
-	
-	private short rooms;
-	private short adults;
-	private short kids;
+    private String location;
+    private String pack;
 
-	private int minDistBeach;
-	private int maxDistBeach;
+    private String dateFrom;
+    private String dateTo;
 
-	private int minDistCenter;
-	private int maxDistCenter;
+    private boolean pool;
+    private boolean childrenClub;
+    private boolean restaurant;
+    private boolean nightEntertainment;
+
+    private short rooms;
+    private short adults;
+    private short kids;
+
+    private int minDistBeach;
+    private int maxDistBeach;
+
+    private int minDistCenter;
+    private int maxDistCenter;
 
     /**
      * Method that returns the field <code>location</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return String of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>location</code>
+     * @return String of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>location</code>
      */
-	public String getLocation() {
-		return location;
-	}
-	
+    public String getLocation() {
+        return location;
+    }
+
     /**
-     * Method that will set the value of the field <code>location</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>location</code> by the
+     * value sent as parameter.
      *
-     * @param location String value to be added to field
-     * <code>location</code>
+     * @param location String value to be added to field <code>location</code>
      */
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     /**
      * Method that returns the field <code>dateFrom</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return String of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>dateFrom</code>
+     * @return String of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>dateFrom</code>
      */
-	public String getDateFrom() {
-		return dateFrom;
-	}
-	
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
     /**
-     * Method that will set the value of the field <code>dateFrom</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>dateFrom</code> by the
+     * value sent as parameter.
      *
-     * @param dateFrom String value to be added to field
-     * <code>dateFrom</code>
+     * @param dateFrom String value to be added to field <code>dateFrom</code>
      */
-	public void setDateFrom(String dateFrom) {
-		this.dateFrom = dateFrom;
-	}
-	
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
     /**
      * Method that returns the field <code>dateTo</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return String of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>dateTo</code>
+     * @return String of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>dateTo</code>
      */
-	public String getDateTo() {
-		return dateTo;
-	}
-	
+    public String getDateTo() {
+        return dateTo;
+    }
+
     /**
-     * Method that will set the value of the field <code>dateTo</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>dateTo</code> by the
+     * value sent as parameter.
      *
-     * @param dateTo String value to be added to field
-     * <code>dateTo</code>
+     * @param dateTo String value to be added to field <code>dateTo</code>
      */
-	public void setDateTo(String dateTo) {
-		this.dateTo = dateTo;
-	}
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
 
     /**
      * Method that returns the field <code>adults</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return short of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>adults</code>
+     * @return short of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>adults</code>
      */
-	public short getAdults() {
-		return adults;
-	}
-	
+    public short getAdults() {
+        return adults;
+    }
+
     /**
-     * Method that will set the value of the field <code>adults</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>adults</code> by the
+     * value sent as parameter.
      *
-     * @param adults short value to be added to field
-     * <code>adults</code>
+     * @param adults short value to be added to field <code>adults</code>
      */
-	public void setAdults(short adults) {
-		this.adults = adults;
-	}
+    public void setAdults(short adults) {
+        this.adults = adults;
+    }
 
     /**
      * Method that returns the field <code>kids</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return short of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>kids</code>
+     * @return short of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>kids</code>
      */
-	public short getKids() {
-		return kids;
-	}
-	
+    public short getKids() {
+        return kids;
+    }
+
     /**
-     * Method that will set the value of the field <code>kids</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>kids</code> by the
+     * value sent as parameter.
      *
-     * @param kids short value to be added to field
-     * <code>kids</code>
+     * @param kids short value to be added to field <code>kids</code>
      */
-	public void setKids(short kids) {
-		this.kids = kids;
-	}
+    public void setKids(short kids) {
+        this.kids = kids;
+    }
 
     /**
      * Method that returns the field <code>pack</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return String of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>pack</code>
+     * @return String of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>pack</code>
      */
-	public String getPack() {
-		return pack;
-	}
-	
+    public String getPack() {
+        return pack;
+    }
+
     /**
-     * Method that will set the value of the field <code>pack</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>pack</code> by the
+     * value sent as parameter.
      *
-     * @param pack String value to be added to field
-     * <code>pack</code>
+     * @param pack String value to be added to field <code>pack</code>
      */
-	public void setPack(String pack) {
-		this.pack = pack;
-	}
+    public void setPack(String pack) {
+        this.pack = pack;
+    }
 
     /**
      * Method that returns the field <code>pool</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>pool</code>
+     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>pool</code>
      */
-	public boolean hasPool() {
-		return pool;
-	}
-	
+    public boolean hasPool() {
+        return pool;
+    }
+
     /**
-     * Method that will set the value of the field <code>pool</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>pool</code> by the
+     * value sent as parameter.
      *
-     * @param pool boolean value to be added to field
-     * <code>pool</code>
+     * @param pool boolean value to be added to field <code>pool</code>
      */
-	public void setPool(boolean pool) {
-		this.pool = pool;
-	}
+    public void setPool(boolean pool) {
+        this.pool = pool;
+    }
 
     /**
      * Method that returns the field <code>ChildrenClub</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>childrenClub</code>
+     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>childrenClub</code>
      */
-	public boolean hasChildrenClub() {
-		return childrenClub;
-	}
-	
+    public boolean hasChildrenClub() {
+        return childrenClub;
+    }
+
     /**
      * Method that will set the value of the field <code>childrenClub</code> by
      * the value sent as parameter.
@@ -219,21 +211,21 @@ public class Filter {
      * @param childrenClub boolean value to be added to field
      * <code>childrenClub</code>
      */
-	public void setChildrenClub(boolean childrenClub) {
-		this.childrenClub = childrenClub;
-	}
+    public void setChildrenClub(boolean childrenClub) {
+        this.childrenClub = childrenClub;
+    }
 
     /**
      * Method that returns the field <code>restaurant</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>restaurant</code>
+     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>restaurant</code>
      */
-	public boolean hasRestaurant() {
-		return restaurant;
-	}
-	
+    public boolean hasRestaurant() {
+        return restaurant;
+    }
+
     /**
      * Method that will set the value of the field <code>restaurant</code> by
      * the value sent as parameter.
@@ -241,53 +233,52 @@ public class Filter {
      * @param restaurant boolean value to be added to field
      * <code>restaurant</code>
      */
-	public void setRestaurant(boolean restaurant) {
-		this.restaurant = restaurant;
-	}
+    public void setRestaurant(boolean restaurant) {
+        this.restaurant = restaurant;
+    }
 
     /**
      * Method that returns the field <code>nightEntertainment</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>nightEntertainment</code>
+     * @return boolean of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>nightEntertainment</code>
      */
-	public boolean hasNightEntertainment() {
-		return nightEntertainment;
-	}
-	
+    public boolean hasNightEntertainment() {
+        return nightEntertainment;
+    }
+
     /**
-     * Method that will set the value of the field <code>nightEntertainment</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field
+     * <code>nightEntertainment</code> by the value sent as parameter.
      *
      * @param nightEntertainment boolean value to be added to field
      * <code>nightEntertainment</code>
      */
-	public void setNightEntertainment(boolean nightEntertainment) {
-		this.nightEntertainment = nightEntertainment;
-	}
+    public void setNightEntertainment(boolean nightEntertainment) {
+        this.nightEntertainment = nightEntertainment;
+    }
 
     /**
      * Method that returns the field <code>rooms</code> of the
      * {@link com.group.foctg.holidayMaker.model.Filter} object
      *
-     * @return short of {@link com.group.foctg.holidayMaker.model.Filter} objects
-     * field <code>rooms</code>
+     * @return short of {@link com.group.foctg.holidayMaker.model.Filter}
+     * objects field <code>rooms</code>
      */
-	public short getRooms() {
-		return rooms;
-	}
-	
+    public short getRooms() {
+        return rooms;
+    }
+
     /**
-     * Method that will set the value of the field <code>rooms</code> by
-     * the value sent as parameter.
+     * Method that will set the value of the field <code>rooms</code> by the
+     * value sent as parameter.
      *
-     * @param rooms short value to be added to field
-     * <code>rooms</code>
+     * @param rooms short value to be added to field <code>rooms</code>
      */
-	public void setRooms(short rooms) {
-		this.rooms = rooms;
-	}
+    public void setRooms(short rooms) {
+        this.rooms = rooms;
+    }
 
     /**
      * Method that returns the field <code>minDistBeach</code> of the
@@ -296,10 +287,10 @@ public class Filter {
      * @return int of {@link com.group.foctg.holidayMaker.model.Filter} objects
      * field <code>minDistBeach</code>
      */
-	public int getMinDistBeach() {
-		return minDistBeach;
-	}
-	
+    public int getMinDistBeach() {
+        return minDistBeach;
+    }
+
     /**
      * Method that will set the value of the field <code>minDistBeach</code> by
      * the value sent as parameter.
@@ -307,9 +298,9 @@ public class Filter {
      * @param minDistBeach int value to be added to field
      * <code>minDistBeach</code>
      */
-	public void setMinDistBeach(int minDistBeach) {
-		this.minDistBeach = minDistBeach;
-	}
+    public void setMinDistBeach(int minDistBeach) {
+        this.minDistBeach = minDistBeach;
+    }
 
     /**
      * Method that returns the field <code>maxDistBeach</code> of the
@@ -318,10 +309,10 @@ public class Filter {
      * @return int of {@link com.group.foctg.holidayMaker.model.Filter} objects
      * field <code>maxDistBeach</code>
      */
-	public int getMaxDistBeach() {
-		return maxDistBeach;
-	}
-	
+    public int getMaxDistBeach() {
+        return maxDistBeach;
+    }
+
     /**
      * Method that will set the value of the field <code>maxDistBeach</code> by
      * the value sent as parameter.
@@ -329,9 +320,9 @@ public class Filter {
      * @param maxDistBeach int value to be added to field
      * <code>maxDistBeach</code>
      */
-	public void setMaxDistBeach(int maxDistBeach) {
-		this.maxDistBeach = maxDistBeach;
-	}
+    public void setMaxDistBeach(int maxDistBeach) {
+        this.maxDistBeach = maxDistBeach;
+    }
 
     /**
      * Method that returns the field <code>minDistCenter</code> of the
@@ -340,10 +331,10 @@ public class Filter {
      * @return int of {@link com.group.foctg.holidayMaker.model.Filter} objects
      * field <code>minDistCenter</code>
      */
-	public int getMinDistCenter() {
-		return minDistCenter;
-	}
-	
+    public int getMinDistCenter() {
+        return minDistCenter;
+    }
+
     /**
      * Method that will set the value of the field <code>minDistCenter</code> by
      * the value sent as parameter.
@@ -351,9 +342,9 @@ public class Filter {
      * @param minDistCenter int value to be added to field
      * <code>minDistCenter</code>
      */
-	public void setMinDistCenter(int minDistCenter) {
-		this.minDistCenter = minDistCenter;
-	}
+    public void setMinDistCenter(int minDistCenter) {
+        this.minDistCenter = minDistCenter;
+    }
 
     /**
      * Method that returns the field <code>maxDistCenter</code> of the
@@ -362,10 +353,10 @@ public class Filter {
      * @return int of {@link com.group.foctg.holidayMaker.model.Filter} objects
      * field <code>maxDistCenter</code>
      */
-	public int getMaxDistCenter() {
-		return maxDistCenter;
-	}
-	
+    public int getMaxDistCenter() {
+        return maxDistCenter;
+    }
+
     /**
      * Method that will set the value of the field <code>maxDistCenter</code> by
      * the value sent as parameter.
@@ -373,8 +364,8 @@ public class Filter {
      * @param maxDistCenter int value to be added to field
      * <code>maxDistCenter</code>
      */
-	public void setMaxDistCenter(int maxDistCenter) {
-		this.maxDistCenter = maxDistCenter;
-	}
+    public void setMaxDistCenter(int maxDistCenter) {
+        this.maxDistCenter = maxDistCenter;
+    }
 
 }
