@@ -29,6 +29,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Accommodation} entity class.
@@ -46,7 +50,6 @@ import javax.persistence.OneToMany;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Accommodation implements Serializable {
-
 
 	public Accommodation() {
 	}
@@ -73,6 +76,7 @@ public class Accommodation implements Serializable {
 	@Column(name = "accommodation_id")
 	private Long id;
 
+	@NotEmpty
 	@Column
 	private String name;
 
@@ -98,6 +102,7 @@ public class Accommodation implements Serializable {
 	@JsonManagedReference
 	private Location location;
 
+	@URL
 	@Column
 	private String imageURL;
 
@@ -111,7 +116,8 @@ public class Accommodation implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonBackReference
 	private Customer customer;
-	
+
+	@Range(min = 0, max = 5)
 	@Column
 	private Float rating;
 
@@ -435,17 +441,17 @@ public class Accommodation implements Serializable {
 	 *         {@link com.group.foctg.holidayMaker.model.Accommodation} objects
 	 *         field <code>rating</code>
 	 */
-	
-    public Float getRating() {
+
+	public Float getRating() {
 		return rating;
 	}
-    
-    /**
-	 * Method that will set the value of the field <code>rating</code> by the
-	 * value sent as parameter.
+
+	/**
+	 * Method that will set the value of the field <code>rating</code> by the value
+	 * sent as parameter.
 	 *
-	 * @param name {@link java.lang.Float} value to be
-	 *             added to field <code>rating</code>
+	 * @param name {@link java.lang.Float} value to be added to field
+	 *             <code>rating</code>
 	 */
 
 	public void setRating(Float rating) {
