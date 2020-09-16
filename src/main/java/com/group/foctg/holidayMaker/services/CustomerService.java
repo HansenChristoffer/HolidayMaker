@@ -50,7 +50,7 @@ public class CustomerService {
      * @param customer {@link com.group.foctg.holidayMaker.model.Customer}
      * object that shall be saved
      * @return A boolean value representing whether the saving was successful or
-     * not
+     * not.
      */
     public boolean saveCustomer(Customer customer) {
         return customerRepository.saveAndFlush(customer).equals(customer);
@@ -64,7 +64,7 @@ public class CustomerService {
      * {@link com.group.foctg.holidayMaker.model.Customer} with that
      * <code>id</code>
      * @return A boolean value representing whether the removing was successful
-     * or not
+     * or not.
      */
     public boolean removeCustomer(Long id) {
         if (customerRepository.existsById(id)) {
@@ -83,7 +83,7 @@ public class CustomerService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
      * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>id</code>, if it exists
+     * the given <code>id</code>, if it exists.
      */
     public Customer getOne(Long id) {
         return customerRepository.getOne(id);
@@ -97,7 +97,7 @@ public class CustomerService {
      * @param email String value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
      * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>email</code>, if it exists
+     * the given <code>email</code>, if it exists.
      */
     public Customer findCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
@@ -113,7 +113,7 @@ public class CustomerService {
      * {@link com.group.foctg.holidayMaker.model.Customer}
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt;
      * from the {@link com.group.foctg.holidayMaker.model.Customer} with the
-     * given <code>id</code>, if it exists
+     * given <code>id</code>, if it exists.
      */
     public List<Booking> findCustomersBookingsByCustomerID(Long id) {
         return customerRepository.findBookingsByID(id);

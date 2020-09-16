@@ -34,9 +34,8 @@ import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 
 /**
- * Service class for the
- * {@link com.group.foctg.holidayMaker.model.Accommodation} column and entity.
- * Autowires the repository.
+ * Service class for the {@link com.group.foctg.holidayMaker.model.Accommodation} 
+ * column and entity. Autowires the repository.
  *
  * @author Olle Johansson
  *
@@ -54,8 +53,8 @@ public class AccommodationService {
 	 * from parameter in the database.
 	 *
 	 * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation}
-	 *                      object that shall be saved
-	 * @return A boolean value representing whether the saving was successful or not
+	 * object that shall be saved.
+	 * @return A boolean value representing whether the saving was successful or not.
 	 */
 	public boolean saveAccommodation(Accommodation accommodation) {
 		return accommodationRepository.saveAndFlush(accommodation).equals(accommodation);
@@ -66,10 +65,10 @@ public class AccommodationService {
 	 * with the same <code>id</code> as the parameter from the database.
 	 *
 	 * @param id Long value used for finding and removing
-	 *           {@link com.group.foctg.holidayMaker.model.Accommodation} with that
-	 *           <code>id</code>
-	 * @return A boolean value representing whether the removing was successful or
-	 *         not
+	 * {@link com.group.foctg.holidayMaker.model.Accommodation} with that
+	 * <code>id</code>
+	 * @return A boolean value representing whether the removing 
+	 * was successful or not.
 	 */
 	public boolean removeAccommodationById(Long id) {
 		if (accommodationRepository.existsById(id)) {
@@ -87,9 +86,9 @@ public class AccommodationService {
 	 * then it'll update the existing object. Otherwise it will save the object.
 	 *
 	 * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation}
-	 *                      object passed for updating or saving
+	 * object passed for updating or saving.
 	 * @return A boolean value representing whether the updating or saving was
-	 *         successful or not
+	 * successful or not.
 	 */
 	public boolean updateAccommodation(Accommodation accommodation) {
 		return accommodationRepository.saveAndFlush(accommodation).equals(accommodation);
@@ -99,28 +98,40 @@ public class AccommodationService {
 	 * Goes through the database, checks and returns all
 	 * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
 	 * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
+	 * 
+	 * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
 	 */
 	public List<Accommodation> findAll() {
 		return accommodationRepository.findAll();
 	}
 
-	/**
-	 * Goes through the database, checks and returns one
-	 * {@link com.group.foctg.holidayMaker.model.Accommodation} object in the
-	 * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
-	 * matches the <code>ID</code>
-	 */
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; if a
+     * customer with given <code>id</code> exists.
+     *
+     * @param id Long value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return {@link com.group.foctg.holidayMaker.model.Accommodation} with the
+     * given <code>id</code>, if it exists.
+     */
 	public Accommodation getOne(Long id) {
 		return accommodationRepository.getOne(id);
 	}
 
-	/**
-	 * Goes through the database, checks and returns all
-	 * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
-	 * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
-	 * matches the <code>ID</code> of a
-	 * {@link com.group.foctg.holidayMaker.model.Customer}
-	 */
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; if a
+     * customer with given <code>id</code> exists.
+     *
+     * @param id Long value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
+     * from {@link com.group.foctg.holidayMaker.model.Customer} with the
+     * given <code>id</code>, if it exists
+     */
 	public List<Accommodation> findAccommodationsByCustomerId(Long id) {
 		return accommodationRepository.findAccommodationsByCustomerId(id);
 	}
@@ -130,7 +141,9 @@ public class AccommodationService {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
      * matches the {@link com.group.foctg.holidayMaker.model.Filter} fields
+     * 
      * @throws ParseException 
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
      */
     public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException  {
 
@@ -144,8 +157,6 @@ public class AccommodationService {
     	 * We check if the return is false and add that accommodation with available
     	 * dates to our availableByDate List
     	 */
-    	
-    	
     	for (Accommodation a : findAll()) {
     		for (Room r : a.getRooms()) {
     			for (String[] dates : r.getDatesTaken()) {
@@ -171,7 +182,6 @@ public class AccommodationService {
          * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
          * appended to the List<Accommodation>
          */
-    	
         List<Accommodation> filtered = availableByDate.stream()
                 .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
                 .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
@@ -192,7 +202,7 @@ public class AccommodationService {
 	 * <code>distanceToBeach</code> within given argument.
 	 *
 	 * @param distance Short value to use for finding the
-	 *                 {@link com.group.foctg.holidayMaker.model.Accommodation}
+	 * {@link com.group.foctg.holidayMaker.model.Accommodation}
 	 * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
 	 */
 	public List<Accommodation> findAccommodationsWithinDistanceToBeach(Short distance) {
@@ -205,7 +215,7 @@ public class AccommodationService {
 	 * <code>distanceToCenter</code> within given argument.
 	 *
 	 * @param distance Short value to use for finding the
-	 *                 {@link com.group.foctg.holidayMaker.model.Accommodation}
+	 * {@link com.group.foctg.holidayMaker.model.Accommodation}
 	 * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
 	 */
 	public List<Accommodation> findAccommodationsWithinDistanceToCenter(Short distance) {
@@ -217,8 +227,8 @@ public class AccommodationService {
 	 * {@link com.group.foctg.holidayMaker.model.Accommodation} objects that has the
 	 * <code>rating</code> within given argument.
 	 *
-	 * @param rating float value to use for finding the
-	 *               {@link com.group.foctg.holidayMaker.model.Accommodation}
+	 * @param rating Float value to use for finding the
+	 * {@link com.group.foctg.holidayMaker.model.Accommodation}
 	 * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
 	 */
 	public List<Accommodation> findAccommodationsByRating(Float rating) {

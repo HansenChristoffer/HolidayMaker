@@ -41,9 +41,9 @@ public class BookingService {
      * parameter in the database.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
-     * that shall be saved
+     * that shall be saved.
      * @return A boolean value representing whether the saving was successful or
-     * not
+     * not.
      */
     public boolean saveBooking(Booking booking) {
         return bookingRepository.saveAndFlush(booking).equals(booking);
@@ -57,7 +57,7 @@ public class BookingService {
      * {@link com.group.foctg.holidayMaker.model.Booking} with that
      * <code>id</code>
      * @return A boolean value representing whether the removing was successful
-     * or not
+     * or not.
      */
     public boolean removeBooking(Long id) {
         if (bookingRepository.existsById(id)) {
@@ -74,9 +74,9 @@ public class BookingService {
      * then it'll update the existing object. Otherwise it will save the object.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
-     * passed for updating or saving
+     * passed for updating or saving.
      * @return A boolean value representing whether the updating or saving was
-     * successful or not
+     * successful or not.
      */
     public boolean updateBooking(Booking booking) {
         return bookingRepository.saveAndFlush(booking).equals(booking);
@@ -91,7 +91,7 @@ public class BookingService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt;
-     * from the {@link com.group.foctg.holidayMaker.model.Customer} with the
+     * from {@link com.group.foctg.holidayMaker.model.Customer} with the
      * given <code>id</code>, if it exists
      */
     public List<Booking> findBookingsByCustomerId(Long id) {

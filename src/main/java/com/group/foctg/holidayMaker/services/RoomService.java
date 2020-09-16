@@ -44,7 +44,7 @@ public class RoomService {
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object that
      * shall be saved
      * @return A boolean value representing whether the saving was successful or
-     * not
+     * not.
      */
     public boolean saveRoom(Room room) {
         return roomRepository.saveAndFlush(room).equals(room);
@@ -57,7 +57,7 @@ public class RoomService {
      * @param id Long value used for finding and removing
      * {@link com.group.foctg.holidayMaker.model.Room} with that <code>id</code>
      * @return A boolean value representing whether the removing was successful
-     * or not
+     * or not.
      */
     public boolean removeRoom(Long id) {
         if (roomRepository.existsById(id)) {
@@ -76,7 +76,7 @@ public class RoomService {
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object passed
      * for updating or saving
      * @return A boolean value representing whether the updating or saving was
-     * successful or not
+     * successful or not.
      */
     public boolean updateRoom(Room room) {
         return roomRepository.saveAndFlush(room).equals(room);
@@ -87,8 +87,7 @@ public class RoomService {
      * {@link com.group.foctg.holidayMaker.model.Room} objects in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt;
      *
-     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; from
-     * the {@link com.group.foctg.holidayMaker.model.Room}
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; 
      */
     public List<Room> findall() {
         return roomRepository.findAll();
@@ -102,24 +101,24 @@ public class RoomService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Room}
      * @return {@link com.group.foctg.holidayMaker.model.Room} object with the
-     * given <code>id</code>, if it exists
+     * given <code>id</code>, if it exists.
      */
     public Room getOne(Long id) {
         return roomRepository.getOne(id);
     }
 
     /**
-     * Goes through the database, checks and returns all
-     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
+     * Goes through the database, checks and returns a
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} object in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; if a
      * room with given <code>id</code> exists.
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Accommodation}
      * @return
-     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; from
-     * the {@link com.group.foctg.holidayMaker.model.Room} with the given
-     * <code>id</code>, if it exists
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} object from
+     * {@link com.group.foctg.holidayMaker.model.Room} object with the given
+     * <code>id</code>, if it exists.
      */
     public Accommodation findAccommodation(Long id) {
         return roomRepository.findAccommdotionByRoomId(id);

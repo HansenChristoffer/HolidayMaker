@@ -44,7 +44,7 @@ public class LocationService {
      * @param location {@link com.group.foctg.holidayMaker.model.Location}
      * object that shall be saved
      * @return A boolean value representing whether the saving was successful or
-     * not
+     * not.
      */
     public boolean saveLocation(Location location) {
         return locationRepository.saveAndFlush(location).equals(location);
@@ -58,7 +58,7 @@ public class LocationService {
      * {@link com.group.foctg.holidayMaker.model.Location} with that
      * <code>id</code>
      * @return A boolean value representing whether the removing was successful
-     * or not
+     * or not.
      */
     public boolean removeLocationByID(Long id) {
         if (locationRepository.existsById(id)) {
@@ -70,6 +70,13 @@ public class LocationService {
         }
     }
 
+    /**
+     * Goes through the database, checks and returns all
+     * {@link com.group.foctg.holidayMaker.model.Location} objects in the
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Location}&gt;
+     *
+     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Location}&gt;
+     */
     public List<Location> findAll() {
         return locationRepository.findAll();
     }
@@ -82,7 +89,7 @@ public class LocationService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Location}
      * @return {@link com.group.foctg.holidayMaker.model.Location} object with
-     * the given <code>id</code>, if it exists
+     * the given <code>id</code>, if it exists.
      */
     public Location getOne(Long id) {
         return locationRepository.getOne(id);
@@ -98,8 +105,8 @@ public class LocationService {
      * {@link com.group.foctg.holidayMaker.model.Location}
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; from
-     * the {@link com.group.foctg.holidayMaker.model.Location} with the given
-     * <code>id</code>, if it exists
+     * {@link com.group.foctg.holidayMaker.model.Location} with the given
+     * <code>id</code>, if it exists.
      */
     public List<Accommodation> findAccommodationsByLocation(Long id) {
         return locationRepository.findAccommodationsByLocationID(id);
