@@ -72,11 +72,9 @@ public class Room implements Serializable {
     @JsonBackReference
     private Accommodation accommodation;
 
-    @NotEmpty
     @Column
     private Float price;
     
-    @NotEmpty
     @Column 
     private Short roomSize;
 
