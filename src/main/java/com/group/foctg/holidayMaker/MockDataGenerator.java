@@ -59,8 +59,10 @@ public class MockDataGenerator implements CommandLineRunner {
                 "Mock_accommodation_1",
                 false, false, false, true,
                 (short) 200, (short) 800, mockLocation1,
-                "mock_URL", "mock_Description",
+                "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1", "mock_Description",
                 new ArrayList<>(), mockCustomer2);
+        
+        mockAccommodation1.setRating(0.5f);
 
         Room mockRoom1 = new Room((short) 2, new ArrayList<>(),mockAccommodation1, 258f, (short) 20);
         Room mockRoom2 = new Room((short) 3, new ArrayList<>(),mockAccommodation1, 380f, (short) 15);
