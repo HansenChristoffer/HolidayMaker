@@ -19,7 +19,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +135,7 @@ public class AccommodationService {
     public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException  {
 
 
-    	List<Accommodation> availableByDate = new ArrayList<Accommodation>();
+    	Set<Accommodation> availableByDate = new HashSet<Accommodation>();
     	
     	/**
     	 * These three nested for-each loops will check if the input filter dates
@@ -154,7 +156,10 @@ public class AccommodationService {
     		    	
     				if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
     					availableByDate.add(a);
-    				} else continue;
+    				} else {
+    					availableByDate.remove(a);
+    					break;
+    				}
     			}
     		}
     	}
