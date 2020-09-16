@@ -13,19 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * RestController for the {@link com.group.foctg.holidayMaker.model.Accommodation}
- * entity and column. This class holds all the endpoints for
- * {@link com.group.foctg.holidayMaker.model.Accommodation}.
- *
- * Autowiring
- * {@link com.group.foctg.holidayMaker.services.AccommodationService}.
- *
- * The default URL value is set to, "/api".
- *
- * @author Olle Johansson
- * @see com.group.foctg.holidayMaker.services.AccommodationService
- */
 package com.group.foctg.holidayMaker.controllers;
 
 import com.group.foctg.holidayMaker.exceptions.AccommodationNotFoundException;
@@ -46,6 +33,19 @@ import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.services.AccommodationService;
 import java.util.Optional;
 
+/**
+ * RestController for the {@link com.group.foctg.holidayMaker.model.Accommodation}
+ * entity and column. This class holds all the endpoints for
+ * {@link com.group.foctg.holidayMaker.model.Accommodation}.
+ *
+ * Autowiring
+ * {@link com.group.foctg.holidayMaker.services.AccommodationService}.
+ *
+ * The default URL value is set to, "/api".
+ *
+ * @author Olle Johansson
+ * @see com.group.foctg.holidayMaker.services.AccommodationService
+ */
 @RestController
 @RequestMapping(value = "/api")
 public class AccommodationController {
@@ -114,7 +114,7 @@ public class AccommodationController {
         if (acc.isEmpty()) {
             throw new AccommodationNotFoundException(id);
         }
-        
+
         return acc;
     }
 
