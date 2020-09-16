@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
@@ -68,11 +69,11 @@ public class Customer implements Serializable {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "customers_accommodations")
     private List<Accommodation> accommodations;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "customers_bookings")
     private List<Booking> bookings;
 
     /**

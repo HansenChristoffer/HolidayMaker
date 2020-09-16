@@ -18,6 +18,7 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
@@ -28,8 +29,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
@@ -67,7 +66,7 @@ public class Location implements Serializable {
     private String name;
     
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference(value = "accommodation_location")
     private List<Accommodation> accommodations;
 
     /**
