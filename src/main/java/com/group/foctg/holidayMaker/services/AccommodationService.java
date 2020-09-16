@@ -142,14 +142,19 @@ public class AccommodationService {
 
     	List<Accommodation> availableByDate = new ArrayList<Accommodation>();
     	
+    	
     	for (Accommodation a : findAll()) {
     		for (Room r : a.getRooms()) {
-    			for (Booking b : r.getBookings()) {
-
-    		    	Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
+    			for (String[] dates : r.getDatesTaken()) {
+    				Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
     		    	Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
-    		    	Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateFrom());
-    		    	Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateTo());
+    		    	Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
+    		    	Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
+
+    		    	System.out.println(dates[0] + " : " + dates[1]);
+    		    	System.out.println(filter.getDateFrom() + " : " + filter.getDateTo());
+    		    	System.out.println(DateChecker.isOverlapping(df1, dt1, df2, dt2));
+    		    	System.out.println("========================");
     		    	
     				if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
     					availableByDate.add(a);

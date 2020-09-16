@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -43,11 +44,11 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Room(Short numberOfBeds, List<Booking> bookings,Accommodation accommodation, Float price, Short size) {
+    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
-        this.size = size;
+        this.roomSize = roomSize;
         this.price = price + (numberOfBeds * 20);
     }
 
@@ -71,9 +72,13 @@ public class Room implements Serializable {
     private Float price;
     
     @Column 
-    private Short size;
+    private Short roomSize;
+    
+    @ElementCollection
+    @Column
+    List<String[]> datesTaken;
 
-    /**
+	/**
      * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Room} object
      *
@@ -176,24 +181,32 @@ public class Room implements Serializable {
     }
     
     /**
-     * Method that returns the field <code>size</code> of the
+     * Method that returns the field <code>roomSize</code> of the
      * {@link com.group.foctg.holidayMaker.model.Room} object
      *
      * @return Short of {@link com.group.foctg.holidayMaker.model.Room} objects
-     * field <code>size</code>
+     * field <code>roomSize</code>
      */
-    public Short getSize() {
-    	return size;
+    public Short getRoomSize() {
+    	return roomSize;
     }
     
     /**
-     * Method that will set the value of the field <code>size</code> by the
+     * Method that will set the value of the field <code>roomSize</code> by the
      * value sent as parameter.
      *
      * @param size <code>Short</code> value to be added to field
-     * <code>size</code>
+     * <code>roomSize</code>
      */
-    public void setSize(Short size) {
-    	this.size = size;
+    public void setRoomSize(Short roomSize) {
+    	this.roomSize = roomSize;
     }
+    
+    public List<String[]> getDatesTaken() {
+		return datesTaken;
+	}
+
+	public void setDatesTaken(List<String[]> datesTaken) {
+		this.datesTaken = datesTaken;
+	}
 }
