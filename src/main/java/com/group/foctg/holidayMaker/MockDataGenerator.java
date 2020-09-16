@@ -10,7 +10,6 @@ import com.group.foctg.holidayMaker.services.BookingService;
 import com.group.foctg.holidayMaker.services.CustomerService;
 import com.group.foctg.holidayMaker.services.LocationService;
 import com.group.foctg.holidayMaker.services.RoomService;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.slf4j.Logger;
@@ -108,17 +107,17 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(mockBooking2);
         bookingService.saveBooking(mockBooking3);
 
-        customerService.findAll().forEach((cust) -> {
-            LOGGER.info("{}", cust);
-        });
-
-        accommodationService.findAll().forEach((acc) -> {
-            LOGGER.info("{}", acc);
-        });
-
-        locationService.findAll().forEach((loc) -> {
-            LOGGER.info("{}", loc);
-        });
+//        customerService.findAll().forEach((cust) -> {
+//            LOGGER.info("{}", cust);
+//        });
+//
+//        accommodationService.findAll().forEach((acc) -> {
+//            LOGGER.info("{}", acc);
+//        });
+//
+//        locationService.findAll().forEach((loc) -> {
+//            LOGGER.info("{}", loc);
+//        });
 
 //        roomService.findAll().forEach((cust) -> {
 //            LOGGER.info("{}", cust);
