@@ -23,6 +23,7 @@ import org.springframework.stereotype.Repository;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 
 /**
@@ -42,7 +43,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query("SELECT c FROM Customer c WHERE c.email = ?1")
-    Customer findCustomerByEmail(String email);
+    Optional<Customer> findCustomerByEmail(String email);
 
     @Query("SELECT c.bookings FROM Customer c WHERE c.id = ?1")
     List<Booking> findBookingsById(Long id);
