@@ -29,12 +29,7 @@ public class CustomerNotFoundException extends RuntimeException {
         super("Could not find Customer by id = { " + id + " }");
     }
 
-    public CustomerNotFoundException(Short distance) {
-        super("Could not find Customer by distance = { " + distance + " }");
+    public CustomerNotFoundException(String email) {
+        super("Could not find Customer by email = { " + email + " }");
     }
-
-    public CustomerNotFoundException(Float rating) {
-        super("Could not find Customer by rating = { " + rating + " }");
-    }
-
 }
