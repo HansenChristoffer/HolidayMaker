@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import com.group.foctg.holidayMaker.exceptions.LocationNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +92,13 @@ public class LocationController {
      */
     @GetMapping("/location")
     public Optional<Location> findById(@RequestParam Long id) {
-        return locationService.findById(id);
+        Optional<Location> loc = locationService.findById(id);
+        
+        if (loc.isEmpty()) {
+            throw new LocationNotFoundException(id);
+        }
+        
+        return loc;
     }
 
     /**
