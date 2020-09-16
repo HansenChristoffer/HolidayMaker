@@ -26,6 +26,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
@@ -60,6 +63,7 @@ public class Location implements Serializable {
     @Column(name = "location_id")
     private Long id;
 
+    @NotEmpty
     @Column
     private String name;
     

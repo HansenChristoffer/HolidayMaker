@@ -27,6 +27,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
  * the various fields that are required for the functionality of the program.
@@ -72,42 +74,44 @@ public class Booking implements Serializable {
         this.extraBeds = extraBeds;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "booking_id")
-    private Long id;
+	@Id
+	@GeneratedValue
+	@Column(name = "booking_id")
+	private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Customer customer;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonBackReference
+	private Customer customer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Room> rooms;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Room> rooms;
 
-    @Column
-    private String dateFrom;
+	@Length(min = 10, max = 10)
+	@Column
+	private String dateFrom;
 
-    @Column
-    private String dateTo;
+	@Length(min = 10, max = 10)
+	@Column
+	private String dateTo;
 
-    @Column
-    private Short numberOfAdults;
+	@Column
+	private Short numberOfAdults;
 
-    @Column
-    private Short numberOfKids;
+	@Column
+	private Short numberOfKids;
 
-    @Column
-    private Boolean allInclusive;
+	@Column
+	private Boolean allInclusive;
 
-    @Column
-    private Boolean fullBoard;
+	@Column
+	private Boolean fullBoard;
 
-    @Column
-    private Boolean halfBoard;
+	@Column
+	private Boolean halfBoard;
 
-    @Column
-    private Short extraBeds;
+	@Column
+	private Short extraBeds;
 
     /**
      * Method that returns the <code>id</code> of the

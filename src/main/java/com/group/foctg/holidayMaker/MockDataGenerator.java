@@ -13,6 +13,8 @@ import com.group.foctg.holidayMaker.services.RoomService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +59,10 @@ public class MockDataGenerator implements CommandLineRunner {
                 "Mock_accommodation_1",
                 false, false, false, true,
                 (short) 200, (short) 800, mockLocation1,
-                "mock_URL", "mock_Description",
+                "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1", "mock_Description",
                 new ArrayList<>(), mockCustomer2);
+        
+        mockAccommodation1.setRating(0.5f);
 
         Room mockRoom1 = new Room((short) 2, new ArrayList<>(),mockAccommodation1, 258f, (short) 20);
         Room mockRoom2 = new Room((short) 3, new ArrayList<>(),mockAccommodation1, 380f, (short) 15);
@@ -70,11 +74,11 @@ public class MockDataGenerator implements CommandLineRunner {
                 (short) 2, (short) 0, true, false, false, (short) 0);
         Booking mockBooking2 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom2)),
-                "01/02/2020", "10/02/2020",
+                "11/01/2020", "20/01/2020",
                 (short) 1, (short) 2, false, true, false, (short) 0);
         Booking mockBooking3 = new Booking(mockCustomer1,
                 new ArrayList<>(Arrays.asList(mockRoom3)),
-                "01/03/2020", "10/03/2020",
+                "21/01/2020", "30/01/2020",
                 (short) 1, (short) 0, false, false, true, (short) 1);
 
         mockLocation1.setAccommodation(new ArrayList<>(Arrays.asList(
@@ -92,6 +96,13 @@ public class MockDataGenerator implements CommandLineRunner {
         mockRoom1.setBookings(new ArrayList<>(Arrays.asList(mockBooking1)));
         mockRoom2.setBookings(new ArrayList<>(Arrays.asList(mockBooking2)));
         mockRoom3.setBookings(new ArrayList<>(Arrays.asList(mockBooking3)));
+
+        List<String[]> mockDatesTaken1 = new ArrayList<String[]>();
+
+        mockDatesTaken1.add(new String[] { "01/01/2020", "10/01/2020" });
+        mockDatesTaken1.add(new String[] { "01/02/2020", "10/02/2020" });
+        
+        mockRoom1.setDatesTaken(mockDatesTaken1);
         
         customerService.saveCustomer(mockCustomer1);
         customerService.saveCustomer(mockCustomer2);

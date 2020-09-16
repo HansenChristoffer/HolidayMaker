@@ -20,11 +20,13 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
@@ -79,8 +81,12 @@ public class Room implements Serializable {
     
     @Column 
     private Short roomSize;
+    
+    @ElementCollection
+    @Column
+    List<String[]> datesTaken;
 
-    /**
+	/**
      * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Room} object
      *
@@ -189,18 +195,26 @@ public class Room implements Serializable {
      * @return Short of {@link com.group.foctg.holidayMaker.model.Room} objects
      * field <code>roomSize</code>
      */
-    public Short getSize() {
+    public Short getRoomSize() {
     	return roomSize;
     }
     
     /**
-     * Method that will set the value of the field <code>size</code> by the
+     * Method that will set the value of the field <code>roomSize</code> by the
      * value sent as parameter.
      *
      * @param roomSize Short value to be added to field
      * <code>roomSize</code>
      */
-    public void setSize(Short roomSize) {
+    public void setRoomSize(Short roomSize) {
     	this.roomSize = roomSize;
     }
+    
+    public List<String[]> getDatesTaken() {
+		return datesTaken;
+	}
+
+	public void setDatesTaken(List<String[]> datesTaken) {
+		this.datesTaken = datesTaken;
+	}
 }
