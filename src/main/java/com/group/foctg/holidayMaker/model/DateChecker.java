@@ -39,7 +39,5 @@ public class DateChecker {
             Date dateRangeFrom2, Date dateRangeTo2) {
         return (dateRangeFrom1.getTime() <= dateRangeTo2.getTime()
                 && dateRangeFrom2.getTime() <= dateRangeTo1.getTime());
-        
-        //return dateRangeFrom1.before(dateRangeTo2) && dateRangeFrom2.after(dateRangeTo1);
     }
 }
