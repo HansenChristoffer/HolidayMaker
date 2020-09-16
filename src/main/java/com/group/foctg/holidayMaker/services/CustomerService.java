@@ -85,7 +85,7 @@ public class CustomerService {
      * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
      * the given <code>id</code>, if it exists
      */
-    public Customer getOne(Long id) {
+    public Customer findById(Long id) {
         return customerRepository.getOne(id);
     }
 

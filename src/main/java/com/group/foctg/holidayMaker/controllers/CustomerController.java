@@ -94,7 +94,7 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customer"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#getOne(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findById(java.lang.Long)}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -103,7 +103,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public Customer findCustomerById(@RequestParam Long id) {
-        return customerService.getOne(id);
+        return customerService.findById(id);
     }
 
     /**
