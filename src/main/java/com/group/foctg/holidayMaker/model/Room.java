@@ -103,7 +103,7 @@ public class Room implements Serializable {
     public Short getNumberOfBeds() {
         return numberOfBeds;
     }
-
+    
     /**
      * Method that will set the value of the field <code>numberOfBeds</code> by
      * the value sent as parameter.
