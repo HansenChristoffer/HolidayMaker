@@ -94,12 +94,17 @@ public class MockDataGenerator implements CommandLineRunner {
         mockRoom2.setBookings(new ArrayList<>(Arrays.asList(mockBooking2)));
         mockRoom3.setBookings(new ArrayList<>(Arrays.asList(mockBooking3)));
 
-        List<String[]> mockDatesTaken1 = new ArrayList<String[]>();
+        List<String[]> mockDatesTaken1 = new ArrayList<>();
+        List<String[]> mockDatesTaken2 = new ArrayList<>();
+        List<String[]> mockDatesTaken3 = new ArrayList<>();
 
         mockDatesTaken1.add(new String[] { "01/01/2020", "10/01/2020" });
-        mockDatesTaken1.add(new String[] { "01/02/2020", "10/02/2020" });
+        mockDatesTaken2.add(new String[] { "01/02/2020", "10/02/2020" });
+        mockDatesTaken3.add(new String[] { "01/03/2020", "10/03/2020" });
         
         mockRoom1.setDatesTaken(mockDatesTaken1);
+        mockRoom2.setDatesTaken(mockDatesTaken2);
+        mockRoom3.setDatesTaken(mockDatesTaken3);
         
         customerService.saveCustomer(mockCustomer1);
         customerService.saveCustomer(mockCustomer2);
