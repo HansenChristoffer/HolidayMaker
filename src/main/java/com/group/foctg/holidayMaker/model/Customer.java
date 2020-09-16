@@ -25,6 +25,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Customer} entity class. Holds
@@ -57,9 +59,11 @@ public class Customer implements Serializable {
     @Column(name = "customer_id")
     private Long id;
 
+    @Email
     @Column
     private String email;
-
+    
+    @NotEmpty
     @Column
     private String password;
 
