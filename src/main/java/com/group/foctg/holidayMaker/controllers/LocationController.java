@@ -88,7 +88,7 @@ public class LocationController {
      * the autowired Service
      */
     @GetMapping("/location")
-    public Location getOne(@RequestParam Long id) {
+    public Location findById(@RequestParam Long id) {
         return locationService.findById(id);
     }
 
