@@ -33,10 +33,7 @@ import org.hibernate.validator.constraints.Length;
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
  * the various fields that are required for the functionality of the program.
  * These fields are also turned into columns in the SQLite3 database. There is
- * also one OneToMany and one ManyToOne relationships with other entity classes.
- *
- * Uses the SEQUENCE type for auto gen id values because of the restrictions
- * that SQLite3 holds.
+ * also one ManyToOne and one ManyToMany relationships with other entity classes.
  *
  * @author Olle Johansson
  */
@@ -46,6 +43,23 @@ public class Booking implements Serializable {
 
     public Booking() {
     }
+    
+    /**
+     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Booking} object.
+     * 
+     * @param customer {@link com.group.foctg.holidayMaker.model.Customer} object 
+     * to be added to field <code>customer</code>
+     * @param rooms List that will become the field <code>rooms</code>
+     * @param dateFrom String value to be added to field <code>dateFrom</code>
+     * @param dateTo String value to be added to field <code>dateTo</code>
+     * @param numberOfAdults Short value to be added to field <code>numberOfAdults</code>
+     * @param numberOfKids Short value to be added to field <code>numberOfKids</code>
+     * @param allInclusive boolean value to be added to field <code>allInclusive</code>
+     * @param fullBoard boolean value to be added to field <code>fullBoard</code>
+     * @param halfBoard boolean value to be added to field <code>halfBoard</code>
+     * @param extraBeds Short value to be added to field<code>extraBeds</code>
+     */
+
 
     public Booking(Customer customer, List<Room> rooms, String dateFrom,
             String dateTo, Short numberOfAdults, Short numberOfKids,
@@ -63,44 +77,44 @@ public class Booking implements Serializable {
         this.extraBeds = extraBeds;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "booking_id")
-    private Long id;
+	@Id
+	@GeneratedValue
+	@Column(name = "booking_id")
+	private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Customer customer;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonBackReference
+	private Customer customer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Room> rooms;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Room> rooms;
 
-    @Length(min = 10, max = 10)
-    @Column
-    private String dateFrom;
+	@Length(min = 10, max = 10)
+	@Column
+	private String dateFrom;
 
-    @Length(min = 10, max = 10)
-    @Column
-    private String dateTo;
+	@Length(min = 10, max = 10)
+	@Column
+	private String dateTo;
 
-    @Column
-    private Short numberOfAdults;
+	@Column
+	private Short numberOfAdults;
 
-    @Column
-    private Short numberOfKids;
+	@Column
+	private Short numberOfKids;
 
-    @Column
-    private Boolean allInclusive;
+	@Column
+	private Boolean allInclusive;
 
-    @Column
-    private Boolean fullBoard;
+	@Column
+	private Boolean fullBoard;
 
-    @Column
-    private Boolean halfBoard;
+	@Column
+	private Boolean halfBoard;
 
-    @Column
-    private Short extraBeds;
+	@Column
+	private Short extraBeds;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -162,6 +176,7 @@ public class Booking implements Serializable {
      * Method that returns the field <code>dateFrom</code> of the
      * {@link com.group.foctg.holidayMaker.model.Booking} object.
      *
+     * @return String of {@link com.group.foctg.holidayMaker.model.Booking}
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateFrom</code>
      */
@@ -173,6 +188,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>dateFrom</code> by the
      * value sent as parameter.
      *
+     * @param dateFrom String value to be added to field
      * @param dateFrom <code>Date</code> value to be added to field
      * <code>dateFrom</code>
      */
@@ -184,6 +200,7 @@ public class Booking implements Serializable {
      * Method that returns the field <code>dateTo</code> of the
      * {@link com.group.foctg.holidayMaker.model.Booking} object.
      *
+     * @return String of {@link com.group.foctg.holidayMaker.model.Booking}
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateTo</code>
      */
@@ -195,6 +212,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>dateTo</code> by the
      * value sent as parameter.
      *
+     * @param dateTo String value to be added to field
      * @param dateTo <code>Date</code> value to be added to field
      * <code>dateTo</code>
      */
@@ -217,6 +235,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>numberOfAdults</code>
      * by the value sent as parameter.
      *
+     * @param numberOfAdults Short value to be added to field
      * @param numberOfAdults <code>Short</code> value to be added to field
      * <code>numberOfAdults</code>
      */
@@ -239,6 +258,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>numberOfKids</code> by
      * the value sent as parameter.
      *
+     * @param numberOfKids Short value to be added to field
      * @param numberOfKids <code>Short</code> value to be added to field
      * <code>numberOfKids</code>
      */
@@ -261,6 +281,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>allInclusive</code> by
      * the value sent as parameter.
      *
+     * @param allInclusive Boolean value to be added to field
      * @param allInclusive <code>Boolean</code> value to be added to field
      * <code>allInclusive</code>
      */
@@ -283,6 +304,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>fullBoard</code> by the
      * value sent as parameter.
      *
+     * @param fullBoard Boolean value to be added to field
      * @param fullBoard <code>Boolean</code> value to be added to field
      * <code>fullBoard</code>
      */
@@ -305,6 +327,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>halfBoard</code> by the
      * value sent as parameter.
      *
+     * @param halfBoard Boolean value to be added to field
      * @param halfBoard <code>Boolean</code> value to be added to field
      * <code>halfBoard</code>
      */
@@ -317,6 +340,7 @@ public class Booking implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Booking} object.
      *
      * @return Short of {@link com.group.foctg.holidayMaker.model.Booking}
+     * objects field <code>extraBeds</code>
      * objects field <code>halfBoard</code>
      */
     public Short getExtraBeds() {
@@ -327,6 +351,7 @@ public class Booking implements Serializable {
      * Method that will set the value of the field <code>extraBeds</code> by the
      * value sent as parameter.
      *
+     * @param extraBeds Short value to be added to field
      * @param extraBeds <code>Boolean</code> value to be added to field
      * <code>extraBeds</code>
      */

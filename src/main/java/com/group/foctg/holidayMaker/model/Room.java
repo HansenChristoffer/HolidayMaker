@@ -34,10 +34,7 @@ import javax.validation.constraints.NotEmpty;
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
  * various fields that are required for the functionality of the program. These
  * fields are also turned into columns in the SQLite3 database. There is also
- * one OneToMany and one ManyToOne relationships with other entity classes.
- *
- * Uses the SEQUENCE type for auto gen id values because of the restrictions
- * that SQLite3 holds.
+ * one ManyToMany and one ManyToOne relationships with other entity classes.
  *
  * @author Olle Johansson
  */
@@ -48,6 +45,16 @@ public class Room implements Serializable {
     public Room() {
     }
 
+    /**
+     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Room} object.
+     * 
+     * @param numberOfBeds Short value to be added to field <code>numberOfBeds</code>
+     * @param bookings List that will become the field <code>bookings</code>
+     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} object 
+     * to be added to field <code>accommodation</code>
+     * @param price Float value to be added to field <code>price</code>
+     * @param roomSize Short value to be added to field <code>roomSize</code>
+     */
     public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
@@ -108,7 +115,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>numberOfBeds</code> by
      * the value sent as parameter.
      *
-     * @param numberOfBeds <code>Short</code> value to be added to field
+     * @param numberOfBeds Short value to be added to field
      * <code>numberOfBeds</code>
      */
     public void setNumberOfBeds(Short numberOfBeds) {
@@ -131,7 +138,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>accommodation</code> by
      * the value sent as parameter.
      *
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Room}
+     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation}
      * value to be added to field <code>accommodation</code>
      */
     public void setAccommodation(Accommodation accommodation) {
@@ -153,7 +160,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>price</code> by the
      * value sent as parameter.
      *
-     * @param price <code>Float</code> value to be added to field
+     * @param price Float value to be added to field
      * <code>price</code>
      */
     public void setPrice(Float price) {
@@ -166,7 +173,7 @@ public class Room implements Serializable {
      *
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
      * the {@link com.group.foctg.holidayMaker.model.Room} objects field
-     * bookings
+     * <code>bookings</code>
      */
     public List<Booking> getBookings() {
         return bookings;
@@ -197,7 +204,11 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>roomSize</code> by the
      * value sent as parameter.
      *
+<<<<<<< HEAD
+     * @param roomSize Short value to be added to field
+=======
      * @param roomSize <code>Short</code> value to be added to field
+>>>>>>> upstream/master
      * <code>roomSize</code>
      */
     public void setRoomSize(Short roomSize) {
