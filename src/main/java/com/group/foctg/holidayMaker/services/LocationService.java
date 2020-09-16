@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Location;
 import com.group.foctg.holidayMaker.repositories.LocationRepository;
+import java.util.Optional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Location}
@@ -80,11 +81,12 @@ public class LocationService {
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Location}
-     * @return {@link com.group.foctg.holidayMaker.model.Location} object with
-     * the given <code>id</code>, if it exists
+     * @return Optional list of the type
+     * {@link com.group.foctg.holidayMaker.model.Location} with the given
+     * <code>id</code>, if it exists
      */
-    public Location getOne(Long id) {
-        return locationRepository.getOne(id);
+    public Optional<Location> findById(Long id) {
+        return locationRepository.findById(id);
     }
 
     /**

@@ -80,7 +80,7 @@ public class LocationController {
     /**
      * GET endpoint method that listens on <code>"/location"</code> URL and will
      * call the 
-     * {@link com.group.foctg.holidayMaker.services.LocationService#getOne(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#findById(java.lang.Long) }
      * method from the Service.
      *
      * @param id Long value to pass to the Service class
@@ -89,7 +89,7 @@ public class LocationController {
      */
     @GetMapping("/location")
     public Location getOne(@RequestParam Long id) {
-        return locationService.getOne(id);
+        return locationService.findById(id);
     }
 
     /**
