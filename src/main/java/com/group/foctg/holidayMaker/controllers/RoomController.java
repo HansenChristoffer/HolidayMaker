@@ -110,7 +110,7 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#getOne(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findById(java.lang.Long)}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -119,7 +119,7 @@ public class RoomController {
      */
 	@GetMapping("/room") 
 	public Room getOne(@RequestParam Long id) {
-		return roomService.getOne(id);
+		return roomService.findById(id);
 	}
 	
     /**

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.RoomRepository;
+import java.util.Optional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Room} column
@@ -101,11 +102,12 @@ public class RoomService {
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Room}
-     * @return {@link com.group.foctg.holidayMaker.model.Room} object with the
-     * given <code>id</code>, if it exists
+     * @return Optional list of the type
+     * {@link com.group.foctg.holidayMaker.model.Room} object with the given
+     * <code>id</code>, if it exists
      */
-    public Room getOne(Long id) {
-        return roomRepository.getOne(id);
+    public Optional<Room> findById(Long id) {
+        return roomRepository.findById(id);
     }
 
     /**

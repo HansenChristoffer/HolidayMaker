@@ -85,8 +85,9 @@ public class LocationController {
      * method from the Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Location} object from
-     * the autowired Service
+     * @return a Optional list with type
+     * {@link com.group.foctg.holidayMaker.model.Location} object from the
+     * autowired Service
      */
     @GetMapping("/location")
     public Optional<Location> findById(@RequestParam Long id) {
