@@ -17,15 +17,15 @@ package com.group.foctg.holidayMaker.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.DateChecker;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
@@ -102,7 +102,8 @@ public class AccommodationService {
      * Goes through the database, checks and returns all
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
-     * @return 
+     *
+     * @return
      */
     public List<Accommodation> findAll() {
         return accommodationRepository.findAll();
@@ -113,8 +114,9 @@ public class AccommodationService {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
      * matches the <code>ID</code>
+     *
      * @param id
-     * @return 
+     * @return
      */
     public Optional<Accommodation> findById(Long id) {
         return accommodationRepository.findById(id);
@@ -126,8 +128,9 @@ public class AccommodationService {
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
      * matches the <code>ID</code> of a
      * {@link com.group.foctg.holidayMaker.model.Customer}
+     *
      * @param id
-     * @return 
+     * @return
      */
     public List<Accommodation> findAccommodationsByCustomerId(Long id) {
         return accommodationRepository.findAccommodationsByCustomerId(id);
@@ -140,34 +143,40 @@ public class AccommodationService {
      * matches the {@link com.group.foctg.holidayMaker.model.Filter} fields
      *
      * @param filter
-     * @return 
+     * @return
      * @throws ParseException
      */
     public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException {
+        Set<Accommodation> availableByDate = new HashSet<>();
 
-
-        List<Accommodation> availableByDate = new ArrayList<Accommodation>();
-
+        /**
+         * These three nested for-each loops will check if the input filter
+         * dates overlap the rooms taken dates. If the filter-dates overlap with
+         * the rooms taken-dates it will return true. We check if the return is
+         * false and add that accommodation with available dates to our
+         * availableByDate List
+         */
         for (Accommodation a : findAll()) {
             for (Room r : a.getRooms()) {
-                for (Booking b : r.getBookings()) {
-
+                for (String[] dates : r.getDatesTaken()) {
                     Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
                     Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
-                    Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateFrom());
-                    Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateTo());
+                    Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
+                    Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
 
                     if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
                         availableByDate.add(a);
+                    } else {
+                        break;
                     }
                 }
             }
         }
-        
+
         /**
-         * These anonymous functions returns true/false depending on the
-         * statement. If the statement is true, the filter() function will pass
-         * the object of
+         * These anonymous functions returns true/false
+         * depending on the statement. If the statement is true, the filter()
+         * function will pass the object of
          * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
          * appended to the List<Accommodation>
          */

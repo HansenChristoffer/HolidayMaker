@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -46,9 +45,9 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(Customer customer, List<Room> rooms, String dateFrom, 
-            String dateTo, Short numberOfAdults, Short numberOfKids, 
-            Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, 
+    public Booking(Customer customer, List<Room> rooms, String dateFrom,
+            String dateTo, Short numberOfAdults, Short numberOfKids,
+            Boolean allInclusive, Boolean fullBoard, Boolean halfBoard,
             Short extraBeds) {
         this.customer = customer;
         this.rooms = rooms;
