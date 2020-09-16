@@ -100,7 +100,7 @@ public class CustomerService {
      * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
      * the given <code>email</code>, if it exists
      */
-    public Customer findCustomerByEmail(String email) {
+    public Optional<Customer> findCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
     }
 
