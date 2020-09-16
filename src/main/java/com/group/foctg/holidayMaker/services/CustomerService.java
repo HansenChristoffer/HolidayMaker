@@ -97,8 +97,9 @@ public class CustomerService {
      *
      * @param email String value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
-     * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>email</code>, if it exists
+     * @return Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} object with the given
+     * <code>email</code>, if it exists
      */
     public Optional<Customer> findCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
