@@ -118,7 +118,7 @@ public class RoomController {
      * Service
      */
     @GetMapping("/room")
-    public Room getOne(@RequestParam Long id) {
+    public Room findById(@RequestParam Long id) {
         return roomService.findById(id);
     }
 
