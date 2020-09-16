@@ -45,8 +45,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findCustomerByEmail(String email);
 
     @Query("SELECT c.bookings FROM Customer c WHERE c.id = ?1")
-    List<Booking> findBookingsByID(Long ID);
+    List<Booking> findBookingsById(Long id);
 
     @Query("SELECT c.accommodations FROM Customer c WHERE c.id = ?1")
-    List<Accommodation> findAccommodationsByID(Long ID);
+    List<Accommodation> findAccommodationsById(Long id);
 }

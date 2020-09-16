@@ -117,7 +117,7 @@ public class CustomerService {
      * given <code>id</code>, if it exists
      */
     public List<Booking> findCustomersBookingsByCustomerID(Long id) {
-        return customerRepository.findBookingsByID(id);
+        return customerRepository.findBookingsById(id);
     }
 
     /**
@@ -134,6 +134,6 @@ public class CustomerService {
      * <code>id</code>, if it exists
      */
     public List<Accommodation> findCustomersAccommodationsByCustomerID(Long id) {
-        return customerRepository.findAccommodationsByID(id);
+        return customerRepository.findAccommodationsById(id);
     }
 }
