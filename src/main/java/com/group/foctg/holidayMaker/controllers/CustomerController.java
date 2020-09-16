@@ -15,11 +15,13 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import com.group.foctg.holidayMaker.exceptions.CustomerNotFoundException;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.services.CustomerService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,20 +48,19 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-    
+
     /**
      * GET endpoint method that listens on <code>"/customers"</code> URL and
      * will call the
      * {@link com.group.foctg.holidayMaker.services.CustomerService#getAll(com.group.foctg.holidayMaker.model.Customer)}
      * method from the Service.
      *
-     * 
+     *
      * @return a List&lt;Customer&gt; from the autowired Service
      */
-    
     @GetMapping("/customers")
     public List<Customer> allCustomers() {
-    	return customerService.findAll();
+        return customerService.findAll();
     }
 
     /**
@@ -94,16 +95,23 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customer"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#getOne(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findById(java.lang.Long)}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Customer} object from
-     * the Service
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} object from the
+     * Service
      */
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public Customer findCustomerById(@RequestParam Long id) {
-        return customerService.getOne(id);
+    public Optional<Customer> findCustomerById(@RequestParam Long id) {
+        Optional<Customer> cust = customerService.findById(id);
+
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(id);
+        }
+
+        return cust;
     }
 
     /**
@@ -113,12 +121,19 @@ public class CustomerController {
      * method from the autowired Service.
      *
      * @param email String value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Customer} value from
-     * the Service
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} value from the
+     * Service
      */
     @RequestMapping(value = "/customer/by", method = RequestMethod.GET)
-    public Customer findCustomerByEmail(@RequestParam String email) {
-        return customerService.findCustomerByEmail(email);
+    public Optional<Customer> findCustomerByEmail(@RequestParam String email) {
+        Optional<Customer> cust = customerService.findCustomerByEmail(email);
+        
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(email);
+        }
+                
+        return cust;
     }
 
     /**

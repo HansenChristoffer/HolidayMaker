@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -27,11 +26,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.DateChecker;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
+import java.util.Optional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Accommodation} 
@@ -70,15 +69,15 @@ public class AccommodationService {
 	 * @return A boolean value representing whether the removing 
 	 * was successful or not.
 	 */
-	public boolean removeAccommodationById(Long id) {
-		if (accommodationRepository.existsById(id)) {
-			Accommodation found = accommodationRepository.getOne(id);
-			accommodationRepository.delete(found);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public boolean removeAccommodationById(Long id) {
+        if (accommodationRepository.existsById(id)) {
+            accommodationRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 	/**
 	 * If there is a Accommodation object already that has the same id as the
@@ -121,61 +120,64 @@ public class AccommodationService {
 	}
 
     /**
-     * Goes through the database, checks and returns all
-     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
-     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; if a
-     * customer with given <code>id</code> exists.
+     * Goes through the database, checks and returns one
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} object in the
+     * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
+     * matches the <code>ID</code>
      *
-     * @param id Long value to use for finding the
-     * {@link com.group.foctg.holidayMaker.model.Accommodation}
-     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt;
-     * from {@link com.group.foctg.holidayMaker.model.Customer} with the
-     * given <code>id</code>, if it exists
+     * @param id
+     * @return
      */
-	public List<Accommodation> findAccommodationsByCustomerId(Long id) {
-		return accommodationRepository.findAccommodationsByCustomerId(id);
-	}
+    public Optional<Accommodation> findById(Long id) {
+        return accommodationRepository.findById(id);
+    }
 
 	/**
-     * Goes through the database, checks and returns all
-     * {@link com.group.foctg.holidayMaker.model.Accommodation} objects in the
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; that
-     * matches the {@link com.group.foctg.holidayMaker.model.Filter} fields
-     * 
-     * @throws ParseException 
-     * @return List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; 
+     * matches the <code>ID</code> of a
+     * {@link com.group.foctg.holidayMaker.model.Customer}
+     *
+     * @param id
+     * @return
      */
-    public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException  {
-
-
-    	Set<Accommodation> availableByDate = new HashSet<Accommodation>();
+    public List<Accommodation> findAccommodationsByCustomerId(Long id) {
+        return accommodationRepository.findAccommodationsByCustomerId(id);
+    }
     	
-    	/**
-    	 * These three nested for-each loops will check if the input filter dates
-    	 * overlap the rooms taken dates. If the filter-dates overlap with
-    	 * the rooms taken-dates it will return true.
-    	 * We check if the return is false and add that accommodation with available
-    	 * dates to our availableByDate List
-    	 */
-    	for (Accommodation a : findAll()) {
-    		for (Room r : a.getRooms()) {
-    			for (String[] dates : r.getDatesTaken()) {
-    				Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
-    		    	Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
-    		    	Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
-    		    	Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
-    		    	
-    				if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
-    					availableByDate.add(a);
-    				} else {
-    					availableByDate.remove(a);
-    					break;
-    				}
-    			}
-    		}
-    	}
-    	
-    	/**
+   /**
+     *
+     * @param filter
+     * @return
+     * @throws ParseException
+     */
+    public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException {
+        Set<Accommodation> availableByDate = new HashSet<>();
+
+        /**
+         * These three nested for-each loops will check if the input filter
+         * dates overlap the rooms taken dates. If the filter-dates overlap with
+         * the rooms taken-dates it will return true. We check if the return is
+         * false and add that accommodation with available dates to our
+         * availableByDate List
+         */
+        for (Accommodation a : findAll()) {
+            for (Room r : a.getRooms()) {
+                for (String[] dates : r.getDatesTaken()) {
+                    Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
+                    Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
+                    Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
+                    Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
+
+                    if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
+                        availableByDate.add(a);
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        /**
          * These anonymous functions returns true/false depending on the
          * statement. If the statement is true, the filter() function will pass
          * the object of
@@ -234,5 +236,4 @@ public class AccommodationService {
 	public List<Accommodation> findAccommodationsByRating(Float rating) {
 		return accommodationRepository.findAccommodationsByRating(rating);
 	}
-
 }

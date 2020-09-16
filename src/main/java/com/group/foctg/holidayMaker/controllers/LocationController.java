@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
+import com.group.foctg.holidayMaker.exceptions.LocationNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Location;
 import com.group.foctg.holidayMaker.services.LocationService;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -80,22 +82,29 @@ public class LocationController {
     /**
      * GET endpoint method that listens on <code>"/location"</code> URL and will
      * call the 
-     * {@link com.group.foctg.holidayMaker.services.LocationService#getOne(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#findById(java.lang.Long) }
      * method from the Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Location} object from
-     * the autowired Service
+     * @return a Optional list with type
+     * {@link com.group.foctg.holidayMaker.model.Location} object from the
+     * autowired Service
      */
     @GetMapping("/location")
-    public Location getOne(@RequestParam Long id) {
-        return locationService.getOne(id);
+    public Optional<Location> findById(@RequestParam Long id) {
+        Optional<Location> loc = locationService.findById(id);
+        
+        if (loc.isEmpty()) {
+            throw new LocationNotFoundException(id);
+        }
+        
+        return loc;
     }
 
     /**
      * DELETE endpoint method that listens on <code>"/location"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationByID(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationById(java.lang.Long) }
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -103,7 +112,7 @@ public class LocationController {
      */
     @DeleteMapping("/location")
     public boolean removeLocation(@RequestParam Long id) {
-        return locationService.removeLocationByID(id);
+        return locationService.removeLocationById(id);
     }
 
     /**

@@ -16,7 +16,7 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -38,6 +38,7 @@ import org.hibernate.validator.constraints.Length;
  * @author Olle Johansson
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Booking implements Serializable {
 
     public Booking() {
@@ -58,9 +59,11 @@ public class Booking implements Serializable {
      * @param halfBoard boolean value to be added to field <code>halfBoard</code>
      * @param extraBeds Short value to be added to field<code>extraBeds</code>
      */
-    public Booking(Customer customer, List<Room> rooms, String dateFrom, 
-            String dateTo, Short numberOfAdults, Short numberOfKids, 
-            Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, 
+
+
+    public Booking(Customer customer, List<Room> rooms, String dateFrom,
+            String dateTo, Short numberOfAdults, Short numberOfKids,
+            Boolean allInclusive, Boolean fullBoard, Boolean halfBoard,
             Short extraBeds) {
         this.customer = customer;
         this.rooms = rooms;
@@ -174,6 +177,7 @@ public class Booking implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Booking} object.
      *
      * @return String of {@link com.group.foctg.holidayMaker.model.Booking}
+     * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateFrom</code>
      */
     public String getDateFrom() {
@@ -185,6 +189,7 @@ public class Booking implements Serializable {
      * value sent as parameter.
      *
      * @param dateFrom String value to be added to field
+     * @param dateFrom <code>Date</code> value to be added to field
      * <code>dateFrom</code>
      */
     public void setDateFrom(String dateFrom) {
@@ -196,6 +201,7 @@ public class Booking implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Booking} object.
      *
      * @return String of {@link com.group.foctg.holidayMaker.model.Booking}
+     * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateTo</code>
      */
     public String getDateTo() {
@@ -207,6 +213,7 @@ public class Booking implements Serializable {
      * value sent as parameter.
      *
      * @param dateTo String value to be added to field
+     * @param dateTo <code>Date</code> value to be added to field
      * <code>dateTo</code>
      */
     public void setDateTo(String dateTo) {
@@ -229,6 +236,7 @@ public class Booking implements Serializable {
      * by the value sent as parameter.
      *
      * @param numberOfAdults Short value to be added to field
+     * @param numberOfAdults <code>Short</code> value to be added to field
      * <code>numberOfAdults</code>
      */
     public void setNumberOfAdults(Short numberOfAdults) {
@@ -251,6 +259,7 @@ public class Booking implements Serializable {
      * the value sent as parameter.
      *
      * @param numberOfKids Short value to be added to field
+     * @param numberOfKids <code>Short</code> value to be added to field
      * <code>numberOfKids</code>
      */
     public void setNumberOfKids(Short numberOfKids) {
@@ -273,6 +282,7 @@ public class Booking implements Serializable {
      * the value sent as parameter.
      *
      * @param allInclusive Boolean value to be added to field
+     * @param allInclusive <code>Boolean</code> value to be added to field
      * <code>allInclusive</code>
      */
     public void setAllInclusive(Boolean allInclusive) {
@@ -295,6 +305,7 @@ public class Booking implements Serializable {
      * value sent as parameter.
      *
      * @param fullBoard Boolean value to be added to field
+     * @param fullBoard <code>Boolean</code> value to be added to field
      * <code>fullBoard</code>
      */
     public void setFullBoard(Boolean fullBoard) {
@@ -317,6 +328,7 @@ public class Booking implements Serializable {
      * value sent as parameter.
      *
      * @param halfBoard Boolean value to be added to field
+     * @param halfBoard <code>Boolean</code> value to be added to field
      * <code>halfBoard</code>
      */
     public void setHalfBoard(Boolean halfBoard) {
@@ -329,6 +341,7 @@ public class Booking implements Serializable {
      *
      * @return Short of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>extraBeds</code>
+     * objects field <code>halfBoard</code>
      */
     public Short getExtraBeds() {
         return extraBeds;
@@ -339,10 +352,10 @@ public class Booking implements Serializable {
      * value sent as parameter.
      *
      * @param extraBeds Short value to be added to field
+     * @param extraBeds <code>Boolean</code> value to be added to field
      * <code>extraBeds</code>
      */
     public void setExtraBeds(Short extraBeds) {
         this.extraBeds = extraBeds;
     }
-
 }

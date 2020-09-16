@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.*;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
+import java.util.Optional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Customer}
@@ -19,11 +20,11 @@ import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
 	 * To find user by email to authenticate logged in user.
@@ -34,12 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 * @param email String to find {@link com.group.foctg.holidayMaker.model.Customer} object.
 	 * @return {@link org.springframework.security.core.userdetails.UserDetails}
 	 */
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-				
-		Customer customer = customerRepository.findCustomerByEmail(email);
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Customer> customer = customerRepository.findCustomerByEmail(email);
 
-		return User.builder().username(customer.getEmail()).password(bCryptPasswordEncoder.encode(customer.getPassword())).roles("USER").build();
-
-	}
+        return User.builder().username(customer.get().getEmail()).password(bCryptPasswordEncoder.encode(customer.get().getPassword())).roles("USER").build();
+    }
 }

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.group.foctg.holidayMaker.repositories;
 
 import java.util.List;
@@ -34,9 +33,9 @@ import org.springframework.data.jpa.repository.Query;
  * {@link com.group.foctg.holidayMaker.services.AccommodationService}.
  *
  * @author Olle Johansson
+ * @author Frida Ek
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
-
 @Repository
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
 

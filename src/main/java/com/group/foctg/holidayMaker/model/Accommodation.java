@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
@@ -43,8 +43,8 @@ import org.hibernate.validator.constraints.URL;
  *
  * @author Olle Johansson
  */
-
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Accommodation implements Serializable {
 
@@ -86,56 +86,56 @@ public class Accommodation implements Serializable {
 		this.customer = customer;
 	}
 
-	@Id
-	@GeneratedValue
-	@Column(name = "accommodation_id")
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "accommodation_id")
+    private Long id;
 
-	@NotEmpty
-	@Column
-	private String name;
+    @NotEmpty
+    @Column
+    private String name;
 
-	@Column
-	private Boolean pool;
+    @Column
+    private Boolean pool;
 
-	@Column
-	private Boolean nightEntertainment;
+    @Column
+    private Boolean nightEntertainment;
 
-	@Column
-	private Boolean childEvents;
+    @Column
+    private Boolean childEvents;
 
-	@Column
-	private Boolean restaurant;
+    @Column
+    private Boolean restaurant;
 
-	@Column
-	private Short distanceToBeach;
+    @Column
+    private Short distanceToBeach;
 
-	@Column
-	private Short distanceToCenter;
+    @Column
+    private Short distanceToCenter;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonManagedReference
-	private Location location;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Location location;
 
-	@URL
-	@Column
-	private String imageURL;
+    @URL
+    @Column
+    private String imageURL;
 
-	@Column
-	private String description;
+    @Column
+    private String description;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JsonManagedReference
-	private List<Room> rooms;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Room> rooms;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonBackReference
-	private Customer customer;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Customer customer;
 
-	@Range(min = 0, max = 5)
-	@Column
-	private Float rating;
-
+    @Range(min = 0, max = 5)
+    @Column
+    private Float rating;
+    
 	/**
 	 * Method that returns the <code>id</code> of the
 	 * {@link com.group.foctg.holidayMaker.model.Accommodation} object
@@ -436,5 +436,4 @@ public class Accommodation implements Serializable {
 	public void setRating(Float rating) {
 		this.rating = rating;
 	}
-
 }
