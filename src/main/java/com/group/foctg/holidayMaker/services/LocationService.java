@@ -60,7 +60,7 @@ public class LocationService {
      * @return A boolean value representing whether the removing was successful
      * or not
      */
-    public boolean removeLocationByID(Long id) {
+    public boolean removeLocationById(Long id) {
         if (locationRepository.existsById(id)) {
             Location found = locationRepository.getOne(id);
             locationRepository.delete(found);

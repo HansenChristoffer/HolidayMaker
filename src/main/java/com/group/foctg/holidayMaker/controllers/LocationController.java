@@ -95,7 +95,7 @@ public class LocationController {
     /**
      * DELETE endpoint method that listens on <code>"/location"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationByID(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationById(java.lang.Long) }
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -103,7 +103,7 @@ public class LocationController {
      */
     @DeleteMapping("/location")
     public boolean removeLocation(@RequestParam Long id) {
-        return locationService.removeLocationByID(id);
+        return locationService.removeLocationById(id);
     }
 
     /**
