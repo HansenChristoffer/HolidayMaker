@@ -74,8 +74,7 @@ public class AccommodationService {
      */
     public boolean removeAccommodationById(Long id) {
         if (accommodationRepository.existsById(id)) {
-            Accommodation found = accommodationRepository.getOne(id);
-            accommodationRepository.delete(found);
+            accommodationRepository.deleteById(id);
             return true;
         } else {
             return false;
@@ -174,9 +173,9 @@ public class AccommodationService {
         }
 
         /**
-         * These anonymous functions returns true/false
-         * depending on the statement. If the statement is true, the filter()
-         * function will pass the object of
+         * These anonymous functions returns true/false depending on the
+         * statement. If the statement is true, the filter() function will pass
+         * the object of
          * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
          * appended to the List<Accommodation>
          */
