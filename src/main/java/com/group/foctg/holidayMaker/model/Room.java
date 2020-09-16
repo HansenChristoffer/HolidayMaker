@@ -16,6 +16,7 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
@@ -39,6 +40,7 @@ import javax.persistence.ManyToOne;
  * @author Olle Johansson
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Room implements Serializable {
 
     public Room() {
