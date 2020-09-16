@@ -15,23 +15,26 @@
  */
 package com.group.foctg.holidayMaker.exceptions;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  *
  * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  */
-@SuppressWarnings("serial")
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class AccommodationNotFoundException extends RuntimeException {
-    
-     public AccommodationNotFoundException(Long id) {
+
+    public AccommodationNotFoundException(Long id) {
         super("Could not find card by id = { " + id + " }");
     }
-    
+
     public AccommodationNotFoundException(Short distance) {
         super("Could not find Accommodation by distance = { " + distance + " }");
     }
-    
+
     public AccommodationNotFoundException(Float rating) {
         super("Could not find Accommodation by rating = { " + rating + " }");
     }
-    
+
 }
