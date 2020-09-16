@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
+import java.util.Optional;
 
 /**
  * RestController for the {@link com.group.foctg.holidayMaker.model.Room} entity
@@ -114,11 +115,11 @@ public class RoomController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Room} object from the
-     * Service
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Room} object from the Service
      */
     @GetMapping("/room")
-    public Room findById(@RequestParam Long id) {
+    public Optional<Room> findById(@RequestParam Long id) {
         return roomService.findById(id);
     }
 
