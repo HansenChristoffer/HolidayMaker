@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -28,7 +27,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
