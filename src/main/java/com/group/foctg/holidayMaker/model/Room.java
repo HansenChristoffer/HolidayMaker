@@ -28,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
@@ -71,10 +72,12 @@ public class Room implements Serializable {
     @JsonBackReference
     private Accommodation accommodation;
 
+    @NotEmpty
     @Column
     private Float price;
-
-    @Column
+    
+    @NotEmpty
+    @Column 
     private Short roomSize;
 
     @ElementCollection

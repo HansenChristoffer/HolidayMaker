@@ -27,6 +27,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
  * the various fields that are required for the functionality of the program.
@@ -74,9 +76,11 @@ public class Booking implements Serializable {
     @JsonBackReference
     private List<Room> rooms;
 
+    @Length(min = 10, max = 10)
     @Column
     private String dateFrom;
 
+    @Length(min = 10, max = 10)
     @Column
     private String dateTo;
 
@@ -329,5 +333,4 @@ public class Booking implements Serializable {
     public void setExtraBeds(Short extraBeds) {
         this.extraBeds = extraBeds;
     }
-
 }
