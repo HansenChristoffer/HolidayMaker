@@ -16,7 +16,6 @@
 
 package com.group.foctg.holidayMaker.model;
 
-import java.util.Date;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Filter} entity class.
