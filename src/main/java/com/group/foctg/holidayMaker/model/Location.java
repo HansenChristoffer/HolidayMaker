@@ -33,9 +33,6 @@ import javax.persistence.OneToMany;
  * These fields are also turned into columns in the SQLite3 database. There is
  * also one OneToMany relationships with other entity classes.
  *
- * Uses the SEQUENCE type for auto gen id values because of the restrictions
- * that SQLite3 holds.
- *
  * @author Olle Johansson
  */
 @Entity
@@ -65,7 +62,7 @@ public class Location implements Serializable {
     private List<Accommodation> accommodations;
 
     /**
-     * Method that returns the <code>id</code> of the
+     * Method that returns the field <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Location} object
      *
      * @return Long value {@link com.group.foctg.holidayMaker.model.Location}
