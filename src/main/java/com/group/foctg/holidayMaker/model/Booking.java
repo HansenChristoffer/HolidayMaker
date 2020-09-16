@@ -44,14 +44,14 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(Customer customer, List<Room> rooms, /*String dateFrom, 
-            String dateTo,*/ Short numberOfAdults, Short numberOfKids, 
+    public Booking(Customer customer, List<Room> rooms, String dateFrom, 
+            String dateTo, Short numberOfAdults, Short numberOfKids, 
             Boolean allInclusive, Boolean fullBoard, Boolean halfBoard, 
             Short extraBeds) {
         this.customer = customer;
         this.rooms = rooms;
-        //this.dateFrom = dateFrom;
-        //this.dateTo = dateTo;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
         this.numberOfAdults = numberOfAdults;
         this.numberOfKids = numberOfKids;
         this.allInclusive = allInclusive;
@@ -73,11 +73,11 @@ public class Booking implements Serializable {
     @JsonManagedReference
     private List<Room> rooms;
 
-    /*@Column
+    @Column
     private String dateFrom;
 
     @Column
-    private String dateTo;*/
+    private String dateTo;
 
     @Column
     private Short numberOfAdults;
@@ -160,9 +160,10 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateFrom</code>
      */
-    /*public String getDateFrom() {
+     
+    public String getDateFrom() {
         return dateFrom;
-    }*/
+    }
 
     /**
      * Method that will set the value of the field <code>dateFrom</code> by the
@@ -171,9 +172,10 @@ public class Booking implements Serializable {
      * @param dateFrom <code>Date</code> value to be added to field
      * <code>dateFrom</code>
      */
-    /*public void setDateFrom(String dateFrom) {
+    
+    public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
-    }*/
+    }
 
     /**
      * Method that returns the field <code>dateTo</code> of the
@@ -182,9 +184,10 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateTo</code>
      */
-    /*public String getDateTo() {
+    
+    public String getDateTo() {
         return dateTo;
-    }*/
+    }
 
     /**
      * Method that will set the value of the field <code>dateTo</code> by the
@@ -193,9 +196,10 @@ public class Booking implements Serializable {
      * @param dateTo <code>Date</code> value to be added to field
      * <code>dateTo</code>
      */
-    /*public void setDateTo(String dateTo) {
+    
+    public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
-    }*/
+    }
 
     /**
      * Method that returns the field <code>numberOfAdults</code> of the

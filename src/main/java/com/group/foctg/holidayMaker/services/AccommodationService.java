@@ -132,15 +132,16 @@ public class AccommodationService {
      */
     public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException  {
 
-        /**
-         * These anonymous functions returns true/false depending on the
-         * statement. If the statement is true, the filter() function will pass
-         * the object of
-         * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
-         * appended to the List<Accommodation>
-         */
 
     	List<Accommodation> availableByDate = new ArrayList<Accommodation>();
+    	
+    	/**
+    	 * These three nested for-each loops will check if the input filter dates
+    	 * overlap the rooms taken dates. If the filter-dates overlap with
+    	 * the rooms taken-dates it will return true.
+    	 * We check if the return is false and add that accommodation with available
+    	 * dates to our availableByDate List
+    	 */
     	
     	
     	for (Accommodation a : findAll()) {
@@ -150,11 +151,6 @@ public class AccommodationService {
     		    	Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
     		    	Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
     		    	Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
-
-    		    	System.out.println(dates[0] + " : " + dates[1]);
-    		    	System.out.println(filter.getDateFrom() + " : " + filter.getDateTo());
-    		    	System.out.println(DateChecker.isOverlapping(df1, dt1, df2, dt2));
-    		    	System.out.println("========================");
     		    	
     				if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
     					availableByDate.add(a);
@@ -162,6 +158,14 @@ public class AccommodationService {
     			}
     		}
     	}
+    	
+    	/**
+         * These anonymous functions returns true/false depending on the
+         * statement. If the statement is true, the filter() function will pass
+         * the object of
+         * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
+         * appended to the List<Accommodation>
+         */
     	
         List<Accommodation> filtered = availableByDate.stream()
                 .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
