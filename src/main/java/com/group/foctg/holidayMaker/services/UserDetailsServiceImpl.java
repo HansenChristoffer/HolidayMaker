@@ -16,18 +16,16 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-				
-		Optional<Customer> customer = customerRepository.findCustomerByEmail(email);
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Customer> customer = customerRepository.findCustomerByEmail(email);
 
-		return User.builder().username(customer.get().getEmail()).password(bCryptPasswordEncoder.encode(customer.get().getPassword())).roles("USER").build();
-
-	}
+        return User.builder().username(customer.get().getEmail()).password(bCryptPasswordEncoder.encode(customer.get().getPassword())).roles("USER").build();
+    }
 }
