@@ -34,8 +34,9 @@ import com.group.foctg.holidayMaker.services.AccommodationService;
 import java.util.Optional;
 
 /**
- * RestController for the {@link com.group.foctg.holidayMaker.model.Accommodation}
- * entity and column. This class holds all the endpoints for
+ * RestController for the
+ * {@link com.group.foctg.holidayMaker.model.Accommodation} entity and column.
+ * This class holds all the endpoints for
  * {@link com.group.foctg.holidayMaker.model.Accommodation}.
  *
  * Autowiring
@@ -104,8 +105,8 @@ public class AccommodationController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a {@link com.group.foctg.holidayMaker.model.Accommodation} object
-     * from the Service
+     * @return a Optional list of the type
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} from the Service
      */
     @GetMapping("/accommodation")
     public Optional<Accommodation> findAccommodationById(@RequestParam Long id) {
@@ -194,7 +195,7 @@ public class AccommodationController {
      * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsByRatings(java.lang.Float)}
      * method from the autowired Service.
      *
-     * @param distance Float value to pass to the Service class
+     * @param rating Float value to pass to the Service class
      * @return a List of accommodations
      */
     @GetMapping("/accommodation/rating")
