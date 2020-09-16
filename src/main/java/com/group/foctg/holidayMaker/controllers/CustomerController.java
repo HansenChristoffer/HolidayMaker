@@ -127,7 +127,13 @@ public class CustomerController {
      */
     @RequestMapping(value = "/customer/by", method = RequestMethod.GET)
     public Optional<Customer> findCustomerByEmail(@RequestParam String email) {
-        return customerService.findCustomerByEmail(email);
+        Optional<Customer> cust = customerService.findCustomerByEmail(email);
+        
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(email);
+        }
+                
+        return cust;
     }
 
     /**
