@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Location;
 import com.group.foctg.holidayMaker.services.LocationService;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -88,7 +89,7 @@ public class LocationController {
      * the autowired Service
      */
     @GetMapping("/location")
-    public Location findById(@RequestParam Long id) {
+    public Optional<Location> findById(@RequestParam Long id) {
         return locationService.findById(id);
     }
 
