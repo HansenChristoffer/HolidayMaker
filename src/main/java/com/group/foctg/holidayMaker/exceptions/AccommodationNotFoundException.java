@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AccommodationNotFoundException extends RuntimeException {
 
     public AccommodationNotFoundException(Long id) {
-        super("Could not find card by id = { " + id + " }");
+        super("Could not find Accommodation by id = { " + id + " }");
     }
 
     public AccommodationNotFoundException(Short distance) {
