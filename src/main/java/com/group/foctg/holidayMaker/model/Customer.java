@@ -34,9 +34,6 @@ import javax.validation.constraints.NotEmpty;
  * These fields are also turned into columns in the SQLite3 database. There is
  * also two OneToMany relationships with other entity classes.
  *
- * Uses the SEQUENCE type for auto gen id values because of the restrictions
- * that SQLite3 holds.
- *
  * @author Olle Johansson
  * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  */
@@ -46,7 +43,15 @@ public class Customer implements Serializable {
 
     public Customer() {
     }
-
+    
+    /**
+     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Customer} object.
+     * 
+     * @param email String value to be added to field <code>email</code>
+     * @param password String value to be added to field <code>password</code>
+     * @param accommodations List that will become the field <code>accommodations</code>
+     * @param bookings List that will become the field <code>bookings</code>
+     */
     public Customer(String email, String password, List<Accommodation> accommodations, List<Booking> bookings) {
         this.email = email;
         this.password = password;
@@ -114,7 +119,7 @@ public class Customer implements Serializable {
      * @return
      * List&lt;{@link com.group.foctg.holidayMaker.model.Accommodation}&gt; of
      * the {@link com.group.foctg.holidayMaker.model.Customer} objects field
-     * accommodations
+     * <code>accommodations</code>
      */
     public List<Accommodation> getAccommodations() {
         return accommodations;
@@ -137,7 +142,7 @@ public class Customer implements Serializable {
      *
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt; of
      * the {@link com.group.foctg.holidayMaker.model.Customer} objects field
-     * bookings
+     * <code>bookings</code>
      */
     public List<Booking> getBookings() {
         return bookings;
@@ -158,7 +163,7 @@ public class Customer implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Customer} object.
      *
      * @return String of the {@link com.group.foctg.holidayMaker.model.Customer}
-     * objects field password
+     * objects field <code>password</code>
      */
     public String getPassword() {
         return password;
