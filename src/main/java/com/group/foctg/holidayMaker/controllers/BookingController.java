@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.services.BookingService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,13 +52,12 @@ public class BookingController {
 
     /**
      * POST endpoint method that listens on <code>"/booking"</code> URL and will
-     * call the {@link com.group.foctg.holidayMaker.services.BookingService#saveBooking(com.group.foctg.holidayMaker.model.Booking)
-     * }
+     * call the {@link com.group.foctg.holidayMaker.services.BookingService#saveBooking}
      * method from the Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
-     * to pass to the Service class
-     * @return a boolean value from the autowired Service
+     * to pass to the Service class.
+     * @return a boolean value from the autowired Service.
      */
     @PostMapping("/booking")
     public boolean saveBooking(@RequestBody Booking booking) {
@@ -67,11 +67,11 @@ public class BookingController {
     /**
      * DELETE endpoint method that listens on <code>"/booking"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#removeBooking(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.BookingService#removeBooking}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @param id Long value to pass to the Service class.
+     * @return a boolean value from the Service.
      */
     @DeleteMapping("/booking")
     public boolean removeBooking(@RequestParam Long id) {
@@ -81,24 +81,26 @@ public class BookingController {
     /**
      * PUT endpoint method that listens on <code>"/booking"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#updateBooking(com.group.foctg.holidayMaker.model.Booking)}
+     * {@link com.group.foctg.holidayMaker.services.BookingService#updateBooking}
      * method from the autowired Service.
      *
-     * @param booking {@link com.group.foctg.holidayMaker.model.Booking value to pass to the Service class
+     * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value to pass to the Service class.
      */
+    
+    
     @PutMapping("/booking")
-    public void updateBooking(@RequestBody Booking booking) {
-        bookingService.updateBooking(booking);
+    public Booking updateBooking(@RequestBody Booking booking, @RequestParam Long id) {
+        return bookingService.updateBooking(booking, id);
     }
 
     /**
      * GET endpoint method that listens on <code>"/booking"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#findBookingsByCustomerId(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.BookingService#findBookingsByCustomerId}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
-     * @return a List object from the Service
+     * @param id Long value to pass to the Service class.
+     * @return a List object from the Service.
      */
     @GetMapping("/booking")
     public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {

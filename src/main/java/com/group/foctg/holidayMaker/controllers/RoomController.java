@@ -55,12 +55,12 @@ public class RoomController {
     /**
      * POST endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom(com.group.foctg.holidayMaker.model.Room)}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom}
      * method from the Service.
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
-     * pass to the Service class
-     * @return a boolean value from the autowired Service
+     * pass to the Service class.
+     * @return a boolean value from the autowired Service.
      */
     @PostMapping("/room")
     public boolean saveRoom(@RequestBody Room room) {
@@ -70,11 +70,11 @@ public class RoomController {
     /**
      * DELETE endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#removeRoom(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#removeRoom}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @param id Long value to pass to the Service class.
+     * @return a boolean value from the Service.
      */
     @DeleteMapping("/room")
     public boolean removeRoom(@RequestParam Long id) {
@@ -84,12 +84,12 @@ public class RoomController {
     /**
      * PUT endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#updateRoom(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#updateRoom}
      * method from the autowired Service.
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
-     * pass to the Service class
-     * @return a boolean value from the Service
+     * pass to the Service class.
+     * @return a boolean value from the Service.
      */
     @PutMapping("/room")
     public boolean updateRoom(@RequestBody Room room) {
@@ -99,10 +99,10 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll()) }
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll}
      * method from the Service.
      *
-     * @return a List object from the autowired Service
+     * @return a List object from the autowired Service.
      */
     @GetMapping("/rooms")
     public List<Room> findAll() {
@@ -110,14 +110,14 @@ public class RoomController {
     }
 
     /**
-     * GET endpoint method that listens on <code>"/room"</code> URL and will
+     * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findById(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findById}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
+     * @param id Long value to pass to the Service class.
      * @return a Optional list of type
-     * {@link com.group.foctg.holidayMaker.model.Room} object from the Service
+     * {@link com.group.foctg.holidayMaker.model.Room} object from the Service.
      */
     @GetMapping("/room")
     public Optional<Room> findById(@RequestParam Long id) {
@@ -133,12 +133,12 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/room/accommodation"</code>
      * URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodation(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodation}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
+     * @param id Long value to pass to the Service class.
      * @return a {@link com.group.foctg.holidayMaker.model.Accommodation} object
-     * from the Service
+     * from the Service.
      */
     @GetMapping("/room/accommodation")
     public Accommodation findAccommodation(@RequestParam Long id) {

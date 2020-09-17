@@ -70,13 +70,13 @@ public class AccommodationController {
     /**
      * POST endpoint method that listens on <code>"/accommodation"</code> URL
      * and will call the
-     * {@link com.group.foctg.holidayMaker.services.AccommodationService#saveAccommodation(com.group.foctg.holidayMaker.model.Accommodation)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#saveAccommodation}
      * method from the Service.
      *
      * @param accommodation
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object to pass
-     * to the Service class
-     * @return a boolean value from the autowired Service
+     * to the Service class.
+     * @return a boolean value from the autowired Service.
      */
     @PostMapping("/accommodation")
     public boolean saveAccommodation(@RequestBody Accommodation accommodation) {
@@ -86,12 +86,12 @@ public class AccommodationController {
     /**
      * GET endpoint method that listens on <code>"/accommodation/filter"</code>
      * URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.AccommodationService#getFilteredAccommodations(com.group.foctg.holidayMaker.model.Filter)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#getFilteredAccommodations}
      * method from the autowired Service.
      *
-     * @param filter Filter object to pass to the Service class
-     * @return a List of the filtered accommodations
-     * @throws ParseException
+     * @param filter {@link com.group.foctg.holidayMaker.model.Filter} object to pass to the Service class.
+     * @return a List of the filtered accommodations.
+     * @throws ParseException.
      */
     @GetMapping("/accommodation/filter")
     public List<Accommodation> filterAccommodations(@RequestBody Filter filter) throws ParseException {
@@ -101,7 +101,7 @@ public class AccommodationController {
     /**
      * GET endpoint method that listens on <code>"/accommodation"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#getOne(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#findById}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -122,12 +122,12 @@ public class AccommodationController {
     /**
      * PUT endpoint method that listens on <code>"/accommodation"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.AccommodationService#updateAccommodation(com.group.foctg.holidayMaker.model.Accommodation)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#updateAccommodation}
      * method from the autowired Service.
      *
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation value to pass to the Service class
-     * @param id The id of the {@link com.group.foctg.holidayMaker.model.Accommodation to update
-     * @return a {@link com.group.foctg.holidayMaker.model.Accommodation object from the Service
+     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} value to pass to the Service class.
+     * @param id Long value to pass to the Service class.
+     * @return {@link com.group.foctg.holidayMaker.model.Accommodation} object from the Service.
      */
     @PutMapping("/accommodation")
     public Accommodation updateAccommodation(@RequestBody Accommodation accommodation, @RequestParam Long id) {
@@ -137,13 +137,13 @@ public class AccommodationController {
     /**
      * DELETE endpoint method that listens on <code>"/accommodation"</code> URL
      * and will call the
-     * {@link com.group.foctg.holidayMaker.services.AccommodationService#removeAccommodationById(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#removeAccommodationById}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
-     * @return a boolean value from the Service
+     * @param id Long value to pass to the Service class.
+     * @return a boolean value from the Service.
      */
-    @DeleteMapping("/api/accommodation")
+    @DeleteMapping("/accommodation")
     public boolean removeAccommodation(@RequestParam Long id) {
         return accommodationService.removeAccommodationById(id);
     }
@@ -151,11 +151,11 @@ public class AccommodationController {
     /**
      * GET endpoint method that listens on
      * <code>"/accommodation/customer"</code> URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsByCustomerId(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#findAccommodationsByCustomerId}
      * method from the autowired Service.
      *
-     * @param id Long value to pass to the Service class
-     * @return a List of accommodations
+     * @param id Long value to pass to the Service class.
+     * @return a List of accommodations.
      */
     @GetMapping("/accommodation/customer")
     public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
@@ -165,11 +165,11 @@ public class AccommodationController {
     /**
      * GET endpoint method that listens on <code>"/accommodation/tobeach"</code>
      * URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsWithinDistanceToBeach(java.lang.Short)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#findAccommodationsWithinDistanceToBeach}
      * method from the autowired Service.
      *
-     * @param distance Short value to pass to the Service class
-     * @return a List of accommodations
+     * @param distance Short value to pass to the Service class.
+     * @return a List of accommodations.
      */
     @GetMapping("/accommodation/tobeach")
     public List<Accommodation> findAccommodationsWithinDistanceToBeach(@RequestParam Short distance) {
@@ -179,11 +179,11 @@ public class AccommodationController {
     /**
      * GET endpoint method that listens on
      * <code>"/accommodation/tocenter"</code> URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.BookingService#findAccommodationsWithinDistanceToCenter(java.lang.Short)}
+     * {@link com.group.foctg.holidayMaker.services.AccommodationService#findAccommodationsWithinDistanceToCenter}
      * method from the autowired Service.
      *
-     * @param distance Short value to pass to the Service class
-     * @return a List of accommodations
+     * @param distance Short value to pass to the Service class.
+     * @return a List of accommodations.
      */
     @GetMapping("/accommodation/tocenter")
     public List<Accommodation> findAccommodationsWithinDistanceToCenter(@RequestParam Short distance) {

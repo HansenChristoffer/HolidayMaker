@@ -131,6 +131,10 @@ public class Booking implements Serializable {
     public Long getId() {
         return id;
     }
+    
+    public void setId(Long id) {
+    	this.id = id;
+    }
 
     /**
      * Method that returns the field <code>customer</code> of the
