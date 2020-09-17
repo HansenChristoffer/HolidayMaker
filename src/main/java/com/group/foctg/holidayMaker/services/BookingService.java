@@ -78,8 +78,8 @@ public class BookingService {
      * @return A boolean value representing whether the updating or saving was
      * successful or not.
      */
-    public boolean updateBooking(Booking booking) {
-        return bookingRepository.saveAndFlush(booking).equals(booking);
+    public Booking updateBooking(Booking booking) {
+        return bookingRepository.saveAndFlush(booking);
     }
 
     /**
