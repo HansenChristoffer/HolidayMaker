@@ -85,6 +85,7 @@ public class BookingController {
      * method from the autowired Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value to pass to the Service class.
+     * @return {@link com.group.foctg.holidayMaker.model.Booking} object from the service
      */
     
     
