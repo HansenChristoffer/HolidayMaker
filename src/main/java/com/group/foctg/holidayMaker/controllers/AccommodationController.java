@@ -126,11 +126,12 @@ public class AccommodationController {
      * method from the autowired Service.
      *
      * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation value to pass to the Service class
-     * @return a boolean value from the Service
+     * @param id The id of the {@link com.group.foctg.holidayMaker.model.Accommodation to update
+     * @return a {@link com.group.foctg.holidayMaker.model.Accommodation object from the Service
      */
     @PutMapping("/accommodation")
-    public boolean updateAccommodation(@RequestBody Accommodation accommodation) {
-        return accommodationService.updateAccommodation(accommodation);
+    public Accommodation updateAccommodation(@RequestBody Accommodation accommodation, @RequestParam Long id) {
+        return accommodationService.updateAccommodation(accommodation, id);
     }
 
     /**
