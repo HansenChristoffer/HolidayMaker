@@ -52,9 +52,9 @@ public class LocationController {
     private LocationService locationService;
 
     /**
-     * POST endpoint method that listens on <code>"/location"</code> URL and
+     * GET endpoint method that listens on <code>"/locations"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#findAll()) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#findAll}
      * method from the Service.
      *
      * @return a List object from the autowired Service
@@ -67,7 +67,7 @@ public class LocationController {
     /**
      * POST endpoint method that listens on <code>"/location"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#saveLocation(com.group.foctg.holidayMaker.model.Location) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#saveLocation}
      * method from the Service.
      *
      * @param location {@link com.group.foctg.holidayMaker.model.Location}
@@ -82,11 +82,11 @@ public class LocationController {
     /**
      * GET endpoint method that listens on <code>"/location"</code> URL and will
      * call the 
-     * {@link com.group.foctg.holidayMaker.services.LocationService#findById(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#findById}
      * method from the Service.
      *
      * @param id Long value to pass to the Service class
-     * @return a Optional list with type
+     * @return an Optional list with type
      * {@link com.group.foctg.holidayMaker.model.Location} object from the
      * autowired Service
      */
@@ -104,7 +104,7 @@ public class LocationController {
     /**
      * DELETE endpoint method that listens on <code>"/location"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationById(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#removeLocationById}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -118,7 +118,7 @@ public class LocationController {
     /**
      * GET endpoint method that listens on
      * <code>"/location/accommodations"</code> URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.LocationService#findAccommodationsByLocation(java.lang.Long) }
+     * {@link com.group.foctg.holidayMaker.services.LocationService#findAccommodationsByLocation}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
