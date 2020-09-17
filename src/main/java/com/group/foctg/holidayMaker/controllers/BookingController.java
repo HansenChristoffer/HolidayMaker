@@ -85,7 +85,6 @@ public class BookingController {
      * method from the autowired Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking value to pass to the Service class
-     * @return a boolean value from the Service
      */
     @PutMapping("/booking")
     public void updateBooking(@RequestBody Booking booking) {
