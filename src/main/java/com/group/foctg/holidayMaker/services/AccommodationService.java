@@ -107,8 +107,6 @@ public class AccommodationService {
                     acc.setLocation(accommodation.getLocation());
                     acc.setImageURL(accommodation.getImageURL());
                     acc.setDescription(accommodation.getDescription());
-                    acc.setRooms(accommodation.getRooms());
-                    acc.setCustomer(accommodation.getCustomer());
                     return accommodationRepository.save(acc);
                 })
                 .orElseGet(() -> {
