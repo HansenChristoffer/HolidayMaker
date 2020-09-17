@@ -91,8 +91,7 @@ public class AccommodationService {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object passed
      * for updating or saving
      * @param id The id of the {@link com.group.foctg.holidayMaker.model.Accommodation to update
-     * @return A boolean value representing whether the updating or saving was
-     * successful or not
+     * @return A {@link com.group.foctg.holidayMaker.model.Accommodation object
      */
     public Accommodation updateAccommodation(Accommodation accommodation, Long id) {
         return accommodationRepository.findById(id)
