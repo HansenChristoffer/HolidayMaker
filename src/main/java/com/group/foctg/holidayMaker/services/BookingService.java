@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
 
@@ -75,11 +77,23 @@ public class BookingService {
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * passed for updating or saving.
-     * @return A boolean value representing whether the updating or saving was
-     * successful or not.
+     * @return A Booking object representing the new Booking
      */
-    public boolean updateBooking(Booking booking) {
-        return bookingRepository.saveAndFlush(booking).equals(booking);
+    public Booking updateBooking(Booking booking, Long id) {
+    	return bookingRepository.findById(id)
+                .map(bkn -> {
+                	bkn.setNumberOfAdults(booking.getNumberOfAdults());
+                	bkn.setNumberOfKids(booking.getNumberOfKids());
+                	bkn.setAllInclusive(booking.getAllInclusive());
+                	bkn.setFullBoard(booking.getFullBoard());
+                	bkn.setHalfBoard(booking.getHalfBoard());
+                	bkn.setExtraBeds(booking.getExtraBeds());
+                    return bookingRepository.save(bkn);
+                })
+                .orElseGet(() -> {
+                    booking.setId(id);
+                    return bookingRepository.save(booking);
+                });
     }
 
     /**

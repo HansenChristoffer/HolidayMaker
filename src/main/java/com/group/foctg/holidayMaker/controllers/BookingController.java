@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.services.BookingService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,11 +85,13 @@ public class BookingController {
      * method from the autowired Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value to pass to the Service class.
-     * @return a boolean value from the Service.
+     * @return {@link com.group.foctg.holidayMaker.model.Booking} object from the service
      */
+    
+    
     @PutMapping("/booking")
-    public boolean updateBooking(@RequestBody Booking booking) {
-        return bookingService.updateBooking(booking);
+    public Booking updateBooking(@RequestBody Booking booking, @RequestParam Long id) {
+        return bookingService.updateBooking(booking, id);
     }
 
     /**
