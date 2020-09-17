@@ -52,11 +52,11 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customers"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#getAll(com.group.foctg.holidayMaker.model.Customer)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#getAll}
      * method from the Service.
      *
      *
-     * @return a List&lt;Customer&gt; from the autowired Service
+     * @return a List&lt;{@link com.group.foctg.holidayMaker.model.Customer}&gt; from the autowired Service
      */
     @GetMapping("/customers")
     public List<Customer> allCustomers() {
@@ -81,7 +81,7 @@ public class CustomerController {
     /**
      * DELETE endpoint method that listens on <code>"/customer"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#removeCustomer(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#removeCustomer}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -95,7 +95,7 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customer"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#findById(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findById}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -117,7 +117,7 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customer/by"</code> URL and
      * will call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail(java.lang.String)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail}
      * method from the autowired Service.
      *
      * @param email String value to pass to the Service class
@@ -139,7 +139,7 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on <code>"/customer/bookings"</code> URL
      * and will call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersBookingsByCustomerID(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersBookingsByCustomerID}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
@@ -153,7 +153,7 @@ public class CustomerController {
     /**
      * GET endpoint method that listens on
      * <code>"/customer/accommodations"</code> URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersAccommodationsByCustomerID(java.lang.Long)}
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersAccommodationsByCustomerID}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class
