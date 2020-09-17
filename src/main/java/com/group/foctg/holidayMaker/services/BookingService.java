@@ -75,8 +75,7 @@ public class BookingService {
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * passed for updating or saving.
-     * @return A boolean value representing whether the updating or saving was
-     * successful or not.
+     * @return A Booking object representing the new Booking
      */
     public Booking updateBooking(Booking booking) {
         return bookingRepository.saveAndFlush(booking);

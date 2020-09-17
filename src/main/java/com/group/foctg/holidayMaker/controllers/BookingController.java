@@ -88,8 +88,8 @@ public class BookingController {
      * @return a boolean value from the Service
      */
     @PutMapping("/booking")
-    public boolean updateBooking(@RequestBody Booking booking) {
-        return bookingService.updateBooking(booking);
+    public void updateBooking(@RequestBody Booking booking) {
+        bookingService.updateBooking(booking);
     }
 
     /**
