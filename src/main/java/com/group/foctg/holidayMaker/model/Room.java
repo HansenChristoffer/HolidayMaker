@@ -69,11 +69,11 @@ public class Room implements Serializable {
     @Column
     private Short numberOfBeds;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany//(cascade = CascadeType.ALL)
     @JsonBackReference(value = "rooms_bookings")
     private List<Booking> bookings;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "accommodation_rooms")
     private Accommodation accommodation;
 
