@@ -45,7 +45,7 @@ import org.hibernate.validator.constraints.URL;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Accommodation implements Serializable {
 
     public Accommodation() {
@@ -119,7 +119,7 @@ public class Accommodation implements Serializable {
     @Column
     private Short distanceToCenter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JsonBackReference(value = "accommodation_location")
     private Location location;
 

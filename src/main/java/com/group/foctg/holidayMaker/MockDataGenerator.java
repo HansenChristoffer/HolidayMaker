@@ -48,6 +48,8 @@ public class MockDataGenerator implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Location mockLocation1 = new Location("Mock_Location_1", new ArrayList<>());
+        
+        locationService.saveLocation(mockLocation1);
 
         Customer mockCustomer1 = new Customer("mockEmail1@mock.io",
                 "mock_password1", new ArrayList<>(), new ArrayList<>());
@@ -110,8 +112,6 @@ public class MockDataGenerator implements CommandLineRunner {
         
         customerService.saveCustomer(mockCustomer1);
         customerService.saveCustomer(mockCustomer2);
-
-        locationService.saveLocation(mockLocation1);
 
         accommodationService.saveAccommodation(mockAccommodation1);
 
