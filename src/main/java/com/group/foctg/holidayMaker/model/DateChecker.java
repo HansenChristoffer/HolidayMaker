@@ -27,8 +27,8 @@ public class DateChecker {
 
     /**
      * Method that makes a check if the two ranges overlap or not
-     * 
-     * @param dateRangeFrom1 
+     *
+     * @param dateRangeFrom1
      * @param dateRangeTo1
      * @param dateRangeFrom2
      * @param dateRangeTo2

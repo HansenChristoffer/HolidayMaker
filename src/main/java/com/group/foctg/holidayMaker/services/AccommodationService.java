@@ -103,7 +103,7 @@ public class AccommodationService {
                     acc.setRestaurant(accommodation.getRestaurant());
                     acc.setDistanceToBeach(accommodation.getDistanceToBeach());
                     acc.setDistanceToCenter(accommodation.getDistanceToCenter());
-                    acc.setLocation(accommodation.getLocation());
+                    //acc.setLocation(accommodation.getLocation());
                     acc.setImageURL(accommodation.getImageURL());
                     acc.setDescription(accommodation.getDescription());
                     return accommodationRepository.save(acc);
