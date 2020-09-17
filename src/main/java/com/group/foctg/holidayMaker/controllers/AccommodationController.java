@@ -127,7 +127,7 @@ public class AccommodationController {
      *
      * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation value to pass to the Service class
      * @param id The id of the {@link com.group.foctg.holidayMaker.model.Accommodation to update
-     * @return a boolean value from the Service
+     * @return a {@link com.group.foctg.holidayMaker.model.Accommodation object from the Service
      */
     @PutMapping("/accommodation")
     public Accommodation updateAccommodation(@RequestBody Accommodation accommodation, @RequestParam Long id) {
