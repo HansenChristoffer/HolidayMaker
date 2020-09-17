@@ -194,7 +194,7 @@ public class Accommodation implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects field
      * <code>pool</code>
      */
-    public Boolean hasPool() {
+    public Boolean getPool() {
         return pool;
     }
 
@@ -216,7 +216,7 @@ public class Accommodation implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects field
      * <code>nightEntertainment</code>
      */
-    public Boolean hasNightEntertainment() {
+    public Boolean getNightEntertainment() {
         return nightEntertainment;
     }
 
@@ -239,7 +239,7 @@ public class Accommodation implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects field
      * <code>childEvents</code>
      */
-    public Boolean hasChildEvents() {
+    public Boolean getChildEvents() {
         return childEvents;
     }
 
@@ -262,7 +262,7 @@ public class Accommodation implements Serializable {
      * {@link com.group.foctg.holidayMaker.model.Accommodation} objects field
      * <code>restaurant</code>
      */
-    public Boolean hasRestaurant() {
+    public Boolean getRestaurant() {
         return restaurant;
     }
 

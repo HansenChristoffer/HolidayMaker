@@ -98,10 +98,10 @@ public class AccommodationService {
         return accommodationRepository.findById(id)
                 .map(acc -> {
                     acc.setName(accommodation.getName());
-                    acc.setPool(accommodation.hasPool());
-                    acc.setNightEntertainment(accommodation.hasNightEntertainment());
-                    acc.setChildEvents(accommodation.hasChildEvents());
-                    acc.setRestaurant(accommodation.hasRestaurant());
+                    acc.setPool(accommodation.getPool());
+                    acc.setNightEntertainment(accommodation.getNightEntertainment());
+                    acc.setChildEvents(accommodation.getChildEvents());
+                    acc.setRestaurant(accommodation.getRestaurant());
                     acc.setDistanceToBeach(accommodation.getDistanceToBeach());
                     acc.setDistanceToCenter(accommodation.getDistanceToCenter());
                     acc.setLocation(accommodation.getLocation());
@@ -211,10 +211,10 @@ public class AccommodationService {
                 .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
                 .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
                 .filter(a -> a.getLocation().getName().equals(filter.getLocation()))
-                .filter(a -> a.hasPool() == true || filter.hasPool() == false)
-                .filter(a -> a.hasChildEvents() == true || filter.hasChildrenClub() == false)
-                .filter(a -> a.hasRestaurant() == true || filter.hasRestaurant() == false)
-                .filter(a -> a.hasNightEntertainment() == true || filter.hasNightEntertainment() == false)
+                .filter(a -> a.getPool() == true || filter.hasPool() == false)
+                .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
+                .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
+                .filter(a -> a.getNightEntertainment() == true || filter.hasNightEntertainment() == false)
                 .filter(a -> a.getRooms().size() >= filter.getRooms())
                 .collect(Collectors.toList());
 
