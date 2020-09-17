@@ -88,7 +88,7 @@ public class BookingController {
      * @return a boolean value from the Service
      */
     @PutMapping("/booking")
-    public boolean updateBooking(@RequestBody Booking booking) {
+    public boolean updateBooking(@RequestParam Long id, @RequestBody Booking booking) {
         return bookingService.updateBooking(booking);
     }
 
