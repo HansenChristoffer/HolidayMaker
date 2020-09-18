@@ -1,137 +1,101 @@
 <html>
 
 <head>
-    <title>Holiday Maker</title>
+<title>Holiday Maker</title>
+
+
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <div id="container">
-        <!--Menubar-->
-        <div id="menuContainer">
-            <div id="menuLeft">
-                <p id="mainTitle">
-                    Holiday Maker
-                </p>
-            </div>
-            <div id="menuRight">
-                <ul id="navBar">
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Login</a>
-                    </li>
-                    <li>
-                        <a href="#">Sign up</a>
-                    </li>
-                    <li>
-                        <a href="#">Profile</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+	<div id="container">
+		<!--Menubar-->
+		<div id="menuContainer">
+			<ul id="navBar">
+			    <li><a id="mainTitle">Holiday Maker</a></li>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Login</a></li>
+				<li><a href="#">Sign up</a></li>
+				<li><a href="#">Profile</a></li>
+			</ul>
+		</div>
 
-        <!--Filter-->
-        <div id="filterContainer">
-            <div id="filterLeft">
-                <div id="locationContainer">
-                    <p class="propertyTitle">
-                        Location
-                    </p>
-                    <select name="location" id="locationSelector"></select>
-                </div>
-                <div id="checkInContainer">
-                    <p class="propertyTitle">
-                        Check In
-                    </p>
-                    <select name="checkIn" id="checkInSelector"></select>
-                </div>
-                <div id="checkOutContainer">
-                    <p class="propertyTitle">
-                        Check Out
-                    </p>
-                    <select name="checkOut" id="checkOutSelector"></select>
-                </div>
-                <div id="adultsContainer">
-                    <p class="propertyTitle">
-                        Adults
-                    </p>
-                    <select name="adults" id="adultsSelector"></select>
-                </div>
-                <div id="kidsContainer">
-                    <p class="propertyTitle">
-                        Kids
-                    </p>
-                    <select name="kids" id="kidsSelector"></select>
-                </div>
-            </div>
-            <div id="filterMid">
-                <div class="checkItem">
-                    <input type="checkbox" id="poolInput" name="pool">
-                    <p for="pool">Pool</p>
-                </div>
-                <div class="checkItem">
-                    <input type="checkbox" id="restaurantInput" name="restaurant">
-                    <p for="restaurant">Restaurant</p>
-                </div>
-                <div class="checkItem">
-                    <input type="checkbox" id="entertainmentInput" name="entertainment">
-                    <p for="entertainment">Night Entertainment</p>
-                </div>
-                <div class="checkItem">
-                    <input type="checkbox" id="clubInput" name="club">
-                    <p for="club">Children Club</p>
-                </div>
-            </div>
-            <div id="filterRight">
-                <div id="roomsContainer">
-                    <p class="propertyTitle">
-                        Rooms
-                    </p>
-                    <select name="rooms" id="roomsSelector"></select>
-                </div>
-                <div id="packageContainer">
-                    <p class="propertyTitle">
-                        Package
-                    </p>
-                    <select name="package" id="packageSelector"></select>
-                </div>
-                <div id="centerContainer">
-                    <p class="propertyTitle">
-                        Distance to Center
-                    </p>
-                    <select name="center" id="centerSelector"></select>
-                </div>
-                <div id="beachContainer">
-                    <p class="propertyTitle">
-                        Distance to Beach
-                    </p>
-                    <select name="beach" id="beachSelector"></select>
-                </div>
-                <input type="button" value="Show Results" />
-            </div>
-        </div>
-    </div>
-    <div id="resultsContainer">
-        <table id="results">
-            <tr class="headerStyle">
-                <th>Image</th>
-                <th>Details</th>
-                <th>Action</th>
-            </tr>
-            <tr class="rowStyle">
-                <td class="itemStyle">
-                    img
-                </td>
-                <td class="itemStyle">
-                    details
-                </td>
-                <td class="itemStyle">
-                    book now
-                </td>
-            </tr>
-        </table>
-    </div>
+		<!--Filter-->
+		<div id="filterContainer">
+			<div id="filterLeft">
+				<div id="locationContainer">
+					<p class="propertyTitle">Location</p>
+					<select name="location" id="locationSelector"></select>
+				</div>
+				<div id="checkInContainer">
+					<p class="propertyTitle">Check In</p>
+					<select name="checkIn" id="checkInSelector"></select>
+				</div>
+				<div id="checkOutContainer">
+					<p class="propertyTitle">Check Out</p>
+					<select name="checkOut" id="checkOutSelector"></select>
+				</div>
+				<div id="adultsContainer">
+					<p class="propertyTitle">Adults</p>
+					<select name="adults" id="adultsSelector"></select>
+				</div>
+				<div id="kidsContainer">
+					<p class="propertyTitle">Kids</p>
+					<select name="kids" id="kidsSelector"></select>
+				</div>
+			</div>
+			<div id="filterMid">
+				<div class="checkItem">
+					<input type="checkbox" id="poolInput" name="pool">
+					<p for="pool">Pool</p>
+				</div>
+				<div class="checkItem">
+					<input type="checkbox" id="restaurantInput" name="restaurant">
+					<p for="restaurant">Restaurant</p>
+				</div>
+				<div class="checkItem">
+					<input type="checkbox" id="entertainmentInput" name="entertainment">
+					<p for="entertainment">Night Entertainment</p>
+				</div>
+				<div class="checkItem">
+					<input type="checkbox" id="clubInput" name="club">
+					<p for="club">Children Club</p>
+				</div>
+			</div>
+			<div id="filterRight">
+				<div id="roomsContainer">
+					<p class="propertyTitle">Rooms</p>
+					<select name="rooms" id="roomsSelector"></select>
+				</div>
+				<div id="packageContainer">
+					<p class="propertyTitle">Package</p>
+					<select name="package" id="packageSelector"></select>
+				</div>
+				<div id="centerContainer">
+					<p class="propertyTitle">Distance to Center</p>
+					<select name="center" id="centerSelector"></select>
+				</div>
+				<div id="beachContainer">
+					<p class="propertyTitle">Distance to Beach</p>
+					<select name="beach" id="beachSelector"></select>
+				</div>
+				<input type="button" value="Show Results" />
+			</div>
+		</div>
+	</div>
+	<div id="resultsContainer">
+		<table id="results">
+			<tr class="headerStyle">
+				<th>Image</th>
+				<th>Details</th>
+				<th>Action</th>
+			</tr>
+			<tr class="rowStyle">
+				<td class="itemStyle">img</td>
+				<td class="itemStyle">details</td>
+				<td class="itemStyle">book now</td>
+			</tr>
+		</table>
+	</div>
 </body>
 
 </html>
