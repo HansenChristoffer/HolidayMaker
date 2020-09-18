@@ -15,10 +15,8 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -67,7 +65,7 @@ public class Location implements Serializable {
     @Column
     private String name;
     
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", cascade = CascadeType.MERGE)
     @JsonManagedReference(value = "accommodation_location")
     private List<Accommodation> accommodations;
 
@@ -112,7 +110,7 @@ public class Location implements Serializable {
      * the {@link com.group.foctg.holidayMaker.model.Location} objects field
      * <code>accommodations</code>
      */
-    public List<Accommodation> getAccommodation() {
+    public List<Accommodation> getAccommodations() {
         return this.accommodations;
     }
 
@@ -123,7 +121,7 @@ public class Location implements Serializable {
      * @param accommodations List that will become the new
      * <code>accommodations</code>
      */
-    public void setAccommodation(List<Accommodation> accommodations) {
+    public void setAccommodations(List<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
 }
