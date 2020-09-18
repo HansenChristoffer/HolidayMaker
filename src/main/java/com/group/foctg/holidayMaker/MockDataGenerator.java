@@ -48,7 +48,7 @@ public class MockDataGenerator implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Location mockLocation1 = new Location("Mock_Location_1", new ArrayList<>());
-        
+
         locationService.saveLocation(mockLocation1);
 
         Customer mockCustomer1 = new Customer("mockEmail1@mock.io",
@@ -56,72 +56,68 @@ public class MockDataGenerator implements CommandLineRunner {
         Customer mockCustomer2 = new Customer("mockEmail2@mock.io",
                 "mock_password2", new ArrayList<>(), new ArrayList<>());
 
+        customerService.saveCustomer(mockCustomer1);
+        customerService.saveCustomer(mockCustomer2);
+
         Accommodation mockAccommodation1 = new Accommodation(
                 "Mock_accommodation_1",
                 false, false, false, true,
                 (short) 200, (short) 800, mockLocation1,
                 "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1", "mock_Description",
-                new ArrayList<>(), mockCustomer2);
-        
-        mockAccommodation1.setRating(0.5f);
-
-        Room mockRoom1 = new Room((short) 2, new ArrayList<>(),mockAccommodation1, 258f, (short) 20);
-        Room mockRoom2 = new Room((short) 3, new ArrayList<>(),mockAccommodation1, 380f, (short) 15);
-        Room mockRoom3 = new Room((short) 1, new ArrayList<>(),mockAccommodation1, 800f, (short) 25);
-
-        Booking mockBooking1 = new Booking(mockCustomer1,
-                new ArrayList<>(Arrays.asList(mockRoom1)),
-                "01/01/2020", "10/01/2020",
-                (short) 2, (short) 0, true, false, false, (short) 0);
-        Booking mockBooking2 = new Booking(mockCustomer1,
-                new ArrayList<>(Arrays.asList(mockRoom2)),
-                "11/01/2020", "20/01/2020",
-                (short) 1, (short) 2, false, true, false, (short) 0);
-        Booking mockBooking3 = new Booking(mockCustomer1,
-                new ArrayList<>(Arrays.asList(mockRoom3)),
-                "21/01/2020", "30/01/2020",
-                (short) 1, (short) 0, false, false, true, (short) 1);
-
-        mockLocation1.setAccommodation(new ArrayList<>(Arrays.asList(
-                mockAccommodation1)));
-
-        mockAccommodation1.setRooms(new ArrayList<>(Arrays.asList(
-                mockRoom1, mockRoom2, mockRoom3)));
+                new ArrayList<>(), mockCustomer2, 0.5f);
 
         mockCustomer2.setAccommodations(new ArrayList<>(Arrays.asList(
                 mockAccommodation1)));
 
-        mockCustomer1.setBookings(new ArrayList<>(Arrays.asList(
-                mockBooking1, mockBooking2, mockBooking3)));
-        
-        mockRoom1.setBookings(new ArrayList<>(Arrays.asList(mockBooking1)));
-        mockRoom2.setBookings(new ArrayList<>(Arrays.asList(mockBooking2)));
-        mockRoom3.setBookings(new ArrayList<>(Arrays.asList(mockBooking3)));
+        accommodationService.saveAccommodation(mockAccommodation1);
 
         List<String[]> mockDatesTaken1 = new ArrayList<>();
         List<String[]> mockDatesTaken2 = new ArrayList<>();
         List<String[]> mockDatesTaken3 = new ArrayList<>();
 
-        mockDatesTaken1.add(new String[] { "01/01/2020", "10/01/2020" });
-        mockDatesTaken2.add(new String[] { "01/02/2020", "10/02/2020" });
-        mockDatesTaken3.add(new String[] { "01/03/2020", "10/03/2020" });
-        
-        mockRoom1.setDatesTaken(mockDatesTaken1);
-        mockRoom2.setDatesTaken(mockDatesTaken2);
-        mockRoom3.setDatesTaken(mockDatesTaken3);
-        
-        customerService.saveCustomer(mockCustomer1);
-        customerService.saveCustomer(mockCustomer2);
+        Room mockRoom1 = new Room((short) 2, new ArrayList<>(), mockAccommodation1, 258f, (short) 20, mockDatesTaken1);
+        Room mockRoom2 = new Room((short) 3, new ArrayList<>(), mockAccommodation1, 380f, (short) 15, mockDatesTaken2);
+        Room mockRoom3 = new Room((short) 1, new ArrayList<>(), mockAccommodation1, 800f, (short) 25, mockDatesTaken3);
 
-        accommodationService.saveAccommodation(mockAccommodation1);
+        mockDatesTaken1.add(new String[]{"01/01/2020", "10/01/2020"});
+        mockDatesTaken2.add(new String[]{"01/02/2020", "10/02/2020"});
+        mockDatesTaken3.add(new String[]{"01/03/2020", "10/03/2020"});
 
         roomService.saveRoom(mockRoom1);
         roomService.saveRoom(mockRoom2);
         roomService.saveRoom(mockRoom3);
 
+        Booking mockBooking1 = new Booking(mockCustomer1,
+                new ArrayList<>(Arrays.asList(mockRoom1)),
+                "01/01/2020", "10/01/2020",
+                (short) 2, (short) 0, true, false, false, (short) 0);
+        
+        Booking mockBooking2 = new Booking(mockCustomer1,
+                new ArrayList<>(Arrays.asList(mockRoom2)),
+                "01/02/2020", "10/02/2020",
+                (short) 1, (short) 2, false, true, false, (short) 0);
+        
+        Booking mockBooking3 = new Booking(mockCustomer1,
+                new ArrayList<>(Arrays.asList(mockRoom3)),
+                "01/03/2020", "10/03/2020",
+                (short) 1, (short) 0, false, false, true, (short) 1);
+
         bookingService.saveBooking(mockBooking1);
         bookingService.saveBooking(mockBooking2);
         bookingService.saveBooking(mockBooking3);
+
+        mockLocation1.setAccommodations(new ArrayList<>(Arrays.asList(
+                mockAccommodation1)));
+
+        mockAccommodation1.setRooms(new ArrayList<>(Arrays.asList(
+                mockRoom1, mockRoom2, mockRoom3)));
+
+        mockCustomer1.setBookings(new ArrayList<>(Arrays.asList(
+                mockBooking1, mockBooking2, mockBooking3)));
+
+        mockRoom1.setBookings(new ArrayList<>(Arrays.asList(mockBooking1)));
+        mockRoom2.setBookings(new ArrayList<>(Arrays.asList(mockBooking2)));
+        mockRoom3.setBookings(new ArrayList<>(Arrays.asList(mockBooking3)));
 
 //        customerService.findAll().forEach((cust) -> {
 //            LOGGER.info("{}", cust);
@@ -134,7 +130,6 @@ public class MockDataGenerator implements CommandLineRunner {
 //        locationService.findAll().forEach((loc) -> {
 //            LOGGER.info("{}", loc);
 //        });
-
 //        roomService.findAll().forEach((cust) -> {
 //            LOGGER.info("{}", cust);
 //        });
