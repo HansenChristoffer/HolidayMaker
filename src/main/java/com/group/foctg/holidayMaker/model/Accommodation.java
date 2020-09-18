@@ -16,10 +16,8 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -74,10 +72,11 @@ public class Accommodation implements Serializable {
      * @param rooms List that will become the field <code>rooms</code>
      * @param customer {@link com.group.foctg.holidayMaker.model.Customer}
      * object to be added to field <code>customer</code>
+     * @param rating
      */
     public Accommodation(String name, Boolean pool, Boolean nightEntertainment, Boolean childEvents, Boolean restaurant,
             Short distanceToBeach, Short distanceToCenter, Location location, String imageURL, String description,
-            List<Room> rooms, Customer customer) {
+            List<Room> rooms, Customer customer, Float rating) {
         this.name = name;
         this.pool = pool;
         this.nightEntertainment = nightEntertainment;
@@ -90,6 +89,7 @@ public class Accommodation implements Serializable {
         this.description = description;
         this.rooms = rooms;
         this.customer = customer;
+        this.rating = rating;
     }
 
     @Id
@@ -119,7 +119,7 @@ public class Accommodation implements Serializable {
     @Column
     private Short distanceToCenter;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JsonBackReference(value = "accommodation_location")
     private Location location;
 
@@ -130,11 +130,11 @@ public class Accommodation implements Serializable {
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.MERGE)
     @JsonManagedReference(value = "accommodation_rooms")
     private List<Room> rooms;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference(value = "customers_accommodations")
     private Customer customer;
 
