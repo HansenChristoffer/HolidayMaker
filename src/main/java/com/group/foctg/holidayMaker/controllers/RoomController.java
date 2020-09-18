@@ -92,8 +92,8 @@ public class RoomController {
      * @return a boolean value from the Service.
      */
     @PutMapping("/room")
-    public boolean updateRoom(@RequestBody Room room) {
-        return roomService.updateRoom(room);
+    public Room updateRoom(@RequestBody Room room, @RequestParam Long id) {
+        return roomService.updateRoom(room, id);
     }
 
     /**
