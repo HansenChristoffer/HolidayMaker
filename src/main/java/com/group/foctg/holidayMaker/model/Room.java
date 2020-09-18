@@ -44,21 +44,26 @@ public class Room implements Serializable {
     }
 
     /**
-     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Room} object.
-     * 
-     * @param numberOfBeds Short value to be added to field <code>numberOfBeds</code>
+     * Constructor to initialize a
+     * {@link com.group.foctg.holidayMaker.model.Room} object.
+     *
+     * @param numberOfBeds Short value to be added to field
+     * <code>numberOfBeds</code>
      * @param bookings List that will become the field <code>bookings</code>
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} object 
-     * to be added to field <code>accommodation</code>
+     * @param accommodation
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} object to be
+     * added to field <code>accommodation</code>
      * @param price Float value to be added to field <code>price</code>
      * @param roomSize Short value to be added to field <code>roomSize</code>
+     * @param datesTaken
      */
-    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize) {
+    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize, List<String[]> datesTaken) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
         this.roomSize = roomSize;
         this.price = price + (numberOfBeds * 20);
+        this.datesTaken = datesTaken;
     }
 
     @Id
@@ -69,18 +74,18 @@ public class Room implements Serializable {
     @Column
     private Short numberOfBeds;
 
-    @ManyToMany//(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JsonBackReference(value = "rooms_bookings")
     private List<Booking> bookings;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JsonBackReference(value = "accommodation_rooms")
     private Accommodation accommodation;
 
     @Column
     private Float price;
-    
-    @Column 
+
+    @Column
     private Short roomSize;
 
     @ElementCollection
@@ -108,7 +113,7 @@ public class Room implements Serializable {
     public Short getNumberOfBeds() {
         return numberOfBeds;
     }
-    
+
     /**
      * Method that will set the value of the field <code>numberOfBeds</code> by
      * the value sent as parameter.
@@ -136,8 +141,9 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>accommodation</code> by
      * the value sent as parameter.
      *
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation}
-     * value to be added to field <code>accommodation</code>
+     * @param accommodation
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} value to be
+     * added to field <code>accommodation</code>
      */
     public void setAccommodation(Accommodation accommodation) {
         this.accommodation = accommodation;
@@ -158,8 +164,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>price</code> by the
      * value sent as parameter.
      *
-     * @param price Float value to be added to field
-     * <code>price</code>
+     * @param price Float value to be added to field <code>price</code>
      */
     public void setPrice(Float price) {
         this.price = price + (numberOfBeds * 20);
@@ -202,12 +207,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>roomSize</code> by the
      * value sent as parameter.
      *
-<<<<<<< HEAD
      * @param roomSize Short value to be added to field
-=======
-     * @param roomSize <code>Short</code> value to be added to field
->>>>>>> upstream/master
-     * <code>roomSize</code>
      */
     public void setRoomSize(Short roomSize) {
         this.roomSize = roomSize;
