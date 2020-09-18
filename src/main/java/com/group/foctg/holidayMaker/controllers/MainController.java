@@ -9,7 +9,7 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String init() {
-		return "index.html";
+		return "landingpage.html";
 	}
 	
 	@GetMapping("/login")
