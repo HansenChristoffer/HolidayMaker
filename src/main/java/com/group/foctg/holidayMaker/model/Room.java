@@ -85,7 +85,7 @@ public class Room implements Serializable {
 
     @ElementCollection
     @Column
-    List<String[]> datesTaken;
+    private List<String[]> datesTaken;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -96,6 +96,16 @@ public class Room implements Serializable {
      */
     public Long getId() {
         return id;
+    }
+    
+    /**
+     * Method that will set the value of the field <code>id</code> by the
+     * value sent as parameter.
+     *
+     * @param id Long value to be added to field <code>id</code>
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
