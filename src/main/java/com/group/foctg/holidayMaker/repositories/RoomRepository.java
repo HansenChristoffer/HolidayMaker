@@ -18,7 +18,6 @@ package com.group.foctg.holidayMaker.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 
@@ -39,7 +38,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	@Query("SELECT r.accommodation FROM Room r WHERE r.id = ?1")
 	public Accommodation findAccommdotionByRoomId(Long id);
-
-
 }
 
