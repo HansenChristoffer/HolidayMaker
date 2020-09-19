@@ -17,6 +17,7 @@ package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -27,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
@@ -74,7 +76,7 @@ public class Room implements Serializable {
     @Column
     private Short numberOfBeds;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JsonBackReference(value = "rooms_bookings")
     private List<Booking> bookings;
 
@@ -92,6 +94,18 @@ public class Room implements Serializable {
     @Column
     private List<String[]> datesTaken;
 
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "rooms_reserveddates")
+    private List<ReservedDates> reservedDates;
+
+    public List<ReservedDates> getReservedDates() {
+        return reservedDates;
+    }
+
+    public void setReservedDates(List<ReservedDates> reservedDates) {
+        this.reservedDates = reservedDates;
+    }
+
     /**
      * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Room} object
@@ -102,10 +116,10 @@ public class Room implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     /**
-     * Method that will set the value of the field <code>id</code> by the
-     * value sent as parameter.
+     * Method that will set the value of the field <code>id</code> by the value
+     * sent as parameter.
      *
      * @param id Long value to be added to field <code>id</code>
      */
@@ -230,4 +244,10 @@ public class Room implements Serializable {
     public void setDatesTaken(List<String[]> datesTaken) {
         this.datesTaken = datesTaken;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" + "id=" + id + ", numberOfBeds=" + numberOfBeds + ", bookings=" + bookings + ", accommodation=" + accommodation + ", price=" + price + ", roomSize=" + roomSize + ", datesTaken=" + datesTaken + ", reservedDates=" + reservedDates + '}';
+    }
+
 }
