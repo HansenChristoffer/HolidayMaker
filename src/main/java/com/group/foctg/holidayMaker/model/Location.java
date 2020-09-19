@@ -65,7 +65,7 @@ public class Location implements Serializable {
     @Column
     private String name;
     
-    @OneToMany(mappedBy = "location", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "accommodation_location")
     private List<Accommodation> accommodations;
 
