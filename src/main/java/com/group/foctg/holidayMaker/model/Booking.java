@@ -16,7 +16,6 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +26,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -88,11 +88,11 @@ public class Booking implements Serializable {
     @Column(name = "booking_id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonBackReference(value = "customers_bookings")
     private Customer customer;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Room> rooms;
 
     @Length(min = 10, max = 10)
@@ -120,7 +120,20 @@ public class Booking implements Serializable {
 
     @Column
     private Short extraBeds;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private ReservedDates reservedDates;
 
+    public ReservedDates getReservedDates() {
+        return reservedDates;
+    }
+
+    public void setReservedDates(ReservedDates reservedDates) {
+        this.reservedDates = reservedDates;
+    }
+
+    
+    
     /**
      * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Booking} object
