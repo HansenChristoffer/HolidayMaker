@@ -72,11 +72,11 @@ public class Customer implements Serializable {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "customers_accommodations")
     private List<Accommodation> accommodations;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "customers_bookings")
     private List<Booking> bookings;
 
