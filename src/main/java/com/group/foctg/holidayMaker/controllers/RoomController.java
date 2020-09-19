@@ -50,13 +50,13 @@ import java.util.Optional;
 public class RoomController {
 
     @Autowired
-    RoomService roomService;
+    private RoomService roomService;
 
     /**
      * POST endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom}
-     * method from the Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom} method
+     * from the Service.
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
      * pass to the Service class.
@@ -89,6 +89,7 @@ public class RoomController {
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
      * pass to the Service class.
+     * @param id
      * @return a boolean value from the Service.
      */
     @PutMapping("/room")
@@ -99,21 +100,21 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll}
-     * method from the Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll} method
+     * from the Service.
      *
      * @return a List object from the autowired Service.
      */
     @GetMapping("/rooms")
     public List<Room> findAll() {
-        return roomService.findall();
+        return roomService.findAll();
     }
 
     /**
      * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findById}
-     * method from the autowired Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findById} method
+     * from the autowired Service.
      *
      * @param id Long value to pass to the Service class.
      * @return a Optional list of type
@@ -122,11 +123,11 @@ public class RoomController {
     @GetMapping("/room")
     public Optional<Room> findById(@RequestParam Long id) {
         Optional<Room> room = roomService.findById(id);
-        
+
         if (room.isEmpty()) {
             throw new RoomNotFoundException(id);
         }
-                
+
         return room;
     }
 
