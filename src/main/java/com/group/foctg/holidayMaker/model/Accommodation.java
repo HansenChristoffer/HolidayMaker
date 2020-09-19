@@ -130,7 +130,7 @@ public class Accommodation implements Serializable {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "accommodation_rooms")
     private List<Room> rooms;
 
@@ -155,15 +155,15 @@ public class Accommodation implements Serializable {
     }
 
     /**
-     * Method that will set the value of the field <code>id</code> by the
-     * value sent as parameter.
+     * Method that will set the value of the field <code>id</code> by the value
+     * sent as parameter.
      *
      * @param id Long value to be added to field <code>id</code>
      */
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * Method that returns the field <code>customer</code> of the
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object
@@ -454,4 +454,10 @@ public class Accommodation implements Serializable {
     public void setRating(Float rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "Accommodation{" + "id=" + id + ", name=" + name + ", pool=" + pool + ", nightEntertainment=" + nightEntertainment + ", childEvents=" + childEvents + ", restaurant=" + restaurant + ", distanceToBeach=" + distanceToBeach + ", distanceToCenter=" + distanceToCenter + ", location=" + location + ", imageURL=" + imageURL + ", description=" + description + ", rooms=" + rooms + ", customer=" + customer + ", rating=" + rating + '}';
+    }
+
 }
