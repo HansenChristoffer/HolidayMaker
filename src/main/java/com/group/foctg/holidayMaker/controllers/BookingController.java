@@ -16,7 +16,6 @@
 package com.group.foctg.holidayMaker.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +24,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.services.BookingService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +46,7 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
-
+    
     /**
      * POST endpoint method that listens on <code>"/booking"</code> URL and will
      * call the {@link com.group.foctg.holidayMaker.services.BookingService#saveBooking}
@@ -85,10 +82,9 @@ public class BookingController {
      * method from the autowired Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value to pass to the Service class.
+     * @param id Long value to pass to the Service class.
      * @return {@link com.group.foctg.holidayMaker.model.Booking} object from the service
      */
-    
-    
     @PutMapping("/booking")
     public Booking updateBooking(@RequestBody Booking booking, @RequestParam Long id) {
         return bookingService.updateBooking(booking, id);
