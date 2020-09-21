@@ -15,8 +15,10 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -39,17 +41,21 @@ import javax.validation.constraints.NotEmpty;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
 public class Customer implements Serializable {
 
     public Customer() {
     }
-    
+
     /**
-     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Customer} object.
-     * 
+     * Constructor to initialize a
+     * {@link com.group.foctg.holidayMaker.model.Customer} object.
+     *
      * @param email String value to be added to field <code>email</code>
      * @param password String value to be added to field <code>password</code>
-     * @param accommodations List that will become the field <code>accommodations</code>
+     * @param accommodations List that will become the field
+     * <code>accommodations</code>
      * @param bookings List that will become the field <code>bookings</code>
      */
     public Customer(String email, String password, List<Accommodation> accommodations, List<Booking> bookings) {
@@ -67,17 +73,17 @@ public class Customer implements Serializable {
     @Email
     @Column
     private String email;
-    
+
     @NotEmpty
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "customers_accommodations")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonBackReference(value = "customers_accommodations")
     private List<Accommodation> accommodations;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "customers_bookings")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference(value = "customers_bookings")
     private List<Booking> bookings;
 
     /**
