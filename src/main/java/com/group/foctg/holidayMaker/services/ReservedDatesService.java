@@ -26,12 +26,16 @@ public class ReservedDatesService {
         return reservedDatesRepository.findAll();
     }
 
-    public ReservedDates findReservedDatesByRoomId(Long id) {
+    public List<ReservedDates> findReservedDatesByRoomId(Long id) {
         return reservedDatesRepository.findReservedDatesByRoomId(id);
     }
     
     public ReservedDates saveReservedDates(ReservedDates reservedDates) {
         return reservedDatesRepository.saveAndFlush(reservedDates);
+    }
+    
+    public boolean roomExistsById(Long id) {
+        return (!reservedDatesRepository.findReservedDatesByRoomId(id).isEmpty()); 
     }
     
 }
