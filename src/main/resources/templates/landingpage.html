@@ -7,10 +7,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="css/landingpagestyle.css">
+
+<link rel="stylesheet" href="css/landingpagestyle.css">
 </head>
 <body>
-	<div class="container-lg">
+	<div class="container-fluid">
+
 		<!--Menubar-->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">Holiday Maker</a>
@@ -35,67 +37,117 @@
 		</nav>
 
 		<!--Filter-->
-		<div id="filterContainer">
-			<div id="filterLeft">
-				<div id="locationContainer">
+		<div class="filterContainer">
+			<div class="filterLeft">
+				<div class="fullContainer">
 					<p class="propertyTitle">Location</p>
-					<select name="location" id="locationSelector"></select>
+					<select name="location" id="locationSelector">
+						<option value="" disabled selected hidden>Select Location</option>
+					</select>
 				</div>
-				<div id="checkInContainer">
-					<p class="propertyTitle">Check In</p>
-					<select name="checkIn" id="checkInSelector"></select>
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Check In</p>
+						<select name="checkIn" id="checkInSelector">
+							<option value="" disabled selected hidden>dd/mm/yyyy</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Check Out</p>
+						<select name="checkOut" id="checkOutSelector">
+							<option value="" disabled selected hidden>dd/mm/yyyy</option>
+						</select>
+					</div>
 				</div>
-				<div id="checkOutContainer">
-					<p class="propertyTitle">Check Out</p>
-					<select name="checkOut" id="checkOutSelector"></select>
-				</div>
-				<div id="adultsContainer">
-					<p class="propertyTitle">Adults</p>
-					<select name="adults" id="adultsSelector"></select>
-				</div>
-				<div id="kidsContainer">
-					<p class="propertyTitle">Kids</p>
-					<select name="kids" id="kidsSelector"></select>
-				</div>
-			</div>
-			<div id="filterMid">
-				<div class="checkItem">
-					<input type="checkbox" id="poolInput" name="pool">
-					<p for="pool">Pool</p>
-				</div>
-				<div class="checkItem">
-					<input type="checkbox" id="restaurantInput" name="restaurant">
-					<p for="restaurant">Restaurant</p>
-				</div>
-				<div class="checkItem">
-					<input type="checkbox" id="entertainmentInput" name="entertainment">
-					<p for="entertainment">Night Entertainment</p>
-				</div>
-				<div class="checkItem">
-					<input type="checkbox" id="clubInput" name="club">
-					<p for="club">Children Club</p>
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Adults</p>
+						<select name="adults" id="adultsSelector">
+							<option value="" disabled selected hidden>Number of
+								Adults</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Kids</p>
+						<select name="kids" id="kidsSelector">
+							<option value="" disabled selected hidden>Number of Kids</option>
+						</select>
+					</div>
 				</div>
 			</div>
-			<div id="filterRight">
-				<div id="roomsContainer">
-					<p class="propertyTitle">Rooms</p>
-					<select name="rooms" id="roomsSelector"></select>
-				</div>
-				<div id="packageContainer">
-					<p class="propertyTitle">Package</p>
-					<select name="package" id="packageSelector"></select>
-				</div>
-				<div id="centerContainer">
-					<p class="propertyTitle">Distance to Center</p>
-					<select name="center" id="centerSelector"></select>
-				</div>
-				<div id="beachContainer">
-					<p class="propertyTitle">Distance to Beach</p>
-					<select name="beach" id="beachSelector"></select>
-				</div>
-				<input type="button" value="Show Results" />
+
+
+			<div class="filterMid">
+				<div class="rowPairContainer">
+                    <div class="halfContainer">
+                        <p class="propertyTitle">Access to Pool?</p>
+                        <select name="pool" id="poolSelector">
+                            <option value="" selected>Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                    <div class="halfContainer">
+                        <p class="propertyTitle">Activities for Children?</p>
+                        <select name="checkOut" id="childActivitiesSelector">
+                            <option value="" selected>Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="rowPairContainer">
+                    <div class="halfContainer">
+                        <p class="propertyTitle">Nightly Entertainment?</p>
+                        <select name="entertainment" id="entertainmentSelector">
+                            <option value="" selected>Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                    <div class="halfContainer">
+                        <p class="propertyTitle">Restaurant?</p>
+                        <select name="restaurant" id="restaurantSelector">
+                            <option value="" selected>Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                </div>
 			</div>
+			<div class="filterRight">
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Rooms</p>
+						<select name="rooms" id="roomsSelector">
+							<option value="" disabled selected hidden>Number of
+								Rooms</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Package</p>
+						<select name="package" id="packageSelector">
+							<option value="" disabled selected hidden>Select Package</option>
+						</select>
+					</div>
+				</div>
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Distance to Center</p>
+						<select name="center" id="centerSelector">
+							<option value="" disabled selected hidden>Max Distance</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Distance to Beach</p>
+						<select name="beach" id="beachSelector">
+							<option value="" disabled selected hidden>Max Distance</option>
+						</select>
+					</div>
+				</div>
+				<div class="halfContainer">
+				    <input class="submit" type="button" value="Show Results" />
+				</div>
+			</div>
+
 		</div>
+
 		<div id="resultsContainer">
 			<table id="results">
 				<tr class="headerStyle">
