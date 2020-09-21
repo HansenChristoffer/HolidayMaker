@@ -16,19 +16,16 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
-import lombok.ToString;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
@@ -41,17 +38,18 @@ import lombok.ToString;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonIdentityReference(alwaysAsId = true)
 public class Location implements Serializable {
 
     public Location() {
     }
 
     /**
-     * Contructor to initialize a {@link com.group.foctg.holidayMaker.model.Location} object.
-     * 
+     * Contructor to initialize a
+     * {@link com.group.foctg.holidayMaker.model.Location} object.
+     *
      * @param name String value to be added to field <code>name</code>
-     * @param accommodations List that will become field <code>accommodations</code>
+     * @param accommodations List that will become field
+     * <code>accommodations</code>
      */
     public Location(String name, List<Accommodation> accommodations) {
         this.name = name;
@@ -66,9 +64,8 @@ public class Location implements Serializable {
     @NotEmpty
     @Column
     private String name;
-    
+
     @OneToMany(mappedBy = "location")
-    //@JsonManagedReference(value = "accommodation_location")
     private List<Accommodation> accommodations;
 
     /**
