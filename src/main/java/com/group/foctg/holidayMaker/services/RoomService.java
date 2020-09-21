@@ -25,7 +25,6 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 import com.group.foctg.holidayMaker.repositories.RoomRepository;
-import java.util.Arrays;
 import java.util.Optional;
 
 /**
