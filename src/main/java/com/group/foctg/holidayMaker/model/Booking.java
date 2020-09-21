@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
@@ -42,6 +41,8 @@ import javax.persistence.Temporal;
  * classes.
  *
  * @author Olle Johansson
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
+ *
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -102,12 +103,12 @@ public class Booking implements Serializable {
 
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dateFrom;
 
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dateTo;
 
     @Column
@@ -127,20 +128,32 @@ public class Booking implements Serializable {
 
     @Column
     private Boolean extraBed;
-    
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private ReservedDates reservedDates;
 
+    /**
+     * Method that returns the <code>reservedDates</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Booking} object
+     *
+     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
+     */
     public ReservedDates getReservedDates() {
         return reservedDates;
     }
 
+    /**
+     * Method that will set the value of the field <code>reservedDates</code> by
+     * the value sent as parameter.
+     *
+     * @param reservedDates
+     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
+     * added to field <code>reservedDates</code>
+     */
     public void setReservedDates(ReservedDates reservedDates) {
         this.reservedDates = reservedDates;
     }
 
-    
-    
     /**
      * Method that returns the <code>id</code> of the
      * {@link com.group.foctg.holidayMaker.model.Booking} object
@@ -151,15 +164,15 @@ public class Booking implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     /**
-     * Method that will set the value of the field <code>id</code> by the
-     * value sent as parameter.
-     * 
+     * Method that will set the value of the field <code>id</code> by the value
+     * sent as parameter.
+     *
      * @param id Long value to be added to field <code>id</code>
      */
     public void setId(Long id) {
-    	this.id = id;
+        this.id = id;
     }
 
     /**
