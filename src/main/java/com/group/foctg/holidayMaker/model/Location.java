@@ -15,8 +15,10 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -26,6 +28,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import lombok.ToString;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Location} entity class. Holds
@@ -37,9 +40,8 @@ import javax.validation.constraints.NotEmpty;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//@JsonIdentityInfo(
-//  generator = ObjectIdGenerators.PropertyGenerator.class, 
-//  property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
 public class Location implements Serializable {
 
     public Location() {
@@ -58,15 +60,15 @@ public class Location implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "location_id")
+    @Column
     private Long id;
 
     @NotEmpty
     @Column
     private String name;
     
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "accommodation_location")
+    @OneToMany(mappedBy = "location")
+    //@JsonManagedReference(value = "accommodation_location")
     private List<Accommodation> accommodations;
 
     /**
