@@ -16,7 +16,6 @@
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
@@ -42,7 +41,6 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonIdentityReference(alwaysAsId = true)
 public class Customer implements Serializable {
 
     public Customer() {
@@ -79,11 +77,9 @@ public class Customer implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonBackReference(value = "customers_accommodations")
     private List<Accommodation> accommodations;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonManagedReference(value = "customers_bookings")
     private List<Booking> bookings;
 
     /**
