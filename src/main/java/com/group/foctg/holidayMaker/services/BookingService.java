@@ -15,6 +15,8 @@
  */
 package com.group.foctg.holidayMaker.services;
 
+import com.group.foctg.holidayMaker.exceptions.BookingNotFoundException;
+import com.group.foctg.holidayMaker.exceptions.BookingValuesOutOfBoundsException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,12 @@ import com.group.foctg.holidayMaker.model.DateChecker;
 import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
@@ -35,6 +41,7 @@ import java.text.SimpleDateFormat;
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
 @Service
+@Slf4j
 public class BookingService {
 
     @Autowired
@@ -56,41 +63,35 @@ public class BookingService {
      * not.
      */
     public boolean saveBooking(Booking booking) {
+        boolean safeToSave = true;
+        short totalBedsNeeded = (short) (booking.getNumberOfAdults() + booking.getNumberOfKids() + (booking.getExtraBed() ? 1 : 0));
+        short totalBedCapacity = 0;
 
         for (Room r : booking.getRooms()) {
-            if (!roomService.findById(r.getId()).isEmpty()) {
-                ReservedDates rd
-                        = reservedDatesService.findReservedDatesByRoomId(r.getId());
-                try {
-                    if (!DateChecker.isOverlapping(rd.getDateFrom(),
-                            rd.getDateTo(),
-                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateFrom()),
-                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateTo()))) {
+            totalBedCapacity += roomService.findById(r.getId()).get().getNumberOfBeds();
+        }
 
-                        ReservedDates newRd = new ReservedDates(
-                                new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateFrom()),
-                                new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateTo()),
-                                r, booking);
-                        reservedDatesService.saveReservedDates(newRd);
-                        
-                        booking.setReservedDates(newRd);
-                        bookingRepository.saveAndFlush(booking);
-
-                        //r.setReservedDates((r.getReservedDates().add(newRd)));
-                        roomService.updateRoom(r, r.getId());
-
-                        return true;
-                    } else {
-                        // throw isOverlapping exception
-                        return false;
+        if (totalBedCapacity < totalBedsNeeded) {
+            throw new BookingValuesOutOfBoundsException(totalBedCapacity, totalBedsNeeded);
+        } else {
+            for (Room r : booking.getRooms()) {
+                if (reservedDatesService.roomExistsById(r.getId())) {
+                    for (ReservedDates rd : reservedDatesService.findReservedDatesByRoomId(r.getId())) {
+                        if (rd.isOverlapping(booking.getDateFrom(), booking.getDateTo())) {
+                            safeToSave = false;
+                        } else {
+                            booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
+                        }
                     }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } else {
+                    booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
                 }
+            }
 
+            if (safeToSave) {
+                return bookingRepository.saveAndFlush(booking).equals(booking);
             }
         }
-        
         return false;
     }
 
@@ -109,7 +110,7 @@ public class BookingService {
             bookingRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new BookingNotFoundException(id);
         }
     }
 
@@ -126,17 +127,14 @@ public class BookingService {
     public Booking updateBooking(Booking booking, Long id) {
         return bookingRepository.findById(id)
                 .map(bkn -> {
-                    bkn.setNumberOfAdults(booking.getNumberOfAdults());
-                    bkn.setNumberOfKids(booking.getNumberOfKids());
                     bkn.setAllInclusive(booking.getAllInclusive());
                     bkn.setFullBoard(booking.getFullBoard());
                     bkn.setHalfBoard(booking.getHalfBoard());
-                    bkn.setExtraBeds(booking.getExtraBeds());
+                    bkn.setExtraBed(booking.getExtraBed());
                     return bookingRepository.save(bkn);
                 })
                 .orElseGet(() -> {
-                    booking.setId(id);
-                    return bookingRepository.save(booking);
+                    throw new BookingNotFoundException(id);
                 });
     }
 
