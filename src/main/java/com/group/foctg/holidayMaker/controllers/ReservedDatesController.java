@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.group.foctg.holidayMaker.controllers;
 
 import com.group.foctg.holidayMaker.model.ReservedDates;
@@ -37,7 +32,7 @@ public class ReservedDatesController {
     }
     
     @GetMapping("/reserveddates/byroom")
-    public ReservedDates findReservedDatesByRoomId(@RequestParam Long id) {
+    public List<ReservedDates> findReservedDatesByRoomId(@RequestParam Long id) {
         return reservedDatesService.findReservedDatesByRoomId(id);
     }
     

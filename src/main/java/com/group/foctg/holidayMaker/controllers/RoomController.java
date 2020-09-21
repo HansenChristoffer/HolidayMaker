@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.controllers;
 
 import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
@@ -134,7 +132,7 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/room/accommodation"</code>
      * URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodation}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodationByRoomId}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class.
@@ -142,7 +140,7 @@ public class RoomController {
      * from the Service.
      */
     @GetMapping("/room/accommodation")
-    public Accommodation findAccommodation(@RequestParam Long id) {
-        return roomService.findAccommodation(id);
+    public Accommodation findAccommodationByRoomId(@RequestParam Long id) {
+        return roomService.findAccommodationByRoomId(id);
     }
 }
