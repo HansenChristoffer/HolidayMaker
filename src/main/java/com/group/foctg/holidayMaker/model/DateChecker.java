@@ -21,6 +21,9 @@ import java.util.Date;
  * This class holds a static method that will check if two ranges of Dates
  * overlap or not.
  *
+ * @deprecated This class is to be removed in upcoming updates as its
+ * functionality already exists in ReservedDates
+ *
  * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  */
 public class DateChecker {
