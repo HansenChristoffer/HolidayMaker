@@ -15,8 +15,10 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -25,8 +27,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Room} entity class. Holds the
@@ -38,54 +44,78 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Room implements Serializable {
 
     public Room() {
     }
 
     /**
-     * Constructor to initialize a {@link com.group.foctg.holidayMaker.model.Room} object.
-     * 
-     * @param numberOfBeds Short value to be added to field <code>numberOfBeds</code>
+     * Constructor to initialize a
+     * {@link com.group.foctg.holidayMaker.model.Room} object.
+     *
+     * @param numberOfBeds Short value to be added to field
+     * <code>numberOfBeds</code>
      * @param bookings List that will become the field <code>bookings</code>
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} object 
-     * to be added to field <code>accommodation</code>
+     * @param accommodation
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} object to be
+     * added to field <code>accommodation</code>
      * @param price Float value to be added to field <code>price</code>
-     * @param roomSize Short value to be added to field <code>roomSize</code>
+     * @param datesTaken
      */
-    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, Short roomSize) {
+    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, List<String[]> datesTaken) {
         this.numberOfBeds = numberOfBeds;
         this.bookings = bookings;
         this.accommodation = accommodation;
-        this.roomSize = roomSize;
         this.price = price + (numberOfBeds * 20);
+        this.datesTaken = datesTaken;
     }
 
     @Id
     @GeneratedValue
-    @Column(name = "room_id")
+    @Column
     private Long id;
 
     @Column
+    @NotNull
     private Short numberOfBeds;
 
-    @ManyToMany//(cascade = CascadeType.ALL)
-    @JsonBackReference(value = "rooms_bookings")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Room_Booking",
+            joinColumns = {
+                @JoinColumn(name = "room_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "booking_id")}
+    )
+    //@JsonBackReference(value = "rooms_bookings")
     private List<Booking> bookings;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JsonBackReference(value = "accommodation_rooms")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "accommodation_id")
+    //@JsonBackReference(value = "accommodation_rooms")
+    @NotNull
     private Accommodation accommodation;
 
     @Column
+    @NotNull
     private Float price;
-    
-    @Column 
-    private Short roomSize;
 
     @ElementCollection
     @Column
     private List<String[]> datesTaken;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    //@JsonManagedReference(value = "rooms_reserveddates")
+    private List<ReservedDates> reservedDates;
+
+    public List<ReservedDates> getReservedDates() {
+        return reservedDates;
+    }
+
+    public void setReservedDates(List<ReservedDates> reservedDates) {
+        this.reservedDates = reservedDates;
+    }
 
     /**
      * Method that returns the <code>id</code> of the
@@ -97,10 +127,10 @@ public class Room implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     /**
-     * Method that will set the value of the field <code>id</code> by the
-     * value sent as parameter.
+     * Method that will set the value of the field <code>id</code> by the value
+     * sent as parameter.
      *
      * @param id Long value to be added to field <code>id</code>
      */
@@ -118,7 +148,7 @@ public class Room implements Serializable {
     public Short getNumberOfBeds() {
         return numberOfBeds;
     }
-    
+
     /**
      * Method that will set the value of the field <code>numberOfBeds</code> by
      * the value sent as parameter.
@@ -146,8 +176,9 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>accommodation</code> by
      * the value sent as parameter.
      *
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation}
-     * value to be added to field <code>accommodation</code>
+     * @param accommodation
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} value to be
+     * added to field <code>accommodation</code>
      */
     public void setAccommodation(Accommodation accommodation) {
         this.accommodation = accommodation;
@@ -168,8 +199,7 @@ public class Room implements Serializable {
      * Method that will set the value of the field <code>price</code> by the
      * value sent as parameter.
      *
-     * @param price Float value to be added to field
-     * <code>price</code>
+     * @param price Float value to be added to field <code>price</code>
      */
     public void setPrice(Float price) {
         this.price = price + (numberOfBeds * 20);
@@ -195,32 +225,6 @@ public class Room implements Serializable {
      */
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    /**
-     * Method that returns the field <code>roomSize</code> of the
-     * {@link com.group.foctg.holidayMaker.model.Room} object
-     *
-     * @return Short of {@link com.group.foctg.holidayMaker.model.Room} objects
-     * field <code>roomSize</code>
-     */
-    public Short getRoomSize() {
-        return roomSize;
-    }
-
-    /**
-     * Method that will set the value of the field <code>roomSize</code> by the
-     * value sent as parameter.
-     *
-<<<<<<< HEAD
-     * @param roomSize Short value to be added to field
-=======
-     * @param roomSize <code>Short</code> value to be added to field
->>>>>>> upstream/master
-     * <code>roomSize</code>
-     */
-    public void setRoomSize(Short roomSize) {
-        this.roomSize = roomSize;
     }
 
     public List<String[]> getDatesTaken() {

@@ -15,14 +15,16 @@
  */
 package com.group.foctg.holidayMaker.services;
 
+import com.group.foctg.holidayMaker.exceptions.BookingNotFoundException;
+import com.group.foctg.holidayMaker.exceptions.BookingValuesOutOfBoundsException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
+import com.group.foctg.holidayMaker.model.ReservedDates;
+import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
@@ -33,10 +35,17 @@ import com.group.foctg.holidayMaker.repositories.BookingRepository;
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
 @Service
+@Slf4j
 public class BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RoomService roomService;
+
+    @Autowired
+    private ReservedDatesService reservedDatesService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Booking} object from
@@ -48,7 +57,36 @@ public class BookingService {
      * not.
      */
     public boolean saveBooking(Booking booking) {
-        return bookingRepository.saveAndFlush(booking).equals(booking);
+        boolean safeToSave = true;
+        short totalBedsNeeded = (short) (booking.getNumberOfAdults() + booking.getNumberOfKids() + (booking.getExtraBed() ? 1 : 0));
+        short totalBedCapacity = 0;
+
+        for (Room r : booking.getRooms()) {
+            totalBedCapacity += roomService.findById(r.getId()).get().getNumberOfBeds();
+        }
+
+        if (totalBedCapacity < totalBedsNeeded) {
+            throw new BookingValuesOutOfBoundsException(totalBedCapacity, totalBedsNeeded);
+        } else {
+            for (Room r : booking.getRooms()) {
+                if (reservedDatesService.roomExistsById(r.getId())) {
+                    for (ReservedDates rd : reservedDatesService.findReservedDatesByRoomId(r.getId())) {
+                        if (rd.isOverlapping(booking.getDateFrom(), booking.getDateTo())) {
+                            safeToSave = false;
+                        } else {
+                            booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
+                        }
+                    }
+                } else {
+                    booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
+                }
+            }
+
+            if (safeToSave) {
+                return bookingRepository.saveAndFlush(booking).equals(booking);
+            }
+        }
+        return false;
     }
 
     /**
@@ -66,33 +104,31 @@ public class BookingService {
             bookingRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new BookingNotFoundException(id);
         }
     }
 
     /**
      * If there is a Booking object already that has the same id as the
      * {@link com.group.foctg.holidayMaker.model.Booking} passed as parameter
-     * then it'll update the existing object. Otherwise it will save the object.
+     * then it'll update the existing object.Otherwise it will save the object.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * passed for updating or saving.
+     * @param id
      * @return A Booking object representing the new Booking
      */
     public Booking updateBooking(Booking booking, Long id) {
-    	return bookingRepository.findById(id)
+        return bookingRepository.findById(id)
                 .map(bkn -> {
-                	bkn.setNumberOfAdults(booking.getNumberOfAdults());
-                	bkn.setNumberOfKids(booking.getNumberOfKids());
-                	bkn.setAllInclusive(booking.getAllInclusive());
-                	bkn.setFullBoard(booking.getFullBoard());
-                	bkn.setHalfBoard(booking.getHalfBoard());
-                	bkn.setExtraBeds(booking.getExtraBeds());
+                    bkn.setAllInclusive(booking.getAllInclusive());
+                    bkn.setFullBoard(booking.getFullBoard());
+                    bkn.setHalfBoard(booking.getHalfBoard());
+                    bkn.setExtraBed(booking.getExtraBed());
                     return bookingRepository.save(bkn);
                 })
                 .orElseGet(() -> {
-                    booking.setId(id);
-                    return bookingRepository.save(booking);
+                    throw new BookingNotFoundException(id);
                 });
     }
 
@@ -105,8 +141,8 @@ public class BookingService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
      * @return List&lt;{@link com.group.foctg.holidayMaker.model.Booking}&gt;
-     * from {@link com.group.foctg.holidayMaker.model.Customer} with the
-     * given <code>id</code>, if it exists
+     * from {@link com.group.foctg.holidayMaker.model.Customer} with the given
+     * <code>id</code>, if it exists
      */
     public List<Booking> findBookingsByCustomerId(Long id) {
         return bookingRepository.findBookingsByCustomerID(id);

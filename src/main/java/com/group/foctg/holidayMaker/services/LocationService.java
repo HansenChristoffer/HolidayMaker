@@ -88,8 +88,6 @@ public class LocationService {
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Location}
-     * @return {@link com.group.foctg.holidayMaker.model.Location} object with
-     * the given <code>id</code>, if it exists.
      * @return Optional list of the type
      * {@link com.group.foctg.holidayMaker.model.Location} with the given
      * <code>id</code>, if it exists

@@ -23,6 +23,7 @@ import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Customer}
@@ -34,6 +35,7 @@ import java.util.Optional;
  * @see com.group.foctg.holidayMaker.repositories.CustomerRepository
  */
 @Service
+@Slf4j
 public class CustomerService {
 
     @Autowired
@@ -82,8 +84,6 @@ public class CustomerService {
      *
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
-     * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>id</code>, if it exists.
      * @return Optional list of type
      * {@link com.group.foctg.holidayMaker.model.Customer} object with the given
      * <code>id</code>, if it exists
@@ -99,8 +99,6 @@ public class CustomerService {
      *
      * @param email String value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Customer}
-     * @return {@link com.group.foctg.holidayMaker.model.Customer} object with
-     * the given <code>email</code>, if it exists.
      * @return Optional list of type
      * {@link com.group.foctg.holidayMaker.model.Customer} object with the given
      * <code>email</code>, if it exists
