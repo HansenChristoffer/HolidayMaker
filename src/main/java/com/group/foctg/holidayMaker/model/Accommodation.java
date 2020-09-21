@@ -15,9 +15,10 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -25,6 +26,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
@@ -43,7 +45,8 @@ import org.hibernate.validator.constraints.URL;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
 public class Accommodation implements Serializable {
 
     public Accommodation() {
@@ -120,7 +123,8 @@ public class Accommodation implements Serializable {
     private Short distanceToCenter;
 
     @ManyToOne
-    @JsonBackReference(value = "accommodation_location")
+    @JoinColumn(name = "location_id")
+    //@JsonBackReference(value = "accommodation_location")
     private Location location;
 
     @URL
@@ -130,12 +134,13 @@ public class Accommodation implements Serializable {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "accommodation_rooms")
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference(value = "accommodation_rooms")
     private List<Room> rooms;
 
     @ManyToOne
-    @JsonBackReference(value = "customers_accommodations")
+    @JoinColumn(name = "customer_id")
+    //@JsonManagedReference(value = "customers_accommodations")
     private Customer customer;
 
     @Range(min = 0, max = 5)
@@ -454,10 +459,4 @@ public class Accommodation implements Serializable {
     public void setRating(Float rating) {
         this.rating = rating;
     }
-
-    @Override
-    public String toString() {
-        return "Accommodation{" + "id=" + id + ", name=" + name + ", pool=" + pool + ", nightEntertainment=" + nightEntertainment + ", childEvents=" + childEvents + ", restaurant=" + restaurant + ", distanceToBeach=" + distanceToBeach + ", distanceToCenter=" + distanceToCenter + ", location=" + location + ", imageURL=" + imageURL + ", description=" + description + ", rooms=" + rooms + ", customer=" + customer + ", rating=" + rating + '}';
-    }
-
 }
