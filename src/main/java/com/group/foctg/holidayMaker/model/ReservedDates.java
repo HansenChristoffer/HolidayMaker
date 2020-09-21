@@ -1,8 +1,22 @@
+/*
+ * Copyright 2020-2030 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
@@ -18,13 +32,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
+ * The {@link com.group.foctg.holidayMaker.model.ReservedDates} entity class.
+ * Holds the various fields that are required for the functionality of the
+ * program. These fields are also turned into columns in the SQLite3 database.
+ * There is also one ManyToOne and one OneToOne relation with other entity
+ * classes.
  *
- * @author Chris
+ * This entities sole purpose is for holding all the booked dates that a room
+ * might have. It is the link between, booking, rooms and dates.
+ *
+ * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//@JsonIdentityReference(alwaysAsId = true)
 public class ReservedDates implements Serializable {
 
     public ReservedDates() {
@@ -54,25 +75,21 @@ public class ReservedDates implements Serializable {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "room_id")
-    //@JsonBackReference(value = "rooms_reserveddates")
     private Room room;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonBackReference(value = "booking_reserveddates")
     private Booking booking;
 
     /**
      * Method that makes a check if the two ranges overlap or not
      *
-     * @param dateFrom
-     * @param dateTo
-     * @param dateRangeFrom2
-     * @param dateRangeTo2
+     * @param dateRangeFrom
+     * @param dateRangeTo
      * @return a boolean value on whether ranges overlap
      */
-    public boolean isOverlapping(Date dateRangeFrom2, Date dateRangeTo2) {
-        return (dateFrom.getTime() <= dateRangeTo2.getTime()
-                && dateRangeFrom2.getTime() <= dateTo.getTime());
+    public boolean isOverlapping(Date dateRangeFrom, Date dateRangeTo) {
+        return (dateFrom.getTime() <= dateRangeTo.getTime()
+                && dateRangeFrom.getTime() <= dateTo.getTime());
     }
 
     public Long getId() {
