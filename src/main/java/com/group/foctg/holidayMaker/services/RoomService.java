@@ -15,6 +15,8 @@
  */
 package com.group.foctg.holidayMaker.services;
 
+import com.group.foctg.holidayMaker.exceptions.AccommodationNotFoundException;
+import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +55,10 @@ public class RoomService {
      * not.
      */
     public boolean saveRoom(Room room) {
-        if (room.getAccommodation() != null) {
-            if (room.getAccommodation().getRooms() != null) {
-                room.getAccommodation().getRooms().add(room);
-            } else {
-                room.getAccommodation().setRooms(Arrays.asList(room));
-            }
-            accommodationRepository.saveAndFlush(room.getAccommodation());
+        if (accommodationRepository.existsById(room.getAccommodation().getId())) {
             return roomRepository.saveAndFlush(room).equals(room);
         } else {
-            return false;
+            throw new AccommodationNotFoundException(room.getAccommodation().getId());
         }
     }
 
@@ -80,7 +76,7 @@ public class RoomService {
             roomRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new RoomNotFoundException(id);
         }
     }
 
@@ -99,11 +95,9 @@ public class RoomService {
         return roomRepository.findById(id).map(rom -> {
             rom.setNumberOfBeds(room.getNumberOfBeds());
             rom.setPrice(room.getPrice());
-            rom.setRoomSize(room.getRoomSize());
-            return roomRepository.save(rom);
+            return roomRepository.saveAndFlush(rom);
         }).orElseGet(() -> {
-            room.setId(id);
-            return roomRepository.save(room);
+            throw new RoomNotFoundException(id);
         });
     }
 
@@ -145,7 +139,7 @@ public class RoomService {
      * from {@link com.group.foctg.holidayMaker.model.Room} object with the
      * given <code>id</code>, if it exists.
      */
-    public Accommodation findAccommodation(Long id) {
+    public Accommodation findAccommodationByRoomId(Long id) {
         return roomRepository.findAccommdotionByRoomId(id);
     }
 
