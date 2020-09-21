@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author Christoffer
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BookingValuesOutOfBoundsException extends RuntimeException {
 
     public BookingValuesOutOfBoundsException(short bedCapacity, short bedsNeeded) {
