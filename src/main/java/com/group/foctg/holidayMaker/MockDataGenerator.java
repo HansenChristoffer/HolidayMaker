@@ -1,22 +1,10 @@
 package com.group.foctg.holidayMaker;
 
-import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
-import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Location;
-import com.group.foctg.holidayMaker.model.Room;
-import com.group.foctg.holidayMaker.services.AccommodationService;
-import com.group.foctg.holidayMaker.services.BookingService;
 import com.group.foctg.holidayMaker.services.CustomerService;
-import com.group.foctg.holidayMaker.services.ReservedDatesService;
 import com.group.foctg.holidayMaker.services.LocationService;
-import com.group.foctg.holidayMaker.services.RoomService;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,29 +24,29 @@ public class MockDataGenerator implements CommandLineRunner {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private AccommodationService accommodationService;
+//    @Autowired
+//    private AccommodationService accommodationService;
+//
+//    @Autowired
+//    private RoomService roomService;
 
-    @Autowired
-    private RoomService roomService;
-
-    @Autowired
-    private BookingService bookingService;
+//    @Autowired
+//    private BookingService bookingService;
 
     @Autowired
     private LocationService locationService;
 
-    @Autowired
-    private ReservedDatesService reservedDatesService;
+//    @Autowired
+//    private ReservedDatesService reservedDatesService;
     
     @Override
     public void run(String... args) throws Exception {
 
         Location mockLocation1 = new Location("Mock_Location_1", new ArrayList<>());
-
         locationService.saveLocation(mockLocation1);
         
-        LOGGER.info("$ Location id == " + mockLocation1.getId());
+        Location mockLocation2 = new Location("Mock_Location_2", new ArrayList<>());
+        locationService.saveLocation(mockLocation2);
 
         Customer mockCustomer1 = new Customer("mockEmail1@mock.io",
                 "mock_password1", new ArrayList<>(), new ArrayList<>());
@@ -66,8 +54,6 @@ public class MockDataGenerator implements CommandLineRunner {
 //                "mock_password2", new ArrayList<>(), new ArrayList<>());
 //
         customerService.saveCustomer(mockCustomer1);
-        
-        LOGGER.info("$ Customer id == " + mockCustomer1.getId());
         
 //        customerService.saveCustomer(mockCustomer2);
 //
