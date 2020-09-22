@@ -1,0 +1,35 @@
+#outer-container {
+	display: flex;
+	flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  padding-left: 15vw;
+  padding-right: 15vw;
+	flex-direction: row;
+}
+
+.buttons{
+	flex-direction: row;
+	float: right;
+}
+
+.item-container {
+	display: flex;
+  border: 1px solid black;
+  flex-direction: column;
+	margin: 5px;
+}
+
+.title {
+	text-align: center;
+}
+
+.right-container {
+	flex-direction: column;
+	flex: 1;
+}
+
+.left-container {
+	flex-direction: column;
+	flex: 1;
+}
