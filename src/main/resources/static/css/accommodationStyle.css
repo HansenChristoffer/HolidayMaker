@@ -1,24 +1,72 @@
 ul {
+  flex-basis: 50%;
   list-style-type: none;
 }
 
-#container-body {
-  display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
+li {
+  font-size: 1;
 }
 
-#container-accommodation {
+table {
+  border-collapse: collapse;
+  border: 1px solid #000000;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #343A40;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #343A40;
+}
+
+#container-body {
+  padding-top: 5%;
+  background-color: #dedede;
+}
+
+#accommodation {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding-left: 1%;
+}
+
+#accommodation-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
 }
 
 #accommodation-data {
-  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  flex-basis: 40%;
+  padding: 1vw;
+  margin-left: 5%;
 }
 
-#accommodation-offers-data > ul {
-  text-align: right;
-}
-
-.accommodation-description {
+#accommodation-data-offers {
   flex-direction: column;
+  flex-basis: 70%;
+}
+
+#accommodation-data-offers>p {
+  margin: 0;
+}
+
+#accommodation-data-stats {
+  flex-direction: column;
+  flex-basis: 30%;
+}
+
+#accommodation-data-stats>p {
+  margin: 0;
+}
+
+.btn-book {
+  float: right;
 }
