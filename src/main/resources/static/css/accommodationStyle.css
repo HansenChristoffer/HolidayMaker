@@ -1,0 +1,24 @@
+ul {
+  list-style-type: none;
+}
+
+#container-body {
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#container-accommodation {
+}
+
+#accommodation-data {
+  justify-content: flex-end;
+}
+
+#accommodation-offers-data > ul {
+  text-align: right;
+}
+
+.accommodation-description {
+  flex-direction: column;
+}
