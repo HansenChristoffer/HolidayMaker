@@ -1,280 +1,288 @@
 footer {
-	text-align: center;
-	padding: 5px;
-	background-color: lightBlue;
-	color: #ff8000;
+  text-align: center;
+  padding: 5px;
+  background-color: lightBlue;
+  color: #ff8000;
 }
 
 p {
-	word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 select, input {
-	width: 100%;
-	height: 5vh;
-	padding-left: 1vw;
-	color: #646464;
+  width: 100%;
+  height: 5vh;
+  padding-left: 1vw;
+  color: #646464;
 }
 
 input {
-	text-align: center;
+  text-align: center;
 }
 
 body {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 #members {
-	color: #000000;
+  color: #000000;
 }
 
 .container-fluid {
-	padding-left: 15vw;
-	padding-right: 15vw;
+  padding-left: 15vw;
+  padding-right: 15vw;
 }
 
 .filterContainer {
-	display: inline-flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	flex-wrap: wrap;
-	width: 100%;
-	border-bottom: 1px solid #646464;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  border-bottom: 1px solid #646464;
 }
 
 .filterLeft {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1vw;
 }
 
 .filterMid {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1vw;
 }
 
 .filterRight {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1vw;
 }
 
 .rowPairContainer {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .fullContainer {
-	flex-basis: 100%;
-	padding-bottom: 1vw;
+  flex-basis: 100%;
+  padding-bottom: 1vw;
 }
 
 .halfContainer {
-	flex-basis: 50%;
-	padding-bottom: 1vw;
+  flex-basis: 50%;
+  padding-bottom: 1vw;
 }
 
 .resultsContainer {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .titleHeader {
-	text-align: center;
+  text-align: center;
 }
 
 .submit {
-	align-self: flex-end;
+  align-self: flex-end;
 }
 
 .resultItem {
-	display: flex;
-	flex-direction: column;
-	padding: 1vw;
-	flex-basis: 23.4%;
-	margin: .5vw;
-	background-color: #ffffff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
+  flex-basis: 23.4%;
+  margin: .5vw;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }
 
 .resultItem:hover {
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .itemImg {
-	width: 100%;
-	height: 15vh;
-	border: 1px solid black;
+  width: 100%;
+  height: 15vh;
+  border: 1px solid black;
 }
 
 .itemTitle {
-	text-align: center;
-	font-weight: bold;
-	margin-bottom: -0.1vw;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: -0.1vw;
 }
 
 .itemRooms {
-	text-align: center;
-	font-style: italic;
-	color: #646464;
-	font-size: 0.7rem;
+  text-align: center;
+  font-style: italic;
+  color: #646464;
+  font-size: 0.7rem;
 }
 
 .itemPool, .itemRestaurant, .itemEntertainment, .itemChildren {
-	text-align: center;
-	color: #646464;
-	font-size: 0.8rem;
-	margin-bottom: -0.1vw;
+  text-align: center;
+  color: #646464;
+  font-size: 0.8rem;
+  margin-bottom: -0.1vw;
 }
 
 .itemDesc {
-	border-top: 1px solid #646464;
+  border-top: 1px solid #646464;
 }
 
 #loginForm {
-	position: fixed;
-	display: none;
-	flex-direction: column;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 15%;
-	height: 30%;
-	background-color: #ffffff;
-	padding: 1vw;
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 30%;
+  background-color: #ffffff;
+  padding: 1vw;
 }
 
 .closeForm {
-	text-align: right;
-	right: 0%;
-	bottom: 0%;
+  text-align: right;
+  right: 0%;
+  bottom: 0%;
 }
 
 #regForm {
-	position: fixed;
-	display: none;
-	flex-direction: column;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 15%;
-	height: 30%;
-	background-color: #ffffff;
-	padding: 1vw;
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 30%;
+  background-color: #ffffff;
+  padding: 1vw;
 }
 
 #formCover {
-	position: fixed;
-	display: none;
-	top: 0%;
-	left: 0%;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(128, 128, 128, 0.8);
+  position: fixed;
+  display: none;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.8);
 }
 
 @media screen and (max-width: 1550px) {
-	.propertyTitle, select, option, input, a {
-		font-size: 0.9rem;
-	}
+  .propertyTitle, select, option, input, a {
+    font-size: 0.9rem;
+  }
 }
 
 @media screen and (max-width: 1400px) {
-	.propertyTitle, select, option, input, a {
-		font-size: 0.8rem;
-	}
+  .propertyTitle, select, option, input, a {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 1245px) {
-	.propertyTitle, select, option, input, a {
-		font-size: 0.7rem;
-	}
+  .propertyTitle, select, option, input, a {
+    font-size: 0.7rem;
+  }
 }
 
 /*TABLET*/
 @media screen and (max-width: 1100px) {
-	.propertyTitle, select, option, input, a {
-		font-size: 1rem;
-	}
-	.filterContainer {
-		display: inline-flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-		flex-wrap: wrap;
-		width: 100%;
-	}
-	.filterRight {
-		margin-top: -4vw;
-	}
-	.filterImg {
-		width: 100%;
-		height: 50%;
-	}
-	.resultItem {
-		display: flex;
-		flex-direction: column;
-		padding: 1vw;
-		flex-basis: 48%;
-	}
-	#loginForm {
-		position: fixed;
-		display: none;
-		flex-direction: column;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 80%;
-		height: 30%;
-		background-color: #ffffff;
-		padding: 1vw;
-	}
-	#regForm {
-		position: fixed;
-		display: none;
-		flex-direction: column;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 80%;
-		height: 30%;
-		background-color: #ffffff;
-		padding: 1vw;
-	}
+  .propertyTitle, select, option, input, a {
+    font-size: 1rem;
+  }
+
+  .filterContainer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .filterRight {
+    margin-top: -4vw;
+  }
+
+  .filterImg {
+    width: 100%;
+    height: 50%;
+  }
+
+  .resultItem {
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    flex-basis: 48%;
+  }
+
+  #loginForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
+
+  #regForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
 }
 
 /*TABLET*/
 @media screen and (max-width: 505px) {
-	.propertyTitle, select, option, input, a {
-		font-size: .8rem;
-	}
-	#loginForm {
-		position: fixed;
-		display: none;
-		flex-direction: column;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 80%;
-		height: 30%;
-		background-color: #ffffff;
-		padding: 1vw;
-	}
-	#regForm {
-		position: fixed;
-		display: none;
-		flex-direction: column;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 80%;
-		height: 30%;
-		background-color: #ffffff;
-		padding: 1vw;
-	}
+  .propertyTitle, select, option, input, a {
+    font-size: .8rem;
+  }
+
+  #loginForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
+
+  #regForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
 }
