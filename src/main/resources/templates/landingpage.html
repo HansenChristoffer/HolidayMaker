@@ -27,8 +27,9 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="openLogin()">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="openReg()">Sign up</a></li>
 
 					<li class="nav-item"><a class="nav-link disabled" href="#"
 						tabindex="-1" aria-disabled="true">Profile</a></li>
@@ -38,8 +39,8 @@
 
 		<!--Filter-->
 		<div class="titleHeader">
-          <p class="navbar-brand headerTitle">Filter</p>
-        </div>
+			<p class="navbar-brand headerTitle">Filter</p>
+		</div>
 		<div class="filterContainer">
 			<div class="filterLeft">
 				<div class="fullContainer">
@@ -151,10 +152,10 @@
 
 		</div>
 
-		
-        <div class="titleHeader">
-          <p class="navbar-brand headerTitle">Results</p>
-        </div>
+
+		<div class="titleHeader">
+			<p class="navbar-brand headerTitle">Results</p>
+		</div>
 		<div class="resultsContainer">
 			<div class="resultItem">
 				<div class="itemImg"></div>
@@ -162,64 +163,82 @@
 				<p class="itemRooms">Rooms</p>
 				<div class="rowPairContainer">
 					<p class="itemPool halfContainer">Pool</p>
-                    <p class="itemChildren halfContainer">Children Activities</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
 				</div>
 
 				<div class="rowPairContainer">
 					<p class="itemEntertainment halfContainer">Entertainment</p>
-                    <p class="itemRestaurant halfContainer">Restaurant</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
 				</div>
 				<p class="itemDesc">Desc</p>
-                <input class="submit" type="button" value="Book Now!" />
+				<input class="submit" type="button" value="Book Now!" />
 			</div>
 			<div class="resultItem">
-                <div class="itemImg"></div>
-                <p class="itemTitle">Title</p>
-                <p class="itemRooms">Rooms</p>
-                <div class="rowPairContainer">
-                    <p class="itemPool halfContainer">Pool</p>
-                    <p class="itemChildren halfContainer">Children Activities</p>
-                </div>
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
 
-                <div class="rowPairContainer">
-                    <p class="itemEntertainment halfContainer">Entertainment</p>
-                    <p class="itemRestaurant halfContainer">Restaurant</p>
-                </div>
-                <p class="itemDesc">Desc</p>
-                <input class="submit" type="button" value="Book Now!" />
-            </div>
-            <div class="resultItem">
-                <div class="itemImg"></div>
-                <p class="itemTitle">Title</p>
-                <p class="itemRooms">Rooms</p>
-                <div class="rowPairContainer">
-                    <p class="itemPool halfContainer">Pool</p>
-                    <p class="itemChildren halfContainer">Children Activities</p>
-                </div>
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
 
-                <div class="rowPairContainer">
-                    <p class="itemEntertainment halfContainer">Entertainment</p>
-                    <p class="itemRestaurant halfContainer">Restaurant</p>
-                </div>
-                <p class="itemDesc">Desc</p>
-                <input class="submit" type="button" value="Book Now!" />
-            </div>
-            <div class="resultItem">
-                <div class="itemImg"></div>
-                <p class="itemTitle">Title</p>
-                <p class="itemRooms">Rooms</p>
-                <div class="rowPairContainer">
-                    <p class="itemPool halfContainer">Pool</p>
-                    <p class="itemChildren halfContainer">Children Activities</p>
-                </div>
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
 
-                <div class="rowPairContainer">
-                    <p class="itemEntertainment halfContainer">Entertainment</p>
-                    <p class="itemRestaurant halfContainer">Restaurant</p>
-                </div>
-                <p class="itemDesc">Desc</p>
-                <input class="submit" type="button" value="Book Now!" />
-            </div>
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+		</div>
+
+		<div id="formCover">
+			<div id="loginForm">
+                <p class="navbar-brand headerTitle">Login</p>
+				<input value='mockEmail1@mock.io' type='text' name='username'>
+				<input value='mock_password1' type='password' name='password' /> <input
+					name="submit" type="submit" value="Login" onclick="closeLogin()" />
+                <a class="closeForm" href="#" onclick="closeLogin()">Close</a>
+			</div>
+			<div id="regForm">
+                <p class="navbar-brand headerTitle">Register</p>
+				<input placeholder='Email' type='text' name='username'>
+				<input placeholder='Password' type='password' name='password' />
+				<input placeholder='Repeat Password' type='password' name='password' />
+				<input name="submit" type="submit" value="Register" onclick="closeReg()" />
+				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
+			</div>
 		</div>
 	</div>
 	<footer>
@@ -249,4 +268,5 @@
 	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 	crossorigin="anonymous"></script>
 
+<script src="js/landingpagescript.js"></script>
 </html>
