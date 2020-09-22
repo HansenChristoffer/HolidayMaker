@@ -5,11 +5,19 @@ footer {
   color: #ff8000;
 }
 
+p {
+  word-wrap: break-word;
+}
+
 select, input {
   width: 100%;
   height: 5vh;
   padding-left: 1vw;
   color: #646464;
+}
+
+input {
+  text-align: center;
 }
 
 body {
@@ -129,27 +137,69 @@ body {
   border-top: 1px solid #646464;
 }
 
+#loginForm {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 30%;
+  background-color: #ffffff;
+  padding: 1vw;
+}
+
+.closeForm {
+  text-align: right;
+  right: 0%;
+  bottom: 0%;
+}
+
+#regForm {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+  height: 30%;
+  background-color: #ffffff;
+  padding: 1vw;
+}
+
+#formCover {
+  position: fixed;
+  display: none;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.8);
+}
+
 @media screen and (max-width: 1550px) {
-  .propertyTitle, select, option, input {
+  .propertyTitle, select, option, input, a {
     font-size: 0.9rem;
   }
 }
 
 @media screen and (max-width: 1400px) {
-  .propertyTitle, select, option, input {
+  .propertyTitle, select, option, input, a {
     font-size: 0.8rem;
   }
 }
 
 @media screen and (max-width: 1245px) {
-  .propertyTitle, select, option, input {
+  .propertyTitle, select, option, input, a {
     font-size: 0.7rem;
   }
 }
 
 /*TABLET*/
 @media screen and (max-width: 1100px) {
-  .propertyTitle, select, option, input {
+  .propertyTitle, select, option, input, a {
     font-size: 1rem;
   }
 
@@ -176,11 +226,63 @@ body {
     padding: 1vw;
     flex-basis: 48%;
   }
+
+  #loginForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
+
+  #regForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
 }
 
 /*TABLET*/
 @media screen and (max-width: 505px) {
-  .propertyTitle, select, option, input {
+  .propertyTitle, select, option, input, a {
     font-size: .8rem;
+  }
+
+  #loginForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
+  }
+
+  #regForm {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 30%;
+    background-color: #ffffff;
+    padding: 1vw;
   }
 }
