@@ -184,7 +184,7 @@ public class RoomService {
         findAllByAccommodationId(id).forEach(room -> {
             if (!room.getReservedDates().isEmpty()) {
                 for (ReservedDates rd : room.getReservedDates()) {
-                    if (rd.isOverlapping(df, dt)) {
+                    if (!rd.isOverlapping(df, dt)) {
                         freeRooms.add(room);
                         break;
                     }
@@ -196,5 +196,4 @@ public class RoomService {
 
         return freeRooms;
     }
-
 }

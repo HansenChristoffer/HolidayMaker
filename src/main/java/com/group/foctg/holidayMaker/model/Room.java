@@ -15,8 +15,8 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
@@ -93,7 +93,7 @@ public class Room implements Serializable {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "accommodation_id")
-    //@JsonBackReference(value = "accommodation_rooms")
+    @JsonBackReference(value = "accommodation_rooms")
     @NotNull
     private Accommodation accommodation;
 

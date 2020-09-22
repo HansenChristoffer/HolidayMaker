@@ -15,7 +15,6 @@
  */
 package com.group.foctg.holidayMaker.controllers;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +30,7 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
@@ -48,8 +48,8 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.services.RoomService
  */
 @RestController
-@RequestMapping(value = "/api")
 @Slf4j
+@RequestMapping(value = "/api")
 public class RoomController {
 
     @Autowired
@@ -171,15 +171,15 @@ public class RoomController {
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class.
-     * @param dates ObjectNode that expects a JSON with 2 fields named dateFrom
-     * and dateTo
+     * @param dateFrom
+     * @param dateTo
      * @return a Set of type {@link com.group.foctg.holidayMaker.model.Room}
      * from the Service.
      * @throws java.text.ParseException
      */
-    @GetMapping("/rooms/accommodation/filter")
-    public Set<Room> findAllByAccommodationIdFilteredByDate(@RequestParam Long id, @RequestBody ObjectNode dates) throws ParseException {
-        return roomService.findAllByAccommodationIdFilteredByDate(id, dates.get("dateFrom").asText(), dates.get("dateFrom").asText());
+    @GetMapping("/filter/rooms/accommodation")
+    public Set<Room> findAllByAccommodationIdFilteredByDate(@RequestParam Long id, @RequestParam String dateFrom, @RequestParam String dateTo) throws ParseException {
+        return roomService.findAllByAccommodationIdFilteredByDate(id, dateFrom, dateTo);
     }
 
 }
