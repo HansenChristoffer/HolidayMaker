@@ -91,7 +91,7 @@ public class AccommodationController {
      *
      * @param filter {@link com.group.foctg.holidayMaker.model.Filter} object to pass to the Service class.
      * @return a List of the filtered accommodations.
-     * @throws ParseException.
+     * @throws java.text.ParseException
      */
     @GetMapping("/accommodation/filter")
     public List<Accommodation> filterAccommodations(@RequestBody Filter filter) throws ParseException {

@@ -17,11 +17,9 @@ package com.group.foctg.holidayMaker.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,19 +37,19 @@ import javax.validation.constraints.NotEmpty;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class, 
-  property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Location implements Serializable {
 
     public Location() {
     }
 
     /**
-     * Contructor to initialize a {@link com.group.foctg.holidayMaker.model.Location} object.
-     * 
+     * Contructor to initialize a
+     * {@link com.group.foctg.holidayMaker.model.Location} object.
+     *
      * @param name String value to be added to field <code>name</code>
-     * @param accommodations List that will become field <code>accommodations</code>
+     * @param accommodations List that will become field
+     * <code>accommodations</code>
      */
     public Location(String name, List<Accommodation> accommodations) {
         this.name = name;
@@ -60,15 +58,14 @@ public class Location implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "location_id")
+    @Column
     private Long id;
 
     @NotEmpty
     @Column
     private String name;
-    
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "accommodation_location")
+
+    @OneToMany(mappedBy = "location")
     private List<Accommodation> accommodations;
 
     /**
@@ -112,7 +109,7 @@ public class Location implements Serializable {
      * the {@link com.group.foctg.holidayMaker.model.Location} objects field
      * <code>accommodations</code>
      */
-    public List<Accommodation> getAccommodation() {
+    public List<Accommodation> getAccommodations() {
         return this.accommodations;
     }
 
@@ -123,7 +120,7 @@ public class Location implements Serializable {
      * @param accommodations List that will become the new
      * <code>accommodations</code>
      */
-    public void setAccommodation(List<Accommodation> accommodations) {
+    public void setAccommodations(List<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
 }
