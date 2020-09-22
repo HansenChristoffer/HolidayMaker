@@ -21,5 +21,9 @@ public class MainController {
     public String accommodation() {
         return "accommodation.html";
     }
+	@GetMapping("/dashboard")
+	public String init3() {
+		return "dashboard.html";
+	}
 
 }
