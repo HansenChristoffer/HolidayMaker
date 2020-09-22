@@ -6,17 +6,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
-	
-	@GetMapping("/")
-	public String init() {
-		return "landingpage.html";
-	}
-	
-	@GetMapping("/login")
-	public String init2() {
-		return "login.html";
-	}
-	
+
+    @GetMapping("/")
+    public String init() {
+        return "landingpage.html";
+    }
+
+    @GetMapping("/login")
+    public String init2() {
+        return "login.html";
+    }
+
+    @GetMapping("/accommodation")
+    public String accommodation() {
+        return "accommodation.html";
+    }
 	@GetMapping("/dashboard")
 	public String init3() {
 		return "dashboard.html";
