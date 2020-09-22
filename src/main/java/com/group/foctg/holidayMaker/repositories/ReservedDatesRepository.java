@@ -15,37 +15,27 @@
  */
 package com.group.foctg.holidayMaker.repositories;
 
+import com.group.foctg.holidayMaker.model.ReservedDates;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.Booking;
-import com.group.foctg.holidayMaker.model.Customer;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * Repository interface for the
- * {@link com.group.foctg.holidayMaker.model.Customer} and this extends
- * JpaRepository. This repository also has 3 custom functions with their own HQL
- * query associated with them.
+ * {@link com.group.foctg.holidayMaker.model.ReservedDates} and this extends
+ * JpaRepository. This repository also has 1 custom function with their own HQL
+ * query associated with it.
  *
  * This repository is suppose to be autowired by a Service. See
- * {@link com.group.foctg.holidayMaker.services.CustomerService}.
+ * {@link com.group.foctg.holidayMaker.services.ReservedDatesService}.
  *
- * @author Frida Ek
  * @author Christoffer Hansen &lt;chris.hansen.ch@outlook.com&gt;
  * @see org.springframework.data.jpa.repository.JpaRepository
  */
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface ReservedDatesRepository extends JpaRepository<ReservedDates, Long> {
 
-    @Query("SELECT c FROM Customer c WHERE c.email = ?1")
-    Optional<Customer> findCustomerByEmail(String email);
-
-    @Query("SELECT c.bookings FROM Customer c WHERE c.id = ?1")
-    List<Booking> findBookingsById(Long id);
-
-    @Query("SELECT c.accommodations FROM Customer c WHERE c.id = ?1")
-    List<Accommodation> findAccommodationsById(Long id);
+    @Query("SELECT d FROM ReservedDates d WHERE d.room.id = ?1")
+    public List<ReservedDates> findReservedDatesByRoomId(Long id);
 }

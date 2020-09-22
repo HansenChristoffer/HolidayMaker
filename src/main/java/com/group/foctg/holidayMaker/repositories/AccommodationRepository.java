@@ -39,7 +39,7 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface AccommodationRepository extends JpaRepository<Accommodation, Long> {
 
-    @Query("SELECT a FROM Accommodation a WHERE a.customer = ?1")
+    @Query("SELECT a FROM Accommodation a WHERE a.customer.id = ?1")
     List<Accommodation> findAccommodationsByCustomerId(Long id);
 	
     @Query("SELECT b FROM Accommodation b WHERE b.distanceToBeach <= ?1")

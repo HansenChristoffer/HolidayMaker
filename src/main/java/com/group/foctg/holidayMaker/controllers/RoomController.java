@@ -17,7 +17,6 @@ package com.group.foctg.holidayMaker.controllers;
 
 import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
@@ -50,13 +48,13 @@ import java.util.Optional;
 public class RoomController {
 
     @Autowired
-    RoomService roomService;
+    private RoomService roomService;
 
     /**
      * POST endpoint method that listens on <code>"/room"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom}
-     * method from the Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#saveRoom} method
+     * from the Service.
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
      * pass to the Service class.
@@ -89,6 +87,7 @@ public class RoomController {
      *
      * @param room {@link com.group.foctg.holidayMaker.model.Room} object to
      * pass to the Service class.
+     * @param id
      * @return a boolean value from the Service.
      */
     @PutMapping("/room")
@@ -99,21 +98,21 @@ public class RoomController {
     /**
      * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll}
-     * method from the Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAll} method
+     * from the Service.
      *
      * @return a List object from the autowired Service.
      */
     @GetMapping("/rooms")
     public List<Room> findAll() {
-        return roomService.findall();
+        return roomService.findAll();
     }
 
     /**
      * GET endpoint method that listens on <code>"/rooms"</code> URL and will
      * call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findById}
-     * method from the autowired Service.
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findById} method
+     * from the autowired Service.
      *
      * @param id Long value to pass to the Service class.
      * @return a Optional list of type
@@ -122,18 +121,18 @@ public class RoomController {
     @GetMapping("/room")
     public Optional<Room> findById(@RequestParam Long id) {
         Optional<Room> room = roomService.findById(id);
-        
+
         if (room.isEmpty()) {
             throw new RoomNotFoundException(id);
         }
-                
+
         return room;
     }
 
     /**
      * GET endpoint method that listens on <code>"/room/accommodation"</code>
      * URL and will call the
-     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodation}
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAccommodationByRoomId}
      * method from the autowired Service.
      *
      * @param id Long value to pass to the Service class.
@@ -141,7 +140,7 @@ public class RoomController {
      * from the Service.
      */
     @GetMapping("/room/accommodation")
-    public Accommodation findAccommodation(@RequestParam Long id) {
-        return roomService.findAccommodation(id);
+    public Accommodation findAccommodationByRoomId(@RequestParam Long id) {
+        return roomService.findAccommodationByRoomId(id);
     }
 }

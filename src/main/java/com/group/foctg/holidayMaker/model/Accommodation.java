@@ -15,10 +15,8 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
@@ -27,10 +25,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
-
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
@@ -74,10 +72,11 @@ public class Accommodation implements Serializable {
      * @param rooms List that will become the field <code>rooms</code>
      * @param customer {@link com.group.foctg.holidayMaker.model.Customer}
      * object to be added to field <code>customer</code>
+     * @param rating
      */
     public Accommodation(String name, Boolean pool, Boolean nightEntertainment, Boolean childEvents, Boolean restaurant,
             Short distanceToBeach, Short distanceToCenter, Location location, String imageURL, String description,
-            List<Room> rooms, Customer customer) {
+            List<Room> rooms, Customer customer, Float rating) {
         this.name = name;
         this.pool = pool;
         this.nightEntertainment = nightEntertainment;
@@ -90,6 +89,7 @@ public class Accommodation implements Serializable {
         this.description = description;
         this.rooms = rooms;
         this.customer = customer;
+        this.rating = rating;
     }
 
     @Id
@@ -119,8 +119,8 @@ public class Accommodation implements Serializable {
     @Column
     private Short distanceToCenter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference(value = "accommodation_location")
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @URL
@@ -130,12 +130,11 @@ public class Accommodation implements Serializable {
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "accommodation_rooms")
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference(value = "customers_accommodations")
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Range(min = 0, max = 5)
@@ -155,15 +154,15 @@ public class Accommodation implements Serializable {
     }
 
     /**
-     * Method that will set the value of the field <code>id</code> by the
-     * value sent as parameter.
+     * Method that will set the value of the field <code>id</code> by the value
+     * sent as parameter.
      *
      * @param id Long value to be added to field <code>id</code>
      */
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * Method that returns the field <code>customer</code> of the
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object

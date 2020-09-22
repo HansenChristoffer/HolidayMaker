@@ -15,6 +15,8 @@
  */
 package com.group.foctg.holidayMaker.services;
 
+import com.group.foctg.holidayMaker.exceptions.AccommodationNotFoundException;
+import com.group.foctg.holidayMaker.exceptions.CustomerNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
@@ -30,7 +31,9 @@ import com.group.foctg.holidayMaker.model.DateChecker;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
+import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the
@@ -42,11 +45,14 @@ import java.util.Optional;
  * @see com.group.foctg.holidayMaker.repositories.AccoommodationRepository
  */
 @Service
-@Transactional
+@Slf4j
 public class AccommodationService {
 
     @Autowired
     private AccommodationRepository accommodationRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Accommodation} object
@@ -59,7 +65,11 @@ public class AccommodationService {
      * not.
      */
     public boolean saveAccommodation(Accommodation accommodation) {
-        return accommodationRepository.saveAndFlush(accommodation).equals(accommodation);
+        if (customerRepository.existsById(accommodation.getCustomer().getId())) {
+            return accommodationRepository.saveAndFlush(accommodation).equals(accommodation);
+        } else {
+            throw new CustomerNotFoundException(accommodation.getCustomer().getId());
+        }
     }
 
     /**
@@ -77,7 +87,7 @@ public class AccommodationService {
             accommodationRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new AccommodationNotFoundException(id);
         }
     }
 
@@ -106,12 +116,12 @@ public class AccommodationService {
                     acc.setLocation(accommodation.getLocation());
                     acc.setImageURL(accommodation.getImageURL());
                     acc.setDescription(accommodation.getDescription());
-                    return accommodationRepository.save(acc);
+                    return accommodationRepository.saveAndFlush(acc);
                 })
                 .orElseGet(() -> {
-                    accommodation.setId(id);
-                    return accommodationRepository.save(accommodation);
+                    throw new AccommodationNotFoundException(id);
                 });
+
     }
 
     /**
