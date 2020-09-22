@@ -79,37 +79,37 @@
 
 			<div class="filterMid">
 				<div class="rowPairContainer">
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Access to Pool?</p>
-                        <select name="pool" id="poolSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Activities for Children?</p>
-                        <select name="checkOut" id="childActivitiesSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="rowPairContainer">
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Nightly Entertainment?</p>
-                        <select name="entertainment" id="entertainmentSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Restaurant?</p>
-                        <select name="restaurant" id="restaurantSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                </div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Access to Pool?</p>
+						<select name="pool" id="poolSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Activities for Children?</p>
+						<select name="checkOut" id="childActivitiesSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Nightly Entertainment?</p>
+						<select name="entertainment" id="entertainmentSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Restaurant?</p>
+						<select name="restaurant" id="restaurantSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			<div class="filterRight">
 				<div class="rowPairContainer">
@@ -142,51 +142,77 @@
 					</div>
 				</div>
 				<div class="halfContainer">
-				    <input class="submit" type="button" value="Show Results" />
+					<input class="submit" type="button" value="Show Results" />
 				</div>
 			</div>
 
 		</div>
 
-		<div id="resultsContainer">
-			<table id="results">
-				<tr class="headerStyle">
-					<th>Image</th>
-					<th>Details</th>
-					<th>Action</th>
-				</tr>
-				<tr class="rowStyle">
-					<td class="itemStyle">img</td>
-					<td class="itemStyle">details</td>
-					<td class="itemStyle">book now</td>
-				</tr>
-			</table>
+		<div class="resultHeader"></div>
+		<div class="resultsContainer">
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+                    <p class="itemChildren halfContainer">Children Activities</p>
+				</div>
+
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+                    <p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+                <input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+                <div class="itemImg"></div>
+                <p class="itemTitle">Title</p>
+                <p class="itemRooms">Rooms</p>
+                <div class="rowPairContainer">
+                    <p class="itemPool halfContainer">Pool</p>
+                    <p class="itemChildren halfContainer">Children Activities</p>
+                </div>
+
+                <div class="rowPairContainer">
+                    <p class="itemEntertainment halfContainer">Entertainment</p>
+                    <p class="itemRestaurant halfContainer">Restaurant</p>
+                </div>
+                <p class="itemDesc">Desc</p>
+                <input class="submit" type="button" value="Book Now!" />
+            </div>
+            <div class="resultItem">
+                <div class="itemImg"></div>
+                <p class="itemTitle">Title</p>
+                <p class="itemRooms">Rooms</p>
+                <div class="rowPairContainer">
+                    <p class="itemPool halfContainer">Pool</p>
+                    <p class="itemChildren halfContainer">Children Activities</p>
+                </div>
+
+                <div class="rowPairContainer">
+                    <p class="itemEntertainment halfContainer">Entertainment</p>
+                    <p class="itemRestaurant halfContainer">Restaurant</p>
+                </div>
+                <p class="itemDesc">Desc</p>
+                <input class="submit" type="button" value="Book Now!" />
+            </div>
 		</div>
 	</div>
 	<footer>
-	
-	 <h5 class="text-uppercase">Contact info</h5>
-	<p id="adress">
-	Adress:
-	</p>
-	
-	<a
-	href="https://newton.learnpoint.se/">Newton 
-	</a>
-	 
-	<p>
-	Github: 
-	</p>
-	<a
-	href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker
-	</a>
-	<p>
-	Authors:
-	</p>
-	
-	<p id="members">
-	Christoffer, Frida, Olle and Tanvir
-	</p>
+
+		<h5 class="text-uppercase">Contact info</h5>
+		<p id="adress">Adress:</p>
+
+		<a href="https://newton.learnpoint.se/">Newton</a>
+
+		<p>Github:</p>
+		<a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker
+		</a>
+		<p>Authors:</p>
+
+		<p id="members">Christoffer, Frida, Olle and Tanvir</p>
 	</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
