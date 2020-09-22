@@ -20,6 +20,7 @@ td, th {
 }
 
 tr:nth-child(even) {
+  color: #FFFFFF;
   background-color: #343A40;
 }
 

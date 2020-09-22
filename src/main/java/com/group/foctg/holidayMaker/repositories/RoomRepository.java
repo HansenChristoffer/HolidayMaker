@@ -20,12 +20,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
+import java.util.Set;
 
 /**
- * Repository interface for the
- * {@link com.group.foctg.holidayMaker.model.Room} and this extends
- * JpaRepository. This repository also has 1 custom functions with their own HQL
- * query associated with them.
+ * Repository interface for the {@link com.group.foctg.holidayMaker.model.Room}
+ * and this extends JpaRepository. This repository also has 1 custom functions
+ * with their own HQL query associated with them.
  *
  * This repository is suppose to be autowired by a Service. See
  * {@link com.group.foctg.holidayMaker.services.RoomService}.
@@ -35,8 +35,11 @@ import com.group.foctg.holidayMaker.model.Room;
  */
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
-	
-	@Query("SELECT r.accommodation FROM Room r WHERE r.id = ?1")
-	public Accommodation findAccommdotionByRoomId(Long id);
-}
 
+    @Query("SELECT r.accommodation FROM Room r WHERE r.id = ?1")
+    public Accommodation findAccommdotionByRoomId(Long id);
+
+    @Query("SELECT a.rooms FROM Accommodation a WHERE a.id = ?1")
+    public Set<Room> findAllByAccomodationId(Long id);
+
+}

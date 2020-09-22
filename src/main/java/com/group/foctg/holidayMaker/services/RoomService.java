@@ -22,10 +22,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
+import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 import com.group.foctg.holidayMaker.repositories.RoomRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Room} column
@@ -36,6 +43,7 @@ import java.util.Optional;
  * @see com.group.foctg.holidayMaker.repositories.RoomRepository
  */
 @Service
+@Slf4j
 public class RoomService {
 
     @Autowired
@@ -142,4 +150,50 @@ public class RoomService {
         return roomRepository.findAccommdotionByRoomId(id);
     }
 
+    /**
+     * Self-explanatory, aka. Finds all rooms that accommodation owns and put
+     * them in a Set and return
+     *
+     * @param id Long value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @return Set&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; with
+     * all the rooms
+     */
+    public Set<Room> findAllByAccommodationId(Long id) {
+        return roomRepository.findAllByAccomodationId(id);
+    }
+
+    /**
+     * This method will find all rooms from a specified accommodation and then
+     * it will filter those that do not have overlapping dates.
+     *
+     * @param id Long value to use for finding the
+     * {@link com.group.foctg.holidayMaker.model.Accommodation}
+     * @param dateFrom
+     * @param dateTo 
+     * @return Set&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; with
+     * all the rooms that has been filtered
+     * @throws ParseException in case the parsing goes haywire
+     */
+    public Set<Room> findAllByAccommodationIdFilteredByDate(Long id, String dateFrom, String dateTo) throws ParseException {
+        Set<Room> freeRooms = new HashSet<>();
+
+        Date df = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
+        Date dt = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
+
+        findAllByAccommodationId(id).forEach(room -> {
+            if (!room.getReservedDates().isEmpty()) {
+                for (ReservedDates rd : room.getReservedDates()) {
+                    if (!rd.isOverlapping(df, dt)) {
+                        freeRooms.add(room);
+                        break;
+                    }
+                }
+            } else {
+                freeRooms.add(room);
+            }
+        });
+
+        return freeRooms;
+    }
 }

@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -75,9 +76,11 @@ public class ReservedDates implements Serializable {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "room_id")
+    @JsonBackReference(value = "rooms_reserveddates")
     private Room room;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference(value = "bookings_reserveddates")
     private Booking booking;
 
     /**

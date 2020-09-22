@@ -29,7 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Optional;
+import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * RestController for the {@link com.group.foctg.holidayMaker.model.Room} entity
@@ -44,6 +48,7 @@ import java.util.Optional;
  * @see com.group.foctg.holidayMaker.services.RoomService
  */
 @RestController
+@Slf4j
 @RequestMapping(value = "/api")
 public class RoomController {
 
@@ -143,4 +148,38 @@ public class RoomController {
     public Accommodation findAccommodationByRoomId(@RequestParam Long id) {
         return roomService.findAccommodationByRoomId(id);
     }
+
+    /**
+     * GET endpoint method that listens on <code>"/rooms/accommodation"</code>
+     * URL and will call the
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAllByAccommodationId(java.lang.Long)}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class.
+     * @return a Set of type {@link com.group.foctg.holidayMaker.model.Room}
+     * from the Service.
+     */
+    @GetMapping("/rooms/accommodation")
+    public Set<Room> findAllByAccommodationId(@RequestParam Long id) {
+        return roomService.findAllByAccommodationId(id);
+    }
+
+    /**
+     * GET endpoint method that listens on <code>"/rooms/accommodation"</code>
+     * URL and will call the
+     * {@link com.group.foctg.holidayMaker.services.RoomService#findAllByAccommodationIdFilteredByDate(java.lang.Long, java.lang.String, java.lang.String)}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class.
+     * @param dateFrom
+     * @param dateTo
+     * @return a Set of type {@link com.group.foctg.holidayMaker.model.Room}
+     * from the Service.
+     * @throws java.text.ParseException
+     */
+    @GetMapping("/filter/rooms/accommodation")
+    public Set<Room> findAllByAccommodationIdFilteredByDate(@RequestParam Long id, @RequestParam String dateFrom, @RequestParam String dateTo) throws ParseException {
+        return roomService.findAllByAccommodationIdFilteredByDate(id, dateFrom, dateTo);
+    }
+
 }
