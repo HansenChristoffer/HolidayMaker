@@ -14,7 +14,7 @@
 	<div class="container-fluid">
 
 		<!--Menubar-->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">Holiday Maker</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -27,8 +27,9 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="openLogin()">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="openReg()">Sign up</a></li>
 
 					<li class="nav-item"><a class="nav-link disabled" href="#"
 						tabindex="-1" aria-disabled="true">Profile</a></li>
@@ -37,6 +38,9 @@
 		</nav>
 
 		<!--Filter-->
+		<div class="titleHeader">
+			<p class="navbar-brand headerTitle">Filter</p>
+		</div>
 		<div class="filterContainer">
 			<div class="filterLeft">
 				<div class="fullContainer">
@@ -79,37 +83,37 @@
 
 			<div class="filterMid">
 				<div class="rowPairContainer">
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Access to Pool?</p>
-                        <select name="pool" id="poolSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Activities for Children?</p>
-                        <select name="checkOut" id="childActivitiesSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="rowPairContainer">
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Nightly Entertainment?</p>
-                        <select name="entertainment" id="entertainmentSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                    <div class="halfContainer">
-                        <p class="propertyTitle">Restaurant?</p>
-                        <select name="restaurant" id="restaurantSelector">
-                            <option value="" selected>Yes</option>
-                            <option value="">No</option>
-                        </select>
-                    </div>
-                </div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Access to Pool?</p>
+						<select name="pool" id="poolSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Activities for Children?</p>
+						<select name="checkOut" id="childActivitiesSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="rowPairContainer">
+					<div class="halfContainer">
+						<p class="propertyTitle">Nightly Entertainment?</p>
+						<select name="entertainment" id="entertainmentSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+					<div class="halfContainer">
+						<p class="propertyTitle">Restaurant?</p>
+						<select name="restaurant" id="restaurantSelector">
+							<option value="" selected>Yes</option>
+							<option value="">No</option>
+						</select>
+					</div>
+				</div>
 			</div>
 			<div class="filterRight">
 				<div class="rowPairContainer">
@@ -142,51 +146,114 @@
 					</div>
 				</div>
 				<div class="halfContainer">
-				    <input class="submit" type="button" value="Show Results" />
+					<input class="submit" type="button" value="Show Results" />
 				</div>
 			</div>
 
 		</div>
 
-		<div id="resultsContainer">
-			<table id="results">
-				<tr class="headerStyle">
-					<th>Image</th>
-					<th>Details</th>
-					<th>Action</th>
-				</tr>
-				<tr class="rowStyle">
-					<td class="itemStyle">img</td>
-					<td class="itemStyle">details</td>
-					<td class="itemStyle">book now</td>
-				</tr>
-			</table>
+
+		<div class="titleHeader">
+			<p class="navbar-brand headerTitle">Results</p>
+		</div>
+		<div class="resultsContainer">
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
+
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
+
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
+
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+			<div class="resultItem">
+				<div class="itemImg"></div>
+				<p class="itemTitle">Title</p>
+				<p class="itemRooms">Rooms</p>
+				<div class="rowPairContainer">
+					<p class="itemPool halfContainer">Pool</p>
+					<p class="itemChildren halfContainer">Children Activities</p>
+				</div>
+
+				<div class="rowPairContainer">
+					<p class="itemEntertainment halfContainer">Entertainment</p>
+					<p class="itemRestaurant halfContainer">Restaurant</p>
+				</div>
+				<p class="itemDesc">Desc</p>
+				<input class="submit" type="button" value="Book Now!" />
+			</div>
+		</div>
+
+		<div id="formCover">
+			<div id="loginForm">
+                <p class="navbar-brand headerTitle">Login</p>
+				<input value='mockEmail1@mock.io' type='text' name='username'>
+				<input value='mock_password1' type='password' name='password' /> <input
+					name="submit" type="submit" value="Login" onclick="closeLogin()" />
+                <a class="closeForm" href="#" onclick="closeLogin()">Close</a>
+			</div>
+			<div id="regForm">
+                <p class="navbar-brand headerTitle">Register</p>
+				<input placeholder='Email' type='text' name='username'>
+				<input placeholder='Password' type='password' name='password' />
+				<input placeholder='Repeat Password' type='password' name='password' />
+				<input name="submit" type="submit" value="Register" onclick="closeReg()" />
+				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
+			</div>
 		</div>
 	</div>
 	<footer>
-	
-	 <h5 class="text-uppercase">Contact info</h5>
-	<p id="adress">
-	Adress:
-	</p>
-	
-	<a
-	href="https://newton.learnpoint.se/">Newton 
-	</a>
-	 
-	<p>
-	Github: 
-	</p>
-	<a
-	href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker
-	</a>
-	<p>
-	Authors:
-	</p>
-	
-	<p id="members">
-	Christoffer, Frida, Olle and Tanvir
-	</p>
+
+		<h5 class="text-uppercase">Contact info</h5>
+		<p id="adress">Adress:</p>
+
+		<a href="https://newton.learnpoint.se/">Newton</a>
+
+		<p>Github:</p>
+		<a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker
+		</a>
+		<p>Authors:</p>
+
+		<p id="members">Christoffer, Frida, Olle and Tanvir</p>
 	</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -201,4 +268,5 @@
 	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 	crossorigin="anonymous"></script>
 
+<script src="js/landingpagescript.js"></script>
 </html>
