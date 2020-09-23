@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -80,7 +81,9 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Accommodation> accommodations;
 
+    
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Booking> bookings;
 
     /**
