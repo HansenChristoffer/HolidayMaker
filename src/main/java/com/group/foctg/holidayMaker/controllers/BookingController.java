@@ -46,10 +46,11 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
-    
+
     /**
      * POST endpoint method that listens on <code>"/booking"</code> URL and will
-     * call the {@link com.group.foctg.holidayMaker.services.BookingService#saveBooking}
+     * call the
+     * {@link com.group.foctg.holidayMaker.services.BookingService#saveBooking}
      * method from the Service.
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
@@ -81,9 +82,11 @@ public class BookingController {
      * {@link com.group.foctg.holidayMaker.services.BookingService#updateBooking}
      * method from the autowired Service.
      *
-     * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value to pass to the Service class.
+     * @param booking {@link com.group.foctg.holidayMaker.model.Booking} value
+     * to pass to the Service class.
      * @param id Long value to pass to the Service class.
-     * @return {@link com.group.foctg.holidayMaker.model.Booking} object from the service
+     * @return {@link com.group.foctg.holidayMaker.model.Booking} object from
+     * the service
      */
     @PutMapping("/booking")
     public Booking updateBooking(@RequestBody Booking booking, @RequestParam Long id) {
