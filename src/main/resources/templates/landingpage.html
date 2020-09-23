@@ -165,16 +165,16 @@
 		<div id="formCover">
 			<div id="loginForm">
 				<p class="navbar-brand headerTitle">Login</p>
-				<input id="email" value="mockEmail1@mock.io" type='text'
+				<input id="email"  placeholder='Email' value="mockEmail1@mock.io" type='text'
 					name='email' /> <input id="password" value="mock_password1"
-					type='password' name='password' /> <input name="submit"
+					type='password' placeholder='Password' name='password' /> <input name="submit"
 					type="submit" value="Login" onclick="closeLogin()" />
 			</div>
 			<div id="regForm">
 				<p class="navbar-brand headerTitle">Register</p>
-				<input placeholder='Email' type='text' name='username'> <input
-					placeholder='Password' type='password' name='password' /> <input
-					placeholder='Repeat Password' type='password' name='password' /> <input
+				<input placeholder='Email' id="regEmail" type='text' name='email'> <input
+					placeholder='Password' id="regPass" type='password' name='password' /> <input
+					placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
 					name="submit" type="submit" value="Register" onclick="closeReg()" />
 				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
 			</div>

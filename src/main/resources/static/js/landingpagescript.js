@@ -34,10 +34,34 @@ function openReg() {
 
 function closeReg(flag) {
     
+    var email = document.getElementById('regEmail').value;
+    var password = document.getElementById('regPass').value;
+    var password2 = document.getElementById('regPassRep').value;
+    
+    var fetchUrl = "http://localhost:8080/api/customer";
+    
+    var newCustomer =  {
+        email: email,
+        password: password
+    };
+    
+    fetch(fetchUrl, {
+     method: 'POST', // or 'PUT'
+     headers: {
+     'Content-Type': 'application/json',
+     },
+        body: JSON.stringify(newCustomer),
+        })
+     .then(response => response.json())
+     .then(function(data) {
+       console.log(data);
+     });
     
   document.getElementById("formCover").style.display = "none";
   document.getElementById("regForm").style.display = "none";
 }
+
+//accId
 
 fetch("http://localhost:8080/api/accommodations")
     .then(response => response.json())
