@@ -122,9 +122,28 @@ fetch("http://localhost:8080/api/accommodations")
             itemDesc.classList.add('itemDesc');
             itemDesc.innerHTML = data[i].description;
             
+            
             var button = document.createElement('input');
             button.setAttribute("type", "button");
             button.setAttribute("value", "Book Now!");
+            
+            button.addEventListener("click", function(index) {
+              return function(){
+                setAccDetails(index);
+              }
+            }(i));
+            
+            var hiddenId = document.createElement('p');
+            hiddenId.style = "display: none";
+            hiddenId.innerHTML = data[i].id;
+            
+            var hiddenDateTo = document.createElement('p');
+            hiddenDateTo.style = "display: none";
+            hiddenDateTo.innerHTML = data[i].dateTo;
+            
+            var hiddenDateFrom = document.createElement('p');
+            hiddenDateFrom.style = "display: none";
+            hiddenDateFrom.innerHTML = data[i].dateFrom;
             
             rowPairContainer1.appendChild(itemPool);
             rowPairContainer1.appendChild(itemChildren);
@@ -141,11 +160,32 @@ fetch("http://localhost:8080/api/accommodations")
             resultItem.appendChild(rowPairContainer2);
             resultItem.appendChild(itemDesc);
             resultItem.appendChild(button);
+            resultItem.appendChild(hiddenId);
+            resultItem.appendChild(hiddenDateTo);
+            resultItem.appendChild(hiddenDateFrom);
             
             resultContainer.appendChild(resultItem);
          }
+         
+         function setAccDetails(index) {
+            
+            var dateFrom = document.getElementById('checkInSelector').value;
+            var dateTo = document.getElementById('checkOutSelector').value;
+            
+            collected = {
+                id: data[index].id,
+                dateFrom: dateFrom,
+                dateTo: dateTo
+            };
+            
+            localStorage.setItem('selectAcc', JSON.stringify(collected));
+            
+            window.location.href = '/accommodation';
+         }
     });
     
+    
+
 
 fetch("http://localhost:8080/api/locations")
     .then(response => response.json())
