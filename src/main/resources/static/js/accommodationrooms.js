@@ -2,40 +2,56 @@ document.addEventListener("DOMContentLoaded", startUp(), false);
 
 async function startUp() {
   setViewData();
-
+  //getData();
 }
 
 /*
-+
+
    Json.parse(localStorage.getItem('accId'))
+   <span class="fa fa-star checked"></span>
+   <span class="fa fa-star checked"></span>
+   <span class="fa fa-star checked"></span>
+   <span class="fa fa-star"></span>
+   <span class="fa fa-star"></span>
  */
 
 async function setViewData() {
-  let baseURL = "http://localhost:8080/api";
+  var baseURL = "http://localhost:8080/api";
   let response = await fetch(baseURL + "/accommodation?id=11")
     .then(response => response.json())
     .then(function(data) {
 
-      var header = document.getElementById("accommodation-header");
-      var imgElement = document.getElementById("accommodation-img");
-      var descriptionElement = document.getElementById("accommodation-description");
-      var ratingElement = document.getElementById("rating");
-      var hasPool = document.getElementById("hasPool");
-      var hasRestaurant = document.getElementById("hasRestaurant");
-      var hasChildEvents = document.getElementById("hasChildEvents");
-      var hasEntertainment = document.getElementById("hasEntertainment");
-      var distanceBeach = document.getElementById("distanceBeach");
-      var distanceCenter = document.getElementById("distanceCenter");
+      let header = document.getElementById("accommodation-header");
+      let imgElement = document.getElementById("accommodation-img");
+      let descriptionElement = document.getElementById("accommodation-description");
+      let ratingElement = document.getElementById("rating");
+      let hasPool = document.getElementById("hasPool");
+      let hasRestaurant = document.getElementById("hasRestaurant");
+      let hasChildEvents = document.getElementById("hasChildEvents");
+      let hasEntertainment = document.getElementById("hasEntertainment");
+      let distanceBeach = document.getElementById("distanceBeach");
+      let distanceCenter = document.getElementById("distanceCenter");
+
+      let cr = Math.round(data.rating + 0.5);
+      let ratingEleString = '';
+
+      for (var i = 0; i < cr; i++) {
+        ratingEleString = ratingEleString.concat('<span class="fa fa-star checked"></span>');
+      }
+
+      for (var i = 0; i < (5 - cr); i++) {
+        ratingEleString = ratingEleString.concat('<span class="fa fa-star"></span>');
+      }
 
       header.innerHTML = data.name;
       imgElement.setAttribute("src", data.imageURL);
       descriptionElement.innerHTML = data.description;
-      ratingElement.innerHTML = "Rating " + data.rating + " / 5";
+      ratingElement.innerHTML = ratingEleString;
 
-      hasPool.innerHTML = data.pool;
-      hasRestaurant.innerHTML = data.restaurant;
-      hasChildEvents.innerHTML = data.childEvents;
-      hasEntertainment.innerHTML = data.nightEntertainment;
+      hasPool.innerHTML = (data.pool) ? "Yes" : "No";
+      hasRestaurant.innerHTML = (data.restaurant) ? "Yes" : "No";
+      hasChildEvents.innerHTML = (data.childEvents) ? "Yes" : "No";
+      hasEntertainment.innerHTML = (data.nightEntertainment) ? "Yes" : "No";
       distanceBeach.innerHTML = data.distanceToBeach;
       distanceCenter.innerHTML = data.distanceToCenter;
 
@@ -43,8 +59,8 @@ async function setViewData() {
 }
 
 async function getData() {
-  let baseURL = "http://localhost:8080/api";
-  let response = await fetch(baseURL + "/filter/rooms/accommodation?id=" +
+  //var baseURL = "http://localhost:8080/api";
+  var response = await fetch(baseURL + "/filter/rooms/accommodation?id=" +
       Json.parse(localStorage.getItem('accId')) + "&dateFrom=" +
       Json.parse(localStorage.getItem('dateFrom')) + "&dateTo=" +
       Json.parse(localStorage.getItem('dateTo')))
@@ -62,10 +78,12 @@ function populateTableWithJson(data) {
   var table = document.getElementById("table-rooms");
   data.forEach(function(object) {
     var tr = document.createElement("tr");
-    tr.innerHTML = '<td> id:' + object.id +
-      ' numBeds: ' + object.numberOfBeds +
-      ' price: ' + object.price +
-      '<button class="btn-book">Book</button></td>';
+    tr.innerHTML = '<td> Room with ' + object.numberOfBeds +
+      ' beds, Price: ' + object.price +
+      '<label class="rooms-data-container">Choose<input id="rcm-' + object.id +
+      '"type = "checkbox" data-toggle="tooltip" ' +
+      'data-placement="right" title="Checkmark if you want to book this room">' +
+      '<span class = "checkmark"></span></label></td>';
     table.appendChild(tr);
   });
 }
