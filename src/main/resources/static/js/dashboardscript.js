@@ -302,7 +302,8 @@ function deleteListing(element) {
     .then(data => {
       if (data == true || data == "true") {
         console.log('Success:', data);
-        document.getElementById("listing-container").innerHTML = '';
+        var listing = document.getElementById("list");
+        listing.innerHTML = '';
       } else {
         console.log('Failure:', data);
       }
