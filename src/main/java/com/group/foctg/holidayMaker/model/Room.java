@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,12 +64,12 @@ public class Room implements Serializable {
      * @param price Float value to be added to field <code>price</code>
      * @param datesTaken
      */
-    public Room(Short numberOfBeds, List<Booking> bookings, Accommodation accommodation, Float price, List<String[]> datesTaken) {
+    public Room(Short numberOfBeds, Accommodation accommodation, Float price) {
         this.numberOfBeds = numberOfBeds;
-        this.bookings = bookings;
+        this.bookings = new ArrayList<>();
         this.accommodation = accommodation;
         this.price = price + (numberOfBeds * 20);
-        this.datesTaken = datesTaken;
+        this.reservedDates = new ArrayList<>();
     }
 
     @Id
