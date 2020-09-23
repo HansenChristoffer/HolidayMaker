@@ -10,7 +10,7 @@ function openLogin() {
   document.getElementById("loginForm").style.display = "flex";
 }
 
-function closeLogin(flag) {
+function closeLogin() {
     
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
@@ -31,6 +31,7 @@ function closeLogin(flag) {
   document.getElementById("formCover").style.display = "none";
   document.getElementById("loginForm").style.display = "none";
   
+    location.reload();
   //console.log(JSON.parse(localStorage.getItem('user')));
 }
 
@@ -229,6 +230,7 @@ function onShow(url) {
                     var button = document.createElement('input');
                     button.setAttribute("type", "button");
                     button.setAttribute("value", "Inspect");
+                    button.disabled = (localStorage.getItem('user') == null) ? true : false;
                     
                     button.addEventListener("click", function(index) {
                       return function(){
