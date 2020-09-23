@@ -77,93 +77,128 @@ fetch("http://localhost:8080/api/accommodations")
          var resultContainer = document.getElementsByClassName('resultsContainer')[0];
          var sorting = document.getElementById('sort');
          
-         var sortable = [];
-         for (var item in data) {
-             sortable.push(item);
-         }
+        let bubbleSortAsc = (inputArr) => {
+            let len = inputArr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len-1; j++) {
+                    if (inputArr[j].rating > inputArr[j + 1].rating) {
+                        let tmp = inputArr[j];
+                        inputArr[j] = inputArr[j + 1];
+                        inputArr[j + 1] = tmp;
+                    }
+                }
+            }
+            return inputArr;
+        };
+        
+        let bubbleSortDesc = (inputArr) => {
+            let len = inputArr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len-1; j++) {
+                    if (inputArr[j].rating < inputArr[j + 1].rating) {
+                        let tmp = inputArr[j];
+                        inputArr[j] = inputArr[j + 1];
+                        inputArr[j + 1] = tmp;
+                    }
+                }
+            }
+            return inputArr;
+        };
+        
          
-         sortable.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+         display();
          
-         console.log(sortable)
+         sorting.addEventListener("change", function() {
+            display();
+        })(0);
          
-         for (var i = 0; i < data.length; i++) {
-          
-            var resultItem = document.createElement('div');
-            resultItem.classList.add("resultItem");
+         function display() {
+            resultContainer.innerHTML = '';
             
-            var itemImg = document.createElement('div');
-            itemImg.classList.add("itemImg");
+            if (sorting.value === "asc")
+            data = bubbleSortAsc(data);
+            else 
+                data = bubbleSortDesc(data);
             
-            var itemTitle = document.createElement('p');
-            itemTitle.classList.add('itemTitle');
-            itemTitle.innerHTML = data[i].name;
-            
-            var itemRooms = document.createElement('p');
-            itemRooms.classList.add('itemRooms');
-            itemRooms.innerHTML = data[i].rooms.length + " rooms";
-            
-            var rowPairContainer1 = document.createElement('div');
-            rowPairContainer1.classList.add("rowPairContainer");
-            
-            var rowPairContainer2 = document.createElement('div');
-            rowPairContainer2.classList.add("rowPairContainer");
-            
-            var itemPool = document.createElement('p');
-            itemPool.classList.add('itemPool');
-            itemPool.classList.add('halfContainer');
-            itemPool.innerHTML = (data[i].pool ? 'Pool' : 'No Pool');
-            
-            var itemChildren = document.createElement('p');
-            itemChildren.classList.add('itemChildren');
-            itemChildren.classList.add('halfContainer');
-            itemChildren.innerHTML = (data[i].childEvents ? 'Children Activities' : 'No Children Activities');
-            
-            var itemEntertainment = document.createElement('p');
-            itemEntertainment.classList.add('itemEntertainment');
-            itemEntertainment.classList.add('halfContainer');
-            itemEntertainment.innerHTML = (data[i].nightEntertainment ? 'Entertainment' : 'No Entertainment');
-            
-            var itemRestaurant = document.createElement('p');
-            itemRestaurant.classList.add('itemRestaurant');
-            itemRestaurant.classList.add('halfContainer');
-            itemRestaurant.innerHTML = (data[i].restaurant ? 'Restaurant' : 'No Restaurant');
-            
-            var itemDesc = document.createElement('p');
-            itemDesc.classList.add('itemDesc');
-            itemDesc.innerHTML = data[i].description.substring(0, 140) + " ...";
-            
-            
-            var button = document.createElement('input');
-            button.setAttribute("type", "button");
-            button.setAttribute("value", "Inspect");
-            
-            button.addEventListener("click", function(index) {
-              return function(){
-                setAccDetails(index);
-              }
-            }(i));
-            
-            var hiddenRating = document.createElement('p');
-            hiddenRating.innerHTML = data[i].rating;
-            
-            rowPairContainer1.appendChild(itemPool);
-            rowPairContainer1.appendChild(itemChildren);
-            
-            
-            rowPairContainer2.appendChild(itemEntertainment);
-            rowPairContainer2.appendChild(itemRestaurant);
-     
-            
-            resultItem.appendChild(itemImg);
-            resultItem.appendChild(itemTitle);
-            resultItem.appendChild(itemRooms);
-            resultItem.appendChild(rowPairContainer1);
-            resultItem.appendChild(rowPairContainer2);
-            resultItem.appendChild(itemDesc);
-            resultItem.appendChild(button);
-            resultItem.appendChild(hiddenRating);
-            
-            resultContainer.appendChild(resultItem);
+             for (var i = 0; i < data.length; i++) {
+              
+                var resultItem = document.createElement('div');
+                resultItem.classList.add("resultItem");
+                
+                var itemImg = document.createElement('div');
+                itemImg.classList.add("itemImg");
+                
+                var itemTitle = document.createElement('p');
+                itemTitle.classList.add('itemTitle');
+                itemTitle.innerHTML = data[i].name;
+                
+                var itemRooms = document.createElement('p');
+                itemRooms.classList.add('itemRooms');
+                itemRooms.innerHTML = data[i].rooms.length + " rooms";
+                
+                var rowPairContainer1 = document.createElement('div');
+                rowPairContainer1.classList.add("rowPairContainer");
+                
+                var rowPairContainer2 = document.createElement('div');
+                rowPairContainer2.classList.add("rowPairContainer");
+                
+                var itemPool = document.createElement('p');
+                itemPool.classList.add('itemPool');
+                itemPool.classList.add('halfContainer');
+                itemPool.innerHTML = (data[i].pool ? 'Pool' : 'No Pool');
+                
+                var itemChildren = document.createElement('p');
+                itemChildren.classList.add('itemChildren');
+                itemChildren.classList.add('halfContainer');
+                itemChildren.innerHTML = (data[i].childEvents ? 'Children Activities' : 'No Children Activities');
+                
+                var itemEntertainment = document.createElement('p');
+                itemEntertainment.classList.add('itemEntertainment');
+                itemEntertainment.classList.add('halfContainer');
+                itemEntertainment.innerHTML = (data[i].nightEntertainment ? 'Entertainment' : 'No Entertainment');
+                
+                var itemRestaurant = document.createElement('p');
+                itemRestaurant.classList.add('itemRestaurant');
+                itemRestaurant.classList.add('halfContainer');
+                itemRestaurant.innerHTML = (data[i].restaurant ? 'Restaurant' : 'No Restaurant');
+                
+                var itemDesc = document.createElement('p');
+                itemDesc.classList.add('itemDesc');
+                itemDesc.innerHTML = data[i].description.substring(0, 140) + " ...";
+                
+                
+                var button = document.createElement('input');
+                button.setAttribute("type", "button");
+                button.setAttribute("value", "Inspect");
+                
+                button.addEventListener("click", function(index) {
+                  return function(){
+                    setAccDetails(index);
+                  }
+                }(i));
+                
+                var hiddenRating = document.createElement('p');
+                hiddenRating.innerHTML = data[i].rating;
+                
+                rowPairContainer1.appendChild(itemPool);
+                rowPairContainer1.appendChild(itemChildren);
+                
+                
+                rowPairContainer2.appendChild(itemEntertainment);
+                rowPairContainer2.appendChild(itemRestaurant);
+         
+                
+                resultItem.appendChild(itemImg);
+                resultItem.appendChild(itemTitle);
+                resultItem.appendChild(itemRooms);
+                resultItem.appendChild(rowPairContainer1);
+                resultItem.appendChild(rowPairContainer2);
+                resultItem.appendChild(itemDesc);
+                resultItem.appendChild(button);
+                resultItem.appendChild(hiddenRating);
+                
+                resultContainer.appendChild(resultItem);
+             }
          }
          
          function setAccDetails(index) {
