@@ -6,13 +6,17 @@
 
 **DELETE** "/api/customer" : Deletes the JSON Customer Object with the **customerId** that was passed as @RequestParam.
 
-**GET** "/api/customer?customerid=" : Returns a JSON Customer Object with the **customerId** that was passed as @RequestParam.
+**GET** "/api/login?email=&password= Returns a JSON user object with the **login** that was passed as @RequestParam 
+
+**GET** "/api/customers": Returns all customers.
+
+**GET** "/api/customer?id=" : Returns a JSON Customer Object with the **customerId** that was passed as @RequestParam.
 
 **GET** "/api/customer/by?email=" : Returns a JSON Customer Object with the **email** that was passed as @RequestParam.
 
-**GET** "/api/customer/bookings?customerid=" : Returns all the bookings that the Customer with the **customerId** that was passed as @RequestParam has.
+**GET** "/api/customer/bookings?id=" : Returns all the bookings that the Customer with the **customerId** that was passed as @RequestParam has.
 
-**GET** "/api/customer/accommodations?customerid=" : Returns all the accommodations that the Customer with the **customerId** that was passed @RequestParam has.
+**GET** "/api/customer/accommodations?id=" : Returns all the accommodations that the Customer with the **customerId** that was passed @RequestParam has.
 
 ## Room
 
@@ -20,13 +24,18 @@
 
 **DELETE** "/api/room" : Deletes the JSON Room Object with the **roomId** that was passed as @RequestParam.
 
-**PUT** "/api/room?roomid=" : Updates the room with passed **roomId** with the JSON Object that was passed through @RequestBody.
+**PUT** "/api/room?id=" : Updates the room with passed **roomId** with the JSON Object that was passed through @RequestBody.
 
 **GET** "/api/rooms" : Returns all rooms.
 
-**GET** "/api/room?roomid=" : Returns a Room with the **roomId** that was passed as @RequestParam as a JSON Object.
+**GET** "/api/room?id=" : Returns a Room with the **roomId** that was passed as @RequestParam as a JSON Object.
 
-**GET** "/api/room/accommodation?roomid=" : Returns an Accommodation with the **roomId** that was passed as @RequestParam as a JSON Object.
+**GET** "/api/room/accommodation?id=" : Returns an Accommodation with the **roomId** that was passed as @RequestParam as a JSON Object.
+
+**GET** "/api/rooms/accommodation?id=" : Returns all Accommodations with the **accommodationId** that was passed as @RequestParam as a JSON Object.
+
+**GET** "/api/filter/rooms/accommodation?id=&dateFrom=&dateTo=" 
+
 
 ## Location
 
@@ -36,9 +45,9 @@
 
 **GET** "/api/locations" : Returns all locations.
 
-**GET** "/api/location?locationid=" : Returns a Location with the **locationId** that was passed as @RequestParam as a JSON Object.
+**GET** "/api/location?id=" : Returns a Location with the **locationId** that was passed as @RequestParam as a JSON Object.
 
-**GET** "/api/location/accommodations?locationid=" : Returns all accommodations at the location with the passed **locationId**.
+**GET** "/api/location/accommodations?id=" : Returns all accommodations at the location with the passed **locationId**.
 
 ## Booking
 
@@ -48,7 +57,7 @@
 
 **PUT** "/api/booking?bookingid=" : Updates the booking with passed **bookingId** with the JSON Object that was passed through @RequestBody.
 
-**GET** "/api/booking?customerid=" : Returns the bookings that is owned by the Customer with the passed **customerId**.
+**GET** "/api/booking?id=" : Returns the bookings that is owned by the Customer with the passed **customerId**.
 
 ## Accommodation
 
@@ -56,13 +65,13 @@
 
 **DELETE** "/api/accommodation" : Deletes the JSON Accommodation Object with the **accommodationId** that was passed as @RequestParam.
 
-**PUT** "/api/accommodation?accommodationid=" : Updates the accommodation with passed **accommodationId** with the JSON Object that was passed through @RequestBody.
+**PUT** "/api/accommodation?id=" : Updates the accommodation with passed **accommodationId** with the JSON Object that was passed through @RequestBody.
 
 **GET** "/api/accommodations" : Returns all the accommodations.
 
-**GET** "/api/accommodation?accommodationid=" : Returns the accommodation with the passed **accommodationId** as a JSON Object.
+**GET** "/api/accommodation?id=" : Returns the accommodation with the passed **accommodationId** as a JSON Object.
 
-**GET** "/api/accommodation/customer?customerid=" : Returns the accommodations that is owned by a Customer with the passed **customerId**.
+**GET** "/api/accommodation/customer?id=" : Returns the accommodations that is owned by a Customer with the passed **customerId**.
 
 **GET** "/api/accommodation/tobeach?distance=" : Returns the accommodations that is within the passed **distance** to a beach.
 
