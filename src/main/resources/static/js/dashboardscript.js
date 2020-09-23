@@ -1,3 +1,6 @@
+const baseURL = "http://localhost:8080/api";
+//document.addEventListener("DOMContentLoaded", listings(), false);
+
 var user = JSON.parse(localStorage.getItem('user'));
 
 fetch("http://localhost:8080/api/booking?id=" + user.id)
@@ -54,7 +57,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       buttonEdit.setAttribute("value", "Edit booking");
 
       buttonEdit.addEventListener("click", function(index) {
-        return function(){
+        return function() {
           editBooking(index);
         }
       }(i));
@@ -64,7 +67,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       buttonDelete.setAttribute("value", "Delete booking");
 
       buttonDelete.addEventListener("click", function(index) {
-        return function(){
+        return function() {
           deleteBooking(index);
         }
       }(i));
@@ -88,6 +91,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       leftContainer.appendChild(bookingContainer);
 
     }
+
     function editBooking(index) {
       var selectedBooking = data[index];
 
@@ -132,79 +136,108 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
     package.add(half);
   });
 
-fetch("http://localhost:8080/api/accommodation/customer?id=" + user.id)
-  .then(response => response.json())
-  .then(function(data) {
-    console.log(data);
+listings();
 
-    var rightContainer = document.getElementsByClassName('right-container')[0];
+function listings() {
+  console.log("Listings()");
 
-    for (var i = 0; i < data.length; i++) {
+  fetch(baseURL + "/accommodation/customer?id=" + user.id)
+    .then(response => response.json())
+    .then(function(data) {
+      console.log(data);
 
-      var listingContainer = document.createElement('div');
-      listingContainer.classList.add('listing-container');
+      var rightContainer = document.getElementsByClassName('right-container')[0];
 
-      var resultListingLeft = document.createElement('div');
-      resultListingLeft.classList.add('column-left');
+      for (var i = 0; i < data.length; i++) {
 
-      var listingId = document.createElement('p');
-      listingId.classList.add('style-p');
-      listingId.innerHTML = "Listing ID: " + data[i].id;
+        var listingContainer = document.createElement('div');
+        listingContainer.classList.add('listing-container');
+        listingContainer.setAttribute("id", "list");
 
-      var listingLocation = document.createElement('p');
-      listingLocation.classList.add('style-p');
-      listingLocation.innerHTML = "Location: " + data[i].location.name;
+        var resultListingLeft = document.createElement('div');
+        resultListingLeft.classList.add('column-left');
 
-      var listingRooms = document.createElement('p');
-      listingRooms.classList.add('style-p');
-      listingRooms.innerHTML = "Number of rooms: " + data[i].rooms;
+        var listingId = document.createElement('p');
+        listingId.classList.add('style-p');
+        listingId.innerHTML = "Listing ID: " + data[i].id;
 
-      var rating = document.createElement('p');
-      rating.classList.add('style-p');
-      rating.innerHTML = "Rating: " + data[i].rating;
+        var listingLocation = document.createElement('p');
+        listingLocation.classList.add('style-p');
+        listingLocation.innerHTML = "Location: " + data[i].location.name;
 
-      var resultListingRight = document.createElement('div');
-      resultListingRight.classList.add('column-right');
+        var listingRooms = document.createElement('p');
+        listingRooms.classList.add('style-p');
+        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.length;
 
-      var pool = document.createElement('p');
-      pool.classList.add('style-p');
-      pool.innerHTML = "Pool: " + (data[i].pool ? 'Yes' : 'No')
+        var rating = document.createElement('p');
+        rating.classList.add('style-p');
+        rating.innerHTML = "Rating: " + data[i].rating;
 
-      var beach = document.createElement('p');
-      beach.classList.add('style-p');
-      beach.innerHTML = "Distance to beach: " + data[i].distanceToBeach;
+        var resultListingRight = document.createElement('div');
+        resultListingRight.classList.add('column-right');
 
-      var center = document.createElement('p');
-      center.classList.add('style-p');
-      center.innerHTML = "Distance to center: " + data[i].distanceToCenter;
+        var pool = document.createElement('p');
+        pool.classList.add('style-p');
+        pool.innerHTML = "Pool: " + (data[i].pool ? 'Yes' : 'No')
 
+        var beach = document.createElement('p');
+        beach.classList.add('style-p');
+        beach.innerHTML = "Distance to beach: " + data[i].distanceToBeach;
 
-      var btnDiv = document.createElement('div');
-      btnDiv.classList.add('buttons');
+        var center = document.createElement('p');
+        center.classList.add('style-p');
+        center.innerHTML = "Distance to center: " + data[i].distanceToCenter;
 
-      var listingBtn = document.createElement('input');
-      listingBtn.setAttribute("type", "button");
-      listingBtn.setAttribute("value", "Delete listing");
+        var btnDiv = document.createElement('div');
+        btnDiv.classList.add('buttons');
 
-      btnDiv.appendChild(listingBtn);
+        var listingBtn = document.createElement('input');
+        listingBtn.setAttribute("type", "button");
+        listingBtn.setAttribute("id", data[i].id);
+        listingBtn.setAttribute("value", "Delete listing");
+        listingBtn.setAttribute("onclick", "deleteListing(this)");
 
-      resultListingLeft.appendChild(listingId);
-      resultListingLeft.appendChild(listingLocation);
-      resultListingLeft.appendChild(listingRooms);
-      resultListingLeft.appendChild(rating);
+        btnDiv.appendChild(listingBtn);
 
-      resultListingRight.appendChild(pool);
-      resultListingRight.appendChild(beach);
-      resultListingRight.appendChild(center);
+        resultListingLeft.appendChild(listingId);
+        resultListingLeft.appendChild(listingLocation);
+        resultListingLeft.appendChild(listingRooms);
+        resultListingLeft.appendChild(rating);
 
-      listingContainer.appendChild(resultListingLeft);
-      listingContainer.appendChild(resultListingRight);
-      listingContainer.appendChild(btnDiv);
+        resultListingRight.appendChild(pool);
+        resultListingRight.appendChild(beach);
+        resultListingRight.appendChild(center);
 
-      rightContainer.appendChild(listingContainer);
-    }
-  });
+        listingContainer.appendChild(resultListingLeft);
+        listingContainer.appendChild(resultListingRight);
+        listingContainer.appendChild(btnDiv);
+
+        rightContainer.appendChild(listingContainer);
+      }
+    });
+}
 
 function addListing() {
   document.getElementById("panel").style.display = "block";
+}
+
+function deleteListing(element) {
+  fetch(baseURL + "/accommodation?id=" + element.id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data == true || data == "true") {
+        console.log('Success:', data);
+        document.getElementById("listing-container").innerHTML = '';
+      } else {
+        console.log('Failure:', data);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
