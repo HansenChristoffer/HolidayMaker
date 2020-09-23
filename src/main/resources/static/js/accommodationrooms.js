@@ -1,11 +1,53 @@
-document.addEventListener("DOMContentLoaded", getData(), false);
+document.addEventListener("DOMContentLoaded", startUp(), false);
+
+async function startUp() {
+  setViewData();
+
+}
+
+/*
++
+   Json.parse(localStorage.getItem('accId'))
+ */
+
+async function setViewData() {
+  let baseURL = "http://localhost:8080/api";
+  let response = await fetch(baseURL + "/accommodation?id=11")
+    .then(response => response.json())
+    .then(function(data) {
+
+      var header = document.getElementById("accommodation-header");
+      var imgElement = document.getElementById("accommodation-img");
+      var descriptionElement = document.getElementById("accommodation-description");
+      var ratingElement = document.getElementById("rating");
+      var hasPool = document.getElementById("hasPool");
+      var hasRestaurant = document.getElementById("hasRestaurant");
+      var hasChildEvents = document.getElementById("hasChildEvents");
+      var hasEntertainment = document.getElementById("hasEntertainment");
+      var distanceBeach = document.getElementById("distanceBeach");
+      var distanceCenter = document.getElementById("distanceCenter");
+
+      header.innerHTML = data.name;
+      imgElement.setAttribute("src", data.imageURL);
+      descriptionElement.innerHTML = data.description;
+      ratingElement.innerHTML = "Rating " + data.rating + " / 5";
+
+      hasPool.innerHTML = data.pool;
+      hasRestaurant.innerHTML = data.restaurant;
+      hasChildEvents.innerHTML = data.childEvents;
+      hasEntertainment.innerHTML = data.nightEntertainment;
+      distanceBeach.innerHTML = data.distanceToBeach;
+      distanceCenter.innerHTML = data.distanceToCenter;
+
+    });
+}
 
 async function getData() {
   let baseURL = "http://localhost:8080/api";
-  let id = 4; /* get this from selection from past page */
-  let dateFrom = "05/04/2020"; /* get this from selection from past page */
-  let dateTo = "15/04/2020"; /* get this from selection from past page */
-  let response = await fetch(baseURL + "/filter/rooms/accommodation?id=" + id + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo)
+  let response = await fetch(baseURL + "/filter/rooms/accommodation?id=" +
+      Json.parse(localStorage.getItem('accId')) + "&dateFrom=" +
+      Json.parse(localStorage.getItem('dateFrom')) + "&dateTo=" +
+      Json.parse(localStorage.getItem('dateTo')))
     .then(response => response.json())
     .then(function(data) {
       populateTableWithJson(data);
