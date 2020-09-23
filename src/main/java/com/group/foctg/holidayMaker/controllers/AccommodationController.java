@@ -32,6 +32,7 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.services.AccommodationService;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * RestController for the
@@ -94,7 +95,7 @@ public class AccommodationController {
      * @throws java.text.ParseException
      */
     @GetMapping("/accommodation/filter")
-    public List<Accommodation> filterAccommodations(@RequestBody Filter filter) throws ParseException {
+    public List<Accommodation> filterAccommodations(@ModelAttribute Filter filter) throws ParseException {
         return accommodationService.getFilteredAccommodations(filter);
     }
 

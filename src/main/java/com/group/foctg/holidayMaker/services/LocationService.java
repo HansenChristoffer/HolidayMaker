@@ -110,7 +110,11 @@ public class LocationService {
      * <code>id</code>, if it exists.
      */
     public List<Accommodation> findAccommodationsByLocation(Long id) {
-        return locationRepository.findAccommodationsByLocationID(id);
+        return locationRepository.findAccommodationsByLocationId(id);
     }
 
+    public Long findLocationIdByName(String name) {
+        return locationRepository.findLocationIdByName(name);
+    }
+    
 }
