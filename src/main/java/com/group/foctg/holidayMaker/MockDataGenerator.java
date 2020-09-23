@@ -431,7 +431,7 @@ public class MockDataGenerator implements CommandLineRunner {
         log.info(String.format("$ Rooms == %dx", rooms.size()));
         log.info(String.format("$ Bookings == %dx", bookings.size()));
         log.info(String.format("$ ReservedDates == %dx", reservedDates.size()));
-        log.info("$ Elapsed in  " + (System.currentTimeMillis() - ms) / 1000 + "s");
+        log.info("$ Elapsed in " + (System.currentTimeMillis() - ms) / 1000 + "s");
         log.info("--- END ---");
     }
 

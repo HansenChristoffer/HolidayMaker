@@ -41,6 +41,9 @@ public interface AccommodationRepository extends JpaRepository<Accommodation, Lo
 
     @Query("SELECT a FROM Accommodation a WHERE a.customer.id = ?1")
     List<Accommodation> findAccommodationsByCustomerId(Long id);
+    
+    @Query("SELECT a FROM Accommodation a WHERE a.location.id = ?1")
+    List<Accommodation> findAccommodationsByLocationId(Long id);
 	
     @Query("SELECT b FROM Accommodation b WHERE b.distanceToBeach <= ?1")
     List<Accommodation> findAccommodationsByDistanceToBeach(Short distance);
