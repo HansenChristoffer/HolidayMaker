@@ -77,6 +77,8 @@ public class MockDataGenerator implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("Started mockdata generation, sit back and take it easy because this might take awhile...");
+        
+        Long beforeMillis = System.currentTimeMillis();
 
         mockNames = getDataFromFile(fNames);
         mockPlaces = getDataFromFile(fPlaces);
@@ -107,8 +109,10 @@ public class MockDataGenerator implements CommandLineRunner {
         createMockBookings();
 
         log.info("Mockdata generation has finished!");
-        mockDataStats();
-
+        mockDataStats(beforeMillis);
+        
+        mockNames.clear();
+        mockPlaces.clear();
     }
 
     private ArrayList<String> getDataFromFile(File path) {
@@ -414,7 +418,7 @@ public class MockDataGenerator implements CommandLineRunner {
         // 25 bookings so far
     }
 
-    private void mockDataStats() {
+    private void mockDataStats(Long ms) {
         log.info("--- Mockdata stats ---");
         List<Customer> customers = customerService.findAll();
         List<Accommodation> accommodations = accommodationService.findAll();
@@ -427,8 +431,8 @@ public class MockDataGenerator implements CommandLineRunner {
         log.info(String.format("$ Rooms == %dx", rooms.size()));
         log.info(String.format("$ Bookings == %dx", bookings.size()));
         log.info(String.format("$ ReservedDates == %dx", reservedDates.size()));
+        log.info("$ Elapsed in  " + (System.currentTimeMillis() - ms) / 1000 + "s");
         log.info("--- END ---");
-
     }
 
 }
