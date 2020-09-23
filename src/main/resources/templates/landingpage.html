@@ -1,15 +1,13 @@
 <html>
 
 <head>
-<title>Holiday Maker</title>
+	<title>Holiday Maker</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-<link rel="stylesheet" href="css/landingpagestyle.css">
+	<link rel="stylesheet" href="css/landingpagestyle.css">
 </head>
+
 <body>
 
 	<!--  <h3 sec:authorize="isAuthenticated()" th:text="${customer.email}"></h3>-->
@@ -19,27 +17,20 @@
 		<!--Menubar-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">Holiday Maker</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						onclick="openLogin()">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						onclick="openReg()">Sign up</a></li>
+						</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="openLogin()">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" onclick="openReg()">Sign up</a></li>
 
-					<li class="nav-item"><a class="nav-link disabled" href="dashboard"
-                        tabindex="-1" id="profile" aria-disabled="true">Profile</a></li>
-                        
-                    <li class="nav-item"><a class="nav-link" href=""
-                        tabindex="-1" id="signOut" onclick="signOut()" aria-disabled="true">Sign out</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="dashboard" tabindex="-1" id="profile" aria-disabled="true">Profile</a></li>
+
+					<li class="nav-item"><a class="nav-link" href="" tabindex="-1" id="signOut" onclick="signOut()" aria-disabled="true">Sign out</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -66,7 +57,7 @@
 					<div class="halfContainer">
 						<p class="propertyTitle">Check Out</p>
 						<select name="checkOut" id="checkOutSelector">
-                            <option value="" disabled selected hidden>dd/mm/yyyy</option>
+							<option value="" disabled selected hidden>dd/mm/yyyy</option>
 						</select>
 					</div>
 				</div>
@@ -161,27 +152,23 @@
 
 
 		<div class="titleHeader">
-            <p class="navbar-brand headerTitle">Results</p>
-            <select name="sortBy" id="sort">
-                <option value="asc" selected >Sort by Rating (Asc)</option>
-                <option value="desc">Sort by Rating (Desc)</option>
-            </select>
+			<p class="navbar-brand headerTitle">Results</p>
+			<select name="sortBy" id="sort">
+				<option value="asc" selected>Sort by Rating (Asc)</option>
+				<option value="desc">Sort by Rating (Desc)</option>
+			</select>
 		</div>
 		<div class="resultsContainer"></div>
 
 		<div id="formCover">
 			<div id="loginForm">
 				<p class="navbar-brand headerTitle">Login</p>
-				<input id="email"  placeholder='Email' value="mockEmail1@mock.io" type='text'
-					name='email' /> <input id="password" value="mock_password1"
-					type='password' placeholder='Password' name='password' /> <input name="submit"
-					type="submit" value="Login" onclick="closeLogin()" />
+				<input id="email" placeholder='Email' value="mockEmail1@mock.io" type='text' name='email' /> <input id="password" value="mock_password1" type='password' placeholder='Password' name='password' /> <input name="submit" type="submit"
+					value="Login" onclick="closeLogin()" />
 			</div>
 			<div id="regForm">
 				<p class="navbar-brand headerTitle">Register</p>
-				<input placeholder='Email' id="regEmail" type='text' name='email'> <input
-					placeholder='Password' id="regPass" type='password' name='password' /> <input
-					placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
+				<input placeholder='Email' id="regEmail" type='text' name='email'> <input placeholder='Password' id="regPass" type='password' name='password' /> <input placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
 					name="submit" type="submit" value="Register" onclick="closeReg()" />
 				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
 			</div>
@@ -189,46 +176,41 @@
 	</div>
 	<footer>
 
-		<div class="footerContainer"> 
-		
-		<div class= "halfContainer"> 
-			<div class= "rowPairContainer">
-				<p id="adress">Adress:    </p>
-		        <a href="https://newton.learnpoint.se/">Newton</a>
+		<div class="footerContainer">
+
+			<div class="halfContainer">
+				<div class="rowPairContainer">
+					<p id="adress">Adress: </p>
+					<a href="https://newton.learnpoint.se/">Newton</a>
+				</div>
 			</div>
-         </div>
-		<div class="halfContainer">
-		  <div class= "rowPairContainer">
-		       <p id="location">Location:    </p>
-               <a href="https://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=svhttps://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=sv"
-        >Location of Newton</a>
-		  </div>
+			<div class="halfContainer">
+				<div class="rowPairContainer">
+					<p id="location">Location: </p>
+					<a
+						href="https://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=svhttps://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=sv">Location
+						of Newton</a>
+				</div>
+			</div>
+			<div class="halfContainer">
+				<div class="rowPairContainer">
+					<p>Github: </p>
+					<a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker </a>
+				</div>
+			</div>
+			<div class="halfContainer">
+				<div class="rowPairContainer">
+					<p>Authors: </p>
+					<p id="members">Christoffer, Frida, Olle and Tanvir</p>
+				</div>
+			</div>
 		</div>
-		<div class= "halfContainer">
-		  <div class= "rowPairContainer">
-		       <p>Github:    </p>
-                <a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker </a>
-	   	   </div>
-		</div>
-		<div class= "halfContainer">
-		     <div class= "rowPairContainer">
-		      <p>Authors:    </p> 
-              <p id="members">Christoffer, Frida, Olle and Tanvir</p>
-	       	</div>
-		</div>
-		</div>
-		
+
 	</footer>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-	crossorigin="anonymous"></script><script src="js/landingpagescript.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="js/landingpagescript.js"></script>
+
 </html>

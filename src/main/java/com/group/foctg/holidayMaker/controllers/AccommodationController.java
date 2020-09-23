@@ -90,32 +90,42 @@ public class AccommodationController {
      * {@link com.group.foctg.holidayMaker.services.AccommodationService#getFilteredAccommodations}
      * method from the autowired Service.
      *
-     * @param filter {@link com.group.foctg.holidayMaker.model.Filter} object to pass to the Service class.
+     * @param location
+     * @param dateFrom
+     * @param dateTo
+     * @param pool
+     * @param childrenClub
+     * @param restaurant
+     * @param nightEntertainment
+     * @param rooms
+     * @param adults
+     * @param kids
+     * @param distToBeach
+     * @param distToCenter
      * @return a List of the filtered accommodations.
      * @throws java.text.ParseException
      */
     @GetMapping("/accommodation/filter")
     public List<Accommodation> filterAccommodations(@RequestParam String location, @RequestParam String dateFrom,
-    		@RequestParam String dateTo, @RequestParam boolean pool, @RequestParam boolean childrenClub,
-    		@RequestParam boolean restaurant, @RequestParam boolean nightEntertainment, @RequestParam short rooms,
-    		@RequestParam short adults, @RequestParam short kids, @RequestParam int distToBeach, @RequestParam int distToCenter) throws ParseException {
-    	
-    	
-    	Filter filter = new Filter();
-    	
-    	filter.setLocation(location);
-    	filter.setDateFrom(dateFrom.replaceAll("-", "/"));
-    	filter.setDateTo(dateTo.replaceAll("-", "/"));
-    	filter.setPool(pool);
-    	filter.setChildrenClub(childrenClub);
-    	filter.setRestaurant(restaurant);
-    	filter.setNightEntertainment(nightEntertainment);
-    	filter.setRooms(rooms);
-    	filter.setAdults(adults);
-    	filter.setKids(kids);
-    	filter.setMaxDistBeach(distToBeach);
-    	filter.setMaxDistCenter(distToCenter);
-    	
+            @RequestParam String dateTo, @RequestParam boolean pool, @RequestParam boolean childrenClub,
+            @RequestParam boolean restaurant, @RequestParam boolean nightEntertainment, @RequestParam short rooms,
+            @RequestParam short adults, @RequestParam short kids, @RequestParam int distToBeach, @RequestParam int distToCenter) throws ParseException {
+
+        Filter filter = new Filter();
+
+        filter.setLocation(location);
+        filter.setDateFrom(dateFrom.replaceAll("-", "/"));
+        filter.setDateTo(dateTo.replaceAll("-", "/"));
+        filter.setPool(pool);
+        filter.setChildrenClub(childrenClub);
+        filter.setRestaurant(restaurant);
+        filter.setNightEntertainment(nightEntertainment);
+        filter.setRooms(rooms);
+        filter.setAdults(adults);
+        filter.setKids(kids);
+        filter.setMaxDistBeach(distToBeach);
+        filter.setMaxDistCenter(distToCenter);
+
         return accommodationService.getFilteredAccommodations(filter);
     }
 
@@ -146,9 +156,12 @@ public class AccommodationController {
      * {@link com.group.foctg.holidayMaker.services.AccommodationService#updateAccommodation}
      * method from the autowired Service.
      *
-     * @param accommodation {@link com.group.foctg.holidayMaker.model.Accommodation} value to pass to the Service class.
+     * @param accommodation
+     * {@link com.group.foctg.holidayMaker.model.Accommodation} value to pass to
+     * the Service class.
      * @param id Long value to pass to the Service class.
-     * @return {@link com.group.foctg.holidayMaker.model.Accommodation} object from the Service.
+     * @return {@link com.group.foctg.holidayMaker.model.Accommodation} object
+     * from the Service.
      */
     @PutMapping("/accommodation")
     public Accommodation updateAccommodation(@RequestBody Accommodation accommodation, @RequestParam Long id) {

@@ -1,3 +1,6 @@
+const baseURL = "http://localhost:8080/api";
+//document.addEventListener("DOMContentLoaded", listings(), false);
+
 var user = JSON.parse(localStorage.getItem('user'));
 var selectedBooking;
 fetch("http://localhost:8080/api/booking?id=" + user.id)
@@ -11,6 +14,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
 
       var bookingContainer = document.createElement('div');
       bookingContainer.classList.add('booking-container');
+      bookingContainer.setAttribute("id", "B" + data[i].id);
 
       var resultBookingLeft = document.createElement('div');
       resultBookingLeft.classList.add("left-inner");
@@ -54,17 +58,18 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       buttonEdit.setAttribute("value", "Edit booking");
 
       buttonEdit.addEventListener("click", function(index) {
-        return function(){
+        return function() {
           editBooking(index);
         }
       }(i));
 
       var buttonDelete = document.createElement('input');
       buttonDelete.setAttribute("type", "button");
+      buttonDelete.setAttribute("id", data[i].id);
       buttonDelete.setAttribute("value", "Delete booking");
 
       buttonDelete.addEventListener("click", function(index) {
-        return function(){
+        return function() {
           deleteBooking(index);
         }
       }(i));
@@ -88,20 +93,35 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       leftContainer.appendChild(bookingContainer);
 
     }
-    
+
     function deleteBooking(index) {
-        selectedBooking = data[index];
-        fetch('http://localhost:8080/api/booking?id=' + selectedBooking.id, {
-          method: 'DELETE'
-        }).then(location.reload());
+      selectedBooking = data[index];
+      fetch('http://localhost:8080/api/booking?id=' + selectedBooking.id, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(response => response.json())
+        .then(data => {
+          if (data == true || data == "true") {
+            console.log('Success:', data);
+            var b = document.getElementById("B" + selectedBooking.id);
+            b.innerHTML = '';
+          } else {
+            console.log('Failure:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
-    
+
     function editBooking(index) {
       selectedBooking = data[index];
-      
+
       document.getElementById('panel').style.display = "block";
       document.getElementById('formCover').style.display = "block";
-      
+
       var bookingId = document.getElementById('booking-id');
       bookingId.innerHTML = "Booking ID: " + selectedBooking.id;
 
@@ -124,68 +144,68 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       kids.innerHTML = "Number of kids: " + selectedBooking.numberOfKids;
 
       var package = document.getElementById('package-selector');
-      
+
       var packOpt1 = document.createElement('option');
       packOpt1.innerHTML = "Full Board";
-      
+
       var packOpt2 = document.createElement('option');
       packOpt2.innerHTML = "Half Board";
-      
+
       var packOpt3 = document.createElement('option');
       packOpt3.innerHTML = "All Inclusive";
-      
-      
+
+
       if (selectedBooking.fullBoard == true) {
         packOpt1.selected = true;
       }
-        
+
       if (selectedBooking.halfBoard == true) {
         packOpt2.selected = true;
       }
-        
+
       if (selectedBooking.allInclusive == true) {
         packOpt3.selected = true;
       }
-        
+
       package.add(packOpt1);
       package.add(packOpt2);
       package.add(packOpt3);
-      
+
       var extraBed = document.getElementById('bed-selector');
-      
+
       var bedOpt1 = document.createElement('option');
       bedOpt1.value = true;
       bedOpt1.innerHTML = "Yes";
-      
+
       var bedOpt2 = document.createElement('option');
       bedOpt2.value = false;
       bedOpt2.innerHTML = "No";
-      
+
       if (selectedBooking.extraBed == true)
         bedOpt1.selected = true;
       if (selectedBooking.extraBed == false)
         bedOpt2.selected = true;
-        
-        extraBed.add(bedOpt1);
-        extraBed.add(bedOpt2);
+
+      extraBed.add(bedOpt1);
+      extraBed.add(bedOpt2);
     }
   });
-  
+
 var updateBtn = document.getElementById('update');
 updateBtn.addEventListener('click', function() {
-    
-    var package = document.getElementById('package-selector');
-    var extraBed = document.getElementById('bed-selector');
-    
-    selectedBooking.extraBed = (extraBed.value === 'true');
-    selectedBooking.fullBoard = (package.value === 'Full Board');
-    selectedBooking.halfBoard = (package.value === 'Half Board');
-    selectedBooking.allInclusive = (package.value === 'All Inclusive');
-    
-    putData("http://localhost:8080/api/booking?id=" + selectedBooking.id, selectedBooking)
+
+  var package = document.getElementById('package-selector');
+  var extraBed = document.getElementById('bed-selector');
+
+  selectedBooking.extraBed = (extraBed.value === 'true');
+  selectedBooking.fullBoard = (package.value === 'Full Board');
+  selectedBooking.halfBoard = (package.value === 'Half Board');
+  selectedBooking.allInclusive = (package.value === 'All Inclusive');
+
+  putData("http://localhost:8080/api/booking?id=" + selectedBooking.id, selectedBooking)
     .then(location.reload());
 })
-  
+
 async function putData(url, data) {
   // Default options are marked with *
   const response = await fetch(url, {
@@ -203,79 +223,107 @@ async function putData(url, data) {
   return response.json();
 }
 
-fetch("http://localhost:8080/api/accommodation/customer?id=" + user.id)
-  .then(response => response.json())
-  .then(function(data) {
-    console.log(data);
+listings();
 
-    var rightContainer = document.getElementsByClassName('right-container')[0];
+function listings() {
+  fetch(baseURL + "/accommodation/customer?id=" + user.id)
+    .then(response => response.json())
+    .then(function(data) {
 
-    for (var i = 0; i < data.length; i++) {
+      var rightContainer = document.getElementsByClassName('right-container')[0];
 
-      var listingContainer = document.createElement('div');
-      listingContainer.classList.add('listing-container');
+      for (var i = 0; i < data.length; i++) {
+        var listingContainer = document.createElement('div');
+        listingContainer.classList.add('listing-container');
+        listingContainer.setAttribute("id", "L" + data[i].id);
 
-      var resultListingLeft = document.createElement('div');
-      resultListingLeft.classList.add('column-left');
+        var resultListingLeft = document.createElement('div');
+        resultListingLeft.classList.add('column-left');
 
-      var listingId = document.createElement('p');
-      listingId.classList.add('style-p');
-      listingId.innerHTML = "Listing ID: " + data[i].id;
+        var listingId = document.createElement('p');
+        listingId.classList.add('style-p');
+        listingId.innerHTML = "Listing ID: " + data[i].id;
 
-      var listingLocation = document.createElement('p');
-      listingLocation.classList.add('style-p');
-      listingLocation.innerHTML = "Location: " + data[i].location.name;
+        var listingLocation = document.createElement('p');
+        listingLocation.classList.add('style-p');
+        console.log(data[i].location);
+        listingLocation.innerHTML = "Location: " + data[i].location.name;
 
-      var listingRooms = document.createElement('p');
-      listingRooms.classList.add('style-p');
-      listingRooms.innerHTML = "Number of rooms: " + data[i].rooms;
+        var listingRooms = document.createElement('p');
+        listingRooms.classList.add('style-p');
+        console.log(data[i].rooms);
+        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.size;
 
-      var rating = document.createElement('p');
-      rating.classList.add('style-p');
-      rating.innerHTML = "Rating: " + data[i].rating;
+        var rating = document.createElement('p');
+        rating.classList.add('style-p');
+        rating.innerHTML = "Rating: " + data[i].rating;
 
-      var resultListingRight = document.createElement('div');
-      resultListingRight.classList.add('column-right');
+        var resultListingRight = document.createElement('div');
+        resultListingRight.classList.add('column-right');
 
-      var pool = document.createElement('p');
-      pool.classList.add('style-p');
-      pool.innerHTML = "Pool: " + (data[i].pool ? 'Yes' : 'No')
+        var pool = document.createElement('p');
+        pool.classList.add('style-p');
+        pool.innerHTML = "Pool: " + (data[i].pool ? 'Yes' : 'No')
 
-      var beach = document.createElement('p');
-      beach.classList.add('style-p');
-      beach.innerHTML = "Distance to beach: " + data[i].distanceToBeach;
+        var beach = document.createElement('p');
+        beach.classList.add('style-p');
+        beach.innerHTML = "Distance to beach: " + data[i].distanceToBeach;
 
-      var center = document.createElement('p');
-      center.classList.add('style-p');
-      center.innerHTML = "Distance to center: " + data[i].distanceToCenter;
+        var center = document.createElement('p');
+        center.classList.add('style-p');
+        center.innerHTML = "Distance to center: " + data[i].distanceToCenter;
 
+        var btnDiv = document.createElement('div');
+        btnDiv.classList.add('buttons');
 
-      var btnDiv = document.createElement('div');
-      btnDiv.classList.add('buttons');
+        var listingBtn = document.createElement('input');
+        listingBtn.setAttribute("type", "button");
+        listingBtn.setAttribute("id", data[i].id);
+        listingBtn.setAttribute("value", "Delete listing");
+        listingBtn.setAttribute("onclick", "deleteListing(this)");
 
-      var listingBtn = document.createElement('input');
-      listingBtn.setAttribute("type", "button");
-      listingBtn.setAttribute("value", "Delete listing");
+        btnDiv.appendChild(listingBtn);
 
-      btnDiv.appendChild(listingBtn);
+        resultListingLeft.appendChild(listingId);
+        resultListingLeft.appendChild(listingLocation);
+        resultListingLeft.appendChild(listingRooms);
+        resultListingLeft.appendChild(rating);
 
-      resultListingLeft.appendChild(listingId);
-      resultListingLeft.appendChild(listingLocation);
-      resultListingLeft.appendChild(listingRooms);
-      resultListingLeft.appendChild(rating);
+        resultListingRight.appendChild(pool);
+        resultListingRight.appendChild(beach);
+        resultListingRight.appendChild(center);
 
-      resultListingRight.appendChild(pool);
-      resultListingRight.appendChild(beach);
-      resultListingRight.appendChild(center);
+        listingContainer.appendChild(resultListingLeft);
+        listingContainer.appendChild(resultListingRight);
+        listingContainer.appendChild(btnDiv);
 
-      listingContainer.appendChild(resultListingLeft);
-      listingContainer.appendChild(resultListingRight);
-      listingContainer.appendChild(btnDiv);
-
-      rightContainer.appendChild(listingContainer);
-    }
-  });
+        rightContainer.appendChild(listingContainer);
+      }
+    });
+}
 
 function addListing() {
   document.getElementById("panel").style.display = "block";
+}
+
+function deleteListing(element) {
+  fetch(baseURL + "/accommodation?id=" + element.id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data == true || data == "true") {
+        console.log('Success:', data);
+        var listing = document.getElementById("L" + element.id);
+        listing.innerHTML = '';
+      } else {
+        console.log('Failure:', data);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
