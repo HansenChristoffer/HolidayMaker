@@ -1,8 +1,14 @@
 footer {
   text-align: center;
+  font-size: 14;
   padding: 5px;
-  background-color: lightBlue;
-  color: #ff8000;
+  background-color: #c0c0c0;
+  color: #ffffff;
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  flex-direction: column;
 }
 
 p {
@@ -178,6 +184,13 @@ body {
   height: 100%;
   background-color: rgba(128, 128, 128, 0.8);
 }
+
+.footerContainer{
+    display: flex;
+
+    flex-direction: row;
+}
+
 
 @media screen and (max-width: 1550px) {
   .propertyTitle, select, option, input, a {
