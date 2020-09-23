@@ -44,7 +44,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.repositories.AccoommodationRepository
  */
 @Service
-@Slf4j
 public class AccommodationService {
 
     @Autowired
@@ -123,7 +122,6 @@ public class AccommodationService {
                 .orElseGet(() -> {
                     throw new AccommodationNotFoundException(id);
                 });
-
     }
 
     /**
