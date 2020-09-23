@@ -95,7 +95,27 @@ public class AccommodationController {
      * @throws java.text.ParseException
      */
     @GetMapping("/accommodation/filter")
-    public List<Accommodation> filterAccommodations(@ModelAttribute Filter filter) throws ParseException {
+    public List<Accommodation> filterAccommodations(@RequestParam String location, @RequestParam String dateFrom,
+    		@RequestParam String dateTo, @RequestParam boolean pool, @RequestParam boolean childrenClub,
+    		@RequestParam boolean restaurant, @RequestParam boolean nightEntertainment, @RequestParam short rooms,
+    		@RequestParam short adults, @RequestParam short kids, @RequestParam int distToBeach, @RequestParam int distToCenter) throws ParseException {
+    	
+    	
+    	Filter filter = new Filter();
+    	
+    	filter.setLocation(location);
+    	filter.setDateFrom(dateFrom.replaceAll("-", "/"));
+    	filter.setDateTo(dateTo.replaceAll("-", "/"));
+    	filter.setPool(pool);
+    	filter.setChildrenClub(childrenClub);
+    	filter.setRestaurant(restaurant);
+    	filter.setNightEntertainment(nightEntertainment);
+    	filter.setRooms(rooms);
+    	filter.setAdults(adults);
+    	filter.setKids(kids);
+    	filter.setMaxDistBeach(distToBeach);
+    	filter.setMaxDistCenter(distToCenter);
+    	
         return accommodationService.getFilteredAccommodations(filter);
     }
 
