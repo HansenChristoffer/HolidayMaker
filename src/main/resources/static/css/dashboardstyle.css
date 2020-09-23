@@ -109,6 +109,10 @@
   align-items: flex-end;
 }
 
+.listing-container {
+  margin-bottom: 0.5vw;
+}
+
 .style-p {}
 
 .button-control {}

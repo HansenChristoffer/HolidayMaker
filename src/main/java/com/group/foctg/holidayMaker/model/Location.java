@@ -15,6 +15,7 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -66,6 +67,7 @@ public class Location implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "location")
+    @JsonBackReference
     private List<Accommodation> accommodations;
 
     /**

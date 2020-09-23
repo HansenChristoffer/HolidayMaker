@@ -59,20 +59,24 @@ async function setTableData() {
       acc.dateTo)
     .then(response => response.json())
     .then(function(data) {
-      populateTable(data);
+      tableData = data;
+      asc = false;
+      populateTable(tableData);
     });
 }
 
 function populateTable(data) {
   var table = document.getElementById("table-rooms");
+  table.innerHTML = "";
+  table.innerHTML = '<tr><th onclick="">Room</th><th onclick="sortTable()">Price</th></tr>';
+
   data.forEach(function(object) {
     var tr = document.createElement("tr");
     tr.innerHTML = '<td> Room with ' + object.numberOfBeds +
-      ' beds, <b>Price:</b> <span id=price-' + object.id + '>' + object.price.toFixed(2) + '</span>' +
-      ':- SEK<label class="rooms-data-container">Choose<input id="' + object.id +
-      '" type = "checkbox" data-toggle="tooltip" ' +
-      'data-placement="right" title="Checkmark if you want to book this room" onClick="check(this)">' +
-      '<span class = "checkmark"></span></label></td>';
+      ' beds <label class="rooms-data-container">Choose<input id="' +
+      object.id + '" type = "checkbox" onClick="check(this)"><span class = "checkmark"></span></label></td>' +
+      '<td><span id=price-' + object.id + '>' + object.price.toFixed(2) + '</span>' +
+      '</td>';
     table.appendChild(tr);
   });
 }
@@ -96,7 +100,6 @@ function check(element) {
   } else {
     bookButton.disabled = true;
   }
-
 }
 
 function addExtraBed() {
@@ -109,7 +112,6 @@ function addExtraBed() {
   } else {
     totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - 200.0) + ":- SEK";
   }
-
 }
 
 function getCheckedRooms() {
@@ -175,4 +177,49 @@ function book() {
     .catch((error) => {
       console.error('Error:', error);
     });
+}
+
+function removeChecked() {
+  for (room of roomsChecked) {
+    var r = document.getElementById(room);
+    r.innerHTML
+  }
+}
+
+let bubbleSortAsc = (inputArr) => {
+  let len = inputArr.length;
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len - 1; j++) {
+      if (inputArr[j].price > inputArr[j + 1].price) {
+        let tmp = inputArr[j];
+        inputArr[j] = inputArr[j + 1];
+        inputArr[j + 1] = tmp;
+      }
+    }
+  }
+  return inputArr;
+};
+
+let bubbleSortDesc = (inputArr) => {
+  let len = inputArr.length;
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len - 1; j++) {
+      if (inputArr[j].price < inputArr[j + 1].price) {
+        let tmp = inputArr[j];
+        inputArr[j] = inputArr[j + 1];
+        inputArr[j + 1] = tmp;
+      }
+    }
+  }
+  return inputArr;
+};
+
+function sortTable() {
+  if (asc) {
+    populateTable(bubbleSortDesc(tableData));
+    asc = false;
+  } else {
+    populateTable(bubbleSortAsc(tableData));
+    asc = true;
+  }
 }

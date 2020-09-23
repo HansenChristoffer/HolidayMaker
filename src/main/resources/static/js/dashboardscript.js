@@ -14,6 +14,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
 
       var bookingContainer = document.createElement('div');
       bookingContainer.classList.add('booking-container');
+      bookingContainer.setAttribute("id", "B" + data[i].id);
 
       var resultBookingLeft = document.createElement('div');
       resultBookingLeft.classList.add("left-inner");
@@ -64,6 +65,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
 
       var buttonDelete = document.createElement('input');
       buttonDelete.setAttribute("type", "button");
+      buttonDelete.setAttribute("id", data[i].id);
       buttonDelete.setAttribute("value", "Delete booking");
 
       buttonDelete.addEventListener("click", function(index) {
@@ -95,8 +97,23 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
     function deleteBooking(index) {
       selectedBooking = data[index];
       fetch('http://localhost:8080/api/booking?id=' + selectedBooking.id, {
-        method: 'DELETE'
-      }).then(location.reload());
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(response => response.json())
+        .then(data => {
+          if (data == true || data == "true") {
+            console.log('Success:', data);
+            var b = document.getElementById("B" + selectedBooking.id);
+            b.innerHTML = '';
+          } else {
+            console.log('Failure:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
     function editBooking(index) {
@@ -209,20 +226,16 @@ async function putData(url, data) {
 listings();
 
 function listings() {
-  console.log("Listings()");
-
   fetch(baseURL + "/accommodation/customer?id=" + user.id)
     .then(response => response.json())
     .then(function(data) {
-      console.log(data);
 
       var rightContainer = document.getElementsByClassName('right-container')[0];
 
       for (var i = 0; i < data.length; i++) {
-
         var listingContainer = document.createElement('div');
         listingContainer.classList.add('listing-container');
-        listingContainer.setAttribute("id", "list");
+        listingContainer.setAttribute("id", "L" + data[i].id);
 
         var resultListingLeft = document.createElement('div');
         resultListingLeft.classList.add('column-left');
@@ -233,11 +246,13 @@ function listings() {
 
         var listingLocation = document.createElement('p');
         listingLocation.classList.add('style-p');
+        console.log(data[i].location);
         listingLocation.innerHTML = "Location: " + data[i].location.name;
 
         var listingRooms = document.createElement('p');
         listingRooms.classList.add('style-p');
-        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.length;
+        console.log(data[i].rooms);
+        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.size;
 
         var rating = document.createElement('p');
         rating.classList.add('style-p');
@@ -302,7 +317,7 @@ function deleteListing(element) {
     .then(data => {
       if (data == true || data == "true") {
         console.log('Success:', data);
-        var listing = document.getElementById("list");
+        var listing = document.getElementById("L" + element.id);
         listing.innerHTML = '';
       } else {
         console.log('Failure:', data);
