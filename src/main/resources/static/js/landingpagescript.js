@@ -1,11 +1,37 @@
+if (localStorage.getItem('user') === null) profile.classList.add("disabled");
+else profile.classList.remove("disabled");
+
+function signOut() {
+  localStorage.removeItem('user');
+}
+
 function openLogin() {
   document.getElementById("formCover").style.display = "block";
   document.getElementById("loginForm").style.display = "flex";
 }
 
-function closeLogin() {
+function closeLogin(flag) {
+    
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
+    
+    
+    fetch(fetchUrl)
+    .then(response => response.json())
+    .then(function(data) { 
+        localStorage.setItem('user', JSON.stringify(data));
+        var profile = document.getElementById("profile");
+        profile.classList.remove("disabled");
+    })
+    .catch((error) => {
+        console.log("No user")
+    });
+    
   document.getElementById("formCover").style.display = "none";
   document.getElementById("loginForm").style.display = "none";
+  
+  //console.log(JSON.parse(localStorage.getItem('user')));
 }
 
 function openReg() {
@@ -13,34 +39,40 @@ function openReg() {
   document.getElementById("regForm").style.display = "flex";
 }
 
-function closeReg() {
+function closeReg(flag) {
+    
+    var email = document.getElementById('regEmail').value;
+    var password = document.getElementById('regPass').value;
+    var password2 = document.getElementById('regPassRep').value;
+    
+    var fetchUrl = "http://localhost:8080/api/customer";
+    
+    var newCustomer =  {
+        email: email,
+        password: password
+    };
+    
+    fetch(fetchUrl, {
+     method: 'POST', // or 'PUT'
+     headers: {
+     'Content-Type': 'application/json',
+     },
+        body: JSON.stringify(newCustomer),
+        })
+     .then(response => response.json())
+     .then(function(data) {
+       console.log(data);
+     });
+    
   document.getElementById("formCover").style.display = "none";
   document.getElementById("regForm").style.display = "none";
 }
 
+//accId
+
 fetch("http://localhost:8080/api/accommodations")
     .then(response => response.json())
-    .then(function(data) {
-        console.log(data);
-        /*Result container */
-        /*<div class="resultItem">
-                <div class="itemImg"></div>
-                <p class="itemTitle">Title</p>
-                <p class="itemRooms">Rooms</p>
-                <div class="rowPairContainer">
-                    <p class="itemPool halfContainer">Pool</p>
-                    <p class="itemChildren halfContainer">Children Activities</p>
-                </div>
-
-                <div class="rowPairContainer">
-                    <p class="itemEntertainment halfContainer">Entertainment</p>
-                    <p class="itemRestaurant halfContainer">Restaurant</p>
-                </div>
-                <p class="itemDesc">Desc</p>
-                <input class="submit" type="button" value="Book Now!" />
-            </div>
-         */
-         
+    .then(function(data) {      
          
          var resultContainer = document.getElementsByClassName('resultsContainer')[0];
          
@@ -90,9 +122,28 @@ fetch("http://localhost:8080/api/accommodations")
             itemDesc.classList.add('itemDesc');
             itemDesc.innerHTML = data[i].description;
             
+            
             var button = document.createElement('input');
             button.setAttribute("type", "button");
             button.setAttribute("value", "Book Now!");
+            
+            button.addEventListener("click", function(index) {
+              return function(){
+                setAccDetails(index);
+              }
+            }(i));
+            
+            var hiddenId = document.createElement('p');
+            hiddenId.style = "display: none";
+            hiddenId.innerHTML = data[i].id;
+            
+            var hiddenDateTo = document.createElement('p');
+            hiddenDateTo.style = "display: none";
+            hiddenDateTo.innerHTML = data[i].dateTo;
+            
+            var hiddenDateFrom = document.createElement('p');
+            hiddenDateFrom.style = "display: none";
+            hiddenDateFrom.innerHTML = data[i].dateFrom;
             
             rowPairContainer1.appendChild(itemPool);
             rowPairContainer1.appendChild(itemChildren);
@@ -109,15 +160,39 @@ fetch("http://localhost:8080/api/accommodations")
             resultItem.appendChild(rowPairContainer2);
             resultItem.appendChild(itemDesc);
             resultItem.appendChild(button);
+            resultItem.appendChild(hiddenId);
+            resultItem.appendChild(hiddenDateTo);
+            resultItem.appendChild(hiddenDateFrom);
             
             resultContainer.appendChild(resultItem);
          }
+         
+         function setAccDetails(index) {
+            
+            var dateFrom = document.getElementById('checkInSelector').value;
+            var dateTo = document.getElementById('checkOutSelector').value;
+            
+            collected = {
+                id: data[index].id,
+                dateFrom: dateFrom,
+                dateTo: dateTo
+            };
+            
+            localStorage.setItem('selectAcc', JSON.stringify(collected));
+            
+            window.location.href = '/accommodation';
+         }
     });
+    
+    
+
 
 fetch("http://localhost:8080/api/locations")
     .then(response => response.json())
     .then(function(data) {
+        
        var locationSelector = document.getElementById('locationSelector');
+       
        for (var i = 0; i < data.length; i++) {
            var option = document.createElement("option");
            option.text = data[i].name;
