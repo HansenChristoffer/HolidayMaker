@@ -32,6 +32,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -47,6 +48,7 @@ import javax.persistence.Temporal;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Slf4j
 public class Booking implements Serializable {
 
     public Booking() {
@@ -71,7 +73,7 @@ public class Booking implements Serializable {
      * <code>fullBoard</code>
      * @param halfBoard boolean value to be added to field
      * <code>halfBoard</code>
-     * @param extraBeds boolean value to be added to field<code>extraBed</code>
+     * @param extraBeds boolean value to be added to field <code>extraBed</code>
      */
     public Booking(Customer customer, List<Room> rooms, Date dateFrom,
             Date dateTo, Short numberOfAdults, Short numberOfKids,
@@ -87,6 +89,27 @@ public class Booking implements Serializable {
         this.fullBoard = fullBoard;
         this.halfBoard = halfBoard;
         this.extraBed = extraBeds;
+        this.cost = 0f;
+        
+        this.rooms.forEach(r -> {
+            this.cost += r.getPrice();
+        });
+        this.cost += extraBed ? 200 : 0;
+
+        if (allInclusive) {
+            this.cost += 3000.0f;
+            this.fullBoard = false;
+            this.halfBoard = false;
+        } else if (fullBoard) {
+            this.cost += 1500.0f;
+            this.allInclusive = false;
+            this.halfBoard = false;
+        } else {
+            this.cost += 750.0f;
+            this.allInclusive = false;
+            this.fullBoard = false;
+            this.halfBoard = true;
+        }
     }
 
     @Id
@@ -129,30 +152,11 @@ public class Booking implements Serializable {
     @Column
     private Boolean extraBed;
 
+    @Column
+    private Float cost;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private ReservedDates reservedDates;
-
-    /**
-     * Method that returns the <code>reservedDates</code> of the
-     * {@link com.group.foctg.holidayMaker.model.Booking} object
-     *
-     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
-     */
-    public ReservedDates getReservedDates() {
-        return reservedDates;
-    }
-
-    /**
-     * Method that will set the value of the field <code>reservedDates</code> by
-     * the value sent as parameter.
-     *
-     * @param reservedDates
-     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
-     * added to field <code>reservedDates</code>
-     */
-    public void setReservedDates(ReservedDates reservedDates) {
-        this.reservedDates = reservedDates;
-    }
 
     /**
      * Method that returns the <code>id</code> of the
@@ -395,4 +399,35 @@ public class Booking implements Serializable {
     public void setExtraBed(Boolean extraBed) {
         this.extraBed = extraBed;
     }
+
+    /**
+     * Method that returns the <code>reservedDates</code> of the
+     * {@link com.group.foctg.holidayMaker.model.Booking} object
+     *
+     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
+     */
+    public ReservedDates getReservedDates() {
+        return reservedDates;
+    }
+
+    /**
+     * Method that will set the value of the field <code>reservedDates</code> by
+     * the value sent as parameter.
+     *
+     * @param reservedDates
+     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
+     * added to field <code>reservedDates</code>
+     */
+    public void setReservedDates(ReservedDates reservedDates) {
+        this.reservedDates = reservedDates;
+    }
+
+    public Float getCost() {
+        return cost;
+    }
+
+    public void setCost(Float cost) {
+        this.cost = cost;
+    }
+
 }

@@ -19,7 +19,6 @@ import com.group.foctg.holidayMaker.exceptions.AccommodationNotFoundException;
 import com.group.foctg.holidayMaker.exceptions.CustomerNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,8 +26,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.DateChecker;
 import com.group.foctg.holidayMaker.model.Filter;
+import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
@@ -53,6 +52,9 @@ public class AccommodationService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private LocationService locationService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Accommodation} object
@@ -192,15 +194,12 @@ public class AccommodationService {
          * false and add that accommodation with available dates to our
          * availableByDate List
          */
-        for (Accommodation a : findAll()) {
+        for (Accommodation a : findAccomodationsByLocationId(locationService.findLocationIdByName(filter.getLocation()))) {
             for (Room r : a.getRooms()) {
-                for (String[] dates : r.getDatesTaken()) {
-                    Date df1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom());
-                    Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo());
-                    Date df2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[0]);
-                    Date dt2 = new SimpleDateFormat("dd/MM/yyyy").parse(dates[1]);
-
-                    if (!DateChecker.isOverlapping(df1, dt1, df2, dt2)) {
+                for (ReservedDates rd : r.getReservedDates()) {
+                    if (!rd.isOverlapping(
+                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo()))) {
                         availableByDate.add(a);
                     } else {
                         break;
@@ -219,7 +218,6 @@ public class AccommodationService {
         List<Accommodation> filtered = availableByDate.stream()
                 .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
                 .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
-                .filter(a -> a.getLocation().getName().equals(filter.getLocation()))
                 .filter(a -> a.getPool() == true || filter.hasPool() == false)
                 .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
                 .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
@@ -228,6 +226,10 @@ public class AccommodationService {
                 .collect(Collectors.toList());
 
         return filtered;
+    }
+
+    public List<Accommodation> findAccomodationsByLocationId(Long id) {
+        return accommodationRepository.findAccommodationsByLocationId(id);
     }
 
     /**

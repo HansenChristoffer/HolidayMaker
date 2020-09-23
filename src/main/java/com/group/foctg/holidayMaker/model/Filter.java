@@ -26,7 +26,6 @@ package com.group.foctg.holidayMaker.model;
 public class Filter {
 
     private String location;
-    private String pack;
 
     private String dateFrom;
     private String dateTo;
@@ -149,27 +148,6 @@ public class Filter {
      */
     public void setKids(short kids) {
         this.kids = kids;
-    }
-
-    /**
-     * Method that returns the field <code>pack</code> of the
-     * {@link com.group.foctg.holidayMaker.model.Filter} object
-     *
-     * @return String of {@link com.group.foctg.holidayMaker.model.Filter}
-     * objects field <code>pack</code>
-     */
-    public String getPack() {
-        return pack;
-    }
-
-    /**
-     * Method that will set the value of the field <code>pack</code> by the
-     * value sent as parameter.
-     *
-     * @param pack String value to be added to field <code>pack</code>
-     */
-    public void setPack(String pack) {
-        this.pack = pack;
     }
 
     /**
@@ -366,6 +344,11 @@ public class Filter {
      */
     public void setMaxDistCenter(int maxDistCenter) {
         this.maxDistCenter = maxDistCenter;
+    }
+
+    @Override
+    public String toString() {
+        return "Filter{" + "location=" + location + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", pool=" + pool + ", childrenClub=" + childrenClub + ", restaurant=" + restaurant + ", nightEntertainment=" + nightEntertainment + ", rooms=" + rooms + ", adults=" + adults + ", kids=" + kids + ", minDistBeach=" + minDistBeach + ", maxDistBeach=" + maxDistBeach + ", minDistCenter=" + minDistCenter + ", maxDistCenter=" + maxDistCenter + '}';
     }
 
 }
