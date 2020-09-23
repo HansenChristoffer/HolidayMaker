@@ -1,4 +1,9 @@
+if (localStorage.getItem('user') === null) profile.classList.add("disabled");
+else profile.classList.remove("disabled");
 
+function signOut() {
+  localStorage.removeItem('user');
+}
 
 function openLogin() {
   document.getElementById("formCover").style.display = "block";
@@ -16,6 +21,8 @@ function closeLogin(flag) {
     .then(response => response.json())
     .then(function(data) { 
         localStorage.setItem('user', JSON.stringify(data));
+        var profile = document.getElementById("profile");
+        profile.classList.remove("disabled");
     })
     .catch((error) => {
         console.log("No user")
