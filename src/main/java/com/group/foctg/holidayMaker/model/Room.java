@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -57,12 +56,10 @@ public class Room implements Serializable {
      *
      * @param numberOfBeds Short value to be added to field
      * <code>numberOfBeds</code>
-     * @param bookings List that will become the field <code>bookings</code>
      * @param accommodation
      * {@link com.group.foctg.holidayMaker.model.Accommodation} object to be
      * added to field <code>accommodation</code>
      * @param price Float value to be added to field <code>price</code>
-     * @param datesTaken
      */
     public Room(Short numberOfBeds, Accommodation accommodation, Float price) {
         this.numberOfBeds = numberOfBeds;
@@ -101,10 +98,6 @@ public class Room implements Serializable {
     @Column
     @NotNull
     private Float price;
-
-    @ElementCollection
-    @Column
-    private List<String[]> datesTaken;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     //@JsonManagedReference(value = "rooms_reserveddates")
@@ -226,13 +219,5 @@ public class Room implements Serializable {
      */
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    public List<String[]> getDatesTaken() {
-        return datesTaken;
-    }
-
-    public void setDatesTaken(List<String[]> datesTaken) {
-        this.datesTaken = datesTaken;
     }
 }
