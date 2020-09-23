@@ -76,7 +76,7 @@ public class MockDataGenerator implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("Started mockdata generation, sit back and take it easy because this might take awhile...");
+      //  log.info("Started mockdata generation, sit back and take it easy because this might take awhile...");
         
         Long beforeMillis = System.currentTimeMillis();
 
@@ -108,8 +108,8 @@ public class MockDataGenerator implements CommandLineRunner {
         //I am hiding the abomination in a method that you can collapse
         createMockBookings();
 
-        log.info("Mockdata generation has finished!");
-        mockDataStats(beforeMillis);
+     //   log.info("Mockdata generation has finished!");
+     //   mockDataStats(beforeMillis);
         
         mockNames.clear();
         mockPlaces.clear();
@@ -418,21 +418,22 @@ public class MockDataGenerator implements CommandLineRunner {
         // 25 bookings so far
     }
 
-    private void mockDataStats(Long ms) {
-        log.info("--- Mockdata stats ---");
-        List<Customer> customers = customerService.findAll();
-        List<Accommodation> accommodations = accommodationService.findAll();
-        List<Room> rooms = roomService.findAll();
-        List<Booking> bookings = bookingRepository.findAll();
-        List<ReservedDates> reservedDates = reservedDatesService.findAll();
-
-        log.info(String.format("$ Customers == %dx", customers.size()));
-        log.info(String.format("$ Accommodations == %dx", accommodations.size()));
-        log.info(String.format("$ Rooms == %dx", rooms.size()));
-        log.info(String.format("$ Bookings == %dx", bookings.size()));
-        log.info(String.format("$ ReservedDates == %dx", reservedDates.size()));
-        log.info("$ Elapsed in " + (System.currentTimeMillis() - ms) / 1000 + "s");
-        log.info("--- END ---");
-    }
+//    private void mockDataStats(Long ms) {
+//        log.info("--- Mockdata stats ---");
+//        List<Customer> customers = customerService.findAll();
+//        List<Accommodation> accommodations = accommodationService.findAll();
+//        List<Room> rooms = roomService.findAll();
+//        List<Booking> bookings = bookingRepository.findAll();
+//        List<ReservedDates> reservedDates = reservedDatesService.findAll();
+//
+//        log.info(String.format("$ Customers == %dx", customers.size()));
+//        log.info(String.format("$ Accommodations == %dx", accommodations.size()));
+//        log.info(String.format("$ Rooms == %dx", rooms.size()));
+//        log.info(String.format("$ Bookings == %dx", bookings.size()));
+//        log.info(String.format("$ ReservedDates == %dx", reservedDates.size()));
+//        log.info("$ Elapsed in " + (System.currentTimeMillis() - ms) / 1000 + "s");
+//        log.info("--- END ---");
+//        
+//    }
 
 }

@@ -20,12 +20,66 @@
 			</ul>
 		</div>
 	</nav>
+	<!--Add listing form-->
+	<div id="panel">
+		<form>
+			<div class="panel-controller">
+				<div class="selector-left">
+					<input type="text" id="listing-name" name="name" placeholder="Name">
+
+					<textarea placeholder="Description" id="description-text" rows="4" cols="50"></textarea>
+
+					<select name="location" id="location-selector">
+						<option value="" disabled selected hidden>Select location</option>
+					</select>
+
+					<select name="rooms" id="room-selector">
+						<option value="" disabled selected hidden>Number of
+							rooms</option>
+					</select>
+				</div>
+
+				<div class="selector-right">
+					<p class="propertyTitle">Access to pool?</p>
+					<select name="pool" id="pool-selector">
+						<option value="" selected>Yes</option>
+						<option value="">No</option>
+					</select>
+
+					<p class="propertyTitle">Activities for children?</p>
+					<select name="checkOut" id="child-selector">
+						<option value="" selected>Yes</option>
+						<option value="">No</option>
+					</select>
+
+					<p class="propertyTitle">Nightly entertainment?</p>
+					<select name="entertainment" id="entertainment-selector">
+						<option value="" selected>Yes</option>
+						<option value="">No</option>
+					</select>
+
+					<p class="propertyTitle">Distance to center</p>
+					<select name="center" id="center-selector">
+						<option value="" disabled selected hidden>Max distance</option>
+					</select>
+
+					<p class="propertyTitle">Distance to beach</p>
+					<select name="beach" id="beach-selector">
+						<option value="" disabled selected hidden>Max distance</option>
+					</select>
+				</div>
+				<input type="submit" value="Submit">
+		</form>
+	</div>
+	</div>
 
 	<div id="outer-container" class="container-fluid">
+
+		<p class="title">Bookings</p>
 		<!-- Booking Container -->
 		<div class="left-container">
-			<p class="title">My Bookings</p>
-			<div class="booking-container">
+
+			<!--		<div class="booking-container">
 				<div class="left-inner w-50">
 					<p id="booking-id">Booking ID</p>
 					<p id="price">Price</p>
@@ -41,11 +95,15 @@
 			<div class="buttons ml-auto">
 				<button id="cancel">Cancel Booking</button>
 				<button id="edit">Edit Booking</button>
-			</div>
+			</div>  -->
 		</div>
+
+
+
+		<p class="title">My Listings</p>
 		<!-- Listing Container -->
 		<div class="right-container">
-			<p class="title">My Listings</p>
+			<!--
 			<div class="listing-container">
 				<div class="column-left w-50">
 					<p id="listing-id">Listing ID</p>
@@ -62,33 +120,10 @@
 			<div class="buttons ml-auto">
 				<button id="cancel">Remove Booking</button>
 				<button id="edit">Edit Listing</button>
-			</div>
+			</div> -->
 		</div>
 	</div>
-	<!--Add listing form-->
-	<!--<p class="flip" onclick="addListing()">Click to show panel</p>-->
 
-	<div id="panel">
-		<form>
-
-			<input type="text" id="listing-name" name="name" placeholder="Name">
-
-			<textarea placeholder="Description" id="description-text" rows="4" cols="50">
-	</textarea>
-
-			<select name="location" id="location-selector">
-				<option value="" disabled selected hidden>Select Location</option>
-			</select>
-
-	<select name="rooms" id="roomsSelector">
-		<option value="" disabled selected hidden>Number of
-			Rooms</option>
-	</select>
-
-
-
-		</form>
-	</div>
 
 
 </body>

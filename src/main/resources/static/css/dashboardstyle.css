@@ -1,75 +1,108 @@
 #outer-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	padding-left: 15vw;
-	padding-right: 15vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 15vw;
+  padding-right: 15vw;
 }
-#panel, .flip {
+
+#panel {
+  display: none;
+  font-size: 16px;
+  padding: 10px;
+  color: black;
+  margin: auto;
+}
+
+.flip {
   font-size: 16px;
   padding: 10px;
   color: white;
   margin: auto;
 }
 
-#panel {
-	 display: none;
-}
-
 .left-container {
-	display: flex;
-	flex: 1;
-	margin: 5px;
-	border: 1px solid black;
-	justify-content: center;
-	flex-direction: column;
+  display: flex;
+  flex: 1;
+  margin: 5px;
+  justify-content: center;
+  flex-direction: column;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .booking-container {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+	margin: 1vw;
+  flex-direction: row;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.booking-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .left-inner {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .right-inner {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .right-container {
-	display: flex;
-	flex: 1;
-	margin: 5px;
-	justify-content: center;
-	flex-direction: column;
-	border: 1px solid black;
+  display: flex;
+  flex: 1;
+  margin: 5px;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .listing-container {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+}
+
+.listing-container:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .column-left {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .column-right {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-	text-align: center;
+  text-align: center;
 }
 
 .buttons {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.panel-controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.style-p {
+
+}
+
+.button-control {
+
 }
