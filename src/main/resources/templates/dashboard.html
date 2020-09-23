@@ -20,9 +20,8 @@
 			</ul>
 		</div>
 	</nav>
-	<!--Add listing form-->
-	<div id="panel">
-		<form>
+	<div id="formCover">
+		<div id="panel">
 			<div class="panel-controller">
 
 				<p id="booking-id">Booking ID</p>
@@ -34,35 +33,17 @@
 				<p id="kids">Number of kids</p>
 
 				<select name="package" id="package-selector">
-					<option value="" disabled selected hidden>Select Package</option>
+				</select>
+				<select name="extra-bed" id="bed-selector">
 				</select>
 			</div>
-			<input type="submit" value="Submit">
-		</form>
+			<input type="submit" value="Submit" id="update">
+		</div>
 	</div>
-
 	<div id="outer-container" class="container-fluid">
-		<p class="title">Bookings</p>
 		<!-- Booking Container -->
 		<div class="left-container">
-
-			<!--		<div class="booking-container">
-				<div class="left-inner w-50">
-					<p id="booking-id">Booking ID</p>
-					<p id="price">Price</p>
-					<p id="date-from">Date from</p>
-					<p id="date-to">Date to</p>
-				</div>
-				<div class="right-inner w-50">
-					<p id="rooms">Number of rooms</p>
-					<p id="adults">Number of adults</p>
-					<p id="kids">Number of kids</p>
-				</div>
-			</div>
-			<div class="buttons ml-auto">
-				<button id="cancel">Cancel Booking</button>
-				<button id="edit">Edit Booking</button>
-			</div>  -->
+			<p class="title">Bookings</p>
 		</div>
 
 		<!-- Listing Container -->

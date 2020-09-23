@@ -92,11 +92,11 @@ var checkOutSelector = document.getElementById('checkOutSelector');
 var dates = getDates(new Date(2021,05,1), new Date(2021,06,31));                                                                                                           
 dates.forEach(function(date) {
     var option1 = document.createElement("option");
-    option1.text = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+    option1.text = ((date.getDate() < 10) ? '0' : '') + date.getDate() + "/" + ((date.getMonth()+1 < 10) ? '0' : '') + (date.getMonth()+1) + "/" + date.getFullYear();
     option1.value = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
     checkInSelector.add(option1);
     var option2 = document.createElement("option");
-    option2.text = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
+    option2.text = ((date.getDate() < 10) ? '0' : '') + date.getDate() + "/" + ((date.getMonth()+1 < 10) ? '0' : '') + (date.getMonth()+1) + "/" + date.getFullYear();
     option2.value = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
     checkOutSelector.add(option2);
 });
