@@ -1,5 +1,5 @@
 var user = JSON.parse(localStorage.getItem('user'));
-
+var selectedBooking;
 fetch("http://localhost:8080/api/booking?id=" + user.id)
   .then(response => response.json())
   .then(function(data) {
@@ -88,9 +88,20 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       leftContainer.appendChild(bookingContainer);
 
     }
+    
+    function deleteBooking(index) {
+        selectedBooking = data[index];
+        fetch('http://localhost:8080/api/booking?id=' + selectedBooking.id, {
+          method: 'DELETE'
+        }).then(location.reload());
+    }
+    
     function editBooking(index) {
-      var selectedBooking = data[index];
-
+      selectedBooking = data[index];
+      
+      document.getElementById('panel').style.display = "block";
+      document.getElementById('formCover').style.display = "block";
+      
       var bookingId = document.getElementById('booking-id');
       bookingId.innerHTML = "Booking ID: " + selectedBooking.id;
 
@@ -113,24 +124,84 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       kids.innerHTML = "Number of kids: " + selectedBooking.numberOfKids;
 
       var package = document.getElementById('package-selector');
-      package.value = selectedBooking.package;
+      
+      var packOpt1 = document.createElement('option');
+      packOpt1.innerHTML = "Full Board";
+      
+      var packOpt2 = document.createElement('option');
+      packOpt2.innerHTML = "Half Board";
+      
+      var packOpt3 = document.createElement('option');
+      packOpt3.innerHTML = "All Inclusive";
+      
+      
+      if (selectedBooking.fullBoard == true) {
+        packOpt1.selected = true;
+      }
+        
+      if (selectedBooking.halfBoard == true) {
+        packOpt2.selected = true;
+      }
+        
+      if (selectedBooking.allInclusive == true) {
+        packOpt3.selected = true;
+      }
+        
+      package.add(packOpt1);
+      package.add(packOpt2);
+      package.add(packOpt3);
+      
+      var extraBed = document.getElementById('bed-selector');
+      
+      var bedOpt1 = document.createElement('option');
+      bedOpt1.value = true;
+      bedOpt1.innerHTML = "Yes";
+      
+      var bedOpt2 = document.createElement('option');
+      bedOpt2.value = false;
+      bedOpt2.innerHTML = "No";
+      
+      if (selectedBooking.extraBed == true)
+        bedOpt1.selected = true;
+      if (selectedBooking.extraBed == false)
+        bedOpt2.selected = true;
+        
+        extraBed.add(bedOpt1);
+        extraBed.add(bedOpt2);
     }
-
-    var package = document.getElementById('package-selector');
-
-    var full = document.createElement("option");
-    full.text = "Full Board";
-
-    var half = document.createElement("option");
-    half.text = "Half Board";
-
-    var all = document.createElement("option");
-    all.text = "All Inclusive";
-
-    package.add(all);
-    package.add(full);
-    package.add(half);
   });
+  
+var updateBtn = document.getElementById('update');
+updateBtn.addEventListener('click', function() {
+    
+    var package = document.getElementById('package-selector');
+    var extraBed = document.getElementById('bed-selector');
+    
+    selectedBooking.extraBed = (extraBed.value === 'true');
+    selectedBooking.fullBoard = (package.value === 'Full Board');
+    selectedBooking.halfBoard = (package.value === 'Half Board');
+    selectedBooking.allInclusive = (package.value === 'All Inclusive');
+    
+    putData("http://localhost:8080/api/booking?id=" + selectedBooking.id, selectedBooking)
+    .then(location.reload());
+})
+  
+async function putData(url, data) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'PUT',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data)
+  });
+  return response.json();
+}
 
 fetch("http://localhost:8080/api/accommodation/customer?id=" + user.id)
   .then(response => response.json())
