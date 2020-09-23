@@ -80,78 +80,68 @@ function populateTable(data) {
 function check(element) {
   var bookButton = document.getElementById("bookBtn");
   var tableRoomPrice = document.getElementById("price-" + element.id);
-  var totalCost = document.getElementById("totalCost");
-  var currentTotalCost = parseFloat(totalCost.innerHTML.split(" ")[1]);
+  var totalCostParagraph = document.getElementById("totalCostParagraph");
+  var currentTotalCost = parseFloat(totalCostParagraph.innerHTML.split(" ")[1]);
 
   if (element.checked) {
-    totalCost.innerHTML = "<b>Cost:</b> " + (currentTotalCost + parseFloat(tableRoomPrice.innerHTML)).toFixed(2);
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost + parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
     roomsChecked.add(element.id);
   } else {
-    totalCost.innerHTML = "<b>Cost:</b> " + (currentTotalCost - parseFloat(tableRoomPrice.innerHTML)).toFixed(2);
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
     roomsChecked.delete(element.id);
   }
+
+  if (roomsChecked.size > 0) {
+    bookButton.disabled = false;
+  } else {
+    bookButton.disabled = true;
+  }
+
+}
+
+function addExtraBed() {
+  var totalCostParagraph = document.getElementById("totalCostParagraph");
+  var currentTotalCost = parseFloat(totalCostParagraph.innerHTML.split(" ")[1]);
+  var checkboxExtraBed = document.getElementById("checkbox-extrabed");
+
+  if (checkboxExtraBed.checked) {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost + 200.0) + ":- SEK";
+  } else {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - 200.0) + ":- SEK";
+  }
+
+}
+
+function getCheckedRooms() {
+  var retStr = '"rooms": [';
+
+  for (room of roomsChecked) {
+    retStr += `{"id": ${room} },`;
+  }
+
+  retStr = retStr.substr(0, (retStr.length - 1));
+  retStr += "],";
+
+  return retStr;
 }
 
 function book() {
   let acc = JSON.parse(localStorage.getItem('selectAcc'));
 
-  const data =
-    ('{
-      "customer": {
-        "id": $ {
-          acc.id
-        }
-      },
-      "rooms": [{
-        "id": 5
-      }],
-      "dateFrom": $ {
-        acc.dateFrom
-      },
-      "dateTo": $ {
-        acc.dateTo
-      },
-      "numberOfAdults": $ {
-        acc.numberOfAdults
-      },
-      "numberOfKids": $ {
-        acc.numberOfKids
-      },
-      "allInclusive": $ {
-        acc.allInclusive
-      },
-      "fullBoard": $ {
-        acc.fullBoard
-      },
-      "halfBoard": $ {
-        acc.halfBoard
-      },
-      "extraBed": $ {
-        acc.extraBed
-      }
-    }
-  ');
+  const data = `{
+      "customer": {"id": ${acc.id}},
+      ` + getCheckedRooms() + `
+      "dateFrom": ${acc.dateFrom},
+      "dateTo": ${acc.dateTo},
+      "numberOfAdults": ${acc.numberOfAdults},
+      "numberOfKids": ${acc.numberOfKids},
+      "allInclusive": ${acc.allInclusive},
+      "fullBoard": ${acc.fullBoard},
+      "halfBoard": ${acc.halfBoard},
+      "extraBed": ${acc.extraBed}
+    }`;
 
-  fetch(baseURL + '/booking', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
+  console.log(data);
 
-function getCheckedRooms() {
-  var retStr = '';
 
-  for (room of roomsChecked) {
-
-  }
 }

@@ -47,8 +47,9 @@
           <h4 id="accommodation-header"></h4>
           <p id="accommodation-description"></p>
           <span id="rating">
-            <input id="" type="checkbox" data-toggle="tooltip" data-placement="right" title="If you need an extra bed" onClick="">
           </span>
+          <label for="Extra bed">Extra bed</label>
+          <input id="checkbox-extrabed" name="Extra bed" type="checkbox" data-toggle="tooltip" data-placement="right" title="If you need an extra bed" onclick="addExtraBed()">
         </div>
 
         <div id="accommodation-data">
@@ -72,8 +73,8 @@
         </div>
       </div>
       <div id="booking-container">
-        <p id="totalCost"><b>Cost:</b> 0</p>
-        <button type="button" id="bookBtn" class="btn btn-primary btn-lg btn-block">Bookin' it</button>
+        <p id="totalCostParagraph"><b>Cost:</b> 0</p>
+        <button type="button" id="bookBtn" disabled class="btn btn-primary btn-lg btn-block" onclick="book()">Bookin' it</button>
       </div>
       <div id="container-rooms">
         <table id="table-rooms">
