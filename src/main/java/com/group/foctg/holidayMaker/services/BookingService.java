@@ -24,7 +24,6 @@ import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
@@ -35,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
 @Service
-@Slf4j
 public class BookingService {
 
     @Autowired
@@ -61,8 +59,25 @@ public class BookingService {
         short totalBedsNeeded = (short) (booking.getNumberOfAdults() + booking.getNumberOfKids() + (booking.getExtraBed() ? 1 : 0));
         short totalBedCapacity = 0;
 
+        if (booking.getAllInclusive()) {
+            booking.setCost(booking.getCost() + 3000.0f);
+            booking.setFullBoard(false);
+            booking.setHalfBoard(false);
+        } else if (booking.getFullBoard()) {
+            booking.setCost(booking.getCost() + 1500.0f);
+            booking.setAllInclusive(false);
+            booking.setHalfBoard(false);
+        } else {
+            booking.setCost(booking.getCost() + 500.0f);
+            booking.setAllInclusive(false);
+            booking.setFullBoard(false);
+            booking.setHalfBoard(true);
+        }
+
         for (Room r : booking.getRooms()) {
-            totalBedCapacity += roomService.findById(r.getId()).get().getNumberOfBeds();
+            Room room = roomService.findById(r.getId()).get();
+            booking.setCost(booking.getCost() + room.getPrice());
+            totalBedCapacity += room.getNumberOfBeds();
         }
 
         if (totalBedCapacity < totalBedsNeeded) {

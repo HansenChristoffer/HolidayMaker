@@ -1,29 +1,178 @@
-document.addEventListener("DOMContentLoaded", getData(), false);
+const baseURL = "http://localhost:8080/api";
+var roomsChecked = new Set();
 
-async function getData() {
-  let baseURL = "http://localhost:8080/api";
-  let id = 4; /* get this from selection from past page */
-  let dateFrom = "05/04/2020"; /* get this from selection from past page */
-  let dateTo = "15/04/2020"; /* get this from selection from past page */
-  let response = await fetch(baseURL + "/filter/rooms/accommodation?id=" + id + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo)
+document.addEventListener("DOMContentLoaded", startUp(), false);
+
+async function startUp() {
+  setViewData();
+  setTableData();
+}
+
+async function setViewData() {
+  var acc = JSON.parse(localStorage.getItem('selectAcc'));
+  var response = await fetch(baseURL + "/accommodation?id=" + acc.id)
     .then(response => response.json())
     .then(function(data) {
-      populateTableWithJson(data);
+
+      var header = document.getElementById("accommodation-header");
+      var imgElement = document.getElementById("accommodation-img");
+      var descriptionElement = document.getElementById("accommodation-description");
+      var ratingElement = document.getElementById("rating");
+      var hasPool = document.getElementById("hasPool");
+      var hasRestaurant = document.getElementById("hasRestaurant");
+      var hasChildEvents = document.getElementById("hasChildEvents");
+      var hasEntertainment = document.getElementById("hasEntertainment");
+      var distanceBeach = document.getElementById("distanceBeach");
+      var distanceCenter = document.getElementById("distanceCenter");
+
+      var cr = Math.round(data.rating + 0.5);
+      var ratingEleString = '';
+
+      for (var i = 0; i < cr; i++) {
+        ratingEleString = ratingEleString.concat('<span class="fa fa-star checked"></span>');
+      }
+
+      for (var i = 0; i < (5 - cr); i++) {
+        ratingEleString = ratingEleString.concat('<span class="fa fa-star"></span>');
+      }
+
+      header.innerHTML = data.name;
+      imgElement.setAttribute("src", data.imageURL);
+      descriptionElement.innerHTML = data.description;
+      ratingElement.innerHTML = ratingEleString;
+
+      hasPool.innerHTML = (data.pool) ? "Yes" : "No";
+      hasRestaurant.innerHTML = (data.restaurant) ? "Yes" : "No";
+      hasChildEvents.innerHTML = (data.childEvents) ? "Yes" : "No";
+      hasEntertainment.innerHTML = (data.nightEntertainment) ? "Yes" : "No";
+      distanceBeach.innerHTML = data.distanceToBeach;
+      distanceCenter.innerHTML = data.distanceToCenter;
+
     });
 }
 
-function populateTableWithJson(data) {
-  /*
-  Populate table with data.
-  Has not been decided on WHAT to show yet
-  */
+async function setTableData() {
+  let acc = JSON.parse(localStorage.getItem('selectAcc'))
+  var response = await fetch(baseURL + "/filter/rooms/accommodation?id=" +
+      acc.id + "&dateFrom=" +
+      acc.dateFrom + "&dateTo=" +
+      acc.dateTo)
+    .then(response => response.json())
+    .then(function(data) {
+      populateTable(data);
+    });
+}
+
+function populateTable(data) {
   var table = document.getElementById("table-rooms");
   data.forEach(function(object) {
     var tr = document.createElement("tr");
-    tr.innerHTML = '<td> id:' + object.id +
-      ' numBeds: ' + object.numberOfBeds +
-      ' price: ' + object.price +
-      '<button class="btn-book">Book</button></td>';
+    tr.innerHTML = '<td> Room with ' + object.numberOfBeds +
+      ' beds, <b>Price:</b> <span id=price-' + object.id + '>' + object.price.toFixed(2) + '</span>' +
+      ':- SEK<label class="rooms-data-container">Choose<input id="' + object.id +
+      '" type = "checkbox" data-toggle="tooltip" ' +
+      'data-placement="right" title="Checkmark if you want to book this room" onClick="check(this)">' +
+      '<span class = "checkmark"></span></label></td>';
     table.appendChild(tr);
   });
+}
+
+function check(element) {
+  var bookButton = document.getElementById("bookBtn");
+  var tableRoomPrice = document.getElementById("price-" + element.id);
+  var totalCostParagraph = document.getElementById("totalCostParagraph");
+  var currentTotalCost = parseFloat(totalCostParagraph.innerHTML.split(" ")[1]);
+
+  if (element.checked) {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost + parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
+    roomsChecked.add(element.id);
+  } else {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
+    roomsChecked.delete(element.id);
+  }
+
+  if (roomsChecked.size > 0) {
+    bookButton.disabled = false;
+  } else {
+    bookButton.disabled = true;
+  }
+
+}
+
+function addExtraBed() {
+  var totalCostParagraph = document.getElementById("totalCostParagraph");
+  var currentTotalCost = parseFloat(totalCostParagraph.innerHTML.split(" ")[1]);
+  var checkboxExtraBed = document.getElementById("checkbox-extrabed");
+
+  if (checkboxExtraBed.checked) {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost + 200.0) + ":- SEK";
+  } else {
+    totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - 200.0) + ":- SEK";
+  }
+
+}
+
+function getCheckedRooms() {
+  var retStr = '"rooms": [';
+
+  for (room of roomsChecked) {
+    retStr += `{"id": ${room} },`;
+  }
+
+  retStr = retStr.substr(0, (retStr.length - 1));
+  retStr += "],";
+
+  return retStr;
+}
+
+function book() {
+  var acc = JSON.parse(localStorage.getItem('selectAcc'));
+  var usr = JSON.parse(localStorage.getItem('user'));
+  var hasExtraBed = document.getElementById("checkbox-extrabed");
+
+  var packageList = [false, false, false];
+
+  if (acc.package == "All Inclusive") {
+    packageList[0] = true;
+  } else if (acc.package == "Fullboard") {
+    packageList[1] = true;
+  } else {
+    packageList[2] = true;
+  }
+
+  var data = {
+    customer: {
+      id: usr.id
+    },
+    rooms: [],
+    dateFrom: acc.dateFrom,
+    dateTo: acc.dateTo,
+    numberOfAdults: 1,
+    numberOfKids: 1,
+    allInclusive: packageList[0],
+    fullBoard: packageList[1],
+    halfBoard: packageList[2],
+    extraBed: hasExtraBed.checked
+  };
+
+  for (room of roomsChecked) {
+    data.rooms.push({
+      id: room
+    });
+  }
+
+  fetch(baseURL + "/booking", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }

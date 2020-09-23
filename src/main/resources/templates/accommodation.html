@@ -8,8 +8,8 @@
   <meta name="keywords" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/landingpagestyle.css">
   <link rel="stylesheet" href="css/accommodationStyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <script src="js/accommodationrooms.js"></script>
 
@@ -18,38 +18,38 @@
 
 <body>
   <div class="container-fluid">
+
     <!--Menubar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Holiday Maker</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+      <a class="navbar-brand" href="/">Holiday Maker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
 
-					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Profile</a></li>
-				</ul>
-			</div>
-		</nav>
+          <li class="nav-item"><a class="nav-link" href="/">Back to frontpage</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="/dashboard" tabindex="-1" aria-disabled="true">Profile</a></li>
+        </ul>
+      </div>
+    </nav>
     <!-- END-->
 
     <div id="container-body">
       <div id="accommodation">
+
+        <div id="image-container">
+          <img id="accommodation-img" src="" alt="Accommodation image">
+        </div>
+
         <div id="accommadation-info">
-          <img src="{{ACCOMMODATION.IMGURL}}"></img>
-          <h4>{{Accommodation}}</h4>
-          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi
-            vitae est. Mauris placerat eleifend leo.</p>
-          <p id="rating">Rating: 0/5</p>
+          <h4 id="accommodation-header"></h4>
+          <p id="accommodation-description"></p>
+          <span id="rating">
+          </span>
+          <label for="Extra bed">Extra bed</label>
+          <input id="checkbox-extrabed" name="Extra bed" type="checkbox" data-toggle="tooltip" data-placement="right" title="If you need an extra bed" onclick="addExtraBed()">
         </div>
 
         <div id="accommodation-data">
@@ -63,23 +63,25 @@
           </div>
 
           <div id="accommodation-data-stats">
-            <p id="hasPool">null</p>
-            <p id="hasRestaurant">null</p>
-            <p id="hasChildEvents">null</p>
-            <p id="hasEntertainment">null</p>
-            <p id="distanceBeach">null</p>
-            <p id="distanceCenter">null</p>
+            <p id="hasPool"></p>
+            <p id="hasRestaurant"></p>
+            <p id="hasChildEvents"></p>
+            <p id="hasEntertainment"></p>
+            <p id="distanceBeach"></p>
+            <p id="distanceCenter"></p>
           </div>
         </div>
       </div>
-
+      <div id="booking-container">
+        <p id="totalCostParagraph"><b>Cost:</b> 0</p>
+        <button type="button" id="bookBtn" disabled class="btn btn-primary btn-lg btn-block" onclick="book()">Bookin' it</button>
+      </div>
       <div id="container-rooms">
         <table id="table-rooms">
         </table>
       </div>
     </div>
-    </div>
-
+  </div>
 </body>
 
 </html>

@@ -23,6 +23,7 @@ import com.group.foctg.holidayMaker.services.CustomerService;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * RestController for the {@link com.group.foctg.holidayMaker.model.Customer}
@@ -46,153 +46,154 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 @RequestMapping(value = "/api")
+@Slf4j
 public class CustomerController {
 
-	@Autowired
-	private CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-	/**
-	 * GET endpoint method that listens on <code>"/login"</code> URL and will
-	 * call the {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail}
-	 * method from the Service.
-	 *
-	 *
-	 * @return an Object of {@link com.group.foctg.holidayMaker.model.Customer};
-	 *         from the autowired Service
-	 */
-	
-	@GetMapping("/login")
-	public Customer loginCustomerByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
-		
-		try {
-			if (customerService.findCustomerByEmail(email).get().getPassword().equals(password)) {
-				System.out.println("logged in");
-				Customer user = customerService.findCustomerByEmail(email).get();
-				
-				return user;
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("not logged in");
-			return null;
-		}
-		
-		
-		return null;
-	}
+    /**
+     * GET endpoint method that listens on <code>"/login"</code> URL and will
+     * call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail}
+     * method from the Service.
+     *
+     * @param email
+     * @param password
+     * @return an Object of {@link com.group.foctg.holidayMaker.model.Customer};
+     * from the autowired Service
+     */
+    @GetMapping("/login")
+    public Customer loginCustomerByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
+        try {
+            Customer user;
+            if ((user = customerService.findCustomerByEmail(email).get()).getPassword().equals(password)) {
+                log.info("User logged in -> USER{ email= " + email + ", password= " + password + " }");
 
-	/**
-	 * GET endpoint method that listens on <code>"/customers"</code> URL and will
-	 * call the {@link com.group.foctg.holidayMaker.services.CustomerService#getAll}
-	 * method from the Service.
-	 *
-	 *
-	 * @return a List&lt;{@link com.group.foctg.holidayMaker.model.Customer}&gt;
-	 *         from the autowired Service
-	 */
-	@GetMapping("/customers")
-	public List<Customer> allCustomers() {
-		return customerService.findAll();
-	}
+                return user;
+            }
+        } catch (NoSuchElementException e) {
+            log.info("Failed login try with -> USER{ email= " + email + ", password= " + password + " }");
+            return null;
+        }
 
-	/**
-	 * POST endpoint method that listens on <code>"/customer"</code> URL and will
-	 * call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#saveCustomer(com.group.foctg.holidayMaker.model.Customer)}
-	 * method from the Service.
-	 *
-	 * @param customer {@link com.group.foctg.holidayMaker.model.Customer} object to
-	 *                 pass to the Service class
-	 * @return a boolean value from the autowired Service
-	 */
-	@RequestMapping(value = "/customer", method = RequestMethod.POST)
-	public boolean saveCustomer(@RequestBody Customer customer) {
-		return customerService.saveCustomer(customer);
-	}
+        return null;
+    }
 
-	/**
-	 * DELETE endpoint method that listens on <code>"/customer"</code> URL and will
-	 * call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#removeCustomer}
-	 * method from the autowired Service.
-	 *
-	 * @param id Long value to pass to the Service class
-	 * @return a boolean value from the Service
-	 */
-	@RequestMapping(value = "/customer", method = RequestMethod.DELETE)
-	public boolean removeCustomer(@RequestParam Long id) {
-		return customerService.removeCustomer(id);
-	}
+    /**
+     * GET endpoint method that listens on <code>"/customers"</code> URL and
+     * will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#getAll}
+     * method from the Service.
+     *
+     *
+     * @return a List&lt;{@link com.group.foctg.holidayMaker.model.Customer}&gt;
+     * from the autowired Service
+     */
+    @GetMapping("/customers")
+    public List<Customer> allCustomers() {
+        return customerService.findAll();
+    }
 
-	/**
-	 * GET endpoint method that listens on <code>"/customer"</code> URL and will
-	 * call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#findById} method
-	 * from the autowired Service.
-	 *
-	 * @param id Long value to pass to the Service class
-	 * @return a Optional list of type
-	 *         {@link com.group.foctg.holidayMaker.model.Customer} object from the
-	 *         Service
-	 */
-	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-	public Optional<Customer> findCustomerById(@RequestParam Long id) {
-		Optional<Customer> cust = customerService.findById(id);
+    /**
+     * POST endpoint method that listens on <code>"/customer"</code> URL and
+     * will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#saveCustomer(com.group.foctg.holidayMaker.model.Customer)}
+     * method from the Service.
+     *
+     * @param customer {@link com.group.foctg.holidayMaker.model.Customer}
+     * object to pass to the Service class
+     * @return a boolean value from the autowired Service
+     */
+    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+    public boolean saveCustomer(@RequestBody Customer customer) {
+        return customerService.saveCustomer(customer);
+    }
 
-		if (cust.isEmpty()) {
-			throw new CustomerNotFoundException(id);
-		}
+    /**
+     * DELETE endpoint method that listens on <code>"/customer"</code> URL and
+     * will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#removeCustomer}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class
+     * @return a boolean value from the Service
+     */
+    @RequestMapping(value = "/customer", method = RequestMethod.DELETE)
+    public boolean removeCustomer(@RequestParam Long id) {
+        return customerService.removeCustomer(id);
+    }
 
-		return cust;
-	}
+    /**
+     * GET endpoint method that listens on <code>"/customer"</code> URL and will
+     * call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findById}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} object from the
+     * Service
+     */
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+    public Optional<Customer> findCustomerById(@RequestParam Long id) {
+        Optional<Customer> cust = customerService.findById(id);
 
-	/**
-	 * GET endpoint method that listens on <code>"/customer/by"</code> URL and will
-	 * call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail}
-	 * method from the autowired Service.
-	 *
-	 * @param email String value to pass to the Service class
-	 * @return a Optional list of type
-	 *         {@link com.group.foctg.holidayMaker.model.Customer} value from the
-	 *         Service
-	 */
-	@RequestMapping(value = "/customer/by", method = RequestMethod.GET)
-	public Optional<Customer> findCustomerByEmail(@RequestParam String email) {
-		Optional<Customer> cust = customerService.findCustomerByEmail(email);
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(id);
+        }
 
-		if (cust.isEmpty()) {
-			throw new CustomerNotFoundException(email);
-		}
+        return cust;
+    }
 
-		return cust;
-	}
+    /**
+     * GET endpoint method that listens on <code>"/customer/by"</code> URL and
+     * will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomerByEmail}
+     * method from the autowired Service.
+     *
+     * @param email String value to pass to the Service class
+     * @return a Optional list of type
+     * {@link com.group.foctg.holidayMaker.model.Customer} value from the
+     * Service
+     */
+    @RequestMapping(value = "/customer/by", method = RequestMethod.GET)
+    public Optional<Customer> findCustomerByEmail(@RequestParam String email) {
+        Optional<Customer> cust = customerService.findCustomerByEmail(email);
 
-	/**
-	 * GET endpoint method that listens on <code>"/customer/bookings"</code> URL and
-	 * will call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersBookingsByCustomerID}
-	 * method from the autowired Service.
-	 *
-	 * @param id Long value to pass to the Service class
-	 * @return a List object from the Service
-	 */
-	@RequestMapping(value = "/customer/bookings", method = RequestMethod.GET)
-	public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {
-		return customerService.findCustomersBookingsByCustomerID(id);
-	}
+        if (cust.isEmpty()) {
+            throw new CustomerNotFoundException(email);
+        }
 
-	/**
-	 * GET endpoint method that listens on <code>"/customer/accommodations"</code>
-	 * URL and will call the
-	 * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersAccommodationsByCustomerID}
-	 * method from the autowired Service.
-	 *
-	 * @param id Long value to pass to the Service class
-	 * @return a List object from the Service
-	 */
-	@RequestMapping(value = "/customer/accommodations", method = RequestMethod.GET)
-	public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
-		return customerService.findCustomersAccommodationsByCustomerID(id);
-	}
+        return cust;
+    }
+
+    /**
+     * GET endpoint method that listens on <code>"/customer/bookings"</code> URL
+     * and will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersBookingsByCustomerID}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class
+     * @return a List object from the Service
+     */
+    @RequestMapping(value = "/customer/bookings", method = RequestMethod.GET)
+    public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {
+        return customerService.findCustomersBookingsByCustomerID(id);
+    }
+
+    /**
+     * GET endpoint method that listens on
+     * <code>"/customer/accommodations"</code> URL and will call the
+     * {@link com.group.foctg.holidayMaker.services.CustomerService#findCustomersAccommodationsByCustomerID}
+     * method from the autowired Service.
+     *
+     * @param id Long value to pass to the Service class
+     * @return a List object from the Service
+     */
+    @RequestMapping(value = "/customer/accommodations", method = RequestMethod.GET)
+    public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
+        return customerService.findCustomersAccommodationsByCustomerID(id);
+    }
 
 }
