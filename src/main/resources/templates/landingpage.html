@@ -163,7 +163,11 @@
 
 
 		<div class="titleHeader">
-			<p class="navbar-brand headerTitle">Results</p>
+            <p class="navbar-brand headerTitle">Results</p>
+            <select name="sortBy" id="sort">
+                <option value="" selected >Sort by Price (Asc)</option>
+                <option value="">Sort by Rating (Asc)</option>
+            </select>
 		</div>
 		<div class="resultsContainer"></div>
 
@@ -187,17 +191,35 @@
 	</div>
 	<footer>
 
-		<h5 class="text-uppercase">Contact info</h5>
-		<p id="adress">Adress:</p>
-
-		<a href="https://newton.learnpoint.se/">Newton</a>
-
-		<p>Github:</p>
-		<a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker
-		</a>
-		<p>Authors:</p>
-
-		<p id="members">Christoffer, Frida, Olle and Tanvir</p>
+		<div class="footerContainer"> 
+		
+		<div class= "halfContainer"> 
+			<div class= "rowPairContainer">
+				<p id="adress">Adress:    </p>
+		        <a href="https://newton.learnpoint.se/">Newton</a>
+			</div>
+         </div>
+		<div class="halfContainer">
+		  <div class= "rowPairContainer">
+		       <p id="location">Location:    </p>
+               <a href="https://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=svhttps://www.google.se/maps/place/Newton+Malm%C3%B6/@55.6098155,13.041636,17z/data=!4m5!3m4!1s0x4653a3547430d8c7:0x19efb59498939bed!8m2!3d55.6098125!4d13.0438248?hl=sv"
+        >Location of Newton</a>
+		  </div>
+		</div>
+		<div class= "halfContainer">
+		  <div class= "rowPairContainer">
+		       <p>Github:    </p>
+                <a href="https://github.com/ollejj/HolidayMaker">Github/holidayMaker </a>
+	   	   </div>
+		</div>
+		<div class= "halfContainer">
+		     <div class= "rowPairContainer">
+		      <p>Authors:    </p> 
+              <p id="members">Christoffer, Frida, Olle and Tanvir</p>
+	       	</div>
+		</div>
+		</div>
+		
 	</footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

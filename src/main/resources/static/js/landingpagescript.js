@@ -75,6 +75,16 @@ fetch("http://localhost:8080/api/accommodations")
     .then(function(data) {      
          
          var resultContainer = document.getElementsByClassName('resultsContainer')[0];
+         var sorting = document.getElementById('sort');
+         
+         var sortable = [];
+         for (var item in data) {
+             sortable.push(item);
+         }
+         
+         sortable.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+         
+         console.log(sortable)
          
          for (var i = 0; i < data.length; i++) {
           
@@ -120,12 +130,12 @@ fetch("http://localhost:8080/api/accommodations")
             
             var itemDesc = document.createElement('p');
             itemDesc.classList.add('itemDesc');
-            itemDesc.innerHTML = data[i].description;
+            itemDesc.innerHTML = data[i].description.substring(0, 140) + " ...";
             
             
             var button = document.createElement('input');
             button.setAttribute("type", "button");
-            button.setAttribute("value", "Book Now!");
+            button.setAttribute("value", "Inspect");
             
             button.addEventListener("click", function(index) {
               return function(){
@@ -133,17 +143,8 @@ fetch("http://localhost:8080/api/accommodations")
               }
             }(i));
             
-            var hiddenId = document.createElement('p');
-            hiddenId.style = "display: none";
-            hiddenId.innerHTML = data[i].id;
-            
-            var hiddenDateTo = document.createElement('p');
-            hiddenDateTo.style = "display: none";
-            hiddenDateTo.innerHTML = data[i].dateTo;
-            
-            var hiddenDateFrom = document.createElement('p');
-            hiddenDateFrom.style = "display: none";
-            hiddenDateFrom.innerHTML = data[i].dateFrom;
+            var hiddenRating = document.createElement('p');
+            hiddenRating.innerHTML = data[i].rating;
             
             rowPairContainer1.appendChild(itemPool);
             rowPairContainer1.appendChild(itemChildren);
@@ -160,9 +161,7 @@ fetch("http://localhost:8080/api/accommodations")
             resultItem.appendChild(rowPairContainer2);
             resultItem.appendChild(itemDesc);
             resultItem.appendChild(button);
-            resultItem.appendChild(hiddenId);
-            resultItem.appendChild(hiddenDateTo);
-            resultItem.appendChild(hiddenDateFrom);
+            resultItem.appendChild(hiddenRating);
             
             resultContainer.appendChild(resultItem);
          }
@@ -171,11 +170,17 @@ fetch("http://localhost:8080/api/accommodations")
             
             var dateFrom = document.getElementById('checkInSelector').value;
             var dateTo = document.getElementById('checkOutSelector').value;
+            var adults = document.getElementById('adultsSelector').value;
+            var kids = document.getElementById('kidsSelector').value;
+            var package = document.getElementById('packageSelector').value;
             
             collected = {
                 id: data[index].id,
                 dateFrom: dateFrom,
-                dateTo: dateTo
+                dateTo: dateTo,
+                adults: adults,
+                kids: kids,
+                package: package
             };
             
             localStorage.setItem('selectAcc', JSON.stringify(collected));
