@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="css/landingpagestyle.css">
 </head>
 <body>
+
+	<!--  <h3 sec:authorize="isAuthenticated()" th:text="${customer.email}"></h3>-->
+
 	<div class="container-fluid">
 
 		<!--Menubar-->
@@ -29,7 +32,8 @@
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"
 						onclick="openLogin()">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" onclick="openReg()">Sign up</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="openReg()">Sign up</a></li>
 
 					<li class="nav-item"><a class="nav-link disabled" href="#"
 						tabindex="-1" aria-disabled="true">Profile</a></li>
@@ -156,24 +160,22 @@
 		<div class="titleHeader">
 			<p class="navbar-brand headerTitle">Results</p>
 		</div>
-		<div class="resultsContainer">
-			
-		</div>
+		<div class="resultsContainer"></div>
 
 		<div id="formCover">
 			<div id="loginForm">
-                <p class="navbar-brand headerTitle">Login</p>
-				<input value='mockEmail1@mock.io' type='text' name='username'>
-				<input value='mock_password1' type='password' name='password' /> <input
-					name="submit" type="submit" value="Login" onclick="closeLogin()" />
-                <a class="closeForm" href="#" onclick="closeLogin()">Close</a>
+				<p class="navbar-brand headerTitle">Login</p>
+				<input id="email"  placeholder='Email' value="mockEmail1@mock.io" type='text'
+					name='email' /> <input id="password" value="mock_password1"
+					type='password' placeholder='Password' name='password' /> <input name="submit"
+					type="submit" value="Login" onclick="closeLogin()" />
 			</div>
 			<div id="regForm">
-                <p class="navbar-brand headerTitle">Register</p>
-				<input placeholder='Email' type='text' name='username'>
-				<input placeholder='Password' type='password' name='password' />
-				<input placeholder='Repeat Password' type='password' name='password' />
-				<input name="submit" type="submit" value="Register" onclick="closeReg()" />
+				<p class="navbar-brand headerTitle">Register</p>
+				<input placeholder='Email' id="regEmail" type='text' name='email'> <input
+					placeholder='Password' id="regPass" type='password' name='password' /> <input
+					placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
+					name="submit" type="submit" value="Register" onclick="closeReg()" />
 				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
 			</div>
 		</div>
@@ -203,7 +205,5 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
 	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-	crossorigin="anonymous"></script>
-
-<script src="js/landingpagescript.js"></script>
+	crossorigin="anonymous"></script><script src="js/landingpagescript.js"></script>
 </html>
