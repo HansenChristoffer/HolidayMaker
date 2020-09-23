@@ -7,18 +7,16 @@
 }
 
 #panel {
-  display: none;
   font-size: 16px;
   padding: 10px;
   color: black;
   margin: auto;
 }
 
-.flip {
-  font-size: 16px;
-  padding: 10px;
-  color: white;
-  margin: auto;
+.panel-controller {
+	padding: 3vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .left-container {
@@ -91,12 +89,6 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-}
-
-.panel-controller {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 
 .style-p {

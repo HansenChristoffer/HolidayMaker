@@ -14,7 +14,7 @@
 		<a class="nav-link mr-auto" href="#">back to explorer</a>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link flip" href="#" onclick="addListing()">Add listing</a></li>
+
 				<li class="nav-item active"><a class="nav-link" href="#">Sign
 						out</a></li>
 			</ul>
@@ -24,57 +24,24 @@
 	<div id="panel">
 		<form>
 			<div class="panel-controller">
-				<div class="selector-left">
-					<input type="text" id="listing-name" name="name" placeholder="Name">
+			
+				<p id="booking-id">Booking ID</p>
+				<p id="price">Price</p>
+				<p id="date-from">Date from</p>
+				<p id="date-to">Date to</p>
+				<p id="rooms">Number of rooms</p>
+				<p id="adults">Number of adults</p>
+				<p id="kids">Number of kids</p>
 
-					<textarea placeholder="Description" id="description-text" rows="4" cols="50"></textarea>
-
-					<select name="location" id="location-selector">
-						<option value="" disabled selected hidden>Select location</option>
-					</select>
-
-					<select name="rooms" id="room-selector">
-						<option value="" disabled selected hidden>Number of
-							rooms</option>
-					</select>
-				</div>
-
-				<div class="selector-right">
-					<p class="propertyTitle">Access to pool?</p>
-					<select name="pool" id="pool-selector">
-						<option value="" selected>Yes</option>
-						<option value="">No</option>
-					</select>
-
-					<p class="propertyTitle">Activities for children?</p>
-					<select name="checkOut" id="child-selector">
-						<option value="" selected>Yes</option>
-						<option value="">No</option>
-					</select>
-
-					<p class="propertyTitle">Nightly entertainment?</p>
-					<select name="entertainment" id="entertainment-selector">
-						<option value="" selected>Yes</option>
-						<option value="">No</option>
-					</select>
-
-					<p class="propertyTitle">Distance to center</p>
-					<select name="center" id="center-selector">
-						<option value="" disabled selected hidden>Max distance</option>
-					</select>
-
-					<p class="propertyTitle">Distance to beach</p>
-					<select name="beach" id="beach-selector">
-						<option value="" disabled selected hidden>Max distance</option>
-					</select>
-				</div>
+				<select name="package" id="package-selector">
+					<option value="" disabled selected hidden>Select Package</option>
+				</select>
+			</div>
 				<input type="submit" value="Submit">
 		</form>
 	</div>
-	</div>
 
 	<div id="outer-container" class="container-fluid">
-
 		<p class="title">Bookings</p>
 		<!-- Booking Container -->
 		<div class="left-container">

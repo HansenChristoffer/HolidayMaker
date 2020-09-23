@@ -49,17 +49,28 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       var btnDiv = document.createElement('div');
       btnDiv.classList.add('buttons');
 
-      var button1 = document.createElement('input');
-      button1.setAttribute("type", "button");
-      button1.setAttribute("value", "Edit booking");
+      var buttonEdit = document.createElement('input');
+      buttonEdit.setAttribute("type", "button");
+      buttonEdit.setAttribute("value", "Edit booking");
 
-      var button2 = document.createElement('input');
+      buttonEdit.addEventListener("click", function(index) {
+        return function(){
+          editBooking(index);
+        }
+      }(i));
 
-      button2.setAttribute("type", "button");
-      button2.setAttribute("value", "Delete booking");
+      var buttonDelete = document.createElement('input');
+      buttonDelete.setAttribute("type", "button");
+      buttonDelete.setAttribute("value", "Delete booking");
 
-      btnDiv.appendChild(button1);
-      btnDiv.appendChild(button2);
+      buttonDelete.addEventListener("click", function(index) {
+        return function(){
+          deleteBooking(index);
+        }
+      }(i));
+
+      btnDiv.appendChild(buttonEdit);
+      btnDiv.appendChild(buttonDelete);
 
       resultBookingLeft.appendChild(bookingId);
       resultBookingLeft.appendChild(price);
@@ -77,7 +88,48 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       leftContainer.appendChild(bookingContainer);
 
     }
+    function editBooking(index) {
+      var selectedBooking = data[index];
 
+      var bookingId = document.getElementById('booking-id');
+      bookingId.innerHTML = "Booking ID: " + selectedBooking.id;
+
+      var price = document.getElementById('price');
+      price.innerHTML = "Cost: " + selectedBooking.cost;
+
+      var dateFrom = document.getElementById('date-from');
+      dateFrom.innerHTML = "Date from: " + selectedBooking.dateFrom;
+
+      var dateTo = document.getElementById('date-to');
+      dateTo.innerHTML = "Date to: " + selectedBooking.dateTo;
+
+      var rooms = document.getElementById('rooms');
+      rooms.innerHTML = "Number of rooms: " + selectedBooking.rooms;
+
+      var adults = document.getElementById('adults');
+      adults.innerHTML = "Number of adults: " + selectedBooking.numberOfAdults;
+
+      var kids = document.getElementById('kids');
+      kids.innerHTML = "Number of kids: " + selectedBooking.numberOfKids;
+
+      var package = document.getElementById('package-selector');
+      package.value = selectedBooking.package;
+    }
+
+    var package = document.getElementById('package-selector');
+
+    var full = document.createElement("option");
+    full.text = "Full Board";
+
+    var half = document.createElement("option");
+    half.text = "Half Board";
+
+    var all = document.createElement("option");
+    all.text = "All Inclusive";
+
+    package.add(all);
+    package.add(full);
+    package.add(half);
   });
 
 fetch("http://localhost:8080/api/accommodation/customer?id=" + user.id)
