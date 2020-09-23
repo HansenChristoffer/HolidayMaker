@@ -14,6 +14,7 @@
 		<a class="nav-link mr-auto" href="#">back to explorer</a>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link flip" href="#" onclick="addListing()">Add listing</a></li>
 				<li class="nav-item active"><a class="nav-link" href="#">Sign
 						out</a></li>
 			</ul>
@@ -64,6 +65,32 @@
 			</div>
 		</div>
 	</div>
+	<!--Add listing form-->
+	<!--<p class="flip" onclick="addListing()">Click to show panel</p>-->
+
+	<div id="panel">
+		<form>
+
+			<input type="text" id="listing-name" name="name" placeholder="Name">
+
+			<textarea placeholder="Description" id="description-text" rows="4" cols="50">
+	</textarea>
+
+			<select name="location" id="location-selector">
+				<option value="" disabled selected hidden>Select Location</option>
+			</select>
+
+	<select name="rooms" id="roomsSelector">
+		<option value="" disabled selected hidden>Number of
+			Rooms</option>
+	</select>
+
+
+
+		</form>
+	</div>
+
+
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
