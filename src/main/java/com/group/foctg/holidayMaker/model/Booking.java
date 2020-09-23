@@ -48,9 +48,8 @@ import lombok.extern.slf4j.Slf4j;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@Slf4j
 public class Booking implements Serializable {
-
+    
     public Booking() {
     }
 
@@ -89,27 +88,8 @@ public class Booking implements Serializable {
         this.fullBoard = fullBoard;
         this.halfBoard = halfBoard;
         this.extraBed = extraBeds;
-        this.cost = 0f;
-        
-        this.rooms.forEach(r -> {
-            this.cost += r.getPrice();
-        });
-        this.cost += extraBed ? 200 : 0;
+        this.cost += 0f + (extraBed ? 200f : 0f);
 
-        if (allInclusive) {
-            this.cost += 3000.0f;
-            this.fullBoard = false;
-            this.halfBoard = false;
-        } else if (fullBoard) {
-            this.cost += 1500.0f;
-            this.allInclusive = false;
-            this.halfBoard = false;
-        } else {
-            this.cost += 750.0f;
-            this.allInclusive = false;
-            this.fullBoard = false;
-            this.halfBoard = true;
-        }
     }
 
     @Id
@@ -152,8 +132,8 @@ public class Booking implements Serializable {
     @Column
     private Boolean extraBed;
 
-    @Column
-    private Float cost;
+    @Column(columnDefinition = "float default 1")
+    private float cost;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private ReservedDates reservedDates;
@@ -422,11 +402,11 @@ public class Booking implements Serializable {
         this.reservedDates = reservedDates;
     }
 
-    public Float getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(Float cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 
