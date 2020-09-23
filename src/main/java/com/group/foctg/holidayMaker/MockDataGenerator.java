@@ -419,7 +419,7 @@ public class MockDataGenerator implements CommandLineRunner {
     }
 
     private void mockDataStats(Long ms) {
-        log.info("--- Mockdata stats ---");
+        //log.info("--- Mockdata stats ---");
         List<Customer> customers = customerService.findAll();
         List<Accommodation> accommodations = accommodationService.findAll();
         List<Room> rooms = roomService.findAll();
