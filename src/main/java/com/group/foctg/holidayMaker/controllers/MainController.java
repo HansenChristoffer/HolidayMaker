@@ -13,11 +13,6 @@ public class MainController {
     public String init() {
         return "landingpage.html";
     }
-	
-	@GetMapping("/login")
-    public String asdf() {
-        return "landingpage.html";
-    }
 
     @GetMapping("/accommodation")
     public String accommodation() {

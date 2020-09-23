@@ -1,5 +1,4 @@
-<html  xmlns:th="https://www.thymeleaf.org" 
-  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html>
 
 <head>
 <title>Holiday Maker</title>
@@ -13,7 +12,7 @@
 </head>
 <body>
 
-<!--  <h3 sec:authorize="isAuthenticated()" th:text="${customer.email}"></h3>-->
+	<!--  <h3 sec:authorize="isAuthenticated()" th:text="${customer.email}"></h3>-->
 
 	<div class="container-fluid">
 
@@ -166,19 +165,10 @@
 		<div id="formCover">
 			<div id="loginForm">
 				<p class="navbar-brand headerTitle">Login</p>
-				<form name='f' action="login" method='GET'>
-					<table>
-						<tr>
-							<td><input value="mockEmail1@mock.io" type='text' name='username' /></td>
-						</tr>
-						<tr>
-							<td><input value="mock_password1" type='password' name='password' /></td>
-						</tr>
-						<tr>
-							<td><input name="submit" type="submit" value="Login" onclick="closeLogin()" /></td>
-						</tr>
-					</table>
-				</form>
+				<input id="email" value="mockEmail1@mock.io" type='text'
+					name='email' /> <input id="password" value="mock_password1"
+					type='password' name='password' /> <input name="submit"
+					type="submit" value="Login" onclick="closeLogin()" />
 			</div>
 			<div id="regForm">
 				<p class="navbar-brand headerTitle">Register</p>
@@ -215,7 +205,5 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
 	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-	crossorigin="anonymous"></script>
-
-<script src="js/landingpagescript.js"></script>
+	crossorigin="anonymous"></script><script src="js/landingpagescript.js"></script>
 </html>

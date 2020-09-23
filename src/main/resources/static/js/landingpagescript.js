@@ -1,11 +1,30 @@
+
+
 function openLogin() {
   document.getElementById("formCover").style.display = "block";
   document.getElementById("loginForm").style.display = "flex";
 }
 
 function closeLogin(flag) {
+    
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
+    
+    
+    fetch(fetchUrl)
+    .then(response => response.json())
+    .then(function(data) { 
+        localStorage.setItem('user', JSON.stringify(data));
+    })
+    .catch((error) => {
+        console.log("No user")
+    });
+    
   document.getElementById("formCover").style.display = "none";
   document.getElementById("loginForm").style.display = "none";
+  
+  //console.log(JSON.parse(localStorage.getItem('user')));
 }
 
 function openReg() {
@@ -95,6 +114,7 @@ fetch("http://localhost:8080/api/accommodations")
             resultContainer.appendChild(resultItem);
          }
     });
+    
 
 fetch("http://localhost:8080/api/locations")
     .then(response => response.json())
