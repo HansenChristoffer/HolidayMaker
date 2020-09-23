@@ -143,6 +143,10 @@ public class MockDataGenerator implements CommandLineRunner {
             customerService.saveCustomer(new Customer(mockNames.get(rand.nextInt(mockNames.size())) + rand.nextInt(255) + "@holidaymaker.io",
                     "password", new ArrayList<>(), new ArrayList<>()));
         }
+        
+            customerService.saveCustomer(new Customer("test@test.io",
+                    "password", new ArrayList<>(), new ArrayList<>()));
+        
     }
 
     private void createMockAccommodations() {
