@@ -63,20 +63,27 @@ public class MockDataGenerator implements CommandLineRunner {
     @Autowired
     private ReservedDatesService reservedDatesService;
 
+    private List<String> mockNames;
+
+    private List<String> mockPlaces;
+
+    private List<String> mockURL;
+
+    private String mockDescription;
+
+    private final File fNames = new File("." + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "data" + File.separator + "mockdatanames.txt");
+    private final File fPlaces = new File("." + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "data" + File.separator + "mockdataplaces.txt");
+
     @Override
     public void run(String... args) throws Exception {
-
         log.info("Started mockdata generation, sit back and take it easy because this might take awhile...");
 
-        File fNames = new File("." + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "data" + File.separator + "mockdatanames.txt");
-        File fPlaces = new File("." + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "data" + File.separator + "mockdataplaces.txt");
-
-        List<String> mockNames = getDataFromFile(fNames);
-        List<String> mockPlaces = getDataFromFile(fPlaces);
-        List<String> mockURL = new ArrayList<>(Arrays.asList("http://www.newdesignfile.com/postpic/2009/07/home-real-estate-stock-photos_385209.jpg",
+        mockNames = getDataFromFile(fNames);
+        mockPlaces = getDataFromFile(fPlaces);
+        mockURL = new ArrayList<>(Arrays.asList("http://www.newdesignfile.com/postpic/2009/07/home-real-estate-stock-photos_385209.jpg",
                 "http://www.newdesignfile.com/postpic/2009/07/american-modern-home_385211.jpg", "http://www.newdesignfile.com/postpic/2009/07/high-water-lake-house-dock_385213.jpg",
                 "http://www.newdesignfile.com/postpic/2009/07/adobe-abandoned-house_385217.jpg", "https://images.freeimages.com/images/large-previews/dae/houses-1527478.jpg"));
-        String mockDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+        mockDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
                 + "Maecenas efficitur urna vitae aliquet rhoncus. "
                 + "Nunc aliquam turpis sed porta pharetra. "
                 + "Nam scelerisque rhoncus urna. Phasellus et augue sem. "
@@ -87,32 +94,13 @@ public class MockDataGenerator implements CommandLineRunner {
                 + "lectus placerat, dictum elit at, volutpat sapien. Donec "
                 + "sollicitudin in erat sed efficitur. Integer vel blandit urna.";
 
-        for (int i = 0; i < 5; i++) {
-            locationService.saveLocation(new Location(mockPlaces.get(rand.nextInt(mockPlaces.size())), new ArrayList<>()));
-        }
+        createMockLocations();
 
-        for (int i = 0; i < 5; i++) {
-            customerService.saveCustomer(new Customer(mockNames.get(rand.nextInt(mockNames.size())) + rand.nextInt(255) + "@holidaymaker.io",
-                    "password", new ArrayList<>(), new ArrayList<>()));
-        }
+        createMockCustomers();
 
-        for (int i = 0; i < 5; i++) {
-            accommodationService.saveAccommodation(new Accommodation(
-                    mockNames.get(rand.nextInt(mockNames.size())),
-                    rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(),
-                    (short) rand.nextInt(1000), (short) rand.nextInt(1000), locationService.findById(Long.valueOf(i) + 1).get(), mockURL.get(i),
-                    mockDescription, new ArrayList<>(), customerService.findById(Long.valueOf(i) + 6).get(), (rand.nextFloat() * (5.0f - 0.1f) + 0.1f)));
-        }
+        createMockAccommodations();
 
-        List<Accommodation> dbAccommodations = accommodationService.findAll();
-
-        dbAccommodations.forEach(ma -> {
-            for (int i = 0; i < 5; i++) {
-                roomService.saveRoom(new Room((short) (rand.nextInt(6) + 2),
-                        accommodationService.findById(ma.getId()).get(),
-                        (rand.nextFloat() * (20000.0f - 1000.0f) + 1000.0f)));
-            }
-        });
+        createMockRooms();
 
         //Create mock bookings - Essentially hardcoded, which is why
         //I am hiding the abomination in a method that you can collapse
@@ -138,6 +126,41 @@ public class MockDataGenerator implements CommandLineRunner {
         }
 
         return mockdata;
+    }
+
+    private void createMockLocations() {
+        for (int i = 0; i < 5; i++) {
+            locationService.saveLocation(new Location(mockPlaces.get(rand.nextInt(mockPlaces.size())), new ArrayList<>()));
+        }
+    }
+
+    private void createMockCustomers() {
+        for (int i = 0; i < 5; i++) {
+            customerService.saveCustomer(new Customer(mockNames.get(rand.nextInt(mockNames.size())) + rand.nextInt(255) + "@holidaymaker.io",
+                    "password", new ArrayList<>(), new ArrayList<>()));
+        }
+    }
+
+    private void createMockAccommodations() {
+        for (int i = 0; i < 5; i++) {
+            accommodationService.saveAccommodation(new Accommodation(
+                    mockNames.get(rand.nextInt(mockNames.size())),
+                    rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(),
+                    (short) rand.nextInt(1000), (short) rand.nextInt(1000), locationService.findById(Long.valueOf(i) + 1).get(), mockURL.get(i),
+                    mockDescription, new ArrayList<>(), customerService.findById(Long.valueOf(i) + 6).get(), (rand.nextFloat() * (5.0f - 0.1f) + 0.1f)));
+        }
+    }
+
+    private void createMockRooms() {
+        List<Accommodation> dbAccommodations = accommodationService.findAll();
+
+        dbAccommodations.forEach(ma -> {
+            for (int i = 0; i < 5; i++) {
+                roomService.saveRoom(new Room((short) (rand.nextInt(6) + 2),
+                        accommodationService.findById(ma.getId()).get(),
+                        (rand.nextFloat() * (20000.0f - 1000.0f) + 1000.0f)));
+            }
+        });
     }
 
     /**
