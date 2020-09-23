@@ -126,22 +126,53 @@ function getCheckedRooms() {
 }
 
 function book() {
-  let acc = JSON.parse(localStorage.getItem('selectAcc'));
+  var acc = JSON.parse(localStorage.getItem('selectAcc'));
+  var usr = JSON.parse(localStorage.getItem('user'));
+  var hasExtraBed = document.getElementById("checkbox-extrabed");
 
-  const data = `{
-      "customer": {"id": ${acc.id}},
-      ` + getCheckedRooms() + `
-      "dateFrom": ${acc.dateFrom},
-      "dateTo": ${acc.dateTo},
-      "numberOfAdults": ${acc.numberOfAdults},
-      "numberOfKids": ${acc.numberOfKids},
-      "allInclusive": ${acc.allInclusive},
-      "fullBoard": ${acc.fullBoard},
-      "halfBoard": ${acc.halfBoard},
-      "extraBed": ${acc.extraBed}
-    }`;
+  var packageList = [false, false, false];
 
-  console.log(data);
+  if (acc.package == "All Inclusive") {
+    packageList[0] = true;
+  } else if (acc.package == "Fullboard") {
+    packageList[1] = true;
+  } else {
+    packageList[2] = true;
+  }
 
+  var data = {
+    customer: {
+      id: usr.id
+    },
+    rooms: [],
+    dateFrom: acc.dateFrom,
+    dateTo: acc.dateTo,
+    numberOfAdults: 1,
+    numberOfKids: 1,
+    allInclusive: packageList[0],
+    fullBoard: packageList[1],
+    halfBoard: packageList[2],
+    extraBed: hasExtraBed.checked
+  };
 
+  for (room of roomsChecked) {
+    data.rooms.push({
+      id: room
+    });
+  }
+
+  fetch(baseURL + "/booking", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
