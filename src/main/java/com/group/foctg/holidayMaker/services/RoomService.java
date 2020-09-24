@@ -18,7 +18,6 @@ package com.group.foctg.holidayMaker.services;
 import com.group.foctg.holidayMaker.exceptions.AccommodationNotFoundException;
 import com.group.foctg.holidayMaker.exceptions.RoomNotFoundException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
@@ -32,7 +31,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Room} column
@@ -43,7 +41,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.repositories.RoomRepository
  */
 @Service
-@Slf4j
 public class RoomService {
 
     @Autowired

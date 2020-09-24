@@ -30,10 +30,8 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * RestController for the {@link com.group.foctg.holidayMaker.model.Room} entity
@@ -48,7 +46,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.services.RoomService
  */
 @RestController
-@Slf4j
 @RequestMapping(value = "/api")
 public class RoomController {
 

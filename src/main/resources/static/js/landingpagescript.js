@@ -1,33 +1,30 @@
-
-
-
 checkLoginTime();
 toggleNavBarButtons();
 
 function toggleNavBarButtons() {
-    
-    var loginBtn = document.getElementById('login');
-    var signinBtn = document.getElementById('signup');
-    var signoutBtn = document.getElementById('profile');
-    var profileBtn = document.getElementById('signOut');
-    
-    if (localStorage.getItem('user') === null) {
-        loginBtn.innerHTML = "<a class='nav-link' href='#' onclick='openLogin()'>Login</a>";
-        signinBtn.innerHTML = "<a class='nav-link' href='#' onclick='openReg()'>Sign up</a>";
-        signoutBtn.innerHTML = "";
-        profileBtn.innerHTML = "";
-    } else {
-        loginBtn.innerHTML = "";
-        signinBtn.innerHTML = "";
-        signoutBtn.innerHTML = "<a class='nav-link' href='' tabindex='-1' onclick='signOut()' aria-disabled='true'>Sign out</a>";
-        profileBtn.innerHTML = "<a class='nav-link' href='dashboard' tabindex='-1' aria-disabled='true'>Profile</a>";
-    }
+
+  var loginBtn = document.getElementById('login');
+  var signinBtn = document.getElementById('signup');
+  var signoutBtn = document.getElementById('profile');
+  var profileBtn = document.getElementById('signOut');
+
+  if (localStorage.getItem('user') === null) {
+    loginBtn.innerHTML = "<a class='nav-link' href='#' onclick='openLogin()'>Login</a>";
+    signinBtn.innerHTML = "<a class='nav-link' href='#' onclick='openReg()'>Sign up</a>";
+    signoutBtn.innerHTML = "";
+    profileBtn.innerHTML = "";
+  } else {
+    loginBtn.innerHTML = "";
+    signinBtn.innerHTML = "";
+    signoutBtn.innerHTML = "<a class='nav-link' href='' tabindex='-1' onclick='signOut()' aria-disabled='true'>Sign out</a>";
+    profileBtn.innerHTML = "<a class='nav-link' href='dashboard' tabindex='-1' aria-disabled='true'>Profile</a>";
+  }
 }
 
 function signOut() {
   if (confirm("You're about to log out. Do you want to proceed?'")) {
-      localStorage.removeItem('user');
-      location.reload();
+    localStorage.removeItem('user');
+    location.reload();
   }
 }
 
@@ -39,21 +36,21 @@ function openLogin() {
 async function closeLogin(flag) {
 
   if (flag === true) {
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
-      var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
-    
-    
-      await fetch(fetchUrl)
-        .then(response => response.json())
-        .then(function(data) {
-          localStorage.setItem('user', JSON.stringify(data));
-          var profile = document.getElementById("profile");
-          profile.classList.remove("disabled");
-        })
-        .catch((error) => {
-          console.log("No user")
-        });
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
+
+
+    await fetch(fetchUrl)
+      .then(response => response.json())
+      .then(function(data) {
+        localStorage.setItem('user', JSON.stringify(data));
+        var profile = document.getElementById("profile");
+        profile.classList.remove("disabled");
+      })
+      .catch((error) => {
+        console.log("No user")
+      });
   }
 
   document.getElementById("formCover").style.display = "none";
@@ -70,29 +67,29 @@ function openReg() {
 async function closeReg(flag) {
 
   if (flag === true) {
-  var email = document.getElementById('regEmail').value;
-  var password = document.getElementById('regPass').value;
-  var password2 = document.getElementById('regPassRep').value;
+    var email = document.getElementById('regEmail').value;
+    var password = document.getElementById('regPass').value;
+    var password2 = document.getElementById('regPassRep').value;
 
-  var fetchUrl = "http://localhost:8080/api/customer";
+    var fetchUrl = "http://localhost:8080/api/customer";
 
-  var newCustomer = {
-    email: email,
-    password: password
-  };
+    var newCustomer = {
+      email: email,
+      password: password
+    };
 
-  await fetch(fetchUrl, {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newCustomer),
-    })
-    .then(response => response.json())
-    .then(function(data) {
-      console.log(data);
-    });
-    
+    await fetch(fetchUrl, {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCustomer),
+      })
+      .then(response => response.json())
+      .then(function(data) {
+        console.log(data);
+      });
+
   }
 
   document.getElementById("formCover").style.display = "none";

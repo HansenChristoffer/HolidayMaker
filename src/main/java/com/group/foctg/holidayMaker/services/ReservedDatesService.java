@@ -37,11 +37,6 @@ public class ReservedDatesService {
     @Autowired
     private ReservedDatesRepository reservedDatesRepository;
 
-    //for testing purposes
-    public List<ReservedDates> findAll() {
-        return reservedDatesRepository.findAll();
-    }
-
     public List<ReservedDates> findReservedDatesByRoomId(Long id) {
         return reservedDatesRepository.findReservedDatesByRoomId(id);
     }
