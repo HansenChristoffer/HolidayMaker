@@ -1,6 +1,7 @@
-if (localStorage.getItem('user') === null) profile.classList.add("disabled");
-else profile.classList.remove("disabled");
 
+
+
+checkLoginTime();
 toggleNavBarButtons();
 
 function toggleNavBarButtons() {
@@ -25,6 +26,7 @@ function toggleNavBarButtons() {
 
 function signOut() {
   localStorage.removeItem('user');
+  location.reload();
 }
 
 function openLogin() {
