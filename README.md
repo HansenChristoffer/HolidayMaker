@@ -1,6 +1,6 @@
 # Holiday Maker
 This Project is a school-group-project written by
-* Stoffmeister Hansen
+* Christoffer Hansen
 * Olle Johansson
 * Frida Ek
 * Tanvir Siddique
@@ -18,7 +18,7 @@ This Project is a school-group-project written by
 Holidaymakers should be a website where customers can book
 holiday accommodation in a modern and simple way.
 You can do complex searches for vacant accommodation based on several choices.
-You can log in and book an accommodation, and see / change Already booked
+You can log in and book an accommodation, and see / change already booked
 accommodation.
 
 ## Tech
@@ -37,6 +37,13 @@ Setup and run this application on
 
     Access the server from http://localhost:8080/
 
+ - Linux:
+    * $ cd [path-to-where-you-want-the-application-to-be-stored-without-the-brackets]
+    * $ git clone https://github.com/ollejj/HolidayMaker
+    * $ cd HolidayMaker
+    * $ mvn spring-boot:run
+
+    Access the server from http://localhost:8080/
 
 ## Example
 
