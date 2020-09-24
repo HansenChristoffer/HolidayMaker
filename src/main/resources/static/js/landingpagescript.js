@@ -32,29 +32,30 @@ function openLogin() {
   document.getElementById("loginForm").style.display = "flex";
 }
 
-async function closeLogin() {
+async function closeLogin(flag) {
 
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
-
-
-  await fetch(fetchUrl)
-    .then(response => response.json())
-    .then(function(data) {
-      localStorage.setItem('user', JSON.stringify(data));
-      var profile = document.getElementById("profile");
-      profile.classList.remove("disabled");
-    })
-    .catch((error) => {
-      console.log("No user")
-    });
+  if (flag === true) {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
+    
+    
+      await fetch(fetchUrl)
+        .then(response => response.json())
+        .then(function(data) {
+          localStorage.setItem('user', JSON.stringify(data));
+          var profile = document.getElementById("profile");
+          profile.classList.remove("disabled");
+        })
+        .catch((error) => {
+          console.log("No user")
+        });
+  }
 
   document.getElementById("formCover").style.display = "none";
   document.getElementById("loginForm").style.display = "none";
 
   location.reload();
-  //console.log(JSON.parse(localStorage.getItem('user')));
 }
 
 function openReg() {
@@ -64,6 +65,7 @@ function openReg() {
 
 async function closeReg(flag) {
 
+  if (flag === true) {
   var email = document.getElementById('regEmail').value;
   var password = document.getElementById('regPass').value;
   var password2 = document.getElementById('regPassRep').value;
@@ -86,6 +88,8 @@ async function closeReg(flag) {
     .then(function(data) {
       console.log(data);
     });
+    
+  }
 
   document.getElementById("formCover").style.display = "none";
   document.getElementById("regForm").style.display = "none";
