@@ -25,8 +25,10 @@ function toggleNavBarButtons() {
 }
 
 function signOut() {
-  localStorage.removeItem('user');
-  location.reload();
+  if (confirm("You're about to log out. Do you want to proceed?'")) {
+      localStorage.removeItem('user');
+      location.reload();
+  }
 }
 
 function openLogin() {
