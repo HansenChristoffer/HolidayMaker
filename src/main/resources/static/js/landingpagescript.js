@@ -131,9 +131,31 @@ show.addEventListener('click', function() {
 });
 
 function onShow(url) {
+    
+  var filterInputs = document.getElementsByTagName('select');
   fetch(url)
-    .then(response => response.json())
+    .then(function(response) {
+        if (response.status >= 400 && response.status < 600) {
+            
+            for (element of filterInputs) {
+                if (element.value === "") {
+                    element.style = "border: 1px solid red";
+                }
+            }
+            
+            throw new Error("Bad response from server");
+        }
+        
+        return response.json();
+    })
     .then(function(data) {
+
+      for (element of filterInputs) {
+            if (element.value === "") {
+                element.style.border = "0px solid black";
+                element.removeAttribute('style');
+            }
+      }
 
       var resultContainer = document.getElementsByClassName('resultsContainer')[0];
       var sorting = document.getElementById('sort');
@@ -280,7 +302,9 @@ function onShow(url) {
 
         window.location.href = '/accommodation';
       }
-    });
+    }).catch(function(error) {
+        console.log(error);
+    });;
 
 }
 
