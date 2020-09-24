@@ -1,9 +1,9 @@
 # Holiday Maker
 This Project is a school-group-project written by
-Stoffmeister Hansen
-Olle Johansson
-Frida Ek
-Tanvir Siddique
+* Stoffmeister Hansen
+* Olle Johansson
+* Frida Ek
+* Tanvir Siddique
 
 
 ## Contents
