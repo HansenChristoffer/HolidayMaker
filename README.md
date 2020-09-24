@@ -30,7 +30,7 @@ accommodation.
 Setup and run this application on
 
  - Windows:
-    cd [path-to-where-you-want-the-application-to-be-stored-without-the-brackets]
+    * cd [path-to-where-you-want-the-application-to-be-stored-without-the-brackets]
     * git clone https://github.com/ollejj/HolidayMaker
     * cd HolidayMaker
     * mvn spring-boot:run
@@ -91,7 +91,7 @@ public List<Accommodation> getFilteredAccommodations(Filter filter) throws Parse
   
 
 ## Features
-List of features ready and TODOs for future development
+
 * Filter all Accommodation objects
 * Sort all Accommodation objects by rating
 * Sort all Room objects by price
