@@ -10,14 +10,14 @@ function openLogin() {
   document.getElementById("loginForm").style.display = "flex";
 }
 
-function closeLogin() {
+async function closeLogin() {
 
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
 
 
-  fetch(fetchUrl)
+  await fetch(fetchUrl)
     .then(response => response.json())
     .then(function(data) {
       localStorage.setItem('user', JSON.stringify(data));
