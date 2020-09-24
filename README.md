@@ -1,11 +1,14 @@
-# HolidayMaker_grupp-3
-FullStack Application hotel management system. Newton project.
+# Holiday Maker
+This Project is a school-group-project written by
+Stoffmeister Hansen
+Olle Johansson
+Frida Ek
+Tanvir Siddique
 
 
 ## Table of contents
 * [General info](#general-info)
-* [Screenshots](#screenshots)
-* [Technologies](#technologies)
+* [Tech](#tech)
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
@@ -18,62 +21,70 @@ You can do complex searches for vacant accommodation based on several choices.
 You can log in and book an accommodation, and see / change Already booked
 accommodation.
 
-## Screenshots
-![Example screenshot](https://github.com/musicollins/HolidayMaker_grupp-3/issues/38#issue-707644003)
-
 ## Technologies
-* Mysql 5.5
-* Java  13
-* Html, Css
-* JavaScript, Jquery
 * Springboot
+* SQLite 3.32.x
+* Java 14
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+Setup and run this application on
 
-Run your project by using terminal or commandline:
-cd ~/desktop
-* $ mkdir folder
-* $ cd folder
-* $ git clone https://github.com/musicollins/HolidayMaker_grupp-3.git
-* $ cd *HolidayMaker
-* $ cd holidaymaker
-* $ mvn spring-boot:run
+ - Windows:
+    cd [path-to-where-you-want-the-application-to-be-stored-without-the-brackets]
+    * git clone https://github.com/ollejj/HolidayMaker
+    * cd HolidayMaker
+    * mvn spring-boot:run
 
-Open your browser and type http://localhost:8091
+    Access the server from http://localhost:8080/
 
 
 ## Code Examples
-Example of some controllers:
+
 ```
-@GetMapping("/bookings")
-    public List<Booking> getBookings() {
-        System.out.println("Bookings retrieved");
-        return repository.findAll();
+public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException {
+        Set<Accommodation> availableByDate = new HashSet<>();
+
+        /**
+         * These three nested for-each loops will check if the input filter
+         * dates overlap the rooms taken dates. If the filter-dates overlap with
+         * the rooms taken-dates it will return true. We check if the return is
+         * false and add that accommodation with available dates to our
+         * availableByDate List
+         */
+        for (Accommodation a : (filter.getLocation().equals("any") ? findAll() : findAccomodationsByLocationId(locationService.findLocationIdByName(filter.getLocation())))) {
+            for (Room r : a.getRooms()) {
+                for (ReservedDates rd : r.getReservedDates()) {
+                    if (!rd.isOverlapping(
+                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo()))) {
+                        availableByDate.add(a);
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        /**
+         * These anonymous functions returns true/false depending on the
+         * statement. If the statement is true, the filter() function will pass
+         * the object of
+         * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
+         * appended to the List<Accommodation>
+         */
+        List<Accommodation> filtered = availableByDate.stream()
+                .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
+                .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
+                .filter(a -> a.getPool() == true || filter.hasPool() == false)
+                .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
+                .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
+                .filter(a -> a.getNightEntertainment() == true || filter.hasNightEntertainment() == false)
+                .filter(a -> a.getRooms().size() >= filter.getRooms())
+                .collect(Collectors.toList());
+
+        return filtered;
     }
-  ```
-  ```
-   }
-    @GetMapping("/hotels/id/{hotelId}")
-    public List<Hotel> getById(@PathVariable int hotelId) {
-        List<Hotel> hotels = repository.findByHotelId(hotelId);
-        return hotels;
-    }
-  
-  ```
-  
-  Example of mockdata:
-  ```
-   List<Room> cookieRooms = Arrays.asList(
-            new Room("Single", 100d, cookie.getHotelID(), false),
-            new Room("Double", 125d, cookie.getHotelID(), false),
-            new Room("Triple", 150d, cookie.getHotelID(), false),
-            new Room("Quad",   175d, cookie.getHotelID(), false),
-            new Room("King",   200d, cookie.getHotelID(), false),
-            new Room("Queen",  250d, cookie.getHotelID(), false)
-        );
-        
-  ```
+```
   
   
   
@@ -81,10 +92,14 @@ Example of some controllers:
 
 ## Features
 List of features ready and TODOs for future development
-*  Booking feature
-*  Change booking feature
-*  Search filtration feature
-*  Delete booking feature
+* Filter all Accommodation objects
+* Sort all Accommodation objects by rating
+* Sort all Room objects by price
+* Booking a Room
+* Deleting a Booking
+* Edit a Bookong
+* Deleting an Accommodation
+* Sign-in/Sign-up/Sign-out
 
 ## Status
-Project is:  _finished_
+Packed and Ready for Holidays!
