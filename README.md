@@ -6,7 +6,7 @@ Frida Ek
 Tanvir Siddique
 
 
-## Table of contents
+## Contents
 * [General info](#general-info)
 * [Tech](#tech)
 * [Setup](#setup)
@@ -21,7 +21,7 @@ You can do complex searches for vacant accommodation based on several choices.
 You can log in and book an accommodation, and see / change Already booked
 accommodation.
 
-## Technologies
+## Tech
 * Springboot
 * SQLite 3.32.x
 * Java 14
@@ -38,7 +38,7 @@ Setup and run this application on
     Access the server from http://localhost:8080/
 
 
-## Code Examples
+## Example
 
 ```
 public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException {
