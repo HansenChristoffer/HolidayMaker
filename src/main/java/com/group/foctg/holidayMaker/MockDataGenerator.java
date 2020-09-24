@@ -156,6 +156,7 @@ public class MockDataGenerator implements CommandLineRunner {
                     rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(),
                     (short) rand.nextInt(1000), (short) rand.nextInt(1000), locationService.findById(Long.valueOf(i) + 1).get(), mockURL.get(i),
                     mockDescription, new ArrayList<>(), customerService.findById(Long.valueOf(i) + 6).get(), (rand.nextFloat() * (5.0f - 0.1f) + 0.1f)));
+            
             accommodationService.saveAccommodation(new Accommodation(
                     mockNames.get(rand.nextInt(mockNames.size())),
                     rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(), rand.nextBoolean(),
@@ -433,13 +434,11 @@ public class MockDataGenerator implements CommandLineRunner {
         List<Accommodation> accommodations = accommodationService.findAll();
         List<Room> rooms = roomService.findAll();
         List<Booking> bookings = bookingRepository.findAll();
-        List<ReservedDates> reservedDates = reservedDatesService.findAll();
 
         log.info(String.format("$ Customers == %dx", customers.size()));
         log.info(String.format("$ Accommodations == %dx", accommodations.size()));
         log.info(String.format("$ Rooms == %dx", rooms.size()));
         log.info(String.format("$ Bookings == %dx", bookings.size()));
-        log.info(String.format("$ ReservedDates == %dx", reservedDates.size()));
         log.info("$ Elapsed in " + (System.currentTimeMillis() - ms) / 1000 + "s");
         log.info("--- END ---");
     }

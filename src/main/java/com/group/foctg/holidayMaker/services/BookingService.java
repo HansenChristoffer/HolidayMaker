@@ -126,7 +126,8 @@ public class BookingService {
     /**
      * If there is a Booking object already that has the same id as the
      * {@link com.group.foctg.holidayMaker.model.Booking} passed as parameter
-     * then it'll update the existing object.Otherwise it will save the object.
+     * then it'll update the existing object. If object does not exist then it
+     * throws BookingNotFoundException(Long)
      *
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * passed for updating or saving.

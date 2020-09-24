@@ -23,7 +23,6 @@ import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Customer}
@@ -35,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.repositories.CustomerRepository
  */
 @Service
-@Slf4j
 public class CustomerService {
 
     @Autowired

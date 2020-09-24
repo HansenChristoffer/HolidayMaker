@@ -51,11 +51,6 @@ public class ReservedDatesController {
         return reservedDatesService.saveReservedDates(reservedDates);
     }
 
-    @GetMapping("/reserveddates")
-    public List<ReservedDates> findAll() {
-        return reservedDatesService.findAll();
-    }
-
     @GetMapping("/reserveddates/byroom")
     public List<ReservedDates> findReservedDatesByRoomId(@RequestParam Long id) {
         return reservedDatesService.findReservedDatesByRoomId(id);

@@ -27,12 +27,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -49,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Booking implements Serializable {
-    
+
     public Booking() {
     }
 
@@ -98,10 +96,9 @@ public class Booking implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToMany(mappedBy = "bookings", cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Room> rooms;
 
     @Column
@@ -135,7 +132,7 @@ public class Booking implements Serializable {
     @Column(columnDefinition = "float default 1")
     private float cost;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     private ReservedDates reservedDates;
 
     /**
@@ -377,6 +374,11 @@ public class Booking implements Serializable {
      * <code>extraBed</code>
      */
     public void setExtraBed(Boolean extraBed) {
+        if (extraBed == true && this.extraBed == false) {
+            this.cost += 200;
+        } else if (extraBed == false && this.extraBed == true) {
+            this.cost -= 200;
+        }
         this.extraBed = extraBed;
     }
 

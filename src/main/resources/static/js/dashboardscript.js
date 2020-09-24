@@ -3,7 +3,7 @@ const baseURL = "http://localhost:8080/api";
 
 var user = JSON.parse(localStorage.getItem('user'));
 var selectedBooking;
-fetch("http://localhost:8080/api/booking?id=" + user.id)
+fetch("http://localhost:8080/api/booking/customer?id=" + user.id)
   .then(response => response.json())
   .then(function(data) {
     console.log(data);
@@ -40,7 +40,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
 
       var rooms = document.createElement('p');
       rooms.classList.add('style-p');
-      rooms.innerHTML = "Number of rooms: " + data[i].rooms;
+      rooms.innerHTML = "Number of rooms: " + data[i].rooms.length;
 
       var adults = document.createElement('p');
       adults.classList.add('style-p');
@@ -135,7 +135,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       dateTo.innerHTML = "Date to: " + selectedBooking.dateTo;
 
       var rooms = document.getElementById('rooms');
-      rooms.innerHTML = "Number of rooms: " + selectedBooking.rooms;
+      rooms.innerHTML = "Number of rooms: " + selectedBooking.rooms.length;
 
       var adults = document.getElementById('adults');
       adults.innerHTML = "Number of adults: " + selectedBooking.numberOfAdults;
@@ -143,7 +143,7 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
       var kids = document.getElementById('kids');
       kids.innerHTML = "Number of kids: " + selectedBooking.numberOfKids;
 
-      var package = document.getElementById('package-selector');
+      var pack = document.getElementById('package-selector');
 
       var packOpt1 = document.createElement('option');
       packOpt1.innerHTML = "Full Board";
@@ -167,9 +167,9 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
         packOpt3.selected = true;
       }
 
-      package.add(packOpt1);
-      package.add(packOpt2);
-      package.add(packOpt3);
+      pack.add(packOpt1);
+      pack.add(packOpt2);
+      pack.add(packOpt3);
 
       var extraBed = document.getElementById('bed-selector');
 
@@ -194,16 +194,18 @@ fetch("http://localhost:8080/api/booking?id=" + user.id)
 var updateBtn = document.getElementById('update');
 updateBtn.addEventListener('click', function() {
 
-  var package = document.getElementById('package-selector');
+  var pack = document.getElementById('package-selector');
   var extraBed = document.getElementById('bed-selector');
 
   selectedBooking.extraBed = (extraBed.value === 'true');
-  selectedBooking.fullBoard = (package.value === 'Full Board');
-  selectedBooking.halfBoard = (package.value === 'Half Board');
-  selectedBooking.allInclusive = (package.value === 'All Inclusive');
+  selectedBooking.fullBoard = (pack.value === 'Full Board');
+  selectedBooking.halfBoard = (pack.value === 'Half Board');
+  selectedBooking.allInclusive = (pack.value === 'All Inclusive');
 
   putData("http://localhost:8080/api/booking?id=" + selectedBooking.id, selectedBooking)
-    .then(location.reload());
+    .then(async function() {
+      await location.reload();
+    });
 })
 
 async function putData(url, data) {
@@ -225,8 +227,8 @@ async function putData(url, data) {
 
 listings();
 
-function listings() {
-  fetch(baseURL + "/accommodation/customer?id=" + user.id)
+async function listings() {
+  await fetch(baseURL + "/accommodation/customer?id=" + user.id)
     .then(response => response.json())
     .then(function(data) {
 
@@ -246,13 +248,14 @@ function listings() {
 
         var listingLocation = document.createElement('p');
         listingLocation.classList.add('style-p');
+        console.log("Location->");
         console.log(data[i].location);
+        console.log(data);
         listingLocation.innerHTML = "Location: " + data[i].location.name;
 
         var listingRooms = document.createElement('p');
         listingRooms.classList.add('style-p');
-        console.log(data[i].rooms);
-        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.size;
+        listingRooms.innerHTML = "Number of rooms: " + data[i].rooms.length;
 
         var rating = document.createElement('p');
         rating.classList.add('style-p');
@@ -264,6 +267,14 @@ function listings() {
         var pool = document.createElement('p');
         pool.classList.add('style-p');
         pool.innerHTML = "Pool: " + (data[i].pool ? 'Yes' : 'No')
+
+        var pool = document.createElement('p');
+        pool.classList.add('style-p');
+        pool.innerHTML = "N.Entertainment: " + (data[i].nightEntertainment ? 'Yes' : 'No')
+
+        var pool = document.createElement('p');
+        pool.classList.add('style-p');
+        pool.innerHTML = "Restaurant: " + (data[i].restaurant ? 'Yes' : 'No')
 
         var beach = document.createElement('p');
         beach.classList.add('style-p');
@@ -306,8 +317,8 @@ function addListing() {
   document.getElementById("panel").style.display = "block";
 }
 
-function deleteListing(element) {
-  fetch(baseURL + "/accommodation?id=" + element.id, {
+async function deleteListing(element) {
+  await fetch(baseURL + "/accommodation?id=" + element.id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

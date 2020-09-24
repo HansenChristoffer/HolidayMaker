@@ -15,11 +15,8 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -27,7 +24,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -46,7 +42,6 @@ import javax.persistence.Temporal;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ReservedDates implements Serializable {
 
     public ReservedDates() {
@@ -75,12 +70,9 @@ public class ReservedDates implements Serializable {
     private Date dateTo;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "room_id")
-    @JsonBackReference(value = "rooms_reserveddates")
     private Room room;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference(value = "bookings_reserveddates")
     private Booking booking;
 
     /**

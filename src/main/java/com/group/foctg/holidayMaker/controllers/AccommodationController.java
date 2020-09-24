@@ -32,7 +32,6 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.services.AccommodationService;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * RestController for the

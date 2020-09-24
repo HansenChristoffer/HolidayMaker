@@ -32,7 +32,6 @@ import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 import com.group.foctg.holidayMaker.repositories.CustomerRepository;
 import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the

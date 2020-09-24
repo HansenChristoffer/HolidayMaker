@@ -127,7 +127,7 @@ function getCheckedRooms() {
   return retStr;
 }
 
-function book() {
+async function book() {
   var acc = JSON.parse(localStorage.getItem('selectAcc'));
   var usr = JSON.parse(localStorage.getItem('user'));
   var hasExtraBed = document.getElementById("checkbox-extrabed");
@@ -163,7 +163,7 @@ function book() {
     });
   }
 
-  fetch(baseURL + "/booking", {
+  await fetch(baseURL + "/booking", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
