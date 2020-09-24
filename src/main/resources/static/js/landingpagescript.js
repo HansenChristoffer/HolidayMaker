@@ -1,8 +1,34 @@
-if (localStorage.getItem('user') === null) profile.classList.add("disabled");
-else profile.classList.remove("disabled");
+
+
+
+checkLoginTime();
+toggleNavBarButtons();
+
+function toggleNavBarButtons() {
+    
+    var loginBtn = document.getElementById('login');
+    var signinBtn = document.getElementById('signup');
+    var signoutBtn = document.getElementById('profile');
+    var profileBtn = document.getElementById('signOut');
+    
+    if (localStorage.getItem('user') === null) {
+        loginBtn.innerHTML = "<a class='nav-link' href='#' onclick='openLogin()'>Login</a>";
+        signinBtn.innerHTML = "<a class='nav-link' href='#' onclick='openReg()'>Sign up</a>";
+        signoutBtn.innerHTML = "";
+        profileBtn.innerHTML = "";
+    } else {
+        loginBtn.innerHTML = "";
+        signinBtn.innerHTML = "";
+        signoutBtn.innerHTML = "<a class='nav-link' href='' tabindex='-1' onclick='signOut()' aria-disabled='true'>Sign out</a>";
+        profileBtn.innerHTML = "<a class='nav-link' href='dashboard' tabindex='-1' aria-disabled='true'>Profile</a>";
+    }
+}
 
 function signOut() {
-  localStorage.removeItem('user');
+  if (confirm("You're about to log out. Do you want to proceed?'")) {
+      localStorage.removeItem('user');
+      location.reload();
+  }
 }
 
 function openLogin() {
@@ -10,29 +36,30 @@ function openLogin() {
   document.getElementById("loginForm").style.display = "flex";
 }
 
-async function closeLogin() {
+async function closeLogin(flag) {
 
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
-
-
-  await fetch(fetchUrl)
-    .then(response => response.json())
-    .then(function(data) {
-      localStorage.setItem('user', JSON.stringify(data));
-      var profile = document.getElementById("profile");
-      profile.classList.remove("disabled");
-    })
-    .catch((error) => {
-      console.log("No user")
-    });
+  if (flag === true) {
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var fetchUrl = "http://localhost:8080/api/login?email=" + email + "&password=" + password;
+    
+    
+      await fetch(fetchUrl)
+        .then(response => response.json())
+        .then(function(data) {
+          localStorage.setItem('user', JSON.stringify(data));
+          var profile = document.getElementById("profile");
+          profile.classList.remove("disabled");
+        })
+        .catch((error) => {
+          console.log("No user")
+        });
+  }
 
   document.getElementById("formCover").style.display = "none";
   document.getElementById("loginForm").style.display = "none";
 
   location.reload();
-  //console.log(JSON.parse(localStorage.getItem('user')));
 }
 
 function openReg() {
@@ -40,8 +67,9 @@ function openReg() {
   document.getElementById("regForm").style.display = "flex";
 }
 
-function closeReg(flag) {
+async function closeReg(flag) {
 
+  if (flag === true) {
   var email = document.getElementById('regEmail').value;
   var password = document.getElementById('regPass').value;
   var password2 = document.getElementById('regPassRep').value;
@@ -53,7 +81,7 @@ function closeReg(flag) {
     password: password
   };
 
-  fetch(fetchUrl, {
+  await fetch(fetchUrl, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -64,6 +92,8 @@ function closeReg(flag) {
     .then(function(data) {
       console.log(data);
     });
+    
+  }
 
   document.getElementById("formCover").style.display = "none";
   document.getElementById("regForm").style.display = "none";
