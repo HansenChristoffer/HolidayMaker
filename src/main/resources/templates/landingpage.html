@@ -25,12 +25,12 @@
 					<li class="nav-item active"><a class="nav-link" href="#">Home
 							<span class="sr-only">(current)</span>
 						</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" onclick="openLogin()">Login</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" onclick="openReg()">Sign up</a></li>
+					<li class="nav-item" id="login"></li>
+					<li class="nav-item" id="signup"></li>
 
-					<li class="nav-item"><a class="nav-link disabled" href="dashboard" tabindex="-1" id="profile" aria-disabled="true">Profile</a></li>
+					<li class="nav-item" id="profile"></li>
 
-					<li class="nav-item"><a class="nav-link" href="" tabindex="-1" id="signOut" onclick="signOut()" aria-disabled="true">Sign out</a></li>
+					<li class="nav-item" id="signOut"></li>
 				</ul>
 			</div>
 		</nav>
@@ -163,14 +163,15 @@
 		<div id="formCover">
 			<div id="loginForm">
 				<p class="navbar-brand headerTitle">Login</p>
-				<input id="email" placeholder='Email' value="mockEmail1@mock.io" type='text' name='email' /> <input id="password" value="mock_password1" type='password' placeholder='Password' name='password' /> <input name="submit" type="submit"
-					value="Login" onclick="closeLogin()" />
+				<input id="email" placeholder='Email' value="" type='text' name='email' /> <input id="password" value="" type='password' placeholder='Password' name='password' /> <input name="submit" type="submit"
+					value="Login" onclick="closeLogin(true)" />
+			    <a class="closeForm" href="#" onclick="closeLogin(false)">Close</a>
 			</div>
 			<div id="regForm">
 				<p class="navbar-brand headerTitle">Register</p>
-				<input placeholder='Email' id="regEmail" type='text' name='email'> <input placeholder='Password' id="regPass" type='password' name='password' /> <input placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
-					name="submit" type="submit" value="Register" onclick="closeReg()" />
-				<a class="closeForm" href="#" onclick="closeReg()">Close</a>
+				<input placeholder='Email' id="regEmail" type='text' name='email'/> <input placeholder='Password' id="regPass" type='password' name='password' /> <input placeholder='Repeat Password' id="regPassRep" type='password' name='password' /> <input
+					name="submit" type="submit" value="Register" onclick="closeReg(true)" />
+				<a class="closeForm" href="#" onclick="closeReg(false)">Close</a>
 			</div>
 		</div>
 	</div>
