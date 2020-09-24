@@ -18,11 +18,13 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -38,7 +40,6 @@ import javax.validation.constraints.NotEmpty;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Location implements Serializable {
 
     public Location() {
@@ -66,8 +67,8 @@ public class Location implements Serializable {
     @Column
     private String name;
 
+    @JsonBackReference(value = "accommodations_location")
     @OneToMany(mappedBy = "location")
-    @JsonBackReference
     private List<Accommodation> accommodations;
 
     /**

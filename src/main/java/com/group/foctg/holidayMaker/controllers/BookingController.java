@@ -102,7 +102,7 @@ public class BookingController {
      * @param id Long value to pass to the Service class.
      * @return a List object from the Service.
      */
-    @GetMapping("/booking")
+    @GetMapping("/booking/customer")
     public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {
         return bookingService.findBookingsByCustomerId(id);
     }

@@ -18,6 +18,7 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,7 +33,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -98,10 +98,9 @@ public class Booking implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToMany(mappedBy = "bookings", cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Room> rooms;
 
     @Column
@@ -135,7 +134,7 @@ public class Booking implements Serializable {
     @Column(columnDefinition = "float default 1")
     private float cost;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy="booking", cascade = CascadeType.ALL, orphanRemoval = true)
     private ReservedDates reservedDates;
 
     /**

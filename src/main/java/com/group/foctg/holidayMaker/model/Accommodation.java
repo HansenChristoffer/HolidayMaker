@@ -18,6 +18,7 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
@@ -44,7 +45,7 @@ import org.hibernate.validator.constraints.URL;
  */
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Accommodation implements Serializable {
 
     public Accommodation() {
@@ -121,7 +122,6 @@ public class Accommodation implements Serializable {
     private Short distanceToCenter;
 
     @ManyToOne
-    @JoinColumn(name = "location_id")
     private Location location;
 
     @URL
@@ -135,8 +135,6 @@ public class Accommodation implements Serializable {
     private List<Room> rooms;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    @JsonBackReference
     private Customer customer;
 
     @Range(min = 0, max = 5)

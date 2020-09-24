@@ -18,6 +18,7 @@ package com.group.foctg.holidayMaker.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -78,19 +78,11 @@ public class Room implements Serializable {
     @NotNull
     private Short numberOfBeds;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Room_Booking",
-            joinColumns = {
-                @JoinColumn(name = "room_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "booking_id")}
-    )
-    //@JsonBackReference(value = "rooms_bookings")
+    @ManyToMany(mappedBy = "rooms", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "bookings_rooms")
     private List<Booking> bookings;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "accommodation_id")
     @JsonBackReference(value = "accommodation_rooms")
     @NotNull
     private Accommodation accommodation;
@@ -100,16 +92,8 @@ public class Room implements Serializable {
     private Float price;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    //@JsonManagedReference(value = "rooms_reserveddates")
+    @JsonBackReference(value = "rooms_reserveddates")
     private List<ReservedDates> reservedDates;
-
-    public List<ReservedDates> getReservedDates() {
-        return reservedDates;
-    }
-
-    public void setReservedDates(List<ReservedDates> reservedDates) {
-        this.reservedDates = reservedDates;
-    }
 
     /**
      * Method that returns the <code>id</code> of the
@@ -220,4 +204,13 @@ public class Room implements Serializable {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    public List<ReservedDates> getReservedDates() {
+        return reservedDates;
+    }
+
+    public void setReservedDates(List<ReservedDates> reservedDates) {
+        this.reservedDates = reservedDates;
+    }
+
 }

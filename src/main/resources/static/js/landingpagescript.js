@@ -110,7 +110,7 @@ show.addEventListener('click', function() {
   var dateTo = document.getElementById('checkOutSelector').value;
   var adults = document.getElementById('adultsSelector').value;
   var kids = document.getElementById('kidsSelector').value;
-  var package = document.getElementById('packageSelector').value;
+  var pack = document.getElementById('packageSelector').value;
   var pool = document.getElementById('poolSelector').value;
   var entertainment = document.getElementById('entertainmentSelector').value;
   var restaurant = document.getElementById('restaurantSelector').value;
@@ -131,30 +131,30 @@ show.addEventListener('click', function() {
 });
 
 function onShow(url) {
-    
+
   var filterInputs = document.getElementsByTagName('select');
   fetch(url)
     .then(function(response) {
-        if (response.status >= 400 && response.status < 600) {
-            
-            for (element of filterInputs) {
-                if (element.value === "") {
-                    element.style = "border: 1px solid red";
-                }
-            }
-            
-            throw new Error("Bad response from server");
+      if (response.status >= 400 && response.status < 600) {
+
+        for (element of filterInputs) {
+          if (element.value === "") {
+            element.style = "border: 1px solid red";
+          }
         }
-        
-        return response.json();
+
+        throw new Error("Bad response from server");
+      }
+
+      return response.json();
     })
     .then(function(data) {
 
       for (element of filterInputs) {
-            if (element.value === "") {
-                element.style.border = "0px solid black";
-                element.removeAttribute('style');
-            }
+        if (element.value === "") {
+          element.style.border = "0px solid black";
+          element.removeAttribute('style');
+        }
       }
 
       var resultContainer = document.getElementsByClassName('resultsContainer')[0];
@@ -287,7 +287,7 @@ function onShow(url) {
         var dateTo = document.getElementById('checkOutSelector').value;
         var adults = document.getElementById('adultsSelector').value;
         var kids = document.getElementById('kidsSelector').value;
-        var package = document.getElementById('packageSelector').value;
+        var pack = document.getElementById('packageSelector').value;
 
         collected = {
           id: data[index].id,
@@ -295,7 +295,7 @@ function onShow(url) {
           dateTo: dateTo,
           adults: adults,
           kids: kids,
-          package: package
+          pack: pack
         };
 
         localStorage.setItem('selectAcc', JSON.stringify(collected));
@@ -303,7 +303,7 @@ function onShow(url) {
         window.location.href = '/accommodation';
       }
     }).catch(function(error) {
-        console.log(error);
+      console.log(error);
     });;
 
 }
