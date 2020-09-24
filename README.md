@@ -1,9 +1,9 @@
 # Holiday Maker
 This Project is a school-group-project written by
-* Christoffer Hansen
-* Olle Johansson
-* Frida Ek
-* Tanvir Siddique
+* [Christoffer Hansen](https://github.com/HansenChristoffer "Christoffer Hansen")
+* [Olle Johansson](https://github.com/ollejj "Olle Johansson")
+* [Frida Ek](https://github.com/FridaEk "Frida Ek")
+* [Tanvir Siddique](https://github.com/Tanvir94 "Tanvir Siddique")
 
 
 ## Contents
