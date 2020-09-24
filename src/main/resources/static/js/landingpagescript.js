@@ -1,6 +1,28 @@
 if (localStorage.getItem('user') === null) profile.classList.add("disabled");
 else profile.classList.remove("disabled");
 
+toggleNavBarButtons();
+
+function toggleNavBarButtons() {
+    
+    var loginBtn = document.getElementById('login');
+    var signinBtn = document.getElementById('signup');
+    var signoutBtn = document.getElementById('profile');
+    var profileBtn = document.getElementById('signOut');
+    
+    if (localStorage.getItem('user') === null) {
+        loginBtn.innerHTML = "<a class='nav-link' href='#' onclick='openLogin()'>Login</a>";
+        signinBtn.innerHTML = "<a class='nav-link' href='#' onclick='openReg()'>Sign up</a>";
+        signoutBtn.innerHTML = "";
+        profileBtn.innerHTML = "";
+    } else {
+        loginBtn.innerHTML = "";
+        signinBtn.innerHTML = "";
+        signoutBtn.innerHTML = "<a class='nav-link' href='' tabindex='-1' onclick='signOut()' aria-disabled='true'>Sign out</a>";
+        profileBtn.innerHTML = "<a class='nav-link' href='dashboard' tabindex='-1' aria-disabled='true'>Profile</a>";
+    }
+}
+
 function signOut() {
   localStorage.removeItem('user');
 }
@@ -40,7 +62,7 @@ function openReg() {
   document.getElementById("regForm").style.display = "flex";
 }
 
-function closeReg(flag) {
+async function closeReg(flag) {
 
   var email = document.getElementById('regEmail').value;
   var password = document.getElementById('regPass').value;
@@ -53,7 +75,7 @@ function closeReg(flag) {
     password: password
   };
 
-  fetch(fetchUrl, {
+  await fetch(fetchUrl, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
