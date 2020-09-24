@@ -41,49 +41,19 @@ Setup and run this application on
 ## Example
 
 ```
-public List<Accommodation> getFilteredAccommodations(Filter filter) throws ParseException {
-        Set<Accommodation> availableByDate = new HashSet<>();
+//AccommodationController.java
+@GetMapping("/accommodation/customer")
+public List<Accommodation> findAccommodationsByCustomerId(@RequestParam Long id) {
+    return accommodationService.findAccommodationsByCustomerId(id);
+}
+```
 
-        /**
-         * These three nested for-each loops will check if the input filter
-         * dates overlap the rooms taken dates. If the filter-dates overlap with
-         * the rooms taken-dates it will return true. We check if the return is
-         * false and add that accommodation with available dates to our
-         * availableByDate List
-         */
-        for (Accommodation a : (filter.getLocation().equals("any") ? findAll() : findAccomodationsByLocationId(locationService.findLocationIdByName(filter.getLocation())))) {
-            for (Room r : a.getRooms()) {
-                for (ReservedDates rd : r.getReservedDates()) {
-                    if (!rd.isOverlapping(
-                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom()),
-                            new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo()))) {
-                        availableByDate.add(a);
-                    } else {
-                        break;
-                    }
-                }
-            }
-        }
-
-        /**
-         * These anonymous functions returns true/false depending on the
-         * statement. If the statement is true, the filter() function will pass
-         * the object of
-         * {@link com.group.foctg.holidayMaker.model.Accommodation} and be
-         * appended to the List<Accommodation>
-         */
-        List<Accommodation> filtered = availableByDate.stream()
-                .filter(a -> a.getDistanceToBeach() > filter.getMinDistBeach() && a.getDistanceToBeach() < filter.getMaxDistBeach())
-                .filter(a -> a.getDistanceToCenter() > filter.getMinDistCenter() && a.getDistanceToCenter() < filter.getMaxDistCenter())
-                .filter(a -> a.getPool() == true || filter.hasPool() == false)
-                .filter(a -> a.getChildEvents() == true || filter.hasChildrenClub() == false)
-                .filter(a -> a.getRestaurant() == true || filter.hasRestaurant() == false)
-                .filter(a -> a.getNightEntertainment() == true || filter.hasNightEntertainment() == false)
-                .filter(a -> a.getRooms().size() >= filter.getRooms())
-                .collect(Collectors.toList());
-
-        return filtered;
-    }
+```
+//BookingController.java
+@PutMapping("/booking")
+public Booking updateBooking(@RequestBody Booking booking, @RequestParam Long id) {
+    return bookingService.updateBooking(booking, id);
+}
 ```
   
   
@@ -97,7 +67,7 @@ public List<Accommodation> getFilteredAccommodations(Filter filter) throws Parse
 * Sort all Room objects by price
 * Booking a Room
 * Deleting a Booking
-* Edit a Bookong
+* Edit a Booking
 * Deleting an Accommodation
 * Sign-in/Sign-up/Sign-out
 
