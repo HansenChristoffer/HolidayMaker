@@ -15,12 +15,10 @@
  */
 package com.group.foctg.holidayMaker.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,9 +27,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -73,8 +68,8 @@ public class Booking implements Serializable {
      * <code>halfBoard</code>
      * @param extraBeds boolean value to be added to field <code>extraBed</code>
      */
-    public Booking(Customer customer, List<Room> rooms, Date dateFrom,
-            Date dateTo, Short numberOfAdults, Short numberOfKids,
+    public Booking(Customer customer, List<Room> rooms, String dateFrom,
+            String dateTo, Short numberOfAdults, Short numberOfKids,
             Boolean allInclusive, Boolean fullBoard, Boolean halfBoard,
             Boolean extraBeds) {
         this.customer = customer;
@@ -103,14 +98,10 @@ public class Booking implements Serializable {
     private List<Room> rooms;
 
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dateFrom;
+    private String dateFrom;
 
     @Column
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dateTo;
+    private String dateTo;
 
     @Column
     private Short numberOfAdults;
@@ -133,8 +124,8 @@ public class Booking implements Serializable {
     @Column(columnDefinition = "float default 1")
     private float cost;
 
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ReservedDates reservedDates;
+//    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private ReservedDates reservedDates;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -209,7 +200,7 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateFrom</code>
      */
-    public Date getDateFrom() {
+    public String getDateFrom() {
         return dateFrom;
     }
 
@@ -220,7 +211,7 @@ public class Booking implements Serializable {
      * @param dateFrom <code>Date</code> value to be added to field
      * <code>dateFrom</code>
      */
-    public void setDateFrom(Date dateFrom) {
+    public void setDateFrom(String dateFrom) {
         this.dateFrom = dateFrom;
     }
 
@@ -231,7 +222,7 @@ public class Booking implements Serializable {
      * @return Date of {@link com.group.foctg.holidayMaker.model.Booking}
      * objects field <code>dateTo</code>
      */
-    public Date getDateTo() {
+    public String getDateTo() {
         return dateTo;
     }
 
@@ -242,7 +233,7 @@ public class Booking implements Serializable {
      * @param dateTo <code>Date</code> value to be added to field
      * <code>dateTo</code>
      */
-    public void setDateTo(Date dateTo) {
+    public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
     }
 
@@ -376,28 +367,6 @@ public class Booking implements Serializable {
      */
     public void setExtraBed(Boolean extraBed) {       
         this.extraBed = extraBed;
-    }
-
-    /**
-     * Method that returns the <code>reservedDates</code> of the
-     * {@link com.group.foctg.holidayMaker.model.Booking} object
-     *
-     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
-     */
-    public ReservedDates getReservedDates() {
-        return reservedDates;
-    }
-
-    /**
-     * Method that will set the value of the field <code>reservedDates</code> by
-     * the value sent as parameter.
-     *
-     * @param reservedDates
-     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
-     * added to field <code>reservedDates</code>
-     */
-    public void setReservedDates(ReservedDates reservedDates) {
-        this.reservedDates = reservedDates;
     }
 
     public float getCost() {

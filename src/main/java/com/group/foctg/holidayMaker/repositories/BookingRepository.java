@@ -40,6 +40,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     
     @Query("SELECT c.bookings FROM Customer c WHERE c.id = ?1")
-    List<Booking> findBookingsByCustomerID(Long ID);
+    List<Booking> findBookingsByCustomerId(Long id);
+    
+    @Query("SELECT DISTINCT b FROM Booking b JOIN b.rooms r WHERE r.id = ?1")
+    List<Booking> findBookingsByRoomId(Long id);
 
 }

@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Booking;
+import com.group.foctg.holidayMaker.repositories.BookingRepository;
 import com.group.foctg.holidayMaker.services.BookingService;
+import java.text.ParseException;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -46,7 +48,15 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
-
+    
+    @Autowired
+    private BookingRepository bookingRepository;
+    
+    @GetMapping("/bookings")
+    public List<Booking> findAll() {
+        return bookingRepository.findAll();
+    }
+    
     /**
      * POST endpoint method that listens on <code>"/booking"</code> URL and will
      * call the
@@ -56,9 +66,10 @@ public class BookingController {
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * to pass to the Service class.
      * @return a boolean value from the autowired Service.
+     * @throws java.text.ParseException
      */
     @PostMapping("/booking")
-    public boolean saveBooking(@RequestBody Booking booking) {
+    public boolean saveBooking(@RequestBody Booking booking) throws ParseException {
         return bookingService.saveBooking(booking);
     }
 
@@ -105,5 +116,10 @@ public class BookingController {
     @GetMapping("/booking/customer")
     public List<Booking> findBookingsByCustomerId(@RequestParam Long id) {
         return bookingService.findBookingsByCustomerId(id);
+    }
+    
+    @GetMapping("/bookings/room")
+    public List<Booking> findBookingsByRoomId(@RequestParam Long id) {
+        return bookingService.findBookingsByRoomId(id);
     }
 }

@@ -21,15 +21,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Booking;
-import com.group.foctg.holidayMaker.model.ReservedDates;
+import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
  * column and entity. Autowires the repository.
  *
  * @author Frida Ek
+ * @author Christoffer Hansen
  *
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
@@ -42,9 +45,6 @@ public class BookingService {
     @Autowired
     private RoomService roomService;
 
-    @Autowired
-    private ReservedDatesService reservedDatesService;
-
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Booking} object from
      * parameter in the database.
@@ -54,7 +54,7 @@ public class BookingService {
      * @return A boolean value representing whether the saving was successful or
      * not.
      */
-    public boolean saveBooking(Booking booking) {
+    public boolean saveBooking(Booking booking) throws ParseException {
         boolean safeToSave = true;
         short totalBedsNeeded = (short) (booking.getNumberOfAdults() + booking.getNumberOfKids() + (booking.getExtraBed() ? 1 : 0));
         short totalBedCapacity = 0;
@@ -74,6 +74,7 @@ public class BookingService {
             booking.setHalfBoard(true);
         }
 
+        // Set the booking cost by the sum of room price + X beds
         for (Room r : booking.getRooms()) {
             Room room = roomService.findById(r.getId()).get();
             booking.setCost(booking.getCost() + room.getPrice());
@@ -84,23 +85,19 @@ public class BookingService {
             throw new BookingValuesOutOfBoundsException(totalBedCapacity, totalBedsNeeded);
         } else {
             for (Room r : booking.getRooms()) {
-                if (reservedDatesService.roomExistsById(r.getId())) {
-                    for (ReservedDates rd : reservedDatesService.findReservedDatesByRoomId(r.getId())) {
-                        if (rd.isOverlapping(booking.getDateFrom(), booking.getDateTo())) {
-                            safeToSave = false;
-                        } else {
-                            booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
-                        }
-                    }
-                } else {
-                    booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
+                for (Booking b : bookingRepository.findBookingsByRoomId(r.getId())) {
+                    safeToSave = !Filter.isOverlapping(
+                            new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateTo()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateTo()));
                 }
             }
-
-            if (safeToSave) {
-                return bookingRepository.saveAndFlush(booking).equals(booking);
-            }
         }
+        if (safeToSave) {
+            return bookingRepository.saveAndFlush(booking).equals(booking);
+        }
+
         return false;
     }
 
@@ -161,6 +158,10 @@ public class BookingService {
      * <code>id</code>, if it exists
      */
     public List<Booking> findBookingsByCustomerId(Long id) {
-        return bookingRepository.findBookingsByCustomerID(id);
+        return bookingRepository.findBookingsByCustomerId(id);
+    }
+
+    public List<Booking> findBookingsByRoomId(Long id) {
+        return bookingRepository.findBookingsByRoomId(id);
     }
 }

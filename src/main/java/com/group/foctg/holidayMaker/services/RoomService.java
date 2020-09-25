@@ -21,16 +21,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
-import com.group.foctg.holidayMaker.model.ReservedDates;
+import com.group.foctg.holidayMaker.model.Booking;
+import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
 import com.group.foctg.holidayMaker.repositories.RoomRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Room} column
@@ -48,6 +48,9 @@ public class RoomService {
 
     @Autowired
     private AccommodationRepository accommodationRepository;
+
+    @Autowired
+    private BookingService bookingService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Room} object from
@@ -156,7 +159,7 @@ public class RoomService {
      * @return Set&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; with
      * all the rooms
      */
-    public Set<Room> findAllByAccommodationId(Long id) {
+    public List<Room> findAllByAccommodationId(Long id) {
         return roomRepository.findAllByAccomodationId(id);
     }
 
@@ -167,30 +170,36 @@ public class RoomService {
      * @param id Long value to use for finding the
      * {@link com.group.foctg.holidayMaker.model.Accommodation}
      * @param dateFrom
-     * @param dateTo 
+     * @param dateTo
      * @return Set&lt;{@link com.group.foctg.holidayMaker.model.Room}&gt; with
      * all the rooms that has been filtered
      * @throws ParseException in case the parsing goes haywire
      */
-    public Set<Room> findAllByAccommodationIdFilteredByDate(Long id, String dateFrom, String dateTo) throws ParseException {
-        Set<Room> freeRooms = new HashSet<>();
+    public List<Room> findAllByAccommodationIdFilteredByDate(Long id, String dateFrom, String dateTo) throws ParseException {
+        List<Room> accoRooms = findAllByAccommodationId(id);
+        List<Room> freeRooms = new ArrayList<>();
+        boolean safeToSend = true;
 
         Date df = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
         Date dt = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
 
-        findAllByAccommodationId(id).forEach(room -> {
-            if (!room.getReservedDates().isEmpty()) {
-                for (ReservedDates rd : room.getReservedDates()) {
-                    if (!rd.isOverlapping(df, dt)) {
-                        freeRooms.add(room);
-                        break;
-                    }
+        for (Room room : accoRooms) {
+            if (!room.getBookings().isEmpty()) {
+                for (Booking b : bookingService.findBookingsByRoomId(room.getId())) {
+                    Date bdf = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateFrom());
+                    Date bdt = new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateTo());
+
+                    safeToSend = !Filter.isOverlapping(bdf, bdt, df, dt);
                 }
-            } else {
+            }
+
+            if (safeToSend) {
                 freeRooms.add(room);
             }
-        });
+
+        }
 
         return freeRooms;
+
     }
 }
