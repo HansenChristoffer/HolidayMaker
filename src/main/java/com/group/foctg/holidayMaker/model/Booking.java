@@ -31,6 +31,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -373,12 +374,7 @@ public class Booking implements Serializable {
      * @param extraBed <code>Boolean</code> value to be added to field
      * <code>extraBed</code>
      */
-    public void setExtraBed(Boolean extraBed) {
-        if (extraBed == true && this.extraBed == false) {
-            this.cost += 200;
-        } else if (extraBed == false && this.extraBed == true) {
-            this.cost -= 200;
-        }
+    public void setExtraBed(Boolean extraBed) {       
         this.extraBed = extraBed;
     }
 

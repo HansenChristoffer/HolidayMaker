@@ -6,7 +6,6 @@ var selectedBooking;
 fetch("http://localhost:8080/api/booking/customer?id=" + user.id)
   .then(response => response.json())
   .then(function(data) {
-    console.log(data);
 
     var leftContainer = document.getElementsByClassName('left-container')[0];
 
@@ -248,9 +247,6 @@ async function listings() {
 
         var listingLocation = document.createElement('p');
         listingLocation.classList.add('style-p');
-        console.log("Location->");
-        console.log(data[i].location);
-        console.log(data);
         listingLocation.innerHTML = "Location: " + data[i].location.name;
 
         var listingRooms = document.createElement('p');
