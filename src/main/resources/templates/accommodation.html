@@ -11,37 +11,55 @@
   <link rel="stylesheet" href="css/accommodationStyle.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <script src="js/autologoutscript.js"></script>
-  <script src="js/accommodationrooms.js"></script>
-
   <title>Holiday Maker - Accommodation</title>
 </head>
 
 <body>
   <div class="container-fluid">
 
-    <!--Menubar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Holiday Maker</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item"><a class="nav-link" href="/">Back to frontpage</a></li>
-
-          <li class="nav-item"><a class="nav-link" href="/dashboard" tabindex="-1" aria-disabled="true">Profile</a></li>
-        </ul>
-      </div>
-    </nav>
+            <a class="navbar-brand" href="#">Holiday Maker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a></li>
+                    <li class="nav-item" id="login"><a class="nav-link" href="/dashboard">Profile</a></li>
+                </ul>
+            </div>
+        </nav>
     <!-- END-->
 
     <div id="container-body">
       <div id="accommodation">
-
-        <div id="image-container">
-          <img id="accommodation-img" src="" alt="Accommodation image">
+        
+        <div class="rowPairContainer">
+	        <div id="image-container">
+	          <img id="accommodation-img" src="" alt="Accommodation image">
+	        </div>
+	        
+	        <div id="accommodation-data">
+	          <div id="accommodation-data-offers">
+	            <p>Pool</p>
+	            <p>Restaurant</p>
+	            <p>Child events</p>
+	            <p>Entertainment</p>
+	            <p>Nearest beach</p>
+	            <p>Nearest center</p>
+	          </div>
+	
+	          <div id="accommodation-data-stats">
+	            <p id="hasPool"></p>
+	            <p id="hasRestaurant"></p>
+	            <p id="hasChildEvents"></p>
+	            <p id="hasEntertainment"></p>
+	            <p id="distanceBeach"></p>
+	            <p id="distanceCenter"></p>
+	          </div>
+	        </div>
         </div>
 
         <div id="accommadation-info">
@@ -53,25 +71,7 @@
           <input id="checkbox-extrabed" name="Extra bed" type="checkbox" data-toggle="tooltip" data-placement="right" title="If you need an extra bed" onclick="addExtraBed()">
         </div>
 
-        <div id="accommodation-data">
-          <div id="accommodation-data-offers">
-            <p>Pool</p>
-            <p>Restaurant</p>
-            <p>Child events</p>
-            <p>Entertainment</p>
-            <p>Nearest beach</p>
-            <p>Nearest center</p>
-          </div>
-
-          <div id="accommodation-data-stats">
-            <p id="hasPool"></p>
-            <p id="hasRestaurant"></p>
-            <p id="hasChildEvents"></p>
-            <p id="hasEntertainment"></p>
-            <p id="distanceBeach"></p>
-            <p id="distanceCenter"></p>
-          </div>
-        </div>
+        
       </div>
       <div id="booking-container">
         <p id="totalCostParagraph"><b>Cost:</b> 0</p>
@@ -88,5 +88,10 @@
     </div>
   </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+<script src="js/autologoutscript.js"></script>
+<script src="js/accommodationrooms.js"></script>
 </html>
