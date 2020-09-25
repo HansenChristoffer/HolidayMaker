@@ -1,3 +1,4 @@
+checkLoginTime();
 const baseURL = "http://localhost:8080/api";
 var roomsChecked = new Set();
 
@@ -182,10 +183,11 @@ async function book() {
 function removeChecked() {
   for (room of roomsChecked) {
     var r = document.getElementById(room);
-    r.innerHTML
+    r.innerHTML = '';
   }
 }
 
+// Sorting for the table -->
 let bubbleSortAsc = (inputArr) => {
   let len = inputArr.length;
   for (let i = 0; i < len; i++) {
