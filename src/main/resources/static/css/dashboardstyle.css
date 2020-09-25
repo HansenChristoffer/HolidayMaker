@@ -3,6 +3,12 @@ body {
   color: #ffffff;
 }
 
+select, input {
+	margin-bottom: 1vw;
+  color: #dddddd;
+  background-color: 646f72;
+}
+
 #outer-container {
   display: flex;
   flex-wrap: wrap;
@@ -20,9 +26,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 25%;
-  height: 40%;
-  background-color: #ffffff;
+  height: 45%;
+  background-color: #343a40;
 }
+
+
 
 #formCover {
   position: fixed;

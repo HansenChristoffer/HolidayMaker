@@ -51,6 +51,8 @@ async function closeLogin(flag) {
       .catch((error) => {
         console.log("No user")
       });
+      
+      alert("Welcome! You are now Logged in!")
   }
 
   document.getElementById("formCover").style.display = "none";
