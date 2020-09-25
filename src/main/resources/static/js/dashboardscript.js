@@ -94,6 +94,8 @@ fetch("http://localhost:8080/api/booking/customer?id=" + user.id)
     }
 
     function deleteBooking(index) {
+        var choice = confirm("You are about to delete this booking permanently! Do you proceed?")
+        if (choice === true) {
       selectedBooking = data[index];
       fetch('http://localhost:8080/api/booking?id=' + selectedBooking.id, {
           method: 'DELETE',
@@ -113,6 +115,7 @@ fetch("http://localhost:8080/api/booking/customer?id=" + user.id)
         .catch((error) => {
           console.error('Error:', error);
         });
+        }
     }
 
     function editBooking(index) {
@@ -174,11 +177,11 @@ fetch("http://localhost:8080/api/booking/customer?id=" + user.id)
 
       var bedOpt1 = document.createElement('option');
       bedOpt1.value = true;
-      bedOpt1.innerHTML = "Yes";
+      bedOpt1.innerHTML = "Extra Bed";
 
       var bedOpt2 = document.createElement('option');
       bedOpt2.value = false;
-      bedOpt2.innerHTML = "No";
+      bedOpt2.innerHTML = "No Extra Bed";
 
       if (selectedBooking.extraBed == true)
         bedOpt1.selected = true;
@@ -200,12 +203,17 @@ updateBtn.addEventListener('click', function() {
   selectedBooking.fullBoard = (pack.value === 'Full Board');
   selectedBooking.halfBoard = (pack.value === 'Half Board');
   selectedBooking.allInclusive = (pack.value === 'All Inclusive');
-
+  
+  var choice = confirm("You are about to do changes to this booking. Do you proceed?");
+  if (choice === true) {
   putData("http://localhost:8080/api/booking?id=" + selectedBooking.id, selectedBooking)
     .then(async function() {
       await location.reload();
     });
-})
+    
+     location.reload();
+    }
+});
 
 async function putData(url, data) {
   // Default options are marked with *
@@ -314,6 +322,10 @@ function addListing() {
 }
 
 async function deleteListing(element) {
+    
+    var choice = confirm("You are about to delete this listing permanently. Do you proceed?");
+    
+  if (choice === true) {
   await fetch(baseURL + "/accommodation?id=" + element.id, {
       method: 'DELETE',
       headers: {
@@ -333,4 +345,5 @@ async function deleteListing(element) {
     .catch((error) => {
       console.error('Error:', error);
     });
+    }
 }
