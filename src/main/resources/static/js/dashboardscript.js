@@ -259,7 +259,7 @@ async function listings() {
 
         var rating = document.createElement('p');
         rating.classList.add('style-p');
-        rating.innerHTML = "Rating: " + data[i].rating;
+        rating.innerHTML = "Rating: " + data[i].rating.toFixed(2);
 
         var resultListingRight = document.createElement('div');
         resultListingRight.classList.add('column-right');
