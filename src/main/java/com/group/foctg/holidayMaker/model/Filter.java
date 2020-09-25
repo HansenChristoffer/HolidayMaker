@@ -15,6 +15,8 @@
  */
 package com.group.foctg.holidayMaker.model;
 
+import java.util.Date;
+
 /**
  * The {@link com.group.foctg.holidayMaker.model.Filter} entity class.
  *
@@ -349,6 +351,11 @@ public class Filter {
     @Override
     public String toString() {
         return "Filter{" + "location=" + location + ", dateFrom=" + dateFrom + ", dateTo=" + dateTo + ", pool=" + pool + ", childrenClub=" + childrenClub + ", restaurant=" + restaurant + ", nightEntertainment=" + nightEntertainment + ", rooms=" + rooms + ", adults=" + adults + ", kids=" + kids + ", minDistBeach=" + minDistBeach + ", maxDistBeach=" + maxDistBeach + ", minDistCenter=" + minDistCenter + ", maxDistCenter=" + maxDistCenter + '}';
+    }
+
+    public static boolean isOverlapping(Date dateFrom, Date dateTo, Date dateRangeFrom, Date dateRangeTo) {
+        return (dateFrom.getTime() <= dateRangeTo.getTime()
+                && dateRangeFrom.getTime() <= dateTo.getTime());
     }
 
 }

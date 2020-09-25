@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
+import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
@@ -53,6 +54,9 @@ public class AccommodationService {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    private BookingService bookingService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Accommodation} object
@@ -193,8 +197,8 @@ public class AccommodationService {
          */
         for (Accommodation a : (filter.getLocation().equals("any") ? findAll() : findAccomodationsByLocationId(locationService.findLocationIdByName(filter.getLocation())))) {
             for (Room r : a.getRooms()) {
-                for (ReservedDates rd : r.getReservedDates()) {
-                    if (!rd.isOverlapping(
+                for (Booking b : bookingService.findBookingsByRoomId(r.getId())) {
+                    if (!Filter.isOverlapping(b.getDateFrom(), b.getDateTo(),
                             new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateFrom()),
                             new SimpleDateFormat("dd/MM/yyyy").parse(filter.getDateTo()))) {
                         availableByDate.add(a);

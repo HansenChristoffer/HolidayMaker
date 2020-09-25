@@ -21,6 +21,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Accommodation;
+import com.group.foctg.holidayMaker.model.Booking;
+import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.AccommodationRepository;
@@ -31,6 +33,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Room} column
@@ -41,6 +44,7 @@ import java.util.Set;
  * @see com.group.foctg.holidayMaker.repositories.RoomRepository
  */
 @Service
+@Slf4j
 public class RoomService {
 
     @Autowired
@@ -48,6 +52,9 @@ public class RoomService {
 
     @Autowired
     private AccommodationRepository accommodationRepository;
+    
+    @Autowired
+    private BookingService bookingService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Room} object from
@@ -173,20 +180,25 @@ public class RoomService {
      * @throws ParseException in case the parsing goes haywire
      */
     public Set<Room> findAllByAccommodationIdFilteredByDate(Long id, String dateFrom, String dateTo) throws ParseException {
-        Set<Room> freeRooms = new HashSet<>();
+        Set<Room> accoRooms = findAllByAccommodationId(id);
+        Set<Room> freeRooms = new HashSet<>(); 
 
         Date df = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
         Date dt = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
-
-        findAllByAccommodationId(id).forEach(room -> {
-            if (!room.getReservedDates().isEmpty()) {
-                for (ReservedDates rd : room.getReservedDates()) {
-                    if (!rd.isOverlapping(df, dt)) {
+        
+        accoRooms.forEach(room -> {
+            if (!room.getBookings().isEmpty()) {
+                log.info("NOT EMPTY");
+                log.info("rSize: " + room.getBookings().size());
+                for (Booking b : bookingService.findBookingsByRoomId(room.getId()))
+                    if (!Filter.isOverlapping(df, dt, b.getDateFrom(), b.getDateTo())) {
+                        log.info("NOT OVERLAPPING == " + b.getDateFrom() + " - " + b.getDateTo() + " =/= " + df + " - " + dt);
                         freeRooms.add(room);
                         break;
                     }
-                }
             } else {
+                log.info("EMPTY");
+                log.info("rSize: " + room.getBookings().size());
                 freeRooms.add(room);
             }
         });

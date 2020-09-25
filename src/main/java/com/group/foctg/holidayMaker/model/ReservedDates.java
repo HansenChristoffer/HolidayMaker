@@ -72,7 +72,7 @@ public class ReservedDates implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Room room;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     private Booking booking;
 
     /**

@@ -25,13 +25,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The {@link com.group.foctg.holidayMaker.model.Booking} entity class. Holds
@@ -99,17 +99,17 @@ public class Booking implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
     private List<Room> rooms;
 
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING , pattern = "dd/MM/yyy")
     private Date dateFrom;
 
     @Column
     @Temporal(javax.persistence.TemporalType.DATE)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING , pattern = "dd/MM/yyy")
     private Date dateTo;
 
     @Column
@@ -133,8 +133,8 @@ public class Booking implements Serializable {
     @Column(columnDefinition = "float default 1")
     private float cost;
 
-    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ReservedDates reservedDates;
+//    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private ReservedDates reservedDates;
 
     /**
      * Method that returns the <code>id</code> of the
@@ -378,27 +378,27 @@ public class Booking implements Serializable {
         this.extraBed = extraBed;
     }
 
-    /**
-     * Method that returns the <code>reservedDates</code> of the
-     * {@link com.group.foctg.holidayMaker.model.Booking} object
-     *
-     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
-     */
-    public ReservedDates getReservedDates() {
-        return reservedDates;
-    }
-
-    /**
-     * Method that will set the value of the field <code>reservedDates</code> by
-     * the value sent as parameter.
-     *
-     * @param reservedDates
-     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
-     * added to field <code>reservedDates</code>
-     */
-    public void setReservedDates(ReservedDates reservedDates) {
-        this.reservedDates = reservedDates;
-    }
+//    /**
+//     * Method that returns the <code>reservedDates</code> of the
+//     * {@link com.group.foctg.holidayMaker.model.Booking} object
+//     *
+//     * @return {@link com.group.foctg.holidayMaker.model.Booking} object field
+//     */
+//    public ReservedDates getReservedDates() {
+//        return reservedDates;
+//    }
+//
+//    /**
+//     * Method that will set the value of the field <code>reservedDates</code> by
+//     * the value sent as parameter.
+//     *
+//     * @param reservedDates
+//     * {@link com.group.foctg.holidayMaker.model.ReservedDates} value to be
+//     * added to field <code>reservedDates</code>
+//     */
+//    public void setReservedDates(ReservedDates reservedDates) {
+//        this.reservedDates = reservedDates;
+//    }
 
     public float getCost() {
         return cost;

@@ -21,19 +21,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.group.foctg.holidayMaker.model.Booking;
-import com.group.foctg.holidayMaker.model.ReservedDates;
+import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
+import java.util.Arrays;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
  * column and entity. Autowires the repository.
  *
  * @author Frida Ek
+ * @author Christoffer Hansen
  *
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
 @Service
+@Slf4j
 public class BookingService {
 
     @Autowired
@@ -74,6 +78,7 @@ public class BookingService {
             booking.setHalfBoard(true);
         }
 
+        // Set the booking cost by the sum of room price + X beds
         for (Room r : booking.getRooms()) {
             Room room = roomService.findById(r.getId()).get();
             booking.setCost(booking.getCost() + room.getPrice());
@@ -84,23 +89,17 @@ public class BookingService {
             throw new BookingValuesOutOfBoundsException(totalBedCapacity, totalBedsNeeded);
         } else {
             for (Room r : booking.getRooms()) {
-                if (reservedDatesService.roomExistsById(r.getId())) {
-                    for (ReservedDates rd : reservedDatesService.findReservedDatesByRoomId(r.getId())) {
-                        if (rd.isOverlapping(booking.getDateFrom(), booking.getDateTo())) {
-                            safeToSave = false;
-                        } else {
-                            booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
-                        }
+                for (Booking b : bookingRepository.findBookingsByRoomId(r.getId())) {
+                    if (Filter.isOverlapping(b.getDateFrom(), b.getDateTo(), booking.getDateFrom(), booking.getDateTo())) {
+                        safeToSave = false;
                     }
-                } else {
-                    booking.setReservedDates(new ReservedDates(booking.getDateFrom(), booking.getDateTo(), r, booking));
                 }
             }
-
-            if (safeToSave) {
-                return bookingRepository.saveAndFlush(booking).equals(booking);
-            }
         }
+        if (safeToSave) {
+            return bookingRepository.saveAndFlush(booking).equals(booking);
+        }
+        
         return false;
     }
 
@@ -161,6 +160,11 @@ public class BookingService {
      * <code>id</code>, if it exists
      */
     public List<Booking> findBookingsByCustomerId(Long id) {
-        return bookingRepository.findBookingsByCustomerID(id);
+        return bookingRepository.findBookingsByCustomerId(id);
     }
+
+    public List<Booking> findBookingsByRoomId(Long id) {
+        return bookingRepository.findBookingsByRoomId(id);
+    }
+
 }

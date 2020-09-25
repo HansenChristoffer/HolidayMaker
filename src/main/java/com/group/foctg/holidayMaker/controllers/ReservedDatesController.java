@@ -16,6 +16,7 @@
 package com.group.foctg.holidayMaker.controllers;
 
 import com.group.foctg.holidayMaker.model.ReservedDates;
+import com.group.foctg.holidayMaker.repositories.ReservedDatesRepository;
 import com.group.foctg.holidayMaker.services.ReservedDatesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,14 @@ public class ReservedDatesController {
     @Autowired
     private ReservedDatesService reservedDatesService;
 
+    @Autowired
+    private ReservedDatesRepository reservedDatesRepository;
+    
+    @GetMapping("/rds")
+    public List<ReservedDates> findAll() {
+        return reservedDatesRepository.findAll();
+    }
+    
     @PostMapping("/reserveddates")
     public ReservedDates saveReservedDatesService(ReservedDates reservedDates) {
         return reservedDatesService.saveReservedDates(reservedDates);

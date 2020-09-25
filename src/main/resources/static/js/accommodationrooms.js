@@ -1,6 +1,7 @@
 checkLoginTime();
 const baseURL = "http://localhost:8080/api";
-var roomsChecked = new Set();
+var roomsChecked = new Array();
+var roomLocMap = {};
 
 document.addEventListener("DOMContentLoaded", startUp(), false);
 
@@ -60,46 +61,56 @@ async function setTableData() {
       acc.dateTo)
     .then(response => response.json())
     .then(function(data) {
+      console.log(data);
+      tableData = data;
       asc = false;
       populateTable(data);
     });
 }
 
 function populateTable(data) {
-  var table = document.getElementById("table-rooms");
-  table.innerHTML = "";
-  table.innerHTML = '<tr><th onclick="">Room</th><th onclick="sortTable()">Price</th></tr>';
-
-  console.log(table.rows.length);
+  var tableRooms = document.getElementById("table-rooms");
+  tableRooms.innerHTML = "";
+  tableRooms.innerHTML = '<tr><th onclick="">Room</th><th onclick="sortTable()">Price</th></tr>';
 
   data.forEach(function(object) {
     var tr = document.createElement("tr");
-    tr.setAttribute("id", ("TR-" + table.rows.length));
+    var tableRowId = 'I-' + tableRooms.rows.length;
+    tr.setAttribute("id", ("TR-" + tableRooms.rows.length));
     tr.innerHTML = '<td> Room with ' + object.numberOfBeds +
-      ' beds <label class="rooms-data-container">Choose<input id="' +
-      object.id + '" type = "checkbox" onClick="check(this)"><span class = "checkmark"></span></label></td>' +
-      '<td><span id=price-' + object.id + '>' + object.price.toFixed(2) + '</span>' +
+      ' beds <label class="rooms-data-container">Choose<input id="I-' +
+      tableRooms.rows.length + '" type = "checkbox" onClick="check(this)"><span class = "checkmark"></span></label></td>' +
+      '<td><span id="price-I-' + tableRooms.rows.length + '">' + object.price.toFixed(2) + '</span>' +
       '</td>';
-    table.appendChild(tr);
-    console.log(table.rows.length);
+    tableRooms.appendChild(tr);
+
+    roomLocMap = Object.assign({
+      [tableRowId]: object.id
+    }, roomLocMap);
   });
+
 }
 
 function check(element) {
   var bookButton = document.getElementById("bookBtn");
-  var tableRoomPrice = document.getElementById("price-" + element.id);
+  var tableRoomPrice = document.getElementById(`price-${element.id}`);
   var totalCostParagraph = document.getElementById("totalCostParagraph");
   var currentTotalCost = parseFloat(totalCostParagraph.innerHTML.split(" ")[1]);
 
   if (element.checked) {
     totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost + parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
-    roomsChecked.add(element.id);
+    roomsChecked.push(element.id);
   } else {
     totalCostParagraph.innerHTML = "<b>Cost:</b> " + (currentTotalCost - parseFloat(tableRoomPrice.innerHTML)).toFixed(2) + ":- SEK";
-    roomsChecked.delete(element.id);
+    for (var i = 0; i < roomsChecked.length; i++) {
+      if (roomsChecked[i] === element.id) {
+        roomsChecked.splice(i, 1);
+        i--;
+      }
+    }
   }
 
-  if (roomsChecked.size > 0) {
+  if (roomsChecked.length > 0) {
     bookButton.disabled = false;
   } else {
     bookButton.disabled = true;
@@ -163,10 +174,8 @@ async function book() {
 
   for (room of roomsChecked) {
     data.rooms.push({
-      id: room
+      id: roomLocMap[room]
     });
-
-    removeChecked()
   }
 
   await fetch(baseURL + "/booking", {
@@ -179,6 +188,7 @@ async function book() {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      removeChecked();
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -186,13 +196,13 @@ async function book() {
 }
 
 function removeChecked() {
-  var table = document.getElementById("table-rooms");
+  var tableRooms = document.getElementById("table-rooms");
 
-  console.log(roomsChecked);
-  for (room of roomsChecked) {
-    console.log(room);
-    table.deleteRow(room);
+  roomsChecked.sort();
+  for (var i = roomsChecked.length - 1; i >= 0; i--) {
+    tableRooms.deleteRow(roomsChecked[i].split("-")[1]);
   }
+
 }
 
 // Sorting for the table -->
