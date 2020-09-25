@@ -60,9 +60,8 @@ async function setTableData() {
       acc.dateTo)
     .then(response => response.json())
     .then(function(data) {
-      tableData = data;
       asc = false;
-      populateTable(tableData);
+      populateTable(data);
     });
 }
 
@@ -71,14 +70,18 @@ function populateTable(data) {
   table.innerHTML = "";
   table.innerHTML = '<tr><th onclick="">Room</th><th onclick="sortTable()">Price</th></tr>';
 
+  console.log(table.rows.length);
+
   data.forEach(function(object) {
     var tr = document.createElement("tr");
+    tr.setAttribute("id", ("TR-" + table.rows.length));
     tr.innerHTML = '<td> Room with ' + object.numberOfBeds +
       ' beds <label class="rooms-data-container">Choose<input id="' +
       object.id + '" type = "checkbox" onClick="check(this)"><span class = "checkmark"></span></label></td>' +
       '<td><span id=price-' + object.id + '>' + object.price.toFixed(2) + '</span>' +
       '</td>';
     table.appendChild(tr);
+    console.log(table.rows.length);
   });
 }
 
@@ -162,6 +165,8 @@ async function book() {
     data.rooms.push({
       id: room
     });
+
+    removeChecked()
   }
 
   await fetch(baseURL + "/booking", {
@@ -181,9 +186,12 @@ async function book() {
 }
 
 function removeChecked() {
+  var table = document.getElementById("table-rooms");
+
+  console.log(roomsChecked);
   for (room of roomsChecked) {
-    var r = document.getElementById(room);
-    r.innerHTML = '';
+    console.log(room);
+    table.deleteRow(room);
   }
 }
 
