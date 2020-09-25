@@ -20,7 +20,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Room;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Repository interface for the {@link com.group.foctg.holidayMaker.model.Room}
@@ -40,6 +40,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     public Accommodation findAccommdotionByRoomId(Long id);
 
     @Query("SELECT a.rooms FROM Accommodation a WHERE a.id = ?1")
-    public Set<Room> findAllByAccomodationId(Long id);
+    public List<Room> findAllByAccomodationId(Long id);
 
 }

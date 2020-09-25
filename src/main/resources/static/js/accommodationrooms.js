@@ -61,7 +61,6 @@ async function setTableData() {
       acc.dateTo)
     .then(response => response.json())
     .then(function(data) {
-      console.log(data);
       tableData = data;
       asc = false;
       populateTable(data);

@@ -4,14 +4,12 @@ import com.group.foctg.holidayMaker.model.Accommodation;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Customer;
 import com.group.foctg.holidayMaker.model.Location;
-import com.group.foctg.holidayMaker.model.ReservedDates;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
 import com.group.foctg.holidayMaker.services.AccommodationService;
 import com.group.foctg.holidayMaker.services.BookingService;
 import com.group.foctg.holidayMaker.services.CustomerService;
 import com.group.foctg.holidayMaker.services.LocationService;
-import com.group.foctg.holidayMaker.services.ReservedDatesService;
 import com.group.foctg.holidayMaker.services.RoomService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,7 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,9 +56,6 @@ public class MockDataGenerator implements CommandLineRunner {
 
     @Autowired
     private LocationService locationService;
-
-    @Autowired
-    private ReservedDatesService reservedDatesService;
 
     private List<String> mockNames;
 
@@ -190,8 +184,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(0, 1),
-                new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("08/11/2020"),
+                "02/11/2020",
+                "08/11/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -199,8 +193,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(7)).get(),
                 dbRooms.subList(1, 2),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/11/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("19/11/2020"),
+                "10/11/2020",
+                "19/11/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -208,8 +202,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(8)).get(),
                 dbRooms.subList(3, 4),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/11/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("29/11/2020"),
+                "20/11/2020",
+                "29/11/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -217,8 +211,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(9)).get(),
                 dbRooms.subList(4, 5),
-                new SimpleDateFormat("dd/MM/yyyy").parse("02/12/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("08/12/2020"),
+                "02/12/2020",
+                "08/12/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -226,8 +220,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(10)).get(),
                 dbRooms.subList(5, 6),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/12/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("29/12/2020"),
+                "20/12/2020",
+                "29/12/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -236,8 +230,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(6, 7),
-                new SimpleDateFormat("dd/MM/yyyy").parse("02/01/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("09/01/2021"),
+                "02/01/2021",
+                "09/01/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -245,8 +239,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(7)).get(),
                 dbRooms.subList(7, 8),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/01/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("28/01/2021"),
+                "20/01/2021",
+                "28/01/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -254,8 +248,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(8)).get(),
                 dbRooms.subList(9, 10),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/02/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/02/2021"),
+                "01/02/2021",
+                "10/02/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -263,8 +257,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(9)).get(),
                 dbRooms.subList(10, 11),
-                new SimpleDateFormat("dd/MM/yyyy").parse("16/02/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("26/02/2021"),
+                "16/02/2021",
+                "26/02/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -272,8 +266,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(10)).get(),
                 dbRooms.subList(11, 12),
-                new SimpleDateFormat("dd/MM/yyyy").parse("02/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/03/2021"),
+                "02/03/2021",
+                "10/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -282,8 +276,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(12, 13),
-                new SimpleDateFormat("dd/MM/yyyy").parse("12/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("23/03/2021"),
+                "12/03/2021",
+                "23/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -291,8 +285,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(7)).get(),
                 dbRooms.subList(13, 14),
-                new SimpleDateFormat("dd/MM/yyyy").parse("25/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("04/04/2021"),
+                "25/03/2021",
+                "04/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -300,8 +294,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(8)).get(),
                 dbRooms.subList(14, 15),
-                new SimpleDateFormat("dd/MM/yyyy").parse("25/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("04/04/2021"),
+                "25/03/2021",
+                "04/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -309,8 +303,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(9)).get(),
                 dbRooms.subList(15, 16),
-                new SimpleDateFormat("dd/MM/yyyy").parse("12/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("21/03/2021"),
+                "12/03/2021",
+                "21/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -318,8 +312,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(10)).get(),
                 dbRooms.subList(16, 17),
-                new SimpleDateFormat("dd/MM/yyyy").parse("15/04/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("26/04/2021"),
+                "15/04/2021",
+                "26/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -328,8 +322,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(17, 18),
-                new SimpleDateFormat("dd/MM/yyyy").parse("10/02/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("18/02/2021"),
+                "10/02/2021",
+                "18/02/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -337,8 +331,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(7)).get(),
                 dbRooms.subList(18, 19),
-                new SimpleDateFormat("dd/MM/yyyy").parse("12/02/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("22/02/2021"),
+                "12/02/2021",
+                "22/02/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -346,8 +340,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(8)).get(),
                 dbRooms.subList(19, 20),
-                new SimpleDateFormat("dd/MM/yyyy").parse("02/04/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/04/2021"),
+                "02/04/2021",
+                "20/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -355,8 +349,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(9)).get(),
                 dbRooms.subList(21, 22),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/04/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("28/04/2021"),
+                "20/04/2021",
+                "28/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -364,8 +358,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(10)).get(),
                 dbRooms.subList(22, 23),
-                new SimpleDateFormat("dd/MM/yyyy").parse("08/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("16/03/2021"),
+                "08/03/2021",
+                "16/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -374,8 +368,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(23, 24),
-                new SimpleDateFormat("dd/MM/yyyy").parse("15/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("26/03/2021"),
+                "15/03/2021",
+                "26/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -383,8 +377,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(7)).get(),
                 dbRooms.subList(0, 1),
-                new SimpleDateFormat("dd/MM/yyyy").parse("15/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("24/03/2021"),
+                "15/03/2021",
+                "24/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -392,8 +386,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(8)).get(),
                 dbRooms.subList(1, 2),
-                new SimpleDateFormat("dd/MM/yyyy").parse("18/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("27/03/2021"),
+                "18/03/2021",
+                "27/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -401,8 +395,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(9)).get(),
                 dbRooms.subList(2, 3),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("09/04/2021"),
+                "01/04/2021",
+                "09/04/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -410,8 +404,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(10)).get(),
                 dbRooms.subList(3, 4),
-                new SimpleDateFormat("dd/MM/yyyy").parse("01/11/2020"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("20/11/2020"),
+                "01/11/2020",
+                "20/11/2020",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));
@@ -419,8 +413,8 @@ public class MockDataGenerator implements CommandLineRunner {
         bookingService.saveBooking(new Booking(
                 customerService.findById(Long.valueOf(6)).get(),
                 dbRooms.subList(24, 25),
-                new SimpleDateFormat("dd/MM/yyyy").parse("15/03/2021"),
-                new SimpleDateFormat("dd/MM/yyyy").parse("26/03/2021"),
+                "15/03/2021",
+                "26/03/2021",
                 (short) 2,
                 (short) 0, rand.nextBoolean(), rand.nextBoolean(),
                 rand.nextBoolean(), false));

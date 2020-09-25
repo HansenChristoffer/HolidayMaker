@@ -24,8 +24,8 @@ import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.model.Filter;
 import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
-import java.util.Arrays;
-import lombok.extern.slf4j.Slf4j;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Service class for the {@link com.group.foctg.holidayMaker.model.Booking}
@@ -37,7 +37,6 @@ import lombok.extern.slf4j.Slf4j;
  * @see com.group.foctg.holidayMaker.repositories.BookingRepository
  */
 @Service
-@Slf4j
 public class BookingService {
 
     @Autowired
@@ -45,9 +44,6 @@ public class BookingService {
 
     @Autowired
     private RoomService roomService;
-
-    @Autowired
-    private ReservedDatesService reservedDatesService;
 
     /**
      * Saves the {@link com.group.foctg.holidayMaker.model.Booking} object from
@@ -58,7 +54,7 @@ public class BookingService {
      * @return A boolean value representing whether the saving was successful or
      * not.
      */
-    public boolean saveBooking(Booking booking) {
+    public boolean saveBooking(Booking booking) throws ParseException {
         boolean safeToSave = true;
         short totalBedsNeeded = (short) (booking.getNumberOfAdults() + booking.getNumberOfKids() + (booking.getExtraBed() ? 1 : 0));
         short totalBedCapacity = 0;
@@ -90,16 +86,18 @@ public class BookingService {
         } else {
             for (Room r : booking.getRooms()) {
                 for (Booking b : bookingRepository.findBookingsByRoomId(r.getId())) {
-                    if (Filter.isOverlapping(b.getDateFrom(), b.getDateTo(), booking.getDateFrom(), booking.getDateTo())) {
-                        safeToSave = false;
-                    }
+                    safeToSave = !Filter.isOverlapping(
+                            new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(b.getDateTo()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateFrom()),
+                            new SimpleDateFormat("dd/MM/yyyy").parse(booking.getDateTo()));
                 }
             }
         }
         if (safeToSave) {
             return bookingRepository.saveAndFlush(booking).equals(booking);
         }
-        
+
         return false;
     }
 
@@ -166,5 +164,4 @@ public class BookingService {
     public List<Booking> findBookingsByRoomId(Long id) {
         return bookingRepository.findBookingsByRoomId(id);
     }
-
 }

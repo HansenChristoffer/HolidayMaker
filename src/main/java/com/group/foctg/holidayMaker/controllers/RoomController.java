@@ -31,7 +31,6 @@ import com.group.foctg.holidayMaker.model.Room;
 import com.group.foctg.holidayMaker.services.RoomService;
 import java.text.ParseException;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * RestController for the {@link com.group.foctg.holidayMaker.model.Room} entity
@@ -157,7 +156,7 @@ public class RoomController {
      * from the Service.
      */
     @GetMapping("/rooms/accommodation")
-    public Set<Room> findAllByAccommodationId(@RequestParam Long id) {
+    public List<Room> findAllByAccommodationId(@RequestParam Long id) {
         return roomService.findAllByAccommodationId(id);
     }
 
@@ -175,7 +174,7 @@ public class RoomController {
      * @throws java.text.ParseException
      */
     @GetMapping("/filter/rooms/accommodation")
-    public Set<Room> findAllByAccommodationIdFilteredByDate(@RequestParam Long id, @RequestParam String dateFrom, @RequestParam String dateTo) throws ParseException {
+    public List<Room> findAllByAccommodationIdFilteredByDate(@RequestParam Long id, @RequestParam String dateFrom, @RequestParam String dateTo) throws ParseException {
         return roomService.findAllByAccommodationIdFilteredByDate(id, dateFrom, dateTo);
     }
 

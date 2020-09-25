@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group.foctg.holidayMaker.model.Booking;
 import com.group.foctg.holidayMaker.repositories.BookingRepository;
 import com.group.foctg.holidayMaker.services.BookingService;
+import java.text.ParseException;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -65,9 +66,10 @@ public class BookingController {
      * @param booking {@link com.group.foctg.holidayMaker.model.Booking} object
      * to pass to the Service class.
      * @return a boolean value from the autowired Service.
+     * @throws java.text.ParseException
      */
     @PostMapping("/booking")
-    public boolean saveBooking(@RequestBody Booking booking) {
+    public boolean saveBooking(@RequestBody Booking booking) throws ParseException {
         return bookingService.saveBooking(booking);
     }
 
