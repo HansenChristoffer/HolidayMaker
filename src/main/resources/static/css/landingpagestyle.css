@@ -19,7 +19,8 @@ select, input {
   width: 100%;
   height: 5vh;
   padding-left: 1vw;
-  color: #646464;
+  color: #dddddd;
+  background-color: 646f72;
 }
 
 input {
@@ -27,7 +28,8 @@ input {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #343a40;
+  color: #ffffff;
 }
 
 #members {
@@ -45,7 +47,7 @@ body {
   justify-content: space-evenly;
   flex-wrap: wrap;
   width: 100%;
-  border-bottom: 1px solid #646464;
+  border-bottom: 1px solid #ffffff;
 }
 
 .filterLeft {
@@ -105,19 +107,18 @@ body {
   padding: 1vw;
   flex-basis: 23.4%;
   margin: .5vw;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #485255;
+  box-shadow: 0 4px 8px 0 rgba(128, 128, 128, 0.2);
   transition: 0.3s;
 }
 
 .resultItem:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(128, 128, 128, 0.2);
 }
 
 .itemImg {
   width: 100%;
   height: 15vh;
-  border: 1px solid black;
 }
 
 .itemTitle {
@@ -135,7 +136,7 @@ body {
 
 .itemPool, .itemRestaurant, .itemEntertainment, .itemChildren {
   text-align: center;
-  color: #646464;
+  color: #dddddd;
   font-size: 0.8rem;
   margin-bottom: -0.1vw;
 }
